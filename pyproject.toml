@@ -50,6 +50,8 @@ extend-exclude = '''
   | \.cursor
   | \.claude
   | airflow/logs
+  # Archivos existentes antes del CI/CD
+  | modulo-01-fundamentos/tema-1-python-estadistica/04-proyecto-practico/ejemplos_practicos\.py
 )/
 '''
 
@@ -73,7 +75,8 @@ skip_glob = [
     "*.egg-info/*",
     ".cursor/*",
     ".claude/*",
-    "airflow/logs/*"
+    "airflow/logs/*",
+    "modulo-01-fundamentos/tema-1-python-estadistica/04-proyecto-practico/ejemplos_practicos.py"
 ]
 
 # ===============================================
