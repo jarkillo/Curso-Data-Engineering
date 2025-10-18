@@ -625,7 +625,35 @@ MONGO_PASSWORD=OtraContraseñaSegura456!
 
 AIRFLOW_USER=admin
 AIRFLOW_PASSWORD=AirflowSeguro789!
+
+# CRÍTICO: Airflow Fernet Key para cifrado de credenciales
+# Genera una nueva con este comando:
+# python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+AIRFLOW_FERNET_KEY=n3ZWLdC8o4d4n2FmztvqiggQ6d-R3CWNlMvpcqVgDu8=
 ```
+
+**⚠️ IMPORTANTE: Airflow Fernet Key**
+
+La `AIRFLOW_FERNET_KEY` es **crítica** para el funcionamiento de Airflow:
+- Se usa para cifrar contraseñas de conexiones y variables
+- **DEBE ser la misma** en todos los servicios de Airflow (webserver, scheduler, init)
+- Si no se configura, cada contenedor generará su propia clave y habrá errores `InvalidToken`
+
+**Generar una nueva Fernet Key**:
+
+```bash
+# Activar entorno virtual
+# Windows: .\venv\Scripts\Activate.ps1
+# Linux/Mac: source venv/bin/activate
+
+# Instalar cryptography si no está instalado
+pip install cryptography
+
+# Generar clave
+python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+```
+
+Copia la clave generada y añádela a tu archivo `.env`.
 
 Añade `.env` al `.gitignore`:
 

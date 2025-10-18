@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Engineer: The Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Pantalla de inicio */
+        #startScreen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .game-logo {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .game-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 50px;
+            opacity: 0.9;
+        }
+
+        .start-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .menu-btn {
+            padding: 20px 40px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-btn.primary {
+            background: linear-gradient(135deg, #00d2ff 0%, #3a47d5 100%);
+            border: none;
+        }
+
+        /* Modal personalizado */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            animation: slideIn 0.4s;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+
+        .modal p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .modal-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00d2ff 0%, #3a47d5 100%);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Cinemática de historia */
+        #storyScreen {
+            display: none;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        .story-container {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 50px;
+        }
+
+        .story-scene {
+            display: none;
+            animation: fadeInScene 0.5s;
+        }
+
+        .story-scene.active {
+            display: block;
+        }
+
+        @keyframes fadeInScene {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .character {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+
+        .character-avatar {
+            font-size: 4rem;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+
+        .character-info {
+            flex: 1;
+        }
+
+        .character-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
+        .character-role {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .dialogue {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #ffd700;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .dialogue strong {
+            color: #ffd700;
+        }
+
+        .story-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .keyboard-hint {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .key-indicator {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-weight: bold;
+        }
+
+        .story-btn {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .story-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .story-btn.primary {
+            background: linear-gradient(135deg, #00d2ff 0%, #3a47d5 100%);
+            border: none;
+        }
+
+        /* Tutorial integrado */
+        .tutorial-box {
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tutorial-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tutorial-content {
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* Pantalla de juego (la misma de antes) */
+        #gameScreen {
+            display: none;
+            padding: 20px;
+        }
+
+        .game-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        .header h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .player-stats {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .xp-bar-container {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            height: 30px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .xp-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Main content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .mission-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        .tools-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .mission-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+
+        .mission-description {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Data visualization */
+        .data-display {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .data-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .data-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .data-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Chart */
+        .chart-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 200px;
+            gap: 10px;
+        }
+
+        .bar {
+            flex: 1;
+            background: linear-gradient(180deg, #00d2ff 0%, #3a47d5 100%);
+            border-radius: 5px 5px 0 0;
+            transition: all 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px 5px;
+        }
+
+        .bar:hover {
+            background: linear-gradient(180deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .bar-label {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        /* Calculator */
+        .calculator {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .calculator-title {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: #ffd700;
+        }
+
+        .calculator-display {
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.8rem;
+            text-align: right;
+            margin-bottom: 15px;
+            font-family: 'Courier New', monospace;
+            min-height: 60px;
+            max-height: 100px;
+            width: 100%;
+            box-sizing: border-box;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            word-break: break-all;
+        }
+
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 100%;
+        }
+
+        .calc-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .calc-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .calc-btn.operator {
+            background: rgba(255, 165, 0, 0.4);
+        }
+
+        .calc-btn.equals {
+            background: rgba(50, 205, 50, 0.4);
+            grid-column: span 2;
+        }
+
+        .calc-btn.clear {
+            background: rgba(255, 69, 0, 0.4);
+        }
+
+        /* Answer section */
+        .answer-section {
+            margin-top: 30px;
+        }
+
+        .answer-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00d2ff 0%, #3a47d5 100%);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Hints */
+        .hints {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 4px solid #ffd700;
+        }
+
+        .hint-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        /* Feedback messages */
+        .feedback {
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            animation: slideIn 0.5s;
+        }
+
+        .feedback.success {
+            background: rgba(50, 205, 50, 0.3);
+            border: 2px solid #32cd32;
+        }
+
+        .feedback.error {
+            background: rgba(255, 69, 0, 0.3);
+            border: 2px solid #ff4500;
+        }
+
+        /* Tool tabs */
+        .tool-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tool-tab {
+            flex: 1;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #fff;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tool-tab.active {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .tool-content {
+            display: none;
+        }
+
+        .tool-content.active {
+            display: block;
+        }
+
+        /* Stats helper */
+        .stats-helper {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .helper-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+
+        .helper-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .helper-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #00d2ff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Pantalla de Inicio -->
+    <div id="startScreen">
+        <div class="game-logo">🎮 DATA ENGINEER</div>
+        <div class="game-subtitle">The Game</div>
+        <div class="start-menu">
+            <button class="menu-btn primary" onclick="newGame()">🚀 NUEVA PARTIDA</button>
+            <button class="menu-btn" onclick="loadGame()" id="loadBtn">📂 CARGAR PARTIDA</button>
+            <button class="menu-btn" onclick="showCredits()">ℹ️ CRÉDITOS</button>
+        </div>
+    </div>
+
+    <!-- Modal para nombre -->
+    <div class="modal-overlay" id="nameModal">
+        <div class="modal">
+            <h2>👋 ¡Bienvenido/a!</h2>
+            <p>Antes de comenzar tu aventura como Data Engineer, necesitamos saber tu nombre.</p>
+            <input type="text" id="playerNameInput" placeholder="Tu nombre..." maxlength="20"
+                onkeypress="if(event.key === 'Enter') startStory()">
+            <button class="modal-btn" onclick="startStory()">✨ COMENZAR AVENTURA</button>
+        </div>
+    </div>
+
+    <!-- Pantalla de Historia -->
+    <div id="storyScreen">
+        <div class="story-container">
+            <!-- Escena 1: Introducción -->
+            <div class="story-scene active" id="scene1">
+                <h2 style="font-size: 2.5rem; margin-bottom: 30px; text-align: center;">📖 Tu Historia Comienza...</h2>
+
+                <div class="dialogue">
+                    Has estado buscando trabajo como Data Engineer durante meses. Después de innumerables entrevistas y
+                    rechazos, finalmente recibiste un email que cambiaría todo:
+                    <br><br>
+                    <em style="color: #ffd700;">"Estimado/a <span id="playerNameStory1">Jugador</span>, nos ha
+                        impresionado tu entusiasmo y potencial. Aunque no tienes experiencia, vemos algo especial en ti.
+                        Te ofrecemos una posición de <strong>Trainee Data Engineer</strong> en DataFlow Industries.
+                        ¡Bienvenido/a al equipo!"</em>
+                </div>
+
+                <div class="dialogue">
+                    Hoy es tu <strong>primer día</strong>. Te sientes nervioso/a pero emocionado/a. Entras al edificio
+                    de oficinas moderno, subes al piso 12, y ves el logo brillante: <strong
+                        style="color: #00d2ff;">DataFlow Industries</strong>.
+                </div>
+
+                <div class="story-actions">
+                    <div class="keyboard-hint">⌨️ Presiona <span class="key-indicator">Enter</span></div>
+                    <button class="story-btn primary" onclick="nextScene(2)">➡️ Continuar</button>
+                </div>
+            </div>
+
+            <!-- Escena 2: Conociendo a María -->
+            <div class="story-scene" id="scene2">
+                <h2 style="font-size: 2rem; margin-bottom: 30px;">🏢 Tu Primera Mañana</h2>
+
+                <div class="dialogue">
+                    La recepcionista te sonríe: <em>"¡Ah, tú debes ser <span id="playerNameStory2">Jugador</span>! María
+                        te está esperando. Sala de reuniones 3."</em>
+                </div>
+
+                <div class="character">
+                    <div class="character-avatar">👩‍💼</div>
+                    <div class="character-info">
+                        <div class="character-name">María González</div>
+                        <div class="character-role">Lead Data Engineer | Tu Mentora</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <strong>María:</strong> "¡Hola <span id="playerNameStory3">Jugador</span>! Bienvenido/a al equipo.
+                    Soy María, seré tu mentora durante estos primeros meses."
+                    <br><br>
+                    <em>Te estrecha la mano con confianza</em>
+                    <br><br>
+                    "Sé que esto puede ser abrumador al principio, pero no te preocupes. <strong>Todos empezamos desde
+                        cero</strong>. Te voy a enseñar todo lo que necesitas saber, paso a paso."
+                </div>
+
+                <div class="story-actions">
+                    <button class="story-btn" onclick="nextScene(1)">⬅️ Atrás</button>
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <div class="keyboard-hint">⌨️ <span class="key-indicator">Enter</span></div>
+                        <button class="story-btn primary" onclick="nextScene(3)">➡️ Continuar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Escena 3: El Cliente -->
+            <div class="story-scene" id="scene3">
+                <h2 style="font-size: 2rem; margin-bottom: 30px;">📊 Tu Primera Misión</h2>
+
+                <div class="dialogue">
+                    <strong>María:</strong> "Tenemos un nuevo cliente: <strong style="color: #00d2ff;">RestaurantData
+                        Co.</strong>, una red de restaurantes que necesita analizar sus datos de ventas."
+                    <br><br>
+                    <em>Abre su laptop y te muestra un dashboard</em>
+                    <br><br>
+                    "Ellos recopilan las ventas de cada día, pero no saben interpretarlas. ¿Están vendiendo bien?
+                    ¿Cumplen sus objetivos? Aquí es donde entramos nosotros."
+                </div>
+
+                <div class="tutorial-box">
+                    <div class="tutorial-title">💡 ¿Qué hace un Data Engineer?</div>
+                    <div class="tutorial-content">
+                        Un <strong>Data Engineer</strong> trabaja con datos para:
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>📥 <strong>Recopilar</strong> datos de diferentes fuentes</li>
+                            <li>🔧 <strong>Transformar</strong> datos en información útil</li>
+                            <li>📊 <strong>Analizar</strong> patrones y tendencias</li>
+                            <li>✅ <strong>Asegurar</strong> la calidad de los datos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="story-actions">
+                    <button class="story-btn" onclick="nextScene(2)">⬅️ Atrás</button>
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <div class="keyboard-hint">⌨️ <span class="key-indicator">Enter</span></div>
+                        <button class="story-btn primary" onclick="nextScene(4)">➡️ Continuar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Escena 4: La Tarea -->
+            <div class="story-scene" id="scene4">
+                <h2 style="font-size: 2rem; margin-bottom: 30px;">🎯 Tu Objetivo</h2>
+
+                <div class="dialogue">
+                    <strong>María:</strong> "Para empezar con algo simple, te voy a enseñar una de las métricas más
+                    básicas pero importantes: <strong style="color: #ffd700;">LA MEDIA</strong> (o promedio)."
+                </div>
+
+                <div class="tutorial-box">
+                    <div class="tutorial-title">📚 ¿Qué es la Media?</div>
+                    <div class="tutorial-content">
+                        La <strong>media</strong> es el valor promedio de un conjunto de datos.
+                        <br><br>
+                        <strong>Fórmula:</strong> Media = (Suma de todos los valores) / (Cantidad de valores)
+                        <br><br>
+                        <strong>Ejemplo:</strong><br>
+                        Si tienes las ventas: 100€, 150€, 200€<br>
+                        Media = (100 + 150 + 200) / 3 = <strong>150€</strong>
+                        <br><br>
+                        <strong>¿Para qué sirve?</strong><br>
+                        Nos dice cuánto se vende "en promedio". Si el objetivo es 170€/día y la media es 150€, sabemos
+                        que NO estamos cumpliendo el objetivo.
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <strong>María:</strong> "RestaurantData Co. tiene un objetivo: vender <strong>170€ promedio por
+                        día</strong>. Tu tarea es calcular la media de las ventas de la última semana y decirme si lo
+                    están cumpliendo."
+                    <br><br>
+                    "No te preocupes, te voy a dar todas las herramientas que necesitas: una
+                    <strong>calculadora</strong>, los <strong>datos visualizados</strong>, y <strong>ayudas</strong> en
+                    pantalla. ¿Listo/a?"
+                </div>
+
+                <div class="story-actions">
+                    <button class="story-btn" onclick="nextScene(3)">⬅️ Atrás</button>
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <div class="keyboard-hint">⌨️ <span class="key-indicator">Enter</span></div>
+                        <button class="story-btn primary" onclick="startMission()">🚀 ¡ESTOY LISTO/A!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla de Juego -->
+    <div id="gameScreen">
+        <div class="game-container">
+            <!-- Header -->
+            <div class="header">
+                <h1>🎮 DATA ENGINEER: THE GAME</h1>
+                <div class="player-stats">
+                    <div class="stat-card">
+                        <div class="stat-label">👤 Jugador</div>
+                        <div class="stat-value" id="playerName">--</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">🎓 Rango</div>
+                        <div class="stat-value" id="playerRank">Trainee</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">⭐ Nivel</div>
+                        <div class="stat-value" id="playerLevel">1</div>
+                    </div>
+                </div>
+                <div class="xp-bar-container">
+                    <div class="xp-bar" id="xpBar" style="width: 0%;">
+                        <span id="xpText">0 / 100 XP</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Mission Panel -->
+                <div class="mission-panel">
+                    <div class="mission-title">📋 Misión 1: Análisis de Ventas Semanales</div>
+
+                    <div class="mission-description">
+                        <p><strong>🏢 Cliente: RestaurantData Co.</strong></p>
+                        <p style="margin-top: 10px;">
+                            Calcula la <strong>venta promedio (media)</strong> de la última semana.
+                        </p>
+                        <p style="margin-top: 10px;">
+                            <strong>Objetivo del cliente:</strong> ¿Cumplen el objetivo de 170€ promedio por día?
+                        </p>
+                    </div>
+
+                    <!-- Data Display -->
+                    <div class="data-display">
+                        <h3>💰 Ventas de la Semana (en €)</h3>
+                        <div class="data-items" id="dataItems"></div>
+                    </div>
+
+                    <!-- Chart -->
+                    <div class="chart-container">
+                        <h3 style="margin-bottom: 15px;">📊 Visualización de Ventas</h3>
+                        <div class="bar-chart" id="barChart"></div>
+                    </div>
+
+                    <!-- Answer Section -->
+                    <div class="answer-section">
+                        <h3>✍️ Tu Respuesta</h3>
+                        <input type="number" class="answer-input" id="answerInput"
+                            placeholder="Ingresa la media (promedio) en €" step="0.01">
+                        <button class="submit-btn" id="submitBtn" onclick="checkAnswer()">
+                            🚀 ENVIAR RESPUESTA
+                        </button>
+                    </div>
+
+                    <div class="hints">
+                        <div class="hint-title">💡 Recuerda:</div>
+                        <p><strong>Media</strong> = (Suma de todos los valores) / (Cantidad de valores)</p>
+                        <p style="margin-top: 10px;">Usa la calculadora de la derecha para ayudarte →</p>
+                    </div>
+
+                    <!-- Feedback -->
+                    <div id="feedback"></div>
+                </div>
+
+                <!-- Tools Panel -->
+                <div class="tools-panel">
+                    <div class="tool-tabs">
+                        <button class="tool-tab active" onclick="switchTool('calculator')">🧮 Calculadora</button>
+                        <button class="tool-tab" onclick="switchTool('helper')">📊 Ayuda</button>
+                    </div>
+
+                    <!-- Calculator -->
+                    <div class="tool-content active" id="calculatorTab">
+                        <div class="calculator">
+                            <div class="calculator-title">🧮 Calculadora Integrada</div>
+                            <div style="text-align: center; font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">
+                                ⌨️ Puedes escribir con el teclado
+                            </div>
+                            <div class="calculator-display" id="calcDisplay">0</div>
+                            <div class="calculator-buttons">
+                                <button class="calc-btn" onclick="appendCalc('7')">7</button>
+                                <button class="calc-btn" onclick="appendCalc('8')">8</button>
+                                <button class="calc-btn" onclick="appendCalc('9')">9</button>
+                                <button class="calc-btn operator" onclick="inputOperator('/')">/</button>
+
+                                <button class="calc-btn" onclick="appendCalc('4')">4</button>
+                                <button class="calc-btn" onclick="appendCalc('5')">5</button>
+                                <button class="calc-btn" onclick="appendCalc('6')">6</button>
+                                <button class="calc-btn operator" onclick="inputOperator('*')">×</button>
+
+                                <button class="calc-btn" onclick="appendCalc('1')">1</button>
+                                <button class="calc-btn" onclick="appendCalc('2')">2</button>
+                                <button class="calc-btn" onclick="appendCalc('3')">3</button>
+                                <button class="calc-btn operator" onclick="inputOperator('-')">-</button>
+
+                                <button class="calc-btn" onclick="appendCalc('0')">0</button>
+                                <button class="calc-btn" onclick="inputDecimal()">.</button>
+                                <button class="calc-btn clear" onclick="clearCalc()">C</button>
+                                <button class="calc-btn operator" onclick="inputOperator('+')">+</button>
+
+                                <button class="calc-btn equals" onclick="calculateCalc()">=</button>
+                                <button class="calc-btn" onclick="copyToAnswer()">📋 Copiar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Helper -->
+                    <div class="tool-content" id="helperTab">
+                        <div class="stats-helper">
+                            <h3 style="margin-bottom: 15px;">📊 Ayuda Estadística</h3>
+                            <div class="helper-item">
+                                <div class="helper-label">Cantidad de días:</div>
+                                <div class="helper-value" id="helperCount">7</div>
+                            </div>
+                            <div class="helper-item">
+                                <div class="helper-label">Suma total:</div>
+                                <div class="helper-value" id="helperSum">--</div>
+                            </div>
+                            <div class="helper-item">
+                                <div class="helper-label">Venta mínima:</div>
+                                <div class="helper-value" id="helperMin">--</div>
+                            </div>
+                            <div class="helper-item">
+                                <div class="helper-label">Venta máxima:</div>
+                                <div class="helper-value" id="helperMax">--</div>
+                            </div>
+                            <div class="helper-item"
+                                style="background: rgba(255, 215, 0, 0.2); border: 2px solid #ffd700;">
+                                <div class="helper-label">Fórmula:</div>
+                                <div style="margin-top: 10px; font-size: 1rem;">
+                                    Media = <span id="formulaSum">?</span> / <span id="formulaCount">7</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game Data
+        const ventasSemana = [145.30, 132.50, 189.75, 156.20, 198.50, 234.80, 175.40];
+        const dias = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+
+        let gameState = {
+            playerName: '',
+            level: 1,
+            xp: 0,
+            totalXP: 0,
+            missionsCompleted: []
+        };
+
+        let calcDisplay = '0';
+        let calcFirstOperand = null;
+        let calcOperator = null;
+        let calcWaitingForSecondOperand = false;
+        let currentScene = 1;
+
+        // Check if save exists
+        window.onload = function () {
+            if (localStorage.getItem('playerName')) {
+                document.getElementById('loadBtn').style.display = 'block';
+            } else {
+                document.getElementById('loadBtn').style.display = 'none';
+            }
+        };
+
+        // New Game
+        function newGame() {
+            document.getElementById('nameModal').classList.add('show');
+            document.getElementById('playerNameInput').focus();
+        }
+
+        // Start Story
+        function startStory() {
+            const name = document.getElementById('playerNameInput').value.trim();
+            if (!name) {
+                alert('Por favor ingresa tu nombre');
+                return;
+            }
+
+            gameState.playerName = name;
+
+            // Update all name placeholders
+            document.querySelectorAll('[id^="playerNameStory"]').forEach(el => {
+                el.textContent = name;
+            });
+
+            // Hide modal and start screen
+            document.getElementById('nameModal').classList.remove('show');
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('storyScreen').style.display = 'block';
+
+            currentScene = 1;
+            showScene(1);
+        }
+
+        // Load Game
+        function loadGame() {
+            gameState.playerName = localStorage.getItem('playerName');
+            gameState.level = parseInt(localStorage.getItem('level')) || 1;
+            gameState.xp = parseInt(localStorage.getItem('xp')) || 0;
+            gameState.totalXP = parseInt(localStorage.getItem('totalXP')) || 0;
+            gameState.missionsCompleted = JSON.parse(localStorage.getItem('missionsCompleted')) || [];
+
+            // Go directly to game
+            startMission();
+        }
+
+        // Show Credits
+        function showCredits() {
+            alert('🎮 DATA ENGINEER: THE GAME\n\nCreado con ❤️ para aprender Data Engineering\n\nVersión: 1.0 Web\n2025');
+        }
+
+        // Navigate scenes
+        function nextScene(sceneNum) {
+            document.getElementById('scene' + currentScene).classList.remove('active');
+            currentScene = sceneNum;
+            document.getElementById('scene' + sceneNum).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showScene(sceneNum) {
+            document.querySelectorAll('.story-scene').forEach(scene => {
+                scene.classList.remove('active');
+            });
+            document.getElementById('scene' + sceneNum).classList.add('active');
+        }
+
+        // Keyboard navigation for story screens
+        document.addEventListener('keydown', function (event) {
+            // Don't interfere with inputs
+            if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+                return;
+            }
+
+            // Story screen navigation with Enter
+            if (event.key === 'Enter' && document.getElementById('storyScreen').style.display === 'block') {
+                event.preventDefault();
+
+                // Find which scene is active and advance
+                if (document.getElementById('scene1').classList.contains('active')) {
+                    nextScene(2);
+                } else if (document.getElementById('scene2').classList.contains('active')) {
+                    nextScene(3);
+                } else if (document.getElementById('scene3').classList.contains('active')) {
+                    nextScene(4);
+                } else if (document.getElementById('scene4').classList.contains('active')) {
+                    startMission();
+                }
+            }
+        });
+
+        // Start Mission
+        function startMission() {
+            // Hide story, show game
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('storyScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+
+            // Update UI
+            document.getElementById('playerName').textContent = gameState.playerName;
+            document.getElementById('playerLevel').textContent = gameState.level;
+            updateXPBar();
+
+            // Load data
+            loadDataItems();
+            loadBarChart();
+            updateStatsHelper();
+
+            // Save game
+            saveGame();
+        }
+
+        // Save game
+        function saveGame() {
+            localStorage.setItem('playerName', gameState.playerName);
+            localStorage.setItem('level', gameState.level);
+            localStorage.setItem('xp', gameState.xp);
+            localStorage.setItem('totalXP', gameState.totalXP);
+            localStorage.setItem('missionsCompleted', JSON.stringify(gameState.missionsCompleted));
+        }
+
+        // Load data items
+        function loadDataItems() {
+            const container = document.getElementById('dataItems');
+            container.innerHTML = '';
+
+            ventasSemana.forEach((venta, index) => {
+                const item = document.createElement('div');
+                item.className = 'data-item';
+                item.innerHTML = `<div style="font-size: 0.8rem; opacity: 0.8;">${dias[index]}</div>${venta}€`;
+                container.appendChild(item);
+            });
+        }
+
+        // Load bar chart
+        function loadBarChart() {
+            const container = document.getElementById('barChart');
+            container.innerHTML = '';
+
+            const maxValue = Math.max(...ventasSemana);
+
+            ventasSemana.forEach((venta, index) => {
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                const height = (venta / maxValue) * 100;
+                bar.style.height = height + '%';
+                bar.innerHTML = `
+                    <div class="bar-value">${venta}€</div>
+                    <div class="bar-label">${dias[index]}</div>
+                `;
+                container.appendChild(bar);
+            });
+        }
+
+        // Update stats helper
+        function updateStatsHelper() {
+            const sum = ventasSemana.reduce((a, b) => a + b, 0);
+            const min = Math.min(...ventasSemana);
+            const max = Math.max(...ventasSemana);
+
+            document.getElementById('helperSum').textContent = sum.toFixed(2) + '€';
+            document.getElementById('helperMin').textContent = min.toFixed(2) + '€';
+            document.getElementById('helperMax').textContent = max.toFixed(2) + '€';
+            document.getElementById('formulaSum').textContent = sum.toFixed(2);
+        }
+
+        // Calculator functions - Real calculator behavior
+        function updateDisplay() {
+            const display = document.getElementById('calcDisplay');
+            display.textContent = calcDisplay;
+        }
+
+        function appendCalc(digit) {
+            // Si estamos esperando el segundo operando, limpiar pantalla
+            if (calcWaitingForSecondOperand) {
+                calcDisplay = digit;
+                calcWaitingForSecondOperand = false;
+            } else {
+                // Si la pantalla muestra 0, reemplazar; sino, añadir
+                calcDisplay = calcDisplay === '0' ? digit : calcDisplay + digit;
+            }
+            updateDisplay();
+        }
+
+        function inputDecimal() {
+            if (calcWaitingForSecondOperand) {
+                calcDisplay = '0.';
+                calcWaitingForSecondOperand = false;
+                updateDisplay();
+                return;
+            }
+
+            // Si no hay punto decimal, añadirlo
+            if (!calcDisplay.includes('.')) {
+                calcDisplay += '.';
+            }
+            updateDisplay();
+        }
+
+        function inputOperator(nextOperator) {
+            const inputValue = parseFloat(calcDisplay);
+
+            // Si ya hay un operador y estamos esperando el segundo operando, solo cambiar el operador
+            if (calcOperator && calcWaitingForSecondOperand) {
+                calcOperator = nextOperator;
+                return;
+            }
+
+            // Si es la primera vez que ingresamos un operador
+            if (calcFirstOperand === null) {
+                calcFirstOperand = inputValue;
+            } else if (calcOperator) {
+                // Si ya tenemos un operador, calcular el resultado
+                const result = calculate(calcFirstOperand, inputValue, calcOperator);
+                calcDisplay = String(result);
+                calcFirstOperand = result;
+            }
+
+            calcWaitingForSecondOperand = true;
+            calcOperator = nextOperator;
+            updateDisplay();
+        }
+
+        function calculate(firstOperand, secondOperand, operator) {
+            switch (operator) {
+                case '+':
+                    return firstOperand + secondOperand;
+                case '-':
+                    return firstOperand - secondOperand;
+                case '*':
+                    return firstOperand * secondOperand;
+                case '/':
+                    return firstOperand / secondOperand;
+                default:
+                    return secondOperand;
+            }
+        }
+
+        function calculateCalc() {
+            const inputValue = parseFloat(calcDisplay);
+
+            if (calcOperator && calcFirstOperand !== null) {
+                const result = calculate(calcFirstOperand, inputValue, calcOperator);
+                calcDisplay = String(result);
+                calcFirstOperand = null;
+                calcOperator = null;
+                calcWaitingForSecondOperand = false;
+                updateDisplay();
+            }
+        }
+
+        function clearCalc() {
+            calcDisplay = '0';
+            calcFirstOperand = null;
+            calcOperator = null;
+            calcWaitingForSecondOperand = false;
+            updateDisplay();
+        }
+
+        // Keyboard support for calculator
+        document.addEventListener('keydown', function (event) {
+            // Don't interfere with input fields or textareas
+            if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+                return;
+            }
+
+            // Only work if calculator is visible
+            const calcTab = document.getElementById('calculatorTab');
+            if (!calcTab || !calcTab.classList.contains('active')) {
+                return;
+            }
+
+            const key = event.key;
+
+            // Numbers
+            if (key >= '0' && key <= '9') {
+                event.preventDefault();
+                appendCalc(key);
+            }
+            // Operators
+            else if (key === '+' || key === '-' || key === '*' || key === '/') {
+                event.preventDefault();
+                inputOperator(key);
+            }
+            // Decimal point
+            else if (key === '.' || key === ',') {
+                event.preventDefault();
+                inputDecimal();
+            }
+            // Enter or = to calculate
+            else if (key === 'Enter' || key === '=') {
+                event.preventDefault();
+                calculateCalc();
+            }
+            // Escape or Delete to clear
+            else if (key === 'Escape' || key === 'Delete') {
+                event.preventDefault();
+                clearCalc();
+            }
+            // Backspace to delete last character
+            else if (key === 'Backspace') {
+                event.preventDefault();
+                if (calcDisplay.length > 1) {
+                    calcDisplay = calcDisplay.slice(0, -1);
+                } else {
+                    calcDisplay = '0';
+                }
+                updateDisplay();
+            }
+        });
+
+        function copyToAnswer() {
+            const result = parseFloat(calcDisplay);
+            document.getElementById('answerInput').value = result.toFixed(2);
+        }
+
+        // Switch tool tabs
+        function switchTool(tool) {
+            const tabs = document.querySelectorAll('.tool-tab');
+            const contents = document.querySelectorAll('.tool-content');
+
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+
+            if (tool === 'calculator') {
+                tabs[0].classList.add('active');
+                document.getElementById('calculatorTab').classList.add('active');
+            } else {
+                tabs[1].classList.add('active');
+                document.getElementById('helperTab').classList.add('active');
+            }
+        }
+
+        // Check answer
+        function checkAnswer() {
+            const answer = parseFloat(document.getElementById('answerInput').value);
+            const correctAnswer = ventasSemana.reduce((a, b) => a + b, 0) / ventasSemana.length;
+
+            const feedback = document.getElementById('feedback');
+
+            if (isNaN(answer)) {
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ Por favor ingresa un número válido';
+                return;
+            }
+
+            if (Math.abs(answer - correctAnswer) < 0.5) {
+                // Correct!
+                feedback.className = 'feedback success';
+                feedback.innerHTML = `
+                    ✅ <strong>¡EXCELENTE, ${gameState.playerName.toUpperCase()}!</strong><br><br>
+                    La media es ${correctAnswer.toFixed(2)}€<br>
+                    Objetivo del cliente: 170€<br>
+                    <strong style="color: #32cd32;">¡SÍ CUMPLEN EL OBJETIVO! ✓</strong><br><br>
+                    <em>María te sonríe: "¡Muy bien hecho! Ya puedes contarle al cliente que están cumpliendo su meta. Has completado tu primera tarea como Data Engineer."</em><br><br>
+                    +100 XP ganados<br><br>
+                    <button class="submit-btn" onclick="nextMission()" style="margin-top: 10px;">
+                        ➡️ CONTINUAR
+                    </button>
+                `;
+
+                // Add XP
+                addXP(100);
+
+                // Save mission
+                if (!gameState.missionsCompleted.includes('mission_1_1')) {
+                    gameState.missionsCompleted.push('mission_1_1');
+                    saveGame();
+                }
+
+                document.getElementById('submitBtn').disabled = true;
+            } else {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `
+                    ❌ <strong>Incorrecto.</strong><br><br>
+                    <em>María: "No te preocupes, intenta de nuevo. Recuerda: suma todos los valores con la calculadora y luego divide por ${ventasSemana.length}."</em>
+                `;
+            }
+        }
+
+        // Add XP
+        function addXP(amount) {
+            gameState.xp += amount;
+            gameState.totalXP += amount;
+
+            const xpNeeded = gameState.level * 100;
+            if (gameState.xp >= xpNeeded) {
+                gameState.level++;
+                gameState.xp -= xpNeeded;
+
+                setTimeout(() => {
+                    alert(`🎊 ¡LEVEL UP! 🎊\n\nNivel ${gameState.level - 1} → Nivel ${gameState.level}\n\n✨ Nuevas misiones desbloqueadas`);
+                }, 500);
+            }
+
+            document.getElementById('playerLevel').textContent = gameState.level;
+            updateXPBar();
+            saveGame();
+        }
+
+        // Update XP bar
+        function updateXPBar() {
+            const xpNeeded = gameState.level * 100;
+            const percentage = (gameState.xp / xpNeeded) * 100;
+
+            document.getElementById('xpBar').style.width = percentage + '%';
+            document.getElementById('xpText').textContent = `${gameState.xp} / ${xpNeeded} XP`;
+        }
+
+        // Next mission
+        function nextMission() {
+            alert('🎮 ¡Próximamente más misiones!\n\nHas completado tu primera misión como Data Engineer.\n\nMaría: "Excelente trabajo. Mañana te daré un desafío más complejo: aprenderás sobre la mediana y los outliers."\n\n¡Hasta pronto! 🚀');
+        }
+    </script>
+</body>
+
+</html>
