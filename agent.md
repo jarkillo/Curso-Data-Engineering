@@ -16,9 +16,9 @@ feature/nombre ← TRABAJO INDIVIDUAL - Cada tarea nueva
 
 ---
 
-## ⛔ REGLA DE ORO
+## ⛔ REGLAS DE ORO
 
-### **NUNCA, JAMÁS, BAJO NINGUNA CIRCUNSTANCIA TOCAR MAIN DIRECTAMENTE**
+### 1. **NUNCA, JAMÁS, BAJO NINGUNA CIRCUNSTANCIA TOCAR MAIN DIRECTAMENTE**
 
 ```bash
 # ❌ PROHIBIDO ABSOLUTAMENTE
@@ -33,9 +33,51 @@ git commit -m "..."
 git push origin feature/mi-tarea
 ```
 
+### 2. **SIEMPRE ACTIVAR EL ENTORNO VIRTUAL ANTES DE TRABAJAR**
+
+```bash
+# ❌ PROHIBIDO - Trabajar sin entorno virtual
+python script.py
+pip install paquete
+
+# ✅ CORRECTO - Activar venv primero
+
+# Windows PowerShell
+.\venv\Scripts\Activate.ps1
+
+# Windows CMD
+.\venv\Scripts\activate.bat
+
+# Linux/Mac
+source venv/bin/activate
+
+# Verificar que está activado (debe aparecer (venv) en el prompt)
+which python  # Linux/Mac
+where python  # Windows
+```
+
+**¿Por qué es crítico?**
+- ✅ Aísla dependencias del proyecto
+- ✅ Evita conflictos con otros proyectos
+- ✅ Asegura versiones correctas de paquetes
+- ✅ No contamina el Python del sistema
+- ❌ Sin venv: instalas en el sistema global (PELIGROSO)
+
 ---
 
 ## 📋 WORKFLOW DIARIO (PASO A PASO)
+
+### 0️⃣ ANTES DE EMPEZAR - Activar Entorno Virtual
+
+```bash
+# PRIMER PASO SIEMPRE
+.\venv\Scripts\Activate.ps1  # Windows
+# o
+source venv/bin/activate      # Linux/Mac
+
+# Verificar que está activado
+# Debes ver (venv) al inicio del prompt
+```
 
 ### 1️⃣ Empezar Nueva Tarea
 
@@ -364,22 +406,26 @@ git commit -m "merge: resolver conflictos"
 ## 📝 RESUMEN RÁPIDO
 
 ```bash
-# INICIO DEL DÍA
+# 0. ACTIVAR ENTORNO VIRTUAL (SIEMPRE PRIMERO)
+.\venv\Scripts\Activate.ps1  # Windows
+source venv/bin/activate      # Linux/Mac
+
+# 1. INICIO DEL DÍA
 git checkout dev && git pull origin dev
 
-# NUEVA TAREA
+# 2. NUEVA TAREA
 git checkout -b feature/descripcion
 
-# TRABAJO
+# 3. TRABAJO
 git add . && git commit -m "feat: descripción"
 
-# SUBIR
+# 4. SUBIR
 git push origin feature/descripcion
 
-# PR
+# 5. PR
 gh pr create --base dev --title "..." --body "..."
 
-# FIN (después del merge)
+# 6. FIN (después del merge)
 git checkout dev && git pull origin dev
 git branch -d feature/descripcion
 git fetch --prune
