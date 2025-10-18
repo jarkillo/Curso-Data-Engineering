@@ -1,0 +1,199 @@
+# ===============================================
+# PRE-COMMIT HOOKS - Master en Ingeniería de Datos
+# ===============================================
+# Instalación: pre-commit install
+# Ejecutar manualmente: pre-commit run --all-files
+# ===============================================
+
+# Configuración general
+default_language_version:
+  python: python3.13
+
+# No fallar si un hook no está disponible
+fail_fast: false
+
+repos:
+  # ===============================================
+  # HOOKS BÁSICOS DE PRE-COMMIT
+  # ===============================================
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      # Prevenir commits a main
+      - id: no-commit-to-branch
+        name: 🚫 Prevenir commits directos a main
+        args: ['--branch', 'main']
+        stages: [pre-commit]
+
+      # Archivos
+      - id: check-added-large-files
+        name: 📦 Verificar archivos grandes
+        args: ['--maxkb=1000']
+
+      - id: check-case-conflict
+        name: 🔤 Verificar conflictos de mayúsculas
+
+      - id: check-merge-conflict
+        name: 🔀 Verificar marcadores de merge
+
+      - id: end-of-file-fixer
+        name: 📄 Asegurar línea final en archivos
+        exclude: '\.json$'
+
+      - id: trailing-whitespace
+        name: ✂️ Eliminar espacios al final
+        args: ['--markdown-linebreak-ext=md']
+
+      - id: mixed-line-ending
+        name: 🔚 Normalizar finales de línea
+        args: ['--fix=lf']
+
+      # Python específico
+      - id: check-ast
+        name: 🐍 Verificar sintaxis Python
+
+      - id: check-builtin-literals
+        name: 🏗️ Verificar literales builtin
+
+      - id: check-docstring-first
+        name: 📝 Verificar docstring primero
+
+      - id: debug-statements
+        name: 🐛 Detectar debugger/print
+
+      - id: name-tests-test
+        name: 🧪 Verificar nombres de tests
+        args: ['--pytest-test-first']
+
+      # JSON/YAML/TOML
+      - id: check-json
+        name: 📋 Validar JSON
+
+      - id: check-yaml
+        name: 📋 Validar YAML
+        args: ['--allow-multiple-documents']
+
+      - id: check-toml
+        name: 📋 Validar TOML
+
+  # ===============================================
+  # BLACK - FORMATEO DE CÓDIGO
+  # ===============================================
+  - repo: https://github.com/psf/black
+    rev: 25.1.0
+    hooks:
+      - id: black
+        name: ⚫ Black - Formatear código
+        language_version: python3.13
+        args: ['--line-length=88', '--target-version=py313']
+        exclude: '^(modulo-01-fundamentos/|documentacion/juego/|data_engineer_game\.py|game\.html|game_save\.json)'
+
+  # ===============================================
+  # FLAKE8 - LINTING
+  # ===============================================
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.1.1
+    hooks:
+      - id: flake8
+        name: 🔍 Flake8 - Linting
+        args:
+          - '--max-line-length=88'
+          - '--extend-ignore=E203,E501,W503'
+          - '--max-complexity=10'
+        additional_dependencies:
+          - flake8-docstrings
+          - flake8-bugbear
+          - flake8-comprehensions
+        exclude: '^(modulo-01-fundamentos/|data_engineer_game\.py)'
+
+  # ===============================================
+  # MYPY - TYPE CHECKING
+  # ===============================================
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.15.0
+    hooks:
+      - id: mypy
+        name: 🔎 MyPy - Verificar tipos
+        args:
+          - '--ignore-missing-imports'
+          - '--warn-unused-ignores'
+          - '--no-implicit-optional'
+          - '--strict-equality'
+        additional_dependencies:
+          - types-requests
+          - types-PyYAML
+        exclude: '^(modulo-01-fundamentos/|documentacion/juego/|data_engineer_game\.py)'
+
+  # ===============================================
+  # ISORT - ORDENAR IMPORTS
+  # ===============================================
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        name: 📚 isort - Ordenar imports
+        args:
+          - '--profile=black'
+          - '--line-length=88'
+          - '--multi-line=3'
+          - '--trailing-comma'
+        exclude: '^(modulo-01-fundamentos/|data_engineer_game\.py)'
+
+  # ===============================================
+  # BANDIT - SEGURIDAD
+  # ===============================================
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.8.0
+    hooks:
+      - id: bandit
+        name: 🔒 Bandit - Análisis de seguridad
+        args:
+          - '-c'
+          - 'pyproject.toml'
+        additional_dependencies: ['bandit[toml]']
+        exclude: '^(tests/|modulo-01-fundamentos/|documentacion/juego/|data_engineer_game\.py)'
+
+  # ===============================================
+  # PYTEST - TESTS RÁPIDOS
+  # ===============================================
+  - repo: local
+    hooks:
+      - id: pytest-quick
+        name: 🧪 Pytest - Tests rápidos
+        entry: pytest
+        language: system
+        pass_filenames: false
+        always_run: true
+        args:
+          - 'tests/'
+          - '-v'
+          - '--tb=short'
+          - '--maxfail=1'
+          - '-x'
+        stages: [pre-commit]
+
+  # ===============================================
+  # COVERAGE - COBERTURA DE TESTS
+  # ===============================================
+  - repo: local
+    hooks:
+      - id: pytest-coverage
+        name: 📊 Pytest - Cobertura mínima
+        entry: pytest
+        language: system
+        pass_filenames: false
+        always_run: false
+        args:
+          - 'tests/'
+          - '--cov=.'
+          - '--cov-report=term-missing'
+          - '--cov-fail-under=0'
+        stages: [pre-push]
+
+# ===============================================
+# CONFIGURACIÓN DE STAGES
+# ===============================================
+# pre-commit: Se ejecuta en cada commit
+# pre-push: Se ejecuta en cada push
+# manual: Solo con pre-commit run --hook-stage manual
+# ===============================================

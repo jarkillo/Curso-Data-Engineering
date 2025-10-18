@@ -1,0 +1,14 @@
+# Dependencias para el proyecto de logging profesional
+# Python 3.11+ requerido
+
+# Testing
+pytest>=8.0.0
+pytest-cov>=4.1.0
+
+# Calidad de código
+black>=24.0.0
+flake8>=7.0.0
+mypy>=1.8.0
+
+# Para ejemplos con datos
+pandas>=2.0.0

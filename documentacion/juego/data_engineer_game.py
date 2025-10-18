@@ -14,14 +14,13 @@ CÓMO JUGAR:
 """
 
 import json
+import math
 import os
 import sys
 import time
-import math
-from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Any
-
+from pathlib import Path
+from typing import Any, Dict, List
 
 # ============================================================================
 # SISTEMA DE COLORES (Cross-platform)
@@ -438,13 +437,13 @@ class Modulo1Tema1:
         print(f"\n{Colors.CYAN}📖 HISTORIA:{Colors.RESET}")
         print(
             """
-¡Bienvenido a DataFlow Industries! 
+¡Bienvenido a DataFlow Industries!
 
-Eres un nuevo Data Engineer y hoy es tu primer día. Tu jefa, María, 
+Eres un nuevo Data Engineer y hoy es tu primer día. Tu jefa, María,
 te ha asignado al equipo de análisis de datos de negocios.
 
-"Tu primera tarea será analizar datos de ventas y tiempos de respuesta 
-de nuestra API. Necesito que entiendas estadística descriptiva: media, 
+"Tu primera tarea será analizar datos de ventas y tiempos de respuesta
+de nuestra API. Necesito que entiendas estadística descriptiva: media,
 mediana, desviación estándar... lo básico para un Data Engineer."
 
 ¿Estás listo para tu primera misión?
@@ -469,7 +468,7 @@ María te pasa los datos de ventas de la última semana:
 
     Ventas: [145.30, 132.50, 189.75, 156.20, 198.50, 234.80, 175.40]
 
-Tu tarea: Calcular la venta promedio (media) para saber si cumplimos 
+Tu tarea: Calcular la venta promedio (media) para saber si cumplimos
 nuestro objetivo de 170€ por día.
 
 RECORDATORIO: Media = Suma de valores / Cantidad de valores
@@ -547,7 +546,7 @@ RECORDATORIO: Media = Suma de valores / Cantidad de valores
 María: "¡Buen trabajo! Ahora un desafío más complejo."
 
 Un sensor de temperatura reportó estos valores:
-    
+
     Temperaturas: [22, 23, 21, 24, 22, 500, 23]
 
 Uno de los sensores falló y reportó 500°C (¡imposible!).
@@ -555,7 +554,7 @@ Uno de los sensores falló y reportó 500°C (¡imposible!).
 Tu tarea: Calcular la MEDIANA para obtener un valor más representativo
 que no se vea afectado por el outlier.
 
-RECORDATORIO: 
+RECORDATORIO:
 1. Ordena los valores
 2. Toma el del medio
             """,
