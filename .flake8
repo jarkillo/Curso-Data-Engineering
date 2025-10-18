@@ -33,6 +33,7 @@ exclude =
     .pytest_cache,
     .mypy_cache,
     modulo-01-fundamentos,
+    documentacion/juego,
     data_engineer_game.py,
     game.html,
     game_save.json
