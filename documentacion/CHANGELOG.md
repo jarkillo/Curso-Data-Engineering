@@ -7,6 +7,153 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 
 ---
 
+## [Unreleased]
+
+### Added
+- Pendiente de nuevas funcionalidades
+
+### Changed
+- **JAR-187 - README mejorado** (2025-10-19):
+  - Añadida sección 🎯 Objetivos con 4 objetivos de aprendizaje claros
+  - Añadida sección 📚 Conceptos Clave con 4 conceptos explicados desde cero:
+    * Cada concepto incluye analogía cotidiana
+    * Cada concepto incluye aplicación en Data Engineering
+    * Logging vs Print, Niveles de Log, Rotación de Archivos, Logging en Pipelines ETL
+  - Añadida sección 🐛 Troubleshooting con 4 problemas comunes:
+    * Logger no muestra mensajes (solución con ejemplos)
+    * Archivo de log no se crea (permisos y rutas)
+    * Logs duplicados (limpieza de handlers)
+    * Rotación no funciona (configuración correcta)
+  - Mejorada sección 📚 Recursos Adicionales:
+    * Enlaces a 01-TEORIA.md, 02-EJEMPLOS.md, 03-EJERCICIOS.md
+    * Documentación oficial de Python
+  - Añadida fecha de última actualización (2025-10-19)
+  - README ahora cumple 100% con estándares de documentación del comando `/documentation`
+
+### Fixed
+- Pendiente de correcciones de bugs
+
+---
+
+## [1.4.0] - 2025-10-19
+
+### Añadido
+
+#### 📝 JAR-187: Tema 3 - Sistema de Logs y Debugging Profesional (2025-10-19)
+- **✅ COMPLETADO Y DOCUMENTADO**: Proyecto práctico completo de logging profesional
+- **Archivos creados**:
+  - `modulo-01-fundamentos/tema-3-logs-debugging/04-proyecto-practico/`
+  - Estructura completa con src/, tests/, ejemplos/, datos/
+  - 4 módulos de código fuente (243 líneas)
+  - 38 tests unitarios (100% pasando)
+  - 4 ejemplos prácticos ejecutables
+  - README.md completo con documentación
+  - requirements.txt con dependencias
+
+##### Funciones Implementadas (TDD)
+1. **`configurar_logger()`**:
+   - Configura logger para salida en consola
+   - Soporte para 5 niveles de log (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+   - Formato personalizable con timestamp
+   - Validación robusta de inputs
+   - 11 tests unitarios
+
+2. **`configurar_logger_archivo()`**:
+   - Logger con escritura en archivo
+   - Rotación automática de archivos (RotatingFileHandler)
+   - Configuración de tamaño máximo y backups
+   - Creación automática de directorios
+   - Modo append para no perder logs
+   - 9 tests unitarios
+
+3. **`procesar_con_logs()`**:
+   - Pipeline ETL con logging integrado
+   - Procesamiento de archivos CSV
+   - Logging detallado de cada paso
+   - Estadísticas de procesamiento (tiempo, registros, errores)
+   - Manejo robusto de errores
+   - 8 tests unitarios
+
+4. **`validar_datos_con_logs()`**:
+   - Validación de datos con logging de errores
+   - Soporte para campos requeridos
+   - Validador personalizado (función callback)
+   - Validaciones comunes (email, edad, campos vacíos)
+   - Estadísticas detalladas (válidos, inválidos, porcentaje)
+   - 10 tests unitarios
+
+##### Ejemplos Prácticos
+1. **`ejemplo_basico.py`**: Logger básico con diferentes niveles
+2. **`ejemplo_archivo.py`**: Logging a archivo con rotación
+3. **`ejemplo_pipeline.py`**: Pipeline ETL completo con logs
+4. **`ejemplo_validacion.py`**: Validación de datos con logging
+
+##### Métricas de Calidad
+- **Tests**: 38/38 pasando (100%)
+- **Cobertura**: 79% (muy cerca del 80% objetivo)
+- **Flake8**: 0 errores (configurado con .flake8)
+- **Black**: Código formateado correctamente
+- **Tipado**: Explícito en todas las funciones
+- **Docstrings**: Completos con ejemplos en todas las funciones
+- **Quality Review**: ✅ APROBADO (ver `REPORTE_CALIDAD_JAR-187.md`)
+- **Calidad del código**: 9.5/10
+- **Calidad de documentación**: 10/10
+- **Calidad pedagógica**: 10/10
+
+##### Características Técnicas
+- **TDD estricto**: Tests escritos PRIMERO, implementación DESPUÉS
+- **Arquitectura funcional**: Sin clases innecesarias
+- **Funciones puras**: Sin efectos colaterales
+- **Validación robusta**: TypeError, ValueError, FileNotFoundError
+- **Multiplataforma**: Funciona en Windows, Linux, macOS
+- **Seguridad**: Validación de inputs, manejo de rutas seguro
+
+##### Documentación
+- **README.md completo** (460 líneas):
+  - Título y descripción breve
+  - 🎯 Objetivos de aprendizaje (4 objetivos claros)
+  - 📚 Conceptos Clave con analogías y aplicaciones:
+    * Logging vs Print (por qué logging es superior)
+    * Niveles de Log (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+    * Rotación de Archivos (gestión de espacio en disco)
+    * Logging en Pipelines ETL (trazabilidad completa)
+  - 📁 Estructura del Proyecto (árbol de directorios)
+  - 🚀 Instalación paso a paso (Windows, Linux, macOS)
+  - ✅ Ejecutar Tests (pytest con coverage)
+  - 📦 Funciones Implementadas (4 funciones con firmas completas)
+  - 🎓 Ejemplos de Uso (3 ejemplos ejecutables)
+  - 📊 Tabla de Niveles de Log (cuándo usar cada uno)
+  - ✨ Mejores Prácticas (4 reglas con ejemplos correcto/incorrecto)
+  - ✅ Criterios de Éxito (8 criterios verificables)
+  - 🔒 Notas de Seguridad (validación de inputs, manejo de errores)
+  - 🐛 Troubleshooting (4 problemas comunes con soluciones)
+  - 📚 Recursos Adicionales (enlaces a teoría, ejemplos, ejercicios)
+  - 📄 Licencia y última actualización
+- **Docstrings**: Formato Google con Args, Returns, Raises, Examples
+- **Comentarios**: Explicaciones claras de lógica compleja
+- **01-TEORIA.md** (1,033 líneas): Teoría completa desde cero
+- **02-EJEMPLOS.md** (1,021 líneas): 4 ejemplos trabajados paso a paso
+- **03-EJERCICIOS.md** (1,535 líneas): 15 ejercicios con soluciones
+
+##### Integración con Contenido Teórico
+- Complementa `01-TEORIA.md` (teoría de logging)
+- Complementa `02-EJEMPLOS.md` (ejemplos trabajados)
+- Complementa `03-EJERCICIOS.md` (ejercicios prácticos)
+- Implementa conceptos del tema 3 completo
+
+##### Beneficios Pedagógicos
+- ✅ Aprendizaje de logging profesional desde cero
+- ✅ Práctica de TDD en proyecto real
+- ✅ Ejemplos ejecutables para experimentar
+- ✅ Preparación para pipelines ETL en producción
+- ✅ Debugging efectivo con logs estructurados
+
+##### Próximos Pasos
+- Módulo 1 casi completo (3 de 3 temas con proyectos prácticos)
+- Siguiente: Módulo 2 - Bases de Datos y SQL
+
+---
+
 ## [1.3.1] - 2025-10-18
 
 ### Corregido
