@@ -63,7 +63,11 @@ AIRFLOW_HOME=./airflow
 AIRFLOW_WEB_USER=admin
 AIRFLOW_WEB_PASSWORD=AirflowAdmin345!
 AIRFLOW_EXECUTOR=LocalExecutor
-AIRFLOW_FERNET_KEY=tu_fernet_key_generada_aqui
+
+# Fernet Key para cifrado de credenciales (CRÍTICO)
+# Genera una nueva con: python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+# IMPORTANTE: Usa la MISMA clave en todos los servicios de Airflow
+AIRFLOW_FERNET_KEY=n3ZWLdC8o4d4n2FmztvqiggQ6d-R3CWNlMvpcqVgDu8=
 
 # ===============================================
 # AWS
