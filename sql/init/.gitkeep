@@ -1,0 +1,3 @@
+# Este directorio contendrá scripts SQL de inicialización
+# Los archivos .sql aquí se ejecutarán automáticamente al iniciar PostgreSQL
+

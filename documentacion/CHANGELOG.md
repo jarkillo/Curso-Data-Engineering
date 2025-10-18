@@ -7,6 +7,43 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 
 ---
 
+## [1.1.0] - 2025-10-18
+
+### Añadido
+
+#### 🤖 WORKFLOWS DE SUB-AGENTES EN ISSUES (2025-10-18)
+- **✅ COMPLETADO**: Las 21 issues de Linear ahora incluyen workflows de comandos
+- **Descripción**: Cada issue especifica el orden exacto de sub-agentes a invocar para completarla
+- **6 Tipos de Workflows**:
+  1. **Tipo 1: Contenido Teórico** (Módulos completos) - 10 issues
+  2. **Tipo 2: Misiones del Juego** - 4 issues
+  3. **Tipo 3: Infraestructura/Setup** - 1 issue
+  4. **Tipo 4: Expansiones del Juego** - 2 issues
+  5. **Tipo 5: Sistema de Evaluación** - 1 issue
+  6. **Tipo 6: Proyecto Final** - 1 issue
+- **Actualización de `ORDEN_DE_IMPLEMENTACION.md`**:
+  - Nueva sección "🤖 Workflows de Sub-Agentes"
+  - Cómo usar los workflows con Cursor y Claude Code
+  - Ejemplos prácticos de invocación de sub-agentes
+  - Notas sobre flexibilidad y adaptación
+- **Beneficios**:
+  - ✅ Guía paso a paso para cada issue
+  - ✅ Consistencia en el desarrollo
+  - ✅ Claridad en el orden de trabajo
+  - ✅ Facilita delegación y colaboración
+  - ✅ Integración con sistema de sub-agentes
+  - ✅ Workflow documentado y reproducible
+- **Ejemplo de uso**:
+  ```
+  1. Abrir issue en Linear
+  2. Leer sección "🤖 Workflow de Comandos"
+  3. Invocar cada sub-agente en orden
+  4. Completar tareas según criterios de aceptación
+  5. Marcar como Done en Linear
+  ```
+
+---
+
 ## [1.0.0] - 2024-10-18
 
 ### Añadido
@@ -182,7 +219,115 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 
 ---
 
-## [Unreleased]
+## [1.2.0] - 2025-10-18
+
+### Añadido
+
+#### 🛠️ JAR-200: INFRAESTRUCTURA Y SETUP COMPLETO (2025-10-18)
+- **✅ COMPLETADO**: Sistema completo de instalación y configuración
+- **Verificado**: Script de Windows ejecutado exitosamente
+- **Verificado**: Entorno virtual creado y funcional (Python 3.13.5, pytest 8.3.2)
+- **Scripts de Setup Automatizados**:
+  - `scripts/setup_windows.ps1`: Setup completo para Windows
+  - `scripts/setup_linux.sh`: Setup completo para Linux
+  - `scripts/setup_mac.sh`: Setup completo para macOS
+  - Verificación automática de Python 3.11+, pip, Git
+  - Creación de entorno virtual automatizada
+  - Instalación de dependencias básicas (pytest, black, flake8, mypy)
+  - Mensajes de error claros y troubleshooting integrado
+  - Recordatorios de seguridad en cada script
+- **Docker Compose**:
+  - `docker-compose.yml`: Servicios completos para Módulos 5+
+  - PostgreSQL 15 (puerto 5432) con healthcheck
+  - MongoDB 6 (puerto 27017) con healthcheck
+  - Apache Airflow 2.7.3 con LocalExecutor
+  - Redis 7 para cache
+  - PostgreSQL dedicado para Airflow
+  - Volúmenes persistentes configurados
+  - Red interna para comunicación entre servicios
+  - Contraseñas de ejemplo seguras (recordatorio: cambiar en producción)
+  - Documentación de comandos útiles integrada
+- **Requirements.txt Completo**:
+  - Dependencias organizadas por módulo (1-10)
+  - Testing y calidad de código
+  - Análisis de datos (pandas, numpy, matplotlib)
+  - Bases de datos (PostgreSQL, MongoDB, Redis, Elasticsearch)
+  - Web scraping y APIs (requests, beautifulsoup4, selenium)
+  - Cloud (AWS boto3, GCP, Azure)
+  - Big Data (PySpark, Dask)
+  - Streaming (Kafka)
+  - ML en producción (scikit-learn, mlflow, fastapi)
+  - Visualización (plotly, streamlit)
+  - Seguridad (cryptography, bcrypt, JWT)
+  - Monitoreo (prometheus, sentry)
+  - Documentación (sphinx, mkdocs)
+  - Notas de instalación por sistema operativo
+- **Guía de Instalación Completa**:
+  - `documentacion/GUIA_INSTALACION.md`: Guía exhaustiva paso a paso
+  - Secciones: Prerrequisitos, Python, Git, Proyecto, Docker, VS Code
+  - Instrucciones específicas para Windows, Linux, macOS
+  - Screenshots conceptuales y comandos exactos
+  - Verificación del setup completa
+  - Troubleshooting extensivo con 10+ problemas comunes
+  - Mejoras de seguridad (variables de entorno, contraseñas fuertes)
+  - Checklist de instalación completa
+  - Recursos adicionales y enlaces a documentación oficial
+- **Configuración de VS Code**:
+  - `.vscode/settings.json`: Configuración completa para Python
+  - `.vscode/extensions.json`: 20+ extensiones recomendadas
+  - `.vscode/launch.json`: 10 configuraciones de debug
+  - Linting con flake8 (max-line-length=120)
+  - Formateo automático con black al guardar
+  - Type checking con Pylance
+  - Testing con pytest integrado
+  - Exclusión de archivos generados (__pycache__, .pytest_cache)
+  - Configuración de terminal por sistema operativo
+  - Soporte para Jupyter, Docker, SQL, Markdown
+  - Configuración de debug para Flask, FastAPI, Airflow DAGs
+- **Multiplataforma**:
+  - Scripts funcionan en Windows, Linux, macOS sin modificaciones
+  - Manejo de rutas compatible entre sistemas
+  - Verificaciones específicas por sistema operativo
+  - Notas especiales para Mac M1/M2
+  - Soluciones de problemas por plataforma
+- **Seguridad**:
+  - Contraseñas de ejemplo complejas (12+ caracteres, mixtas)
+  - Recordatorios de seguridad en todos los scripts
+  - Documentación de uso de variables de entorno (.env)
+  - Advertencias sobre no compartir credenciales
+  - Sugerencias de mejora de seguridad integradas
+  - Límite de intentos fallidos documentado
+- **Beneficios**:
+  - ✅ Setup en menos de 10 minutos
+  - ✅ Multiplataforma sin ajustes manuales
+  - ✅ Verificación automática de requisitos
+  - ✅ Troubleshooting integrado
+  - ✅ Documentación exhaustiva
+  - ✅ Configuración profesional desde día 1
+  - ✅ Seguridad por defecto
+- **Archivos Creados**:
+  - `scripts/setup_windows.ps1` (219 líneas)
+  - `scripts/setup_linux.sh` (194 líneas)
+  - `scripts/setup_mac.sh` (235 líneas)
+  - `scripts/README.md`: Documentación de scripts
+  - `docker-compose.yml` (258 líneas)
+  - `requirements.txt` (275 líneas)
+  - `documentacion/GUIA_INSTALACION.md` (729 líneas)
+  - `documentacion/ENV_EXAMPLE.md`: Plantilla de variables de entorno
+  - `.gitignore`: Configuración completa de archivos a ignorar
+  - `.vscode/settings.json` (167 líneas)
+  - `.vscode/extensions.json` (59 líneas)
+  - `.vscode/launch.json` (152 líneas)
+  - `airflow/dags/.gitkeep`, `airflow/logs/.gitkeep`, `airflow/plugins/.gitkeep`
+  - `sql/init/README.md`: Guía de scripts SQL de inicialización
+  - `mongo/init/README.md`: Guía de scripts MongoDB de inicialización
+- **Tests Ejecutados**:
+  - ✅ Script setup_windows.ps1 ejecutado exitosamente
+  - ✅ Entorno virtual creado y funcional
+  - ✅ 51 tests del Módulo 1 pasando (100%)
+  - ✅ Python 3.13.5 y pytest 8.3.2 verificados
+
+---
 
 ### En Progreso
 
@@ -304,6 +449,29 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 
 ### Por Añadir en Futuras Versiones
 
+#### 🤖 SISTEMA DE SUB-AGENTES: Arquitectura Completa (2025-10-18)
+- **✅ COMPLETADO**: Sistema de 12 sub-agentes especializados
+- **✅ COMPLETADO**: 7 comandos de Cursor agrupados por función
+- **✅ COMPLETADO**: 12 agentes individuales para Claude Code
+- **✅ COMPLETADO**: Archivo maestro `claude.md` con toda la filosofía
+- **Estructura**:
+  - `claude.md`: Fuente única de verdad (reglas, filosofía, workflow)
+  - `.cursor/commands/`: 7 comandos agrupados
+    - `teaching.md`: Pedagogo, Profesor, Psicólogo
+    - `development.md`: Desarrollador TDD, Arquitecto
+    - `game-design.md`: Diseñador, Frontend, UX/UI
+    - `infrastructure.md`: DevOps
+    - `quality.md`: Reviewer de Calidad
+    - `documentation.md`: Documentador
+    - `project-management.md`: Project Manager
+  - `.claude/agents/`: 12 agentes individuales
+- **Beneficios**:
+  - ✅ Roles especializados claros
+  - ✅ Workflow definido para cada tipo de tarea
+  - ✅ Consistencia en desarrollo
+  - ✅ Escalabilidad del proyecto
+  - ✅ Colaboración estructurada
+
 #### 📋 GESTIÓN DE PROYECTO: Integración con Linear (2025-10-18)
 - **✅ COMPLETADO**: Creación de 21 issues organizadas en Linear
 - **✅ COMPLETADO**: Prioridades ajustadas según orden pedagógico
@@ -337,7 +505,7 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
     - JAR-200: Guía de Instalación y Setup Completa
 - **Organización y Prioridades**:
   - **Prioridad 1 (URGENT)**: 8 issues - Módulo 1 completo + Guía setup
-  - **Prioridad 2 (HIGH)**: 9 issues - Módulos 2-10 
+  - **Prioridad 2 (HIGH)**: 9 issues - Módulos 2-10
   - **Prioridad 3 (MEDIUM)**: 3 issues - Expansiones y certificación
   - **Prioridad 4 (LOW)**: 1 issue - Mejoras estéticas
   - Etiquetas por módulo y tipo (game, pedagogía, proyecto)

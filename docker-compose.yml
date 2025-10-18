@@ -1,0 +1,257 @@
+version: '3.8'
+
+# ===============================================
+# Docker Compose - Master en Ingeniería de Datos
+# ===============================================
+# Servicios necesarios para Módulos 5+
+# 
+# Para iniciar: docker-compose up -d
+# Para detener: docker-compose down
+# Para ver logs: docker-compose logs -f [servicio]
+# ===============================================
+
+services:
+  # =============================================
+  # PostgreSQL - Base de Datos Relacional
+  # Módulos 5, 6, 7
+  # =============================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: master-postgres
+    environment:
+      # SEGURIDAD: Estas contraseñas son de ejemplo
+      # En producción, usa variables de entorno desde .env
+      POSTGRES_USER: dataeng_user
+      POSTGRES_PASSWORD: DataEng2025!SecurePass
+      POSTGRES_DB: dataeng_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./sql/init:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dataeng_user -d dataeng_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - master-network
+
+  # =============================================
+  # MongoDB - Base de Datos NoSQL
+  # Módulos 5, 8
+  # =============================================
+  mongodb:
+    image: mongo:6-jammy
+    container_name: master-mongodb
+    environment:
+      # SEGURIDAD: Contraseñas de ejemplo
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: MongoAdmin2025!SecurePass
+      MONGO_INITDB_DATABASE: dataeng_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+      - ./mongo/init:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - master-network
+
+  # =============================================
+  # PostgreSQL para Airflow
+  # Módulo 6
+  # =============================================
+  postgres-airflow:
+    image: postgres:15-alpine
+    container_name: master-postgres-airflow
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: Airflow2025!SecurePass
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres_airflow_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U airflow -d airflow"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - master-network
+
+  # =============================================
+  # Apache Airflow - Orquestación de Pipelines
+  # Módulo 6
+  # =============================================
+  airflow-init:
+    image: apache/airflow:2.7.3-python3.11
+    container_name: master-airflow-init
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:Airflow2025!SecurePass@postgres-airflow/airflow
+      AIRFLOW__CORE__FERNET_KEY: ''
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
+      _AIRFLOW_DB_UPGRADE: 'true'
+      _AIRFLOW_WWW_USER_CREATE: 'true'
+      _AIRFLOW_WWW_USER_USERNAME: admin
+      _AIRFLOW_WWW_USER_PASSWORD: Airflow2025!Admin
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+    depends_on:
+      postgres-airflow:
+        condition: service_healthy
+    networks:
+      - master-network
+    command: version
+
+  airflow-webserver:
+    image: apache/airflow:2.7.3-python3.11
+    container_name: master-airflow-webserver
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:Airflow2025!SecurePass@postgres-airflow/airflow
+      AIRFLOW__CORE__FERNET_KEY: ''
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+    ports:
+      - "8080:8080"
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+      postgres-airflow:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - master-network
+    command: webserver
+
+  airflow-scheduler:
+    image: apache/airflow:2.7.3-python3.11
+    container_name: master-airflow-scheduler
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:Airflow2025!SecurePass@postgres-airflow/airflow
+      AIRFLOW__CORE__FERNET_KEY: ''
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+      postgres-airflow:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - master-network
+    command: scheduler
+
+  # =============================================
+  # Redis - Cache (opcional, para Airflow Celery)
+  # =============================================
+  redis:
+    image: redis:7-alpine
+    container_name: master-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - master-network
+
+# ===============================================
+# Volúmenes Persistentes
+# ===============================================
+volumes:
+  postgres_data:
+    driver: local
+  mongo_data:
+    driver: local
+  postgres_airflow_data:
+    driver: local
+  redis_data:
+    driver: local
+
+# ===============================================
+# Red Interna
+# ===============================================
+networks:
+  master-network:
+    driver: bridge
+
+# ===============================================
+# Notas de Seguridad
+# ===============================================
+# 1. Las contraseñas aquí son de EJEMPLO
+# 2. En producción, usa un archivo .env:
+#    - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+#    - MONGO_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+# 3. Añade .env al .gitignore
+# 4. Cambia las contraseñas por defecto
+# 5. Limita el acceso con firewalls
+# ===============================================
+
+# ===============================================
+# Comandos Útiles
+# ===============================================
+# Iniciar todos los servicios:
+#   docker-compose up -d
+#
+# Ver logs de un servicio:
+#   docker-compose logs -f postgres
+#   docker-compose logs -f mongodb
+#   docker-compose logs -f airflow-webserver
+#
+# Detener servicios:
+#   docker-compose down
+#
+# Detener y eliminar datos (CUIDADO):
+#   docker-compose down -v
+#
+# Reiniciar un servicio:
+#   docker-compose restart postgres
+#
+# Verificar estado:
+#   docker-compose ps
+#
+# Acceder a PostgreSQL:
+#   docker exec -it master-postgres psql -U dataeng_user -d dataeng_db
+#
+# Acceder a MongoDB:
+#   docker exec -it master-mongodb mongosh -u admin -p MongoAdmin2025!SecurePass
+#
+# Acceder a Airflow Web:
+#   http://localhost:8080
+#   Usuario: admin
+#   Contraseña: Airflow2025!Admin
+# ===============================================
+

@@ -1,0 +1,274 @@
+# ===============================================
+# Requirements - Master en Ingeniería de Datos
+# ===============================================
+# Instalar: pip install -r requirements.txt
+# ===============================================
+
+# ===============================================
+# TESTING Y CALIDAD DE CÓDIGO (Todos los Módulos)
+# ===============================================
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-mock>=3.12.0
+black>=23.7.0
+flake8>=6.1.0
+mypy>=1.5.0
+pylint>=3.0.0
+
+# ===============================================
+# MÓDULO 1: FUNDAMENTOS PYTHON
+# ===============================================
+# Análisis de datos básico
+pandas>=2.0.3
+numpy>=1.25.2
+matplotlib>=3.7.2
+seaborn>=0.12.2
+
+# CSV Processing
+chardet>=5.2.0
+
+# Logging avanzado
+python-json-logger>=2.0.7
+
+# ===============================================
+# MÓDULO 2: SQL Y BASES DE DATOS RELACIONALES
+# ===============================================
+# PostgreSQL
+psycopg2-binary>=2.9.9
+sqlalchemy>=2.0.23
+
+# SQLite (incluido en Python)
+# Herramientas SQL
+sqlparse>=0.4.4
+
+# ===============================================
+# MÓDULO 3: PYTHON AVANZADO
+# ===============================================
+# Programación funcional
+toolz>=0.12.0
+more-itertools>=10.1.0
+
+# Concurrencia
+asyncio>=3.4.3; python_version < '3.9'
+
+# Type hints avanzados
+typing-extensions>=4.8.0
+
+# ===============================================
+# MÓDULO 4: WEB SCRAPING Y APIS
+# ===============================================
+# HTTP y APIs
+requests>=2.31.0
+httpx>=0.25.0
+aiohttp>=3.9.0
+
+# Web Scraping
+beautifulsoup4>=4.12.2
+lxml>=4.9.3
+selenium>=4.15.0
+scrapy>=2.11.0
+
+# Parsing
+html5lib>=1.1
+
+# ===============================================
+# MÓDULO 5: BASES DE DATOS NoSQL
+# ===============================================
+# MongoDB
+pymongo>=4.6.0
+
+# Redis
+redis>=5.0.1
+
+# Elasticsearch
+elasticsearch>=8.11.0
+
+# ===============================================
+# MÓDULO 6: ORQUESTACIÓN CON AIRFLOW
+# ===============================================
+# Apache Airflow (se instala via Docker, pero incluimos cliente)
+apache-airflow-client>=2.7.0
+
+# Herramientas para DAGs
+pendulum>=2.1.2
+croniter>=2.0.1
+
+# ===============================================
+# MÓDULO 7: CLOUD (AWS, GCP, AZURE)
+# ===============================================
+# AWS
+boto3>=1.34.0
+botocore>=1.34.0
+awscli>=1.32.0
+
+# Google Cloud Platform
+google-cloud-storage>=2.14.0
+google-cloud-bigquery>=3.14.0
+google-auth>=2.25.0
+
+# Azure (opcional)
+# azure-storage-blob>=12.19.0
+# azure-identity>=1.15.0
+
+# ===============================================
+# MÓDULO 8: PROCESAMIENTO DE DATOS EN BATCH
+# ===============================================
+# Apache Spark
+pyspark>=3.5.0
+
+# Procesamiento paralelo
+dask>=2023.12.0
+dask[complete]>=2023.12.0
+
+# Compression
+python-snappy>=0.6.1
+
+# ===============================================
+# MÓDULO 9: PROCESAMIENTO EN STREAMING
+# ===============================================
+# Kafka
+kafka-python>=2.0.2
+confluent-kafka>=2.3.0
+
+# Event processing
+pydantic>=2.5.0
+
+# ===============================================
+# MÓDULO 10: MACHINE LEARNING EN PRODUCCIÓN
+# ===============================================
+# ML Core
+scikit-learn>=1.3.2
+xgboost>=2.0.3
+lightgbm>=4.1.0
+
+# Deep Learning (opcional)
+# tensorflow>=2.15.0
+# torch>=2.1.0
+
+# MLOps
+mlflow>=2.9.0
+optuna>=3.5.0
+
+# Model serving
+fastapi>=0.105.0
+uvicorn>=0.25.0
+
+# ===============================================
+# VISUALIZACIÓN Y DASHBOARDS
+# ===============================================
+plotly>=5.18.0
+dash>=2.14.0
+streamlit>=1.29.0
+
+# Jupyter
+jupyter>=1.0.0
+jupyterlab>=4.0.9
+ipykernel>=6.27.1
+ipywidgets>=8.1.1
+
+# ===============================================
+# UTILITIES
+# ===============================================
+# Configuración
+python-dotenv>=1.0.0
+pyyaml>=6.0.1
+toml>=0.10.2
+
+# CLI
+click>=8.1.7
+rich>=13.7.0
+typer>=0.9.0
+
+# Fechas
+python-dateutil>=2.8.2
+
+# Validación
+marshmallow>=3.20.1
+cerberus>=1.3.5
+
+# HTTP Mock (testing)
+responses>=0.24.1
+requests-mock>=1.11.0
+
+# ===============================================
+# SEGURIDAD
+# ===============================================
+# Cryptography
+cryptography>=41.0.7
+pycryptodome>=3.19.0
+
+# Password hashing
+bcrypt>=4.1.2
+argon2-cffi>=23.1.0
+
+# JWT
+pyjwt>=2.8.0
+
+# Secrets management
+python-jose>=3.3.0
+
+# ===============================================
+# MONITOREO Y LOGGING
+# ===============================================
+# Structured logging
+structlog>=23.2.0
+
+# Monitoring
+prometheus-client>=0.19.0
+
+# Error tracking
+sentry-sdk>=1.39.0
+
+# ===============================================
+# PERFORMANCE
+# ===============================================
+# Profiling
+line-profiler>=4.1.1
+memory-profiler>=0.61.0
+
+# Caching
+cachetools>=5.3.2
+
+# ===============================================
+# DOCUMENTACIÓN
+# ===============================================
+sphinx>=7.2.6
+sphinx-rtd-theme>=2.0.0
+mkdocs>=1.5.3
+mkdocs-material>=9.5.0
+
+# ===============================================
+# NOTAS DE INSTALACIÓN
+# ===============================================
+# 1. Instalar dependencias básicas primero:
+#    pip install pytest black flake8 mypy
+#
+# 2. Instalar por módulos según necesites:
+#    Módulo 1: pip install pandas numpy matplotlib
+#    Módulo 2: pip install psycopg2-binary sqlalchemy
+#    etc.
+#
+# 3. Algunas librerías requieren dependencias del sistema:
+#    - psycopg2: requiere PostgreSQL dev headers
+#    - mysqlclient: requiere MySQL dev headers
+#    - selenium: requiere ChromeDriver/GeckoDriver
+#
+# 4. Para Mac M1/M2, algunas librerías pueden requerir
+#    instalación específica o uso de Rosetta 2
+#
+# 5. Para Windows, algunas librerías pueden requerir
+#    Microsoft C++ Build Tools
+#
+# ===============================================
+# SEGURIDAD
+# ===============================================
+# Mantén las dependencias actualizadas:
+#   pip list --outdated
+#   pip install --upgrade [paquete]
+#
+# Auditoría de seguridad:
+#   pip install safety
+#   safety check
+#
+# ===============================================
+
