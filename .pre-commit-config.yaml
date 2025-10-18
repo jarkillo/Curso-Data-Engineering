@@ -122,7 +122,7 @@ repos:
         additional_dependencies:
           - types-requests
           - types-PyYAML
-        exclude: '^(modulo-01-fundamentos/|data_engineer_game\.py)'
+        exclude: '^(modulo-01-fundamentos/|documentacion/juego/|data_engineer_game\.py)'
 
   # ===============================================
   # ISORT - ORDENAR IMPORTS
