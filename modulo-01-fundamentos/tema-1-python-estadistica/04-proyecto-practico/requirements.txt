@@ -1,0 +1,14 @@
+# Dependencias para el Proyecto 1: Calculadora de Estadísticas Básicas
+# Python 3.11+
+
+# Testing
+pytest>=8.0.0
+pytest-cov>=4.1.0
+
+# Code Quality
+black>=24.0.0
+flake8>=7.0.0
+
+# Type checking
+mypy>=1.8.0
+

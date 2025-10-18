@@ -1,0 +1,25 @@
+{
+  "player_name": "jarko",
+  "level": 1,
+  "xp": 0,
+  "total_xp_earned": 0,
+  "current_module": 1,
+  "current_tema": 1,
+  "completed_missions": [],
+  "unlocked_achievements": [],
+  "unlocked_technologies": [
+    "Python",
+    "Git"
+  ],
+  "stats": {
+    "lines_of_code": 0,
+    "tests_passed": 0,
+    "bugs_fixed": 0,
+    "projects_completed": 0,
+    "study_hours": 0,
+    "exercises_solved": 0
+  },
+  "created_at": "2025-10-18T14:16:14.332135",
+  "last_played": "2025-10-18T14:16:19.151101",
+  "play_time_minutes": 0
+}
