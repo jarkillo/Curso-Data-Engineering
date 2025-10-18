@@ -32,7 +32,10 @@ exclude =
     htmlcov,
     .pytest_cache,
     .mypy_cache,
-    modulo-01-fundamentos/tema-1-python-estadistica/04-proyecto-practico/ejemplos_practicos.py
+    modulo-01-fundamentos,
+    data_engineer_game.py,
+    game.html,
+    game_save.json
 
 # Ignorar errores específicos por archivo
 per-file-ignores =

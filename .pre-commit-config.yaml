@@ -86,6 +86,7 @@ repos:
         name: ⚫ Black - Formatear código
         language_version: python3.13
         args: ['--line-length=88', '--target-version=py313']
+        exclude: '^(modulo-01-fundamentos/|data_engineer_game\.py|game\.html|game_save\.json)'
 
   # ===============================================
   # FLAKE8 - LINTING
@@ -103,6 +104,7 @@ repos:
           - flake8-docstrings
           - flake8-bugbear
           - flake8-comprehensions
+        exclude: '^(modulo-01-fundamentos/|data_engineer_game\.py)'
 
   # ===============================================
   # MYPY - TYPE CHECKING
@@ -120,6 +122,7 @@ repos:
         additional_dependencies:
           - types-requests
           - types-PyYAML
+        exclude: '^(modulo-01-fundamentos/|data_engineer_game\.py)'
 
   # ===============================================
   # ISORT - ORDENAR IMPORTS
@@ -134,6 +137,7 @@ repos:
           - '--line-length=88'
           - '--multi-line=3'
           - '--trailing-comma'
+        exclude: '^(modulo-01-fundamentos/|data_engineer_game\.py)'
 
   # ===============================================
   # BANDIT - SEGURIDAD
@@ -147,7 +151,7 @@ repos:
           - '-c'
           - 'pyproject.toml'
         additional_dependencies: ['bandit[toml]']
-        exclude: '^tests/'
+        exclude: '^(tests/|modulo-01-fundamentos/|data_engineer_game\.py)'
 
   # ===============================================
   # PYTEST - TESTS RÁPIDOS

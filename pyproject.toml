@@ -50,8 +50,11 @@ extend-exclude = '''
   | \.cursor
   | \.claude
   | airflow/logs
-  # Archivos existentes antes del CI/CD
-  | modulo-01-fundamentos/tema-1-python-estadistica/04-proyecto-practico/ejemplos_practicos\.py
+  # Archivos del curso (material educativo, no código de producción)
+  | modulo-01-fundamentos/.*
+  | data_engineer_game\.py
+  | game\.html
+  | game_save\.json
 )/
 '''
 
@@ -76,7 +79,10 @@ skip_glob = [
     ".cursor/*",
     ".claude/*",
     "airflow/logs/*",
-    "modulo-01-fundamentos/tema-1-python-estadistica/04-proyecto-practico/ejemplos_practicos.py"
+    "modulo-01-fundamentos/**/*",
+    "data_engineer_game.py",
+    "game.html",
+    "game_save.json"
 ]
 
 # ===============================================
@@ -126,8 +132,11 @@ omit = [
     "*/airflow/logs/*",
     "*/htmlcov/*",
     "setup.py",
-    "*/game*.py",
-    "*/ejemplos_practicos.py"
+    # Archivos del curso (material educativo)
+    "*/modulo-01-fundamentos/*",
+    "data_engineer_game.py",
+    "game.html",
+    "game_save.json"
 ]
 branch = true
 
@@ -191,7 +200,8 @@ exclude_dirs = [
     ".cursor",
     ".claude",
     "airflow/logs",
-    "htmlcov"
+    "htmlcov",
+    "modulo-01-fundamentos"
 ]
 skips = [
     "B101",  # assert_used - permitido en tests
