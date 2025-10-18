@@ -1,0 +1,3 @@
+# Este directorio contendrá scripts de inicialización de MongoDB
+# Los archivos .js aquí se ejecutarán automáticamente al iniciar MongoDB
+

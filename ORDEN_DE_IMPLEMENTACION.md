@@ -237,6 +237,90 @@ Este documento define el orden lógico y pedagógico para implementar todo el co
 
 ---
 
+## 🤖 Workflows de Sub-Agentes
+
+Cada issue en Linear incluye ahora una sección **"🤖 Workflow de Comandos"** que especifica el orden exacto de sub-agentes a invocar para completarla.
+
+### Cómo Usar los Workflows
+
+Los workflows están diseñados para usarse con el sistema de sub-agentes del proyecto:
+- **En Cursor**: Usa los comandos en `.cursor/commands/` (ej: `@teaching`, `@development`, `@game-design`)
+- **En Claude Code**: Usa los agentes en `.claude/agents/` (ej: `pedagogo.md`, `desarrollador-tdd.md`)
+
+### Tipos de Workflows
+
+#### Workflow Tipo 1: Contenido Teórico (Módulos)
+```
+@project-management → @teaching [pedagogo] → @teaching [profesor] → 
+@teaching [psicólogo] → @development [arquitecto] → @development [tdd] → 
+@quality → @documentation → @project-management
+```
+**Aplica a**: JAR-185, JAR-186, JAR-187, JAR-188-196
+
+#### Workflow Tipo 2: Misiones del Juego
+```
+@project-management → @game-design [diseñador] → @teaching [pedagogo] → 
+@game-design [frontend] → @game-design [ux] → @quality → 
+@documentation → @project-management
+```
+**Aplica a**: JAR-180, JAR-181, JAR-182, JAR-183
+
+#### Workflow Tipo 3: Infraestructura/Setup
+```
+@project-management → @infrastructure → @infrastructure → 
+@quality → @documentation → @project-management
+```
+**Aplica a**: JAR-200
+
+#### Workflow Tipo 4: Expansiones del Juego
+```
+@project-management → @game-design [diseñador] → @game-design [frontend] → 
+@game-design [ux] → @quality → @documentation → @project-management
+```
+**Aplica a**: JAR-198, JAR-184
+
+#### Workflow Tipo 5: Sistema de Evaluación
+```
+@project-management → @teaching [profesor] → @development [tdd] → 
+@development [arquitecto] → @quality → @documentation → @project-management
+```
+**Aplica a**: JAR-199
+
+#### Workflow Tipo 6: Proyecto Final
+```
+@project-management → @development [arquitecto] → @teaching [pedagogo] → 
+@development [tdd] → @infrastructure → @quality → 
+@documentation → @project-management
+```
+**Aplica a**: JAR-197
+
+### Ejemplo Práctico: JAR-186 (Tema CSV)
+
+1. Abre la issue en Linear: [JAR-186](https://linear.app/jarko/issue/JAR-186)
+2. Lee la sección "🤖 Workflow de Comandos"
+3. Invoca cada sub-agente en orden:
+   ```
+   1. @project-management - "Revisar JAR-186 y planificar Tema 2: CSV"
+   2. @teaching [pedagogo] - "Crear 01-TEORIA.md para CSV desde cero"
+   3. @teaching [profesor] - "Crear 02-EJEMPLOS.md con casos reales"
+   4. @teaching [profesor] - "Crear 03-EJERCICIOS.md"
+   5. @teaching [psicólogo] - "Validar progresión pedagógica"
+   6. @development [arquitecto] - "Diseñar estructura procesador CSV"
+   7. @development [tdd] - "Escribir tests para procesador CSV"
+   8. @development [tdd] - "Implementar funciones CSV"
+   9. @quality - "Ejecutar black, flake8, pytest"
+   10. @documentation - "Actualizar README y CHANGELOG"
+   11. @project-management - "Marcar JAR-186 como Done"
+   ```
+
+### Notas sobre Workflows
+- Los workflows son **guías**, no reglas estrictas
+- Puedes adaptar el orden según el contexto
+- Algunos pasos pueden ejecutarse en paralelo
+- El orden general es: **Planificación → Creación → Calidad → Documentación → Cierre**
+
+---
+
 ## 📝 Notas Importantes
 
 ### Filosofía de Implementación
@@ -244,15 +328,18 @@ Este documento define el orden lógico y pedagógico para implementar todo el co
 - ✅ **TDD siempre**: Escribir tests primero
 - ✅ **Documentar mientras creas**: No dejar documentación para después
 - ✅ **Validar con usuarios**: Pedir feedback temprano y frecuente
+- ✅ **Seguir los workflows**: Invocar sub-agentes en el orden especificado
 
 ### Flexibilidad
 Este orden es una **recomendación**, no una regla estricta. Puedes:
 - Trabajar en paralelo en varias issues si tienes un equipo
 - Ajustar prioridades según feedback de estudiantes
 - Saltarte issues que no aporten valor inmediato
+- Adaptar workflows según necesidad
 
 ### Tracking
 - Ver todas las issues en Linear: https://linear.app/jarko/project/master-ingenieria-de-datos-3041b5471239
+- Cada issue contiene su workflow de sub-agentes específico
 - Actualizar el CHANGELOG.md al completar cada issue
 - Marcar issues como "In Progress" → "Done" en Linear
 
