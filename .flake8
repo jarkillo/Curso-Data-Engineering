@@ -1,0 +1,48 @@
+# ===============================================
+# FLAKE8 - CONFIGURACIÓN DE LINTING
+# ===============================================
+# Flake8 no soporta pyproject.toml nativamente
+# ===============================================
+
+[flake8]
+# Longitud máxima de línea (compatible con black)
+max-line-length = 88
+
+# Complejidad ciclomática máxima
+max-complexity = 10
+
+# Ignorar ciertos errores
+# E203: whitespace before ':' (incompatible con black)
+# E501: line too long (manejado por black)
+# W503: line break before binary operator (estilo preferido)
+extend-ignore = E203, E501, W503
+
+# Directorios a excluir
+exclude =
+    .git,
+    __pycache__,
+    build,
+    dist,
+    venv,
+    .venv,
+    *.egg-info,
+    .cursor,
+    .claude,
+    airflow/logs,
+    htmlcov,
+    .pytest_cache,
+    .mypy_cache
+
+# Ignorar errores específicos por archivo
+per-file-ignores =
+    __init__.py:F401
+    tests/*:S101,S105,S106
+
+# Mostrar el código fuente del error
+show-source = True
+
+# Mostrar estadísticas al final
+statistics = True
+
+# Contar errores
+count = True
