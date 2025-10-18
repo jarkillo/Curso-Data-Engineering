@@ -1,0 +1,63 @@
+# Archivos temporales de desarrollo
+game_save.json
+claude.md
+
+# Directorios de dependencias
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+node_modules/
+
+# Entornos virtuales
+env/
+ENV/
+venv/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Coverage y testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Logs
+*.log
+airflow/logs/
+
+# Docker
+*.env.local
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de build
+build/
+dist/
+*.egg-info/
+
+# Archivos temporales de git
+*.orig
+*.rej
+
+# Archivos de documentación generados temporalmente
+COMMIT_MESSAGE_*.md
+PR_DESCRIPTION_*.md
+PR_CREADO_*.md
+INSTRUCCIONES_PR_*.md
+REPORTE_PROJECT_MANAGEMENT_*.md
+
+# Mantener solo si son versión final
+# CHECKLIST_*.md
+# REPORTE_*.md
+

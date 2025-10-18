@@ -307,6 +307,22 @@ certificados/*.pdf
 reportes/temp/
 
 # ===============================================
+# Archivos de Trabajo de Agentes IA
+# ===============================================
+# Archivos temporales de Claude/Cursor
+claude.md
+.claude/
+# .cursor/ no se ignora porque contiene comandos útiles
+
+# Documentos de trabajo temporal de PR y tickets
+# (Los finales deben estar en documentacion/)
+COMMIT_MESSAGE_*.md
+PR_DESCRIPTION_*.md
+PR_CREADO_*.md
+INSTRUCCIONES_PR_*.md
+REPORTE_PROJECT_MANAGEMENT_*.md
+
+# ===============================================
 # Build y Distribución
 # ===============================================
 build/
