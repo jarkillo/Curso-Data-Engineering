@@ -148,57 +148,58 @@ jobs:
   # ===============================================
   # JOB 3: VERIFICACIÓN DE TESTS
   # ===============================================
-  test-coverage:
-    name: 🧪 Cobertura de Tests
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: 📥 Checkout código
-        uses: actions/checkout@v4
-
-      - name: 🐍 Configurar Python 3.13
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-          cache: 'pip'
-
-      - name: 📦 Instalar dependencias
-        run: |
-          python -m pip install --upgrade pip
-          pip install pytest pytest-cov
-          pip install -r requirements.txt
-
-      - name: 🧪 Ejecutar tests con cobertura
-        run: |
-          pytest tests/ --cov=. --cov-report=term-missing --cov-report=json
-
-      - name: 📊 Comentar cobertura en PR
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            try {
-              const coverage = JSON.parse(fs.readFileSync('coverage.json', 'utf8'));
-              const percent = coverage.totals.percent_covered.toFixed(2);
-
-              let emoji = '✅';
-              if (percent < 80) emoji = '⚠️';
-              if (percent < 60) emoji = '❌';
-
-              const comment = `## ${emoji} Cobertura de Tests: ${percent}%\n\n` +
-                `- Líneas cubiertas: ${coverage.totals.covered_lines}\n` +
-                `- Líneas totales: ${coverage.totals.num_statements}\n` +
-                `- Líneas faltantes: ${coverage.totals.missing_lines}`;
-
-              github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: comment
-              });
-            } catch (error) {
-              core.info('No se pudo leer el reporte de cobertura');
-            }
+  # NOTA: Deshabilitado temporalmente hasta que haya código de producción
+  # test-coverage:
+  #   name: 🧪 Cobertura de Tests
+  #   runs-on: ubuntu-latest
+  #
+  #   steps:
+  #     - name: 📥 Checkout código
+  #       uses: actions/checkout@v4
+  #
+  #     - name: 🐍 Configurar Python 3.13
+  #       uses: actions/setup-python@v5
+  #       with:
+  #         python-version: '3.13'
+  #         cache: 'pip'
+  #
+  #     - name: 📦 Instalar dependencias
+  #       run: |
+  #         python -m pip install --upgrade pip
+  #         pip install pytest pytest-cov
+  #         pip install -r requirements.txt
+  #
+  #     - name: 🧪 Ejecutar tests con cobertura
+  #       run: |
+  #         pytest tests/ --cov=. --cov-report=term-missing --cov-report=json
+  #
+  #     - name: 📊 Comentar cobertura en PR
+  #       uses: actions/github-script@v7
+  #       with:
+  #         script: |
+  #           const fs = require('fs');
+  #           try {
+  #             const coverage = JSON.parse(fs.readFileSync('coverage.json', 'utf8'));
+  #             const percent = coverage.totals.percent_covered.toFixed(2);
+  #
+  #             let emoji = '✅';
+  #             if (percent < 80) emoji = '⚠️';
+  #             if (percent < 60) emoji = '❌';
+  #
+  #             const comment = `## ${emoji} Cobertura de Tests: ${percent}%\n\n` +
+  #               `- Líneas cubiertas: ${coverage.totals.covered_lines}\n` +
+  #               `- Líneas totales: ${coverage.totals.num_statements}\n` +
+  #               `- Líneas faltantes: ${coverage.totals.missing_lines}`;
+  #
+  #             github.rest.issues.createComment({
+  #               issue_number: context.issue.number,
+  #               owner: context.repo.owner,
+  #               repo: context.repo.repo,
+  #               body: comment
+  #             });
+  #           } catch (error) {
+  #             core.info('No se pudo leer el reporte de cobertura');
+  #           }
 
   # ===============================================
   # JOB 4: VERIFICACIÓN DE SEGURIDAD

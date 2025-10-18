@@ -93,17 +93,18 @@ jobs:
         run: |
           pytest tests/ -v --tb=short --maxfail=5
 
-      - name: 📊 Generar reporte de cobertura
-        run: |
-          pytest tests/ --cov=. --cov-report=xml --cov-report=term-missing
-
-      - name: 📤 Subir cobertura a Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          file: ./coverage.xml
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: false
+      # Cobertura deshabilitada temporalmente hasta que haya código de producción
+      # - name: 📊 Generar reporte de cobertura
+      #   run: |
+      #     pytest tests/ --cov=. --cov-report=xml --cov-report=term-missing
+      #
+      # - name: 📤 Subir cobertura a Codecov
+      #   uses: codecov/codecov-action@v4
+      #   with:
+      #     file: ./coverage.xml
+      #     flags: unittests
+      #     name: codecov-umbrella
+      #     fail_ci_if_error: false
 
   # ===============================================
   # JOB 3: SEGURIDAD

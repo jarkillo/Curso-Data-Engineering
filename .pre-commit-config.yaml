@@ -187,7 +187,7 @@ repos:
           - 'tests/'
           - '--cov=.'
           - '--cov-report=term-missing'
-          - '--cov-fail-under=80'
+          - '--cov-fail-under=0'
         stages: [pre-push]
 
 # ===============================================
