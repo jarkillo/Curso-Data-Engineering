@@ -89,9 +89,19 @@ jobs:
           pip install pytest pytest-cov pytest-mock
           pip install -r requirements.txt
 
-      - name: 🧪 Ejecutar tests
+      - name: 🧪 Ejecutar tests - Raíz
         run: |
           pytest tests/ -v --tb=short --maxfail=5
+
+      - name: 🧪 Ejecutar tests - Tema 1 (Estadística)
+        run: |
+          cd modulo-01-fundamentos/tema-1-python-estadistica/04-proyecto-practico
+          pytest -v --tb=short
+
+      - name: 🧪 Ejecutar tests - Tema 3 (Logs y Debugging)
+        run: |
+          cd modulo-01-fundamentos/tema-3-logs-debugging/04-proyecto-practico
+          pytest -v --tb=short
 
       # Cobertura deshabilitada temporalmente hasta que haya código de producción
       # - name: 📊 Generar reporte de cobertura
