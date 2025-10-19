@@ -95,11 +95,29 @@ http://localhost:8000/game.html
 - ✅ **Feedback pedagógico** sobre bimodalidad
 - ✅ **+150 XP + 25 XP bonus** al completar
 
+### Misión 4A: Percentil 50 (Mediana) ✅
+- ✅ **Tutorial integrado** sobre percentiles y cuartiles
+- ✅ **Conexión explícita** con Misión 2 (P50 = mediana)
+- ✅ **Visualización de línea temporal** con Q2 marcado en dorado
+- ✅ **Zonas coloreadas** (50% más rápidos vs 50% más lentos)
+- ✅ **Empresa ficticia**: PerformanceAPI Analytics (monitoreo de APIs)
+- ✅ **Contexto empresarial**: Establecer SLAs realistas
+- ✅ **+100 XP + 20 XP bonus** al completar
+
+### Misión 4B: Cuartiles Completos (Q1, Q2, Q3) ✅
+- ✅ **Visualización de boxplot** interactivo con zonas coloreadas
+- ✅ **Detección de outliers** con regla IQR
+- ✅ **Cuartiles visuales**: Q1 (verde), Q2 (amarillo), Q3 (naranja), Q4 (rojo)
+- ✅ **Conexión con IQR** de Misión 2B
+- ✅ **Decisiones de SLA** por niveles (Premium, Estándar, Básico)
+- ✅ **Nota sobre métodos de cálculo** (simplificado vs numpy/pandas)
+- ✅ **+150 XP + 50 XP bonus** al completar
+
 ### Sistema de Progresión ✅
-- ✅ **Desbloqueo progresivo**: Misión 1 → 2A → 2B → 3A → 3B
+- ✅ **Desbloqueo progresivo**: Misión 1 → 2A → 2B → 3A → 3B → 4A → 4B
 - ✅ **Guardado automático** en localStorage
 - ✅ **Botón "Continuar"** lleva a la siguiente misión
-- ✅ **Total: 575 XP** disponibles (100 + 75 + 125 + 100 + 175)
+- ✅ **Total: 895 XP** disponibles (100 + 75 + 125 + 100 + 175 + 120 + 200)
 
 ---
 
@@ -230,22 +248,27 @@ Desblocas más misiones
 
 ## 🚀 Roadmap Versión Web
 
-### ✅ Implementado (v1.2)
+### ✅ Implementado (v1.3)
 - Misión 1 completa (Media)
 - Misión 2A completa (Mediana con outliers evidentes)
 - Misión 2B completa (Mediana con outliers sutiles)
 - Misión 3A completa (Moda simple)
 - Misión 3B completa (Distribución bimodal)
+- Misión 4A completa (Percentil 50 - Mediana)
+- Misión 4B completa (Cuartiles Q1, Q2, Q3)
 - Calculadora funcional
 - Sistema de XP y progresión
-- Visualizaciones con outliers y modas destacados
+- Visualizaciones avanzadas:
+  - Outliers y modas destacados
+  - Línea temporal con Q2
+  - Boxplot interactivo con cuartiles
 - Guardado automático
 - Sistema de desbloqueo progresivo
 - Tabla de frecuencias interactiva
 
-### 🚧 Próximo (v1.3)
-- [ ] Misión 4: Percentiles y cuartiles
+### 🚧 Próximo (v1.4)
 - [ ] Misión 5: Varianza y desviación estándar
+- [ ] Misión 6: Correlación y regresión lineal
 - [ ] Dashboard completo de stats
 - [ ] Sistema de logros con badges visuales
 - [ ] Animaciones de level up más épicas
@@ -410,6 +433,6 @@ python -m http.server 8000
 
 ---
 
-**Versión:** 1.2 Web (con Misión 3: Moda y Distribuciones Bimodales)
+**Versión:** 1.3 Web (con Misión 4: Percentiles y Cuartiles)
 **Última actualización:** 2025-10-19
 **Creado con:** ❤️, HTML, CSS y JavaScript

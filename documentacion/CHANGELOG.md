@@ -10,6 +10,94 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 ## [Unreleased]
 
 ### Added
+- **JAR-182: Misión 4 del Juego - Percentiles y Cuartiles** (2025-10-19):
+  - ✅ **COMPLETADO Y VALIDADO**: Diseño, implementación y revisión pedagógica
+  - **Empresa ficticia**: PerformanceAPI Analytics (monitoreo de APIs y servicios web)
+  - **Personajes**: Laura Martínez (CEO), María González (mentora)
+  - **Innovación pedagógica**: Primera misión sobre percentiles y cuartiles con visualizaciones avanzadas (boxplot)
+  - ✅ **Escena 10 (Tutorial)**: Introducción a Percentiles y Cuartiles
+    - Analogía de 100 estudiantes ordenados por nota
+    - Conexión explícita con Misión 2: P50 = Q2 = MEDIANA
+    - Explicación de cuartiles (Q1, Q2, Q3) como percentiles especiales
+    - Aplicación a APIs: P50, P95, P99 para SLAs
+    - Por qué percentiles son mejores que media con outliers
+  - ✅ **Misión 4A (Básica)**: Percentil 50 (Mediana)
+    - Dataset: 9 tiempos de respuesta de API (120-160 ms)
+    - Pregunta: ¿Cuál es el percentil 50 (Q2)?
+    - Respuesta correcta: 142 ms (tolerancia ±0.5 ms)
+    - Visualización: Línea temporal con Q2 marcado en dorado
+    - Zonas coloreadas: 50% más rápidos (verde), 50% más lentos (rojo)
+    - Panel de ayuda con datos ordenados y pistas progresivas
+    - Feedback con interpretación de negocio (SLA Estándar)
+    - Conexión explícita con Misión 2 (mediana)
+    - +100 XP base + 20 XP bonus sin hints
+  - ✅ **Misión 4B (Avanzada)**: Cuartiles Completos (Q1, Q2, Q3)
+    - Dataset: 13 tiempos de respuesta de API (95-250 ms, con outlier)
+    - Pregunta: ¿Cuál es Q2 (mediana)?
+    - Respuesta correcta: 150 ms (tolerancia ±1 ms)
+    - Visualización: Boxplot interactivo con zonas coloreadas
+      - Verde (0-Q1): 25% más rápidos
+      - Amarillo (Q1-Q2): 25% siguiente
+      - Naranja (Q2-Q3): 25% siguiente
+      - Rojo (Q3-Max): 25% más lentos
+    - Q1 = 130 ms, Q2 = 150 ms, Q3 = 170 ms
+    - Outlier detectado: 250 ms (marcado en rojo con animación)
+    - Panel de ayuda con explicación de cuartiles y conexión con IQR (Misión 2B)
+    - Feedback con análisis completo de cuartiles y decisiones de SLA por niveles
+    - Nota sobre métodos de cálculo (simplificado vs numpy/pandas)
+    - +150 XP base + 25 XP bonus sin hints + 25 XP bonus primer intento
+  - **Sistema de XP**: 320 XP total (120 + 200)
+  - **Funciones implementadas**:
+    - `calcularCuartiles(datos)`: Calcula Q1, Q2, Q3 usando método simplificado educativo
+    - `startMission4A()` y `startMission4B()`: Inicializan misiones
+    - `loadTimelineChartMission4A()`: Visualización de línea temporal con Q2
+    - `loadBoxplotChartMission4B()`: Visualización de boxplot interactivo
+    - `updateHelperMission4A()` y `updateHelperMission4B()`: Paneles de ayuda
+    - `checkAnswerMission4A()` y `checkAnswerMission4B()`: Validación con feedback específico
+  - **CSS añadido**:
+    - `.quartile-line`: Línea dorada animada para marcar Q2
+    - `.zone-q1`, `.zone-q2`, `.zone-q3`, `.zone-q4`: Zonas coloreadas del boxplot
+    - `.timeline-point`: Puntos de datos interactivos con hover
+    - `.boxplot-box`, `.boxplot-median`, `.boxplot-whisker`: Elementos del boxplot
+    - `.outlier-point`: Outliers en rojo con animación pulse-red
+    - `.zone-above-q2`, `.zone-below-q2`: Zonas de línea temporal
+  - **Mejoras pedagógicas** (basadas en revisión):
+    - Conexión explícita con IQR de Misión 2B en feedback
+    - Nota sobre métodos de cálculo para prevenir confusión
+    - Solo se pide calcular Q2, pero se muestran Q1 y Q3 (reduce frustración)
+    - Feedback específico por tipo de error (confusión entre Q1, Q2, Q3)
+    - Visualizaciones educativas que enseñan sin sobrecargar
+  - **Sistema de navegación**:
+    - Integración con `nextMission()`: Misión 3B → Escena 10 → Misión 4A → Misión 4B
+    - Keyboard navigation con Enter en Escena 10
+    - Botón de continuar automático tras completar 4A
+  - **Revisión pedagógica**:
+    - ✅ Calificación: 9.3/10 por Psicólogo Educativo
+    - ✅ Veredicto: APROBADO PARA IMPLEMENTACIÓN
+    - ✅ Fortalezas: Conexión con conocimientos previos, progresión impecable, contexto empresarial relevante
+    - ✅ Cumplimiento: Bloom's Taxonomy, Zona de Desarrollo Próximo, Aprendizaje Significativo
+    - 📄 **Reporte completo**: `documentacion/jira/REVISION_PEDAGOGICA_MISION_4_JAR-182.md`
+  - **Revisión UX/UI**:
+    - ✅ Calificación: 9.5/10 por Especialista UX/UI
+    - ✅ Veredicto: APROBADO PARA PRODUCCIÓN
+    - ✅ Visualizaciones claras y educativas (timeline y boxplot)
+    - ✅ Feedback constructivo con mensajes específicos por error
+    - ✅ Accesibilidad completa (ARIA, tooltips, contraste)
+    - ✅ Navegación intuitiva y fluida
+  - **Archivos modificados**:
+    - `documentacion/juego/game.html` (~3660 líneas, +650 líneas añadidas)
+    - `documentacion/CHANGELOG.md` (esta entrada)
+  - **Archivos creados**:
+    - `documentacion/jira/DISENO_MISION_4_JAR-182.md` (415 líneas, diseño completo)
+    - `documentacion/jira/REVISION_PEDAGOGICA_MISION_4_JAR-182.md` (revisión pedagógica completa)
+  - **Beneficios pedagógicos**:
+    - ✅ Comprensión de percentiles como posiciones en datos ordenados
+    - ✅ Conexión clara con mediana (P50 = Q2)
+    - ✅ Introducción a boxplot (herramienta profesional)
+    - ✅ Aplicación a SLAs de APIs (contexto real de Data Engineering)
+    - ✅ Conexión con IQR para detección de outliers
+  - **Total XP disponible en el juego**: 895 XP (575 anteriores + 320 nuevos)
+
 - **JAR-181: Misión 3 del Juego - Moda y Distribuciones Bimodales** (2025-10-19):
   - ✅ **COMPLETADO Y VALIDADO**: Diseño, implementación, revisión pedagógica y testing manual
   - **Empresa ficticia**: TrendyShop Analytics (cadena de tiendas de ropa)

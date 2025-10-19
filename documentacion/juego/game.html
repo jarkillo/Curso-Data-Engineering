@@ -101,6 +101,124 @@
             border-left: 4px solid #ffd700;
         }
 
+        /* Estilos para Misión 4: Percentiles y Cuartiles */
+        .quartile-line {
+            stroke: #ffd700;
+            stroke-width: 3px;
+            stroke-dasharray: 5, 5;
+            animation: pulse-gold-line 2s infinite;
+        }
+
+        @keyframes pulse-gold-line {
+
+            0%,
+            100% {
+                opacity: 1;
+                stroke-width: 3px;
+            }
+
+            50% {
+                opacity: 0.7;
+                stroke-width: 4px;
+            }
+        }
+
+        /* Zonas de boxplot */
+        .zone-q1 {
+            fill: rgba(0, 255, 0, 0.1);
+            transition: fill 0.3s ease;
+        }
+
+        .zone-q1:hover {
+            fill: rgba(0, 255, 0, 0.2);
+        }
+
+        .zone-q2 {
+            fill: rgba(255, 255, 0, 0.1);
+            transition: fill 0.3s ease;
+        }
+
+        .zone-q2:hover {
+            fill: rgba(255, 255, 0, 0.2);
+        }
+
+        .zone-q3 {
+            fill: rgba(255, 165, 0, 0.1);
+            transition: fill 0.3s ease;
+        }
+
+        .zone-q3:hover {
+            fill: rgba(255, 165, 0, 0.2);
+        }
+
+        .zone-q4 {
+            fill: rgba(255, 0, 0, 0.1);
+            transition: fill 0.3s ease;
+        }
+
+        .zone-q4:hover {
+            fill: rgba(255, 0, 0, 0.2);
+        }
+
+        /* Timeline point */
+        .timeline-point {
+            fill: #00c6ff;
+            r: 6;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .timeline-point:hover {
+            r: 8;
+            fill: #ffd700;
+        }
+
+        /* Boxplot elements */
+        .boxplot-box {
+            fill: rgba(255, 255, 255, 0.2);
+            stroke: #ffd700;
+            stroke-width: 2px;
+        }
+
+        .boxplot-median {
+            stroke: #ffd700;
+            stroke-width: 4px;
+        }
+
+        .boxplot-whisker {
+            stroke: #fff;
+            stroke-width: 2px;
+        }
+
+        /* Outlier point */
+        .outlier-point {
+            fill: #ff4444;
+            r: 8;
+            animation: pulse-red 2s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes pulse-red {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        /* Zonas de timeline */
+        .zone-above-q2 {
+            fill: rgba(255, 0, 0, 0.1);
+        }
+
+        .zone-below-q2 {
+            fill: rgba(0, 255, 0, 0.1);
+        }
+
         .game-subtitle {
             font-size: 1.5rem;
             margin-bottom: 50px;
@@ -1282,6 +1400,91 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Escena 10: Tutorial de Percentiles -->
+            <div class="story-scene" id="scene10">
+                <h2 style="font-size: 2rem; margin-bottom: 30px;">📊 Percentiles y Cuartiles</h2>
+
+                <div class="dialogue">
+                    <strong>María:</strong> "¡Excelente trabajo con TrendyShop, <span id="playerNameScene10"></span>!
+                    Tu análisis de las tallas más vendidas les ayudó a optimizar su inventario."
+                    <br><br>
+                    <strong>Tú:</strong> "Gracias, María. ¿Cuál es el siguiente desafío?"
+                    <br><br>
+                    <strong>María:</strong> "Tenemos un nuevo cliente: <strong>PerformanceAPI Analytics</strong>.
+                    Monitorean APIs y necesitan establecer SLAs realistas."
+                    <br><br>
+                    <strong>Tú:</strong> "¿SLAs?"
+                    <br><br>
+                    <strong>María:</strong> "Service Level Agreements. Promesas de tiempo de respuesta.
+                    Por ejemplo: 'Tu API responderá en menos de 150 ms el 95% del tiempo'."
+                    <br><br>
+                    "Para establecer SLAs, usaremos <strong>PERCENTILES</strong>."
+                </div>
+
+                <div class="tutorial-box">
+                    <div class="tutorial-title">🎯 ¿Qué son los percentiles?</div>
+                    <div class="tutorial-content">
+                        Imagina que ordenas <strong>100 estudiantes</strong> por nota (de menor a mayor):
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>El <strong>percentil 25 (P25)</strong> es la nota del estudiante #25</li>
+                            <li>El <strong>percentil 50 (P50)</strong> es la nota del estudiante #50</li>
+                            <li>El <strong>percentil 75 (P75)</strong> es la nota del estudiante #75</li>
+                        </ul>
+                        <br>
+                        <strong>💡 Interpretación:</strong>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li><strong>P25</strong> → El 25% de estudiantes tiene esa nota o menos</li>
+                            <li><strong>P50</strong> → El 50% de estudiantes tiene esa nota o menos</li>
+                            <li><strong>P75</strong> → El 75% de estudiantes tiene esa nota o menos</li>
+                        </ul>
+                        <br>
+                        <strong style="color: #32cd32;">¿Y sabes qué? ¡Ya conoces uno!</strong>
+                        <br><br>
+                        <strong style="font-size: 1.2rem; color: #ffd700;">P50 = MEDIANA</strong>
+                        (¡la aprendiste en la Misión 2!)
+                    </div>
+                </div>
+
+                <div class="tutorial-box">
+                    <div class="tutorial-title">📊 Cuartiles = Percentiles especiales</div>
+                    <div class="tutorial-content">
+                        Los cuartiles dividen los datos en <strong>4 partes iguales</strong> (25% cada una):
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li><strong>Q1 = P25</strong> (primer cuartil)</li>
+                            <li><strong>Q2 = P50</strong> (segundo cuartil = mediana)</li>
+                            <li><strong>Q3 = P75</strong> (tercer cuartil)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tutorial-box">
+                    <div class="tutorial-title">🚀 ¿Por qué son útiles en APIs?</div>
+                    <div class="tutorial-content">
+                        <ul style="margin-left: 20px;">
+                            <li><strong>P50 (mediana)</strong>: Tiempo de respuesta típico</li>
+                            <li><strong>P95</strong>: Tiempo que el 95% de requests cumple</li>
+                            <li><strong>P99</strong>: Tiempo que el 99% de requests cumple</li>
+                        </ul>
+                        <br>
+                        <strong style="color: #ffd700;">Importante:</strong> Los SLAs suelen basarse en
+                        <strong>P95 o P99</strong>, no en la media, porque la media se ve muy afectada
+                        por outliers.
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <strong>María:</strong> "¿Listo/a para tu primera misión con percentiles?"
+                </div>
+
+                <div class="story-actions">
+                    <button class="story-btn" onclick="nextScene(9)">⬅️ Atrás</button>
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <div class="keyboard-hint">⌨️ <span class="key-indicator">Enter</span></div>
+                        <button class="story-btn primary" onclick="startMission4A()">🚀 ¡VAMOS!</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1955,6 +2158,10 @@
                 checkAnswerMission2A(answer, feedback);
             } else if (missionType === 'mission_2b') {
                 checkAnswerMission2B(answer, feedback);
+            } else if (missionType === 'mission_4a') {
+                checkAnswerMission4A(answer, feedback);
+            } else if (missionType === 'mission_4b') {
+                checkAnswerMission4B(answer, feedback);
             }
         }
 
@@ -2303,8 +2510,16 @@
             } else if (completedMissions.includes('mission_3a') && !completedMissions.includes('mission_3b')) {
                 // Ir a Misión 3B directamente (ya vio el tutorial)
                 startMission3B();
+            } else if (completedMissions.includes('mission_3b') && !completedMissions.includes('mission_4a')) {
+                // Ir a tutorial de Misión 4 (Percentiles)
+                document.getElementById('gameScreen').style.display = 'none';
+                document.getElementById('storyScreen').style.display = 'block';
+                showScene(10);
+            } else if (completedMissions.includes('mission_4a') && !completedMissions.includes('mission_4b')) {
+                // Ir a Misión 4B directamente (ya vio el tutorial)
+                startMission4B();
             } else {
-                alert('🎮 ¡Próximamente más misiones!\n\nHas completado las misiones disponibles.\n\nMaría: "¡Increíble progreso! Pronto aprenderás sobre percentiles, varianza y más."\n\n¡Hasta pronto! 🚀');
+                alert('🎮 ¡Próximamente más misiones!\n\nHas completado las misiones disponibles.\n\nMaría: "¡Increíble progreso! Pronto aprenderás sobre varianza, desviación estándar y más."\n\n¡Hasta pronto! 🚀');
             }
         }
 
@@ -2822,6 +3037,639 @@
                     </div>
                 </div>
             `;
+        }
+
+        // ============================================
+        // MISIÓN 4: PERCENTILES Y CUARTILES
+        // ============================================
+
+        // Datos de Misión 4A: Tiempos de respuesta API (9 requests)
+        const tiempos_4A = [120, 145, 135, 150, 140, 160, 138, 142, 155];
+
+        // Datos de Misión 4B: Tiempos de respuesta API (13 requests - día completo)
+        const tiempos_4B = [95, 110, 125, 130, 140, 145, 150, 155, 160, 170, 185, 200, 250];
+
+        /**
+         * Calcula los cuartiles Q1, Q2, Q3 de un array de datos
+         * Método simplificado educativo
+         */
+        function calcularCuartiles(datos) {
+            const sorted = [...datos].sort((a, b) => a - b);
+            const n = sorted.length;
+
+            // Q2 (mediana)
+            const q2 = calcularMediana(sorted);
+
+            // Q1 (mediana de la mitad inferior)
+            const mitadInferior = sorted.slice(0, Math.floor(n / 2));
+            const q1 = calcularMediana(mitadInferior);
+
+            // Q3 (mediana de la mitad superior)
+            const mitadSuperior = sorted.slice(Math.ceil(n / 2));
+            const q3 = calcularMediana(mitadSuperior);
+
+            return { q1, q2, q3 };
+        }
+
+        /**
+         * Inicia la Misión 4A: Percentil 50 (Mediana)
+         */
+        function startMission4A() {
+            // Hide story, show game
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('storyScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+
+            // Set mission data
+            gameState.currentMissionData = tiempos_4A;
+            gameState.currentMissionType = 'mission_4a';
+
+            // Update mission title and description
+            document.querySelector('.mission-title').textContent = '📊 Misión 4A: Percentil 50 (Básico)';
+            document.querySelector('.mission-description').innerHTML = `
+                <p><strong>🏢 Cliente: PerformanceAPI Analytics</strong></p>
+                <p style="margin-top: 10px;">
+                    La CEO Laura Martínez necesita analizar los tiempos de respuesta de su API principal.
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>Tu tarea:</strong> Calcula el <strong>percentil 50 (Q2)</strong> de los tiempos de respuesta.
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">
+                    💡 <strong>Recuerda:</strong> P50 = Q2 = MEDIANA (¡ya la conoces de la Misión 2!)
+                </p>
+            `;
+
+            // Update hints
+            document.querySelector('.hints').innerHTML = `
+                <div class="hint-title">💡 Recuerda:</div>
+                <p><strong>Q2 (P50)</strong> = Percentil 50 = Mediana</p>
+                <p style="margin-top: 10px;">
+                    Ordena los datos y encuentra el valor del medio.
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">
+                    Con 9 valores, el del medio está en la posición 5.
+                </p>
+            `;
+
+            // Update UI
+            document.getElementById('playerName').textContent = gameState.playerName;
+            document.getElementById('playerLevel').textContent = gameState.level;
+            updateXPBar();
+
+            // Load timeline chart for Mission 4A
+            loadTimelineChartMission4A();
+            updateHelperMission4A();
+
+            // Change input to number
+            const answerInput = document.getElementById('answerInput');
+            answerInput.type = 'number';
+            answerInput.value = '';
+            answerInput.placeholder = 'Ingresa el valor de Q2 en ms';
+            answerInput.step = '0.1';
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('submitBtn').disabled = false;
+
+            // Update player name in scene 10
+            document.getElementById('playerNameScene10').textContent = gameState.playerName;
+
+            // Save game
+            saveGame();
+        }
+
+        /**
+         * Inicia la Misión 4B: Cuartiles (Q1, Q2, Q3)
+         */
+        function startMission4B() {
+            // Hide story, show game
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('storyScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+
+            // Set mission data
+            gameState.currentMissionData = tiempos_4B;
+            gameState.currentMissionType = 'mission_4b';
+
+            // Update mission title and description
+            document.querySelector('.mission-title').textContent = '📊 Misión 4B: Cuartiles Completos (Avanzado)';
+            document.querySelector('.mission-description').innerHTML = `
+                <p><strong>🏢 Cliente: PerformanceAPI Analytics (Día Completo)</strong></p>
+                <p style="margin-top: 10px;">
+                    Laura necesita analizar un día completo de datos para establecer 3 niveles de SLA:
+                    Premium, Estándar y Básico.
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>Tu tarea:</strong> Calcula el <strong>cuartil Q2 (mediana)</strong> de los tiempos de respuesta.
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">
+                    💡 <strong>Nota:</strong> Solo te pedimos Q2. El gráfico muestra Q1 y Q3 automáticamente.
+                </p>
+            `;
+
+            // Update hints
+            document.querySelector('.hints').innerHTML = `
+                <div class="hint-title">💡 Recuerda:</div>
+                <p><strong>Q2 (P50)</strong> = Mediana (valor central)</p>
+                <p style="margin-top: 10px;">
+                    Con 13 valores, el del medio está en la posición 7.
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">
+                    Los cuartiles dividen los datos en 4 partes iguales (25% cada una).
+                </p>
+            `;
+
+            // Update UI
+            document.getElementById('playerName').textContent = gameState.playerName;
+            document.getElementById('playerLevel').textContent = gameState.level;
+            updateXPBar();
+
+            // Load boxplot chart for Mission 4B
+            loadBoxplotChartMission4B();
+            updateHelperMission4B();
+
+            // Change input to number
+            const answerInput = document.getElementById('answerInput');
+            answerInput.type = 'number';
+            answerInput.value = '';
+            answerInput.placeholder = 'Ingresa el valor de Q2 en ms';
+            answerInput.step = '0.1';
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('submitBtn').disabled = false;
+
+            // Save game
+            saveGame();
+        }
+
+        /**
+         * Visualización de línea temporal con Q2 marcado (Misión 4A)
+         */
+        function loadTimelineChartMission4A() {
+            const datos = tiempos_4A;
+            const sorted = [...datos].sort((a, b) => a - b);
+            const q2 = calcularMediana(sorted);
+
+            const container = document.getElementById('chartContainer');
+            const width = container.clientWidth;
+            const height = 300;
+            const padding = 50;
+
+            const maxValue = Math.max(...datos);
+            const minValue = Math.min(...datos);
+            const range = maxValue - minValue;
+
+            let svg = `<svg width="${width}" height="${height}" class="timeline-chart" style="background: rgba(0,0,0,0.2); border-radius: 10px;">`;
+
+            // Eje Y (valores)
+            svg += `<text x="10" y="20" fill="#fff" font-size="12">ms</text>`;
+
+            // Línea horizontal de Q2
+            const q2Y = height - padding - ((q2 - minValue) / range) * (height - 2 * padding);
+            svg += `<line x1="${padding}" y1="${q2Y}" x2="${width - padding}" y2="${q2Y}"
+                    class="quartile-line" />`;
+            svg += `<text x="${width - padding - 80}" y="${q2Y - 10}" fill="#ffd700" font-size="14" font-weight="bold">Q2 = ${q2} ms</text>`;
+
+            // Zona superior (50% más lentos)
+            svg += `<rect x="${padding}" y="${padding}" width="${width - 2 * padding}" height="${q2Y - padding}"
+                    class="zone-above-q2" />`;
+            svg += `<text x="${width / 2}" y="${padding + 20}" fill="#fff" font-size="12" text-anchor="middle" opacity="0.7">50% más lentos</text>`;
+
+            // Zona inferior (50% más rápidos)
+            svg += `<rect x="${padding}" y="${q2Y}" width="${width - 2 * padding}" height="${height - padding - q2Y}"
+                    class="zone-below-q2" />`;
+            svg += `<text x="${width / 2}" y="${height - padding + 20}" fill="#fff" font-size="12" text-anchor="middle" opacity="0.7">50% más rápidos</text>`;
+
+            // Puntos de datos
+            datos.forEach((value, index) => {
+                const x = padding + (index / (datos.length - 1)) * (width - 2 * padding);
+                const y = height - padding - ((value - minValue) / range) * (height - 2 * padding);
+
+                svg += `<circle cx="${x}" cy="${y}" class="timeline-point" r="6">
+                    <title>Request #${index + 1}: ${value} ms</title>
+                </circle>`;
+            });
+
+            svg += `</svg>`;
+            container.innerHTML = svg;
+        }
+
+        /**
+         * Visualización de boxplot con zonas coloreadas (Misión 4B)
+         */
+        function loadBoxplotChartMission4B() {
+            const datos = tiempos_4B;
+            const sorted = [...datos].sort((a, b) => a - b);
+            const { q1, q2, q3 } = calcularCuartiles(datos);
+
+            const container = document.getElementById('chartContainer');
+            const width = container.clientWidth;
+            const height = 300;
+            const padding = 50;
+
+            const min = sorted[0];
+            const max = sorted[sorted.length - 1];
+            const range = max - min;
+
+            // Detectar outliers (regla IQR)
+            const iqr = q3 - q1;
+            const lowerBound = q1 - 1.5 * iqr;
+            const upperBound = q3 + 1.5 * iqr;
+            const outliers = sorted.filter(v => v < lowerBound || v > upperBound);
+            const maxNormal = Math.max(...sorted.filter(v => v <= upperBound));
+
+            // Función para convertir valor a coordenada X
+            const valueToX = (value) => {
+                return padding + ((value - min) / range) * (width - 2 * padding);
+            };
+
+            let svg = `<svg width="${width}" height="${height}" class="boxplot-chart" style="background: rgba(0,0,0,0.2); border-radius: 10px;">`;
+
+            const centerY = height / 2;
+
+            // Zonas coloreadas
+            const zones = [
+                { start: min, end: q1, class: 'zone-q1', label: '25%' },
+                { start: q1, end: q2, class: 'zone-q2', label: '25%' },
+                { start: q2, end: q3, class: 'zone-q3', label: '25%' },
+                { start: q3, end: maxNormal, class: 'zone-q4', label: '25%' }
+            ];
+
+            zones.forEach(zone => {
+                const x1 = valueToX(zone.start);
+                const x2 = valueToX(zone.end);
+                svg += `<rect x="${x1}" y="${centerY - 40}" width="${x2 - x1}" height="80"
+                        class="${zone.class}" />`;
+                svg += `<text x="${(x1 + x2) / 2}" y="${centerY - 50}" fill="#fff" font-size="11" text-anchor="middle" opacity="0.7">${zone.label}</text>`;
+            });
+
+            // Whiskers (líneas)
+            const minX = valueToX(min);
+            const maxX = valueToX(maxNormal);
+
+            svg += `<line x1="${minX}" y1="${centerY}" x2="${valueToX(q1)}" y2="${centerY}"
+                    class="boxplot-whisker" />`;
+            svg += `<line x1="${valueToX(q3)}" y1="${centerY}" x2="${maxX}" y2="${centerY}"
+                    class="boxplot-whisker" />`;
+
+            // Caja (Q1 a Q3)
+            const boxX = valueToX(q1);
+            const boxWidth = valueToX(q3) - boxX;
+            svg += `<rect x="${boxX}" y="${centerY - 40}" width="${boxWidth}" height="80"
+                    class="boxplot-box" />`;
+
+            // Mediana (Q2) - línea gruesa dorada
+            const q2X = valueToX(q2);
+            svg += `<line x1="${q2X}" y1="${centerY - 40}" x2="${q2X}" y2="${centerY + 40}"
+                    class="boxplot-median" />`;
+
+            // Etiquetas de cuartiles
+            svg += `<text x="${valueToX(q1)}" y="${centerY - 50}" fill="#fff" font-size="12" text-anchor="middle">Q1=${Math.round(q1)}</text>`;
+            svg += `<text x="${valueToX(q2)}" y="${centerY - 60}" fill="#ffd700" font-size="14" text-anchor="middle" font-weight="bold">Q2=${q2}</text>`;
+            svg += `<text x="${valueToX(q3)}" y="${centerY - 50}" fill="#fff" font-size="12" text-anchor="middle">Q3=${Math.round(q3)}</text>`;
+
+            // Puntos de datos
+            sorted.forEach((value) => {
+                const x = valueToX(value);
+                const isOutlier = outliers.includes(value);
+                const className = isOutlier ? 'outlier-point' : 'timeline-point';
+
+                svg += `<circle cx="${x}" cy="${centerY + 60}" class="${className}" r="${isOutlier ? 8 : 6}">
+                    <title>Request: ${value} ms${isOutlier ? ' (outlier)' : ''}</title>
+                </circle>`;
+            });
+
+            svg += `</svg>`;
+            container.innerHTML = svg;
+        }
+
+        /**
+         * Actualiza el panel de ayuda para Misión 4A
+         */
+        function updateHelperMission4A() {
+            const datos = tiempos_4A;
+            const sorted = [...datos].sort((a, b) => a - b);
+            const q2 = calcularMediana(sorted);
+
+            document.getElementById('helperTab').innerHTML = `
+                <div class="stats-helper">
+                    <h3 style="margin-bottom: 15px;">📊 Ayuda Estadística</h3>
+
+                    <div class="helper-item">
+                        <div class="helper-label">📊 Datos de tiempos de respuesta (ms):</div>
+                        <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; margin-top: 10px; font-family: monospace;">
+                            [${datos.join(', ')}]
+                        </div>
+                    </div>
+
+                    <div class="helper-item">
+                        <div class="helper-label">📈 Datos ordenados:</div>
+                        <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; margin-top: 10px; font-family: monospace;">
+                            [${sorted.join(', ')}]
+                        </div>
+                        <div style="text-align: center; margin-top: 10px; color: #ffd700; font-weight: bold;">
+                            ↓<br>
+                            50% | Q2 | 50%
+                        </div>
+                    </div>
+
+                    <div class="helper-item" style="background: rgba(255, 215, 0, 0.2); border: 2px solid #ffd700;">
+                        <div class="helper-label">💡 Pista:</div>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>Q2 es el percentil 50 (P50)</li>
+                            <li>P50 es la MEDIANA (valor del medio)</li>
+                            <li>Con ${sorted.length} valores, el del medio está en la posición ${Math.ceil(sorted.length / 2)}</li>
+                        </ul>
+                    </div>
+
+                    <div class="helper-item">
+                        <div class="helper-label">🧮 Recuerda de la Misión 2:</div>
+                        <div style="margin-top: 10px;">
+                            Para calcular la mediana, ordena los datos y encuentra el valor central.
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /**
+         * Actualiza el panel de ayuda para Misión 4B
+         */
+        function updateHelperMission4B() {
+            const datos = tiempos_4B;
+            const sorted = [...datos].sort((a, b) => a - b);
+            const { q1, q2, q3 } = calcularCuartiles(datos);
+            const iqr = q3 - q1;
+
+            document.getElementById('helperTab').innerHTML = `
+                <div class="stats-helper">
+                    <h3 style="margin-bottom: 15px;">📊 Ayuda Estadística</h3>
+
+                    <div class="helper-item">
+                        <div class="helper-label">📊 Datos de tiempos de respuesta (ms) - ${datos.length} requests:</div>
+                        <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; margin-top: 10px; font-family: monospace; font-size: 0.9rem;">
+                            [${sorted.join(', ')}]
+                        </div>
+                    </div>
+
+                    <div class="helper-item">
+                        <div class="helper-label">📈 Datos ordenados con cuartiles marcados:</div>
+                        <div style="text-align: center; margin-top: 10px; color: #ffd700; font-weight: bold; font-family: monospace;">
+                            Q1        Q2        Q3<br>
+                            ↓         ↓         ↓
+                        </div>
+                    </div>
+
+                    <div class="helper-item">
+                        <div class="helper-label">💡 Cuartiles dividen los datos en 4 partes iguales:</div>
+                        <ul style="margin-top: 10px; margin-left: 20px; font-size: 0.95rem;">
+                            <li><strong>Q1 (P25)</strong>: 25% de datos están por debajo → ~${Math.round(q1)} ms</li>
+                            <li><strong>Q2 (P50)</strong>: 50% de datos están por debajo → ${q2} ms (mediana)</li>
+                            <li><strong>Q3 (P75)</strong>: 75% de datos están por debajo → ~${Math.round(q3)} ms</li>
+                        </ul>
+                    </div>
+
+                    <div class="helper-item" style="background: rgba(255, 215, 0, 0.2); border: 2px solid #ffd700;">
+                        <div class="helper-label">🧮 Método simplificado para Q2:</div>
+                        <div style="margin-top: 10px;">
+                            Con ${datos.length} valores, la mediana está en la posición ${Math.ceil(datos.length / 2)} (el del medio).
+                            <br><br>
+                            Cuenta: 1, 2, 3, 4, 5, 6, 7 ← este es Q2
+                        </div>
+                    </div>
+
+                    <div class="helper-item">
+                        <div class="helper-label">📝 Nota:</div>
+                        <div style="margin-top: 10px; font-size: 0.9rem;">
+                            Existen varios métodos para calcular cuartiles. Este es el más simple y educativo.
+                            En Python, numpy y pandas pueden dar valores ligeramente diferentes debido a métodos
+                            de interpolación más avanzados.
+                        </div>
+                    </div>
+
+                    <div class="helper-item">
+                        <div class="helper-label">🔗 ¿Recuerdas la Misión 2B?</div>
+                        <div style="margin-top: 10px;">
+                            Usamos IQR (Rango Intercuartílico) para detectar outliers.
+                            <br><br>
+                            <strong>IQR = Q3 - Q1 = ${Math.round(q3)} - ${Math.round(q1)} = ${Math.round(iqr)} ms</strong>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /**
+         * Verifica respuesta de Misión 4A
+         */
+        function checkAnswerMission4A(answer, feedback) {
+            const correctAnswer = 142;
+            const tolerance = 0.5;
+
+            if (Math.abs(answer - correctAnswer) <= tolerance) {
+                // Correcto
+                feedback.className = 'feedback success';
+                feedback.innerHTML = `
+                    <div style="font-size: 1.5rem; margin-bottom: 15px;">✅ ¡Excelente! Q2 = 142 ms</div>
+
+                    <div style="margin-top: 15px;">
+                        <strong>📊 Interpretación:</strong>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>El 50% de las requests responden en 142 ms o menos</li>
+                            <li>El 50% de las requests responden en 142 ms o más</li>
+                            <li>Q2 es la MEDIANA (¡ya la conocías de la Misión 2!)</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 15px;">
+                        <strong>💼 Decisión de negocio:</strong>
+                        <p style="margin-top: 10px;">
+                            Laura puede establecer un SLA Estándar de 150 ms con confianza,
+                            ya que el 50% de requests ya están por debajo de 142 ms.
+                            Esto significa que cumplirá el SLA más del 50% del tiempo.
+                        </p>
+                    </div>
+
+                    <div style="margin-top: 15px;">
+                        <strong>🎯 Dato curioso:</strong>
+                        <p style="margin-top: 10px;">
+                            Si hubiera usado la MEDIA (143.9 ms), habría sido similar en este caso.
+                            Pero con outliers, la mediana (P50) es más confiable.
+                        </p>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 15px; background: rgba(0, 255, 0, 0.2); border-radius: 10px;">
+                        <strong style="color: #32cd32;">🎉 +100 XP</strong>
+                    </div>
+                `;
+
+                // Give XP
+                addXP(100);
+
+                // Mark as completed
+                if (!gameState.missionsCompleted.includes('mission_4a')) {
+                    gameState.missionsCompleted.push('mission_4a');
+                    saveGame();
+                }
+
+                // Show continue button
+                setTimeout(() => {
+                    feedback.innerHTML += `
+                        <button class="story-btn primary" onclick="startMission4B()" style="margin-top: 20px;">
+                            🚀 CONTINUAR → Misión 4B
+                        </button>
+                    `;
+                }, 1000);
+
+            } else if (answer === 140) {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `
+                    ❌ Estás cerca, pero no es el valor exacto del medio.
+                    Revisa los datos ordenados en el panel de ayuda.
+                    Con 9 valores, el del medio está en la posición 5.
+                `;
+            } else if (answer === 145) {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `
+                    ❌ Ese es el valor siguiente al medio.
+                    El Q2 es el valor CENTRAL (posición 5 en datos ordenados).
+                `;
+            } else if (Math.abs(answer - 143.9) < 1) {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `
+                    ❌ Ese valor parece ser la MEDIA.
+                    Recuerda: Q2 es la MEDIANA (valor del medio), no la media.
+                    Ordena los datos y encuentra el valor central.
+                `;
+            } else {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `
+                    ❌ No es correcto. Recuerda:
+                    Q2 es la mediana (valor del medio en datos ordenados).
+                    Usa el panel de ayuda para ver los datos ordenados.
+                `;
+            }
+        }
+
+        /**
+         * Verifica respuesta de Misión 4B
+         */
+        function checkAnswerMission4B(answer, feedback) {
+            const correctAnswer = 150;
+            const tolerance = 1;
+
+            if (Math.abs(answer - correctAnswer) <= tolerance) {
+                // Correcto
+                feedback.className = 'feedback success';
+                feedback.innerHTML = `
+                    <div style="font-size: 1.5rem; margin-bottom: 15px;">✅ ¡Perfecto! Q2 = 150 ms</div>
+
+                    <div style="margin-top: 15px;">
+                        <strong>📊 Análisis completo de cuartiles:</strong>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>Q1 = 130 ms → 25% de requests son más rápidas</li>
+                            <li>Q2 = 150 ms → 50% de requests son más rápidas (mediana)</li>
+                            <li>Q3 = 170 ms → 75% de requests son más rápidas</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 15px;">
+                        <strong>📈 Interpretación:</strong>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>El 50% central de requests está entre 130-170 ms</li>
+                            <li>Rango Intercuartílico (IQR) = Q3 - Q1 = 40 ms</li>
+                            <li>La variabilidad es moderada (IQR no muy grande)</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 15px;">
+                        <strong>💼 Decisión de negocio:</strong>
+                        <p style="margin-top: 10px;">Laura puede establecer SLAs por niveles:</p>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li><strong>SLA Premium:</strong> 130 ms (satisface al 25% más exigente)</li>
+                            <li><strong>SLA Estándar:</strong> 150 ms (satisface al 50% - típico)</li>
+                            <li><strong>SLA Básico:</strong> 170 ms (satisface al 75% - mayoría)</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 15px;">
+                        <strong>🎯 Outliers detectados:</strong>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>250 ms está muy por encima de Q3 (170 ms)</li>
+                            <li>Usando la regla IQR de la Misión 2B:<br>
+                                Outlier si > Q3 + 1.5*IQR = 170 + 1.5*40 = 230 ms</li>
+                            <li>¡250 ms es outlier! Laura debe investigar esa request específica.</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 15px;">
+                        <strong>🔗 ¿Ves cómo todo se conecta?</strong>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>Misión 2: Aprendiste mediana y regla IQR</li>
+                            <li>Misión 4: Ahora sabes de dónde vienen Q1, Q2, Q3</li>
+                            <li>¡Estás construyendo tu toolkit de Data Engineer! 🚀</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 15px; background: rgba(0, 255, 0, 0.2); border-radius: 10px;">
+                        <strong style="color: #32cd32;">🎉 +150 XP</strong>
+                    </div>
+                `;
+
+                // Give XP
+                addXP(150);
+
+                // Mark as completed
+                if (!gameState.missionsCompleted.includes('mission_4b')) {
+                    gameState.missionsCompleted.push('mission_4b');
+                    saveGame();
+                }
+
+                // Show completion message
+                setTimeout(() => {
+                    feedback.innerHTML += `
+                        <div style="margin-top: 20px; padding: 20px; background: rgba(255, 215, 0, 0.2); border: 2px solid #ffd700; border-radius: 10px;">
+                            <strong style="font-size: 1.2rem;">🎊 ¡MISIÓN 4 COMPLETADA!</strong>
+                            <p style="margin-top: 10px;">
+                                Has dominado los percentiles y cuartiles. ¡Excelente trabajo!
+                            </p>
+                        </div>
+                    `;
+                }, 1000);
+
+            } else if (answer === 145 || answer === 155) {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `
+                    ❌ Estás muy cerca. El Q2 está exactamente en el centro.
+                    Con 13 valores, la posición 7 es el medio.
+                    Cuenta desde el inicio en los datos ordenados del panel de ayuda.
+                `;
+            } else if (answer === 130 || Math.abs(answer - 130) < 2) {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `
+                    ❌ Ese es Q1 (percentil 25).
+                    Te pedimos Q2 (percentil 50 = mediana).
+                    Q2 está más a la derecha, en la posición 7.
+                `;
+            } else if (answer === 170 || Math.abs(answer - 170) < 2) {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `
+                    ❌ Ese es Q3 (percentil 75).
+                    Te pedimos Q2 (percentil 50 = mediana).
+                    Q2 está en el centro, en la posición 7.
+                `;
+            } else if (Math.abs(answer - 153.8) < 2) {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `
+                    ❌ Ese valor parece ser la MEDIA.
+                    Recuerda: Q2 es la MEDIANA (valor del medio), no la media.
+                    Con 13 valores ordenados, el del medio está en la posición 7.
+                `;
+            } else {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `
+                    ❌ No es correcto. Q2 es la MEDIANA (valor central en datos ordenados).
+                    Con 13 valores, está en la posición 7.
+                    Mira el panel de ayuda: los datos ya están ordenados y Q2 está marcado.
+                `;
+            }
         }
     </script>
 </body>
