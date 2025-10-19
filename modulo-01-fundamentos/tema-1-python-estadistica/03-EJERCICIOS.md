@@ -1044,22 +1044,22 @@ print(f"Transacciones sospechosas: {outliers}")
 **Cálculo manual:**
 ```
 Media = (50 + 45 + 52 + 48 + 50 + 47 + 53 + 49 + 250 + 51) / 10
-Media = 645 / 10 = 64.5€
+Media = 695 / 10 = 69.5€
 
-Desviación ≈ 59.5€
+Desviación ≈ 60.21€
 
-Límite superior = 64.5 + 2(59.5) = 183.5€
-Límite inferior = 64.5 - 2(59.5) = -54.5€ (no aplica, no hay valores negativos)
+Límite superior = 69.5 + 2(60.21) = 189.92€
+Límite inferior = 69.5 - 2(60.21) = -50.92€ (no aplica, no hay valores negativos)
 ```
 
 **Respuesta:**
-- Media = **64.5€**
-- Desviación estándar = **59.5€**
-- Límite superior = **183.5€**
+- Media = **69.5€**
+- Desviación estándar = **60.21€**
+- Límite superior = **189.92€**
 - Transacciones sospechosas: **[250€]**
 
 **Interpretación:**
-La transacción de 250€ está claramente fuera del patrón normal del cliente (más de 2 desviaciones estándar por encima de la media). Esta transacción debe ser investigada por el departamento de fraude, ya que es 5 veces mayor que las transacciones habituales del cliente.
+La transacción de 250€ está claramente fuera del patrón normal del cliente (más de 2 desviaciones estándar por encima de la media). Esta transacción debe ser investigada por el departamento de fraude, ya que es aproximadamente 3.6 veces mayor que las transacciones habituales del cliente.
 
 ---
 
@@ -1067,6 +1067,8 @@ La transacción de 250€ está claramente fuera del patrón normal del cliente 
 
 **Código completo:**
 ```python
+import math
+
 tiempos = [15, 18, 22, 25, 19, 23, 28, 31, 24, 27,
            20, 26, 29, 33, 21, 25, 30, 35, 28, 32,
            24, 27, 31, 36, 150, 29, 34, 38, 26, 30]
@@ -1075,13 +1077,13 @@ tiempos = [15, 18, 22, 25, 19, 23, 28, 31, 24, 27,
 tiempos_ordenados = sorted(tiempos)
 n = len(tiempos_ordenados)
 
-# P95
-pos_p95 = int(0.95 * n)
-p95 = tiempos_ordenados[pos_p95 - 1]
+# P95 (usando math.ceil para redondeo correcto)
+pos_p95 = math.ceil(0.95 * n) - 1
+p95 = tiempos_ordenados[pos_p95]
 
 # P99
-pos_p99 = int(0.99 * n)
-p99 = tiempos_ordenados[pos_p99 - 1]
+pos_p99 = math.ceil(0.99 * n) - 1
+p99 = tiempos_ordenados[pos_p99]
 
 # Identificar outliers
 media = sum(tiempos) / len(tiempos)
@@ -1101,8 +1103,8 @@ Ordenados (30 valores):
  25, 26, 26, 27, 27, 28, 28, 29, 29, 30,
  30, 31, 31, 32, 33, 34, 35, 36, 38, 150]
 
-P95 (posición 29): 38ms
-P99 (posición 30): 150ms
+P95 (ceil(0.95 * 30) = 29, índice 28): 38ms
+P99 (ceil(0.99 * 30) = 30, índice 29): 150ms
 ```
 
 **Respuesta:**
@@ -1276,16 +1278,16 @@ print(f"Media fin de semana: {media_finde:.2f}€")
 ```
 
 **Respuesta:**
-- Media = **1,003.33€**
+- Media = **1,006.67€**
 - Mediana = **965€**
-- Desviación = **125.67€**
+- Desviación = **118.50€**
 - P25 = **920€**
 - P50 = **965€**
-- P75 = **1,190€**
+- P75 = **1,150€**
 - Outliers = **Ninguno** (todos los valores están dentro de 2 desviaciones)
 
 **Interpretación:**
-Las ventas son **moderadamente variables** (desviación de 125€ sobre una media de 1,003€, ~12.5% de variación). Esto es normal para una cafetería.
+Las ventas son **moderadamente variables** (desviación de 118.50€ sobre una media de 1,006.67€, ~11.8% de variación). Esto es normal para una cafetería.
 
 **Patrón de ventas:**
 - **Entre semana**: ~930€/día en promedio
@@ -1293,7 +1295,7 @@ Las ventas son **moderadamente variables** (desviación de 125€ sobre una medi
 - **Diferencia**: Los fines de semana venden ~28% más
 
 **Conclusión para el informe ejecutivo:**
-"La sucursal genera ventas promedio de 1,003€/día con un patrón claro: los fines de semana superan las 1,200€ mientras que entre semana rondan los 900-950€. Las ventas son estables y predecibles, sin valores atípicos. Recomendación: Reforzar personal los fines de semana."
+"La sucursal genera ventas promedio de 1,006.67€/día con un patrón claro: los fines de semana superan las 1,200€ mientras que entre semana rondan los 900-950€. Las ventas son estables y predecibles, sin valores atípicos. Recomendación: Reforzar personal los fines de semana."
 
 ---
 
