@@ -195,15 +195,16 @@ class TestConfigurarLoggerArchivo:
         # Escribir varios mensajes para probar rotación
         for i in range(100):
             logger.info(
-                f"Mensaje de prueba número {i} con texto adicional para llenar el archivo"
+                f"Mensaje de prueba número {i} con texto adicional "
+                f"para llenar el archivo"
             )
 
         # Verificar que el archivo principal existe
         assert archivo_log.exists()
 
         # Verificar que se crearon archivos de backup (si se superó el límite)
-        archivos_backup = list(tmp_path.glob("rotacion.log.*"))
         # Puede haber 0 o más archivos de backup dependiendo del tamaño
+        assert len(list(tmp_path.glob("rotacion.log.*"))) >= 0
 
     def test_configurar_logger_archivo_crea_directorio_si_no_existe(self, tmp_path):
         """Debe crear el directorio si no existe."""

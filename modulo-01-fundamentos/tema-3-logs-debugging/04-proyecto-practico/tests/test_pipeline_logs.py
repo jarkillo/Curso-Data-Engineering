@@ -7,7 +7,6 @@ Siguiendo TDD: Tests escritos PRIMERO, implementación DESPUÉS.
 import csv
 import logging
 import pytest
-from pathlib import Path
 from src.pipeline_logs import procesar_con_logs, validar_datos_con_logs
 
 
@@ -99,7 +98,7 @@ class TestProcesarConLogs:
             )
 
         with caplog.at_level(logging.WARNING):
-            resultado = procesar_con_logs(str(archivo_csv))
+            procesar_con_logs(str(archivo_csv))
 
         # Debe procesar lo que pueda y loggear advertencias
         assert any(

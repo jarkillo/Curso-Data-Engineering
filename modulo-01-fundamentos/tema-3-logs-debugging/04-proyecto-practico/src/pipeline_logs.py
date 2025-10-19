@@ -165,7 +165,8 @@ def procesar_con_logs(
 
             if stats["registros_con_error"] > 0:
                 logger.warning(
-                    f"Se encontraron {stats['registros_con_error']} registros con errores"
+                    f"Se encontraron {stats['registros_con_error']} registros "
+                    f"con errores"
                 )
 
         # Calcular tiempo de procesamiento
@@ -174,9 +175,12 @@ def procesar_con_logs(
 
         logger.info("=" * 60)
         logger.info("Procesamiento completado exitosamente")
-        logger.info(f"Tiempo total: {stats['tiempo_procesamiento']:.2f} segundos")
         logger.info(
-            f"Registros procesados: {stats['registros_procesados']}/{stats['total_registros']}"
+            f"Tiempo total: {stats['tiempo_procesamiento']:.2f} segundos"
+        )
+        logger.info(
+            f"Registros procesados: {stats['registros_procesados']}/"
+            f"{stats['total_registros']}"
         )
         logger.info("=" * 60)
 
@@ -205,8 +209,8 @@ def validar_datos_con_logs(
     Args:
         datos: Lista de diccionarios a validar
         campos_requeridos: Lista de campos que deben estar presentes
-        validador_personalizado: Función que recibe un registro y retorna
-                               True si es válido, False si no
+        validador_personalizado: Función que recibe un registro y
+                                 retorna True si es válido, False si no
         logger: Logger personalizado (opcional)
 
     Returns:
@@ -225,14 +229,18 @@ def validar_datos_con_logs(
         ...     {'id': '1', 'nombre': 'Juan', 'edad': '25'},
         ...     {'id': '2', 'nombre': 'María', 'edad': '30'},
         ... ]
-        >>> resultado = validar_datos_con_logs(datos, campos_requeridos=['id', 'nombre'])
+        >>> resultado = validar_datos_con_logs(
+        ...     datos, campos_requeridos=['id', 'nombre']
+        ... )
         >>> print(f"Válidos: {resultado['validos']}/{resultado['total']}")
         Válidos: 2/2
 
         >>> # Con validador personalizado
         >>> def validar_edad(registro):
         ...     return int(registro.get('edad', 0)) >= 18
-        >>> resultado = validar_datos_con_logs(datos, validador_personalizado=validar_edad)
+        >>> resultado = validar_datos_con_logs(
+        ...     datos, validador_personalizado=validar_edad
+        ... )
     """
     # Validación de inputs
     if not isinstance(datos, list):
