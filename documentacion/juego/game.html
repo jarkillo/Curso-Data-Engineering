@@ -3501,11 +3501,11 @@
                 `;
 
                 // Give XP
-                giveXP(100);
+                addXP(100);
 
                 // Mark as completed
-                if (!gameState.completedMissions.includes('mission_4a')) {
-                    gameState.completedMissions.push('mission_4a');
+                if (!gameState.missionsCompleted.includes('mission_4a')) {
+                    gameState.missionsCompleted.push('mission_4a');
                     saveGame();
                 }
 
@@ -3614,11 +3614,11 @@
                 `;
 
                 // Give XP
-                giveXP(150);
+                addXP(150);
 
                 // Mark as completed
-                if (!gameState.completedMissions.includes('mission_4b')) {
-                    gameState.completedMissions.push('mission_4b');
+                if (!gameState.missionsCompleted.includes('mission_4b')) {
+                    gameState.missionsCompleted.push('mission_4b');
                     saveGame();
                 }
 
