@@ -56,13 +56,35 @@ http://localhost:8000/game.html
 
 ## 🎯 Lo Que Tiene Ahora
 
-### Misión 1: Análisis de Ventas
+### Misión 1: Análisis de Ventas ✅
 - ✅ **Visualización de datos** (ventas de la semana)
 - ✅ **Gráfico de barras** interactivo
 - ✅ **Calculadora integrada** para hacer cálculos
 - ✅ **Panel de ayuda** con fórmulas y pistas
 - ✅ **Sistema de XP** y niveles
 - ✅ **Feedback visual** (correcto/incorrecto)
+
+### Misión 2A: Mediana con Outliers Evidentes ✅
+- ✅ **Tutorial integrado** sobre mediana y outliers
+- ✅ **Outliers destacados en rojo** (visualización clara)
+- ✅ **Dataset con outlier evidente** (500€ vs ~55€)
+- ✅ **Comparación media vs mediana** en el feedback
+- ✅ **Narrativa continuada** con RestaurantData Co.
+- ✅ **+75 XP** al completar
+
+### Misión 2B: Mediana con Outliers Sutiles ✅
+- ✅ **Detección automática con regla IQR** (Interquartile Range)
+- ✅ **Dataset más complejo** (9 sucursales, zona premium)
+- ✅ **Outliers sutiles** marcados en rojo
+- ✅ **Análisis de decisiones de negocio** en el feedback
+- ✅ **Tutorial de regla IQR** integrado
+- ✅ **+125 XP** al completar
+
+### Sistema de Progresión ✅
+- ✅ **Desbloqueo progresivo**: Misión 1 → 2A → 2B
+- ✅ **Guardado automático** en localStorage
+- ✅ **Botón "Continuar"** lleva a la siguiente misión
+- ✅ **Total: 300 XP** disponibles (100 + 75 + 125)
 
 ---
 
@@ -193,16 +215,20 @@ Desblocas más misiones
 
 ## 🚀 Roadmap Versión Web
 
-### ✅ Implementado (v1.0)
-- Misión 1 completa
+### ✅ Implementado (v1.1)
+- Misión 1 completa (Media)
+- Misión 2A completa (Mediana con outliers evidentes)
+- Misión 2B completa (Mediana con outliers sutiles)
 - Calculadora funcional
-- Sistema de XP
-- Visualizaciones
+- Sistema de XP y progresión
+- Visualizaciones con outliers destacados
 - Guardado automático
+- Sistema de desbloqueo progresivo
 
-### 🚧 Próximo (v1.1)
-- [ ] Misión 2: Calcular mediana con outliers
+### 🚧 Próximo (v1.2)
 - [ ] Misión 3: Identificar moda (productos más vendidos)
+- [ ] Misión 4: Percentiles y cuartiles
+- [ ] Misión 5: Varianza y desviación estándar
 - [ ] Dashboard completo de stats
 - [ ] Sistema de logros con badges visuales
 - [ ] Animaciones de level up más épicas
@@ -220,15 +246,15 @@ Desblocas más misiones
 
 ## 🎯 Comparación: Terminal vs Web
 
-| Característica | Terminal | Web |
-|---------------|----------|-----|
-| **Visual** | ❌ Solo texto | ✅ Gráficos, colores |
-| **Calculadora** | ❌ Externa | ✅ Integrada |
-| **Interactividad** | ❌ Baja | ✅ Alta |
-| **Gráficos** | ❌ No | ✅ Sí |
-| **Móvil** | ❌ No | ✅ Sí |
-| **Moderno** | ❌ Años 90 | ✅ 2025 |
-| **Diversión** | ⭐⭐ | ⭐⭐⭐⭐⭐ |
+| Característica     | Terminal     | Web                 |
+| ------------------ | ------------ | ------------------- |
+| **Visual**         | ❌ Solo texto | ✅ Gráficos, colores |
+| **Calculadora**    | ❌ Externa    | ✅ Integrada         |
+| **Interactividad** | ❌ Baja       | ✅ Alta              |
+| **Gráficos**       | ❌ No         | ✅ Sí                |
+| **Móvil**          | ❌ No         | ✅ Sí                |
+| **Moderno**        | ❌ Años 90    | ✅ 2025              |
+| **Diversión**      | ⭐⭐           | ⭐⭐⭐⭐⭐               |
 
 ---
 
@@ -300,18 +326,39 @@ Lee las pistas
 
 ---
 
+## ✅ Mejoras Implementadas (2025-10-19)
+
+### Pedagógicas
+- ✅ **Comentarios explicativos** sobre cálculo de percentiles (método simplificado)
+- ✅ **Aclaración de métodos** de detección de outliers (2A vs 2B)
+- ✅ **Clarificación conceptual**: Mediana incluye outliers (no los excluye)
+- ✅ **Nota de tolerancia**: ±0.5€ visible en panel de ayuda
+
+### Accesibilidad
+- ✅ **Etiquetas ARIA**: role="alert", aria-live, aria-label en elementos clave
+- ✅ **Navegación por teclado**: Estilos :focus y :focus-visible
+- ✅ **Feedback visual**: Outline dorado (#ffd700) al navegar con Tab
+- ✅ **Screen readers**: Soporte mejorado con aria-atomic y aria-describedby
+
+### Calidad
+- ✅ **Revisión pedagógica**: 9.2/10 (Psicólogo Educativo)
+- ✅ **Revisión UX/UI**: 9.0/10 (Especialista UX/UI)
+- ✅ **Reportes completos**: `REVISION_PEDAGOGICA_MISION_2.md` y `REVISION_UX_UI_GAME.md`
+
+---
+
 ## 🎨 Próximas Mejoras Visuales
 
 ### Animaciones
 - [ ] Confetti al completar misión
-- [ ] Partículas de XP
+- [ ] Partículas de XP flotantes
 - [ ] Transiciones más suaves
 - [ ] Loading spinners
 
 ### UX
-- [ ] Tutorial interactivo
-- [ ] Tooltips explicativos
-- [ ] Drag & drop para datos
+- [ ] Tooltips explicativos personalizados
+- [ ] Indicador de carga entre misiones
+- [ ] Modo oscuro/claro (toggle)
 - [ ] Mini-map de progreso
 
 ### Gamificación
@@ -346,7 +393,6 @@ python -m http.server 8000
 
 ---
 
-**Versión:** 1.0 Web  
-**Última actualización:** 2025-10-18  
+**Versión:** 1.1 Web (con mejoras pedagógicas y de accesibilidad)
+**Última actualización:** 2025-10-19
 **Creado con:** ❤️, HTML, CSS y JavaScript
-

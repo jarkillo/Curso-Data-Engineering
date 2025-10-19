@@ -598,6 +598,28 @@
             transform: scale(1.05);
         }
 
+        /* Estilos de focus para accesibilidad (navegación por teclado) */
+        button:focus,
+        input:focus,
+        .calc-btn:focus {
+            outline: 3px solid #ffd700;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Focus visible solo cuando se navega con teclado (no con mouse) */
+        button:focus:not(:focus-visible) {
+            outline: none;
+            box-shadow: none;
+        }
+
+        button:focus-visible,
+        input:focus-visible {
+            outline: 3px solid #ffd700;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+        }
+
         .calc-btn.operator {
             background: rgba(255, 165, 0, 0.4);
         }
@@ -913,6 +935,171 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Escena 5: Tutorial Mediana -->
+            <div class="story-scene" id="scene5">
+                <h2 style="font-size: 2rem; margin-bottom: 30px;">📚 Nueva Métrica: La Mediana</h2>
+
+                <div class="dialogue">
+                    <strong>María:</strong> "¡Excelente trabajo con la primera misión! Ahora RestaurantData Co. tiene un
+                    nuevo problema..."
+                    <br><br>
+                    <em>María abre su laptop y te muestra un reporte</em>
+                    <br><br>
+                    "Mira esto: algunas sucursales reportan ventas muy extrañas. Por ejemplo, una sucursal que
+                    normalmente vende 50-60€ al día, de repente reportó <strong style="color: #ff4757;">500€</strong>.
+                    Claramente es un error en el sistema."
+                </div>
+
+                <div class="tutorial-box">
+                    <div class="tutorial-title">⚠️ El Problema de los Outliers</div>
+                    <div class="tutorial-content">
+                        Los <strong>outliers</strong> (valores atípicos) son datos muy diferentes al resto.
+                        <br><br>
+                        <strong>Pueden ser:</strong>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>❌ <strong>Errores</strong>: Error de sistema, entrada manual incorrecta</li>
+                            <li>✅ <strong>Casos especiales</strong>: Evento único, promoción, día festivo</li>
+                        </ul>
+                        <br>
+                        <strong>El problema:</strong> Los outliers <strong style="color: #ff4757;">distorsionan la
+                            media</strong>.
+                        <br><br>
+                        <strong>Ejemplo:</strong><br>
+                        Ventas: 50€, 55€, 52€, 58€, <span style="color: #ff4757;">500€</span>, 60€, 57€<br>
+                        Media = 118.86€ ← ¡No representa la realidad!<br>
+                        La mayoría vende ~55€, pero la media dice 118€ por culpa del outlier.
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <strong>María:</strong> "Aquí es donde entra la <strong style="color: #ffd700;">MEDIANA</strong>. Es
+                    una métrica mucho más robusta cuando hay outliers."
+                </div>
+
+                <div class="tutorial-box">
+                    <div class="tutorial-title">💡 ¿Qué es la Mediana?</div>
+                    <div class="tutorial-content">
+                        La <strong>mediana</strong> es el <strong>valor del medio</strong> cuando ordenas los datos de
+                        menor a mayor.
+                        <br><br>
+                        <strong>Pasos para calcularla:</strong>
+                        <ol style="margin-top: 10px; margin-left: 20px;">
+                            <li>Ordena los valores de menor a mayor</li>
+                            <li>Si hay cantidad <strong>impar</strong>: toma el valor del centro</li>
+                            <li>Si hay cantidad <strong>par</strong>: promedia los dos valores del centro</li>
+                        </ol>
+                        <br>
+                        <strong>Ejemplo con outlier:</strong><br>
+                        Datos originales: 50, 55, 52, 58, <span style="color: #ff4757;">500</span>, 60, 57<br>
+                        Ordenados: 50, 52, 55, <strong style="color: #ffd700;">57</strong>, 58, 60, 500<br>
+                        Mediana = <strong>57€</strong> ← ¡Mucho más representativo!
+                        <br><br>
+                        <strong>Ventaja:</strong> La mediana <strong style="color: #32cd32;">NO se ve afectada</strong>
+                        por outliers.
+                    </div>
+                </div>
+
+                <div class="story-actions">
+                    <button class="story-btn" onclick="nextScene(4)">⬅️ Atrás</button>
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <div class="keyboard-hint">⌨️ <span class="key-indicator">Enter</span></div>
+                        <button class="story-btn primary" onclick="nextScene(6)">➡️ Continuar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Escena 6: Misión 2A -->
+            <div class="story-scene" id="scene6">
+                <h2 style="font-size: 2rem; margin-bottom: 30px;">🎯 Misión 2A: Detectar el Outlier</h2>
+
+                <div class="dialogue">
+                    <strong>María:</strong> "Perfecto, ahora que entiendes la mediana, te voy a dar un desafío real."
+                    <br><br>
+                    "RestaurantData Co. tiene 7 sucursales. Aquí están las ventas de ayer de cada una. <strong
+                        style="color: #ff4757;">Una de ellas tiene un error evidente</strong>."
+                    <br><br>
+                    "Tu tarea: <strong>calcula la mediana</strong> de las ventas. Verás que es mucho más representativa
+                    que la media cuando hay outliers."
+                </div>
+
+                <div class="tutorial-box">
+                    <div class="tutorial-title">💡 Recuerda</div>
+                    <div class="tutorial-content">
+                        <strong>Mediana:</strong> Ordena los datos y toma el valor del medio.
+                        <br><br>
+                        Los valores <strong style="color: #ff4757;">rojos</strong> en el gráfico son outliers detectados
+                        automáticamente. En esta misión, el outlier es <strong>muy evidente</strong> (mucho mayor que el
+                        resto).
+                        <br><br>
+                        <em style="color: #ffd700;">💡 En la próxima misión aprenderás un método más sofisticado
+                            (regla IQR) para detectar outliers sutiles.</em>
+                        <br><br>
+                        Usa la <strong>calculadora</strong> y el <strong>panel de ayuda</strong> para resolver.
+                    </div>
+                </div>
+
+                <div class="story-actions">
+                    <button class="story-btn" onclick="nextScene(5)">⬅️ Atrás</button>
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <div class="keyboard-hint">⌨️ <span class="key-indicator">Enter</span></div>
+                        <button class="story-btn primary" onclick="startMission2A()">🚀 ¡EMPEZAR MISIÓN 2A!</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Escena 7: Tutorial Misión 2B -->
+            <div class="story-scene" id="scene7">
+                <h2 style="font-size: 2rem; margin-bottom: 30px;">📊 Misión 2B: Outliers Sutiles</h2>
+
+                <div class="dialogue">
+                    <strong>María:</strong> "¡Muy bien! Ahora un desafío más complejo..."
+                    <br><br>
+                    "A veces los outliers no son tan obvios. RestaurantData Co. abrió nuevas sucursales en una zona
+                    premium, y necesitamos analizar si las ventas son consistentes."
+                </div>
+
+                <div class="tutorial-box">
+                    <div class="tutorial-title">📐 Regla IQR para Detectar Outliers</div>
+                    <div class="tutorial-content">
+                        La <strong>regla IQR</strong> (Rango Intercuartílico) es un método estadístico para detectar
+                        outliers:
+                        <br><br>
+                        <strong>Pasos:</strong>
+                        <ol style="margin-top: 10px; margin-left: 20px;">
+                            <li>Ordena los datos</li>
+                            <li>Calcula Q1 (percentil 25) y Q3 (percentil 75)</li>
+                            <li>IQR = Q3 - Q1</li>
+                            <li>Outliers son valores fuera de: [Q1 - 1.5×IQR, Q3 + 1.5×IQR]</li>
+                        </ol>
+                        <br>
+                        <strong>No te preocupes:</strong> El juego detecta los outliers automáticamente y los marca en
+                        <strong style="color: #ff4757;">rojo</strong>.
+                        <br><br>
+                        <strong style="color: #32cd32;">Importante:</strong> La mediana se calcula con
+                        <strong>TODOS</strong>
+                        los valores (incluyendo outliers). Su ventaja es que <strong>no se ve afectada</strong> por
+                        ellos,
+                        no que los excluya.
+                        <br><br>
+                        Tu tarea es calcular la <strong>mediana</strong> para obtener un valor representativo de la
+                        venta típica.
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <strong>María:</strong> "Esta vez hay 9 sucursales y los outliers son más sutiles. ¿Puedes
+                    identificar cuál es la venta típica usando la mediana?"
+                </div>
+
+                <div class="story-actions">
+                    <button class="story-btn" onclick="backToGame()">⬅️ Volver al Juego</button>
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <div class="keyboard-hint">⌨️ <span class="key-indicator">Enter</span></div>
+                        <button class="story-btn primary" onclick="startMission2B()">🚀 ¡EMPEZAR MISIÓN 2B!</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -975,8 +1162,11 @@
                     <div class="answer-section">
                         <h3>✍️ Tu Respuesta</h3>
                         <input type="number" class="answer-input" id="answerInput"
-                            placeholder="Ingresa la media (promedio) en €" step="0.01">
-                        <button class="submit-btn" id="submitBtn" onclick="checkAnswer()">
+                            placeholder="Ingresa la media (promedio) en €" step="0.01"
+                            aria-label="Ingresa tu respuesta en euros" aria-describedby="feedback helper-text"
+                            tabindex="0">
+                        <button class="submit-btn" id="submitBtn" onclick="checkAnswer()"
+                            aria-label="Enviar respuesta y verificar si es correcta" tabindex="0">
                             🚀 ENVIAR RESPUESTA
                         </button>
                     </div>
@@ -988,7 +1178,7 @@
                     </div>
 
                     <!-- Feedback -->
-                    <div id="feedback"></div>
+                    <div id="feedback" role="alert" aria-live="polite" aria-atomic="true"></div>
                 </div>
 
                 <!-- Tools Panel -->
@@ -1000,12 +1190,14 @@
 
                     <!-- Calculator -->
                     <div class="tool-content active" id="calculatorTab">
-                        <div class="calculator">
+                        <div class="calculator" role="application"
+                            aria-label="Calculadora integrada para realizar cálculos">
                             <div class="calculator-title">🧮 Calculadora Integrada</div>
                             <div style="text-align: center; font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">
                                 ⌨️ Puedes escribir con el teclado
                             </div>
-                            <div class="calculator-display" id="calcDisplay">0</div>
+                            <div class="calculator-display" id="calcDisplay" aria-live="polite" aria-atomic="true">0
+                            </div>
                             <div class="calculator-buttons">
                                 <button class="calc-btn" onclick="appendCalc('7')">7</button>
                                 <button class="calc-btn" onclick="appendCalc('8')">8</button>
@@ -1060,6 +1252,14 @@
                                     Media = <span id="formulaSum">?</span> / <span id="formulaCount">7</span>
                                 </div>
                             </div>
+                            <div class="helper-item" style="background: rgba(50, 205, 50, 0.15); font-size: 0.85rem;">
+                                <div class="helper-label" style="color: #32cd32;">💡 Nota sobre respuestas:</div>
+                                <div style="margin-top: 8px; opacity: 0.9;">
+                                    Se acepta una tolerancia de <strong>±0.5€</strong> para compensar redondeos.
+                                    <br>
+                                    Ejemplo: Si la respuesta es 57€, se aceptan valores entre 56.5€ y 57.5€.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1072,12 +1272,22 @@
         const ventasSemana = [145.30, 132.50, 189.75, 156.20, 198.50, 234.80, 175.40];
         const dias = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
+        // Misión 2A: Outliers evidentes
+        const mision2A_ventas = [50, 60, 55, 58, 500, 52, 57]; // Outlier evidente: 500€
+        const mision2A_dias = ['Suc 1', 'Suc 2', 'Suc 3', 'Suc 4', 'Suc 5', 'Suc 6', 'Suc 7'];
+
+        // Misión 2B: Outliers sutiles
+        const mision2B_ventas = [120, 135, 128, 200, 125, 132, 210, 130, 122];
+        const mision2B_dias = ['Suc 1', 'Suc 2', 'Suc 3', 'Suc 4', 'Suc 5', 'Suc 6', 'Suc 7', 'Suc 8', 'Suc 9'];
+
         let gameState = {
             playerName: '',
             level: 1,
             xp: 0,
             totalXP: 0,
-            missionsCompleted: []
+            missionsCompleted: [],
+            currentMissionData: null,
+            currentMissionType: null
         };
 
         let calcDisplay = '0';
@@ -1177,6 +1387,12 @@
                     nextScene(4);
                 } else if (document.getElementById('scene4').classList.contains('active')) {
                     startMission();
+                } else if (document.getElementById('scene5').classList.contains('active')) {
+                    nextScene(6);
+                } else if (document.getElementById('scene6').classList.contains('active')) {
+                    startMission2A();
+                } else if (document.getElementById('scene7').classList.contains('active')) {
+                    startMission2B();
                 }
             }
         });
@@ -1212,33 +1428,51 @@
         }
 
         // Load data items
-        function loadDataItems() {
+        function loadDataItems(data = null, labels = null, outlierIndices = []) {
             const container = document.getElementById('dataItems');
             container.innerHTML = '';
 
-            ventasSemana.forEach((venta, index) => {
+            const dataToUse = data || ventasSemana;
+            const labelsToUse = labels || dias;
+
+            dataToUse.forEach((venta, index) => {
                 const item = document.createElement('div');
                 item.className = 'data-item';
-                item.innerHTML = `<div style="font-size: 0.8rem; opacity: 0.8;">${dias[index]}</div>${venta}€`;
+
+                // Si es outlier, destacar en rojo
+                if (outlierIndices.includes(index)) {
+                    item.style.background = 'linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%)';
+                    item.style.border = '2px solid #ff4757';
+                }
+
+                item.innerHTML = `<div style="font-size: 0.8rem; opacity: 0.8;">${labelsToUse[index]}</div>${venta}€`;
                 container.appendChild(item);
             });
         }
 
         // Load bar chart
-        function loadBarChart() {
+        function loadBarChart(data = null, labels = null, outlierIndices = []) {
             const container = document.getElementById('barChart');
             container.innerHTML = '';
 
-            const maxValue = Math.max(...ventasSemana);
+            const dataToUse = data || ventasSemana;
+            const labelsToUse = labels || dias;
+            const maxValue = Math.max(...dataToUse);
 
-            ventasSemana.forEach((venta, index) => {
+            dataToUse.forEach((venta, index) => {
                 const bar = document.createElement('div');
                 bar.className = 'bar';
                 const height = (venta / maxValue) * 100;
                 bar.style.height = height + '%';
+
+                // Si es outlier, usar color rojo
+                if (outlierIndices.includes(index)) {
+                    bar.style.background = 'linear-gradient(180deg, #ff6b6b 0%, #ee5a6f 100%)';
+                }
+
                 bar.innerHTML = `
                     <div class="bar-value">${venta}€</div>
-                    <div class="bar-label">${dias[index]}</div>
+                    <div class="bar-label">${labelsToUse[index]}</div>
                 `;
                 container.appendChild(bar);
             });
@@ -1246,14 +1480,59 @@
 
         // Update stats helper
         function updateStatsHelper() {
-            const sum = ventasSemana.reduce((a, b) => a + b, 0);
-            const min = Math.min(...ventasSemana);
-            const max = Math.max(...ventasSemana);
+            const data = gameState.currentMissionData || ventasSemana;
+            const sum = data.reduce((a, b) => a + b, 0);
+            const min = Math.min(...data);
+            const max = Math.max(...data);
 
             document.getElementById('helperSum').textContent = sum.toFixed(2) + '€';
             document.getElementById('helperMin').textContent = min.toFixed(2) + '€';
             document.getElementById('helperMax').textContent = max.toFixed(2) + '€';
             document.getElementById('formulaSum').textContent = sum.toFixed(2);
+            document.getElementById('helperCount').textContent = data.length;
+            document.getElementById('formulaCount').textContent = data.length;
+        }
+
+        // Calcular mediana
+        function calcularMediana(datos) {
+            const ordenados = [...datos].sort((a, b) => a - b);
+            const n = ordenados.length;
+
+            if (n % 2 === 0) {
+                // Par: promedio de los dos del centro
+                return (ordenados[n / 2 - 1] + ordenados[n / 2]) / 2;
+            } else {
+                // Impar: valor del centro
+                return ordenados[Math.floor(n / 2)];
+            }
+        }
+
+        // Detectar outliers usando regla IQR (Interquartile Range)
+        // NOTA PEDAGÓGICA: Este método usa una aproximación simplificada de percentiles
+        // (método de índice directo). Existen otros métodos más precisos (interpolación),
+        // pero para datasets pequeños educativos este es suficiente y más fácil de entender.
+        function detectarOutliersIQR(datos) {
+            const ordenados = [...datos].sort((a, b) => a - b);
+            const n = ordenados.length;
+
+            // Calcular Q1 (percentil 25) y Q3 (percentil 75)
+            // Método simplificado: índice = floor(n × percentil)
+            // Ejemplo: con 9 valores, Q1 = índice 2, Q3 = índice 6
+            const q1Index = Math.floor(n * 0.25);
+            const q3Index = Math.floor(n * 0.75);
+            const q1 = ordenados[q1Index];
+            const q3 = ordenados[q3Index];
+            const iqr = q3 - q1;
+
+            // Límites para outliers (regla estándar: 1.5 × IQR)
+            // Valores fuera de [Q1 - 1.5×IQR, Q3 + 1.5×IQR] son outliers
+            const limiteInferior = q1 - 1.5 * iqr;
+            const limiteSuperior = q3 + 1.5 * iqr;
+
+            // Retornar índices de outliers en el array original
+            return datos.map((valor, index) =>
+                valor < limiteInferior || valor > limiteSuperior ? index : null
+            ).filter(index => index !== null);
         }
 
         // Calculator functions - Real calculator behavior
@@ -1426,8 +1705,6 @@
         // Check answer
         function checkAnswer() {
             const answer = parseFloat(document.getElementById('answerInput').value);
-            const correctAnswer = ventasSemana.reduce((a, b) => a + b, 0) / ventasSemana.length;
-
             const feedback = document.getElementById('feedback');
 
             if (isNaN(answer)) {
@@ -1435,6 +1712,22 @@
                 feedback.textContent = '❌ Por favor ingresa un número válido';
                 return;
             }
+
+            // Determine which mission is active
+            const missionType = gameState.currentMissionType || 'mission_1_1';
+
+            if (missionType === 'mission_1_1') {
+                checkAnswerMission1(answer, feedback);
+            } else if (missionType === 'mission_2a') {
+                checkAnswerMission2A(answer, feedback);
+            } else if (missionType === 'mission_2b') {
+                checkAnswerMission2B(answer, feedback);
+            }
+        }
+
+        // Check answer for Mission 1
+        function checkAnswerMission1(answer, feedback) {
+            const correctAnswer = ventasSemana.reduce((a, b) => a + b, 0) / ventasSemana.length;
 
             if (Math.abs(answer - correctAnswer) < 0.5) {
                 // Correct!
@@ -1470,6 +1763,96 @@
             }
         }
 
+        // Check answer for Mission 2A
+        function checkAnswerMission2A(answer, feedback) {
+            const correctAnswer = calcularMediana(mision2A_ventas);
+            const media = mision2A_ventas.reduce((a, b) => a + b, 0) / mision2A_ventas.length;
+
+            if (Math.abs(answer - correctAnswer) < 0.5) {
+                // Correct!
+                feedback.className = 'feedback success';
+                feedback.innerHTML = `
+                    ✅ <strong>¡EXCELENTE, ${gameState.playerName.toUpperCase()}!</strong><br><br>
+                    <strong>Mediana calculada:</strong> ${correctAnswer.toFixed(2)}€<br>
+                    <strong>Media (con outliers):</strong> ${media.toFixed(2)}€<br><br>
+                    <strong style="color: #ffd700;">¿Ves la diferencia?</strong><br>
+                    La media (${media.toFixed(2)}€) está distorsionada por el outlier de 500€.<br>
+                    La mediana (${correctAnswer.toFixed(2)}€) representa mejor la venta típica.<br><br>
+                    <em>María: "¡Perfecto! La mediana te dio un valor mucho más representativo. La sucursal con 500€ claramente tiene un error en el sistema. Vamos a investigarla."</em><br><br>
+                    +75 XP ganados<br><br>
+                    <button class="submit-btn" onclick="nextMission()" style="margin-top: 10px;">
+                        ➡️ CONTINUAR A MISIÓN 2B
+                    </button>
+                `;
+
+                // Add XP
+                addXP(75);
+
+                // Save mission
+                if (!gameState.missionsCompleted.includes('mission_2a')) {
+                    gameState.missionsCompleted.push('mission_2a');
+                    saveGame();
+                }
+
+                document.getElementById('submitBtn').disabled = true;
+            } else {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `
+                    ❌ <strong>Incorrecto.</strong><br><br>
+                    <em>María: "Recuerda que la mediana es el valor del MEDIO después de ordenar."<br><br>
+                    Intenta ordenar los valores primero: 50, 52, 55, 57, 58, 60, 500<br>
+                    ¿Cuál es el valor del centro?</em>
+                `;
+            }
+        }
+
+        // Check answer for Mission 2B
+        function checkAnswerMission2B(answer, feedback) {
+            const correctAnswer = calcularMediana(mision2B_ventas);
+            const media = mision2B_ventas.reduce((a, b) => a + b, 0) / mision2B_ventas.length;
+            const outliers = detectarOutliersIQR(mision2B_ventas);
+            const outliersValues = outliers.map(i => mision2B_ventas[i]);
+
+            if (Math.abs(answer - correctAnswer) < 0.5) {
+                // Correct!
+                feedback.className = 'feedback success';
+                feedback.innerHTML = `
+                    ✅ <strong>¡EXCELENTE, ${gameState.playerName.toUpperCase()}!</strong><br><br>
+                    <strong>Mediana calculada:</strong> ${correctAnswer.toFixed(2)}€<br>
+                    <strong>Media (con outliers):</strong> ${media.toFixed(2)}€<br>
+                    <strong>Outliers detectados (IQR):</strong> ${outliersValues.join('€, ')}€<br><br>
+                    <strong style="color: #ffd700;">Análisis:</strong><br>
+                    Las sucursales con ventas de ${outliersValues.join('€ y ')}€ son atípicas.<br>
+                    La venta típica en zona premium es ~${correctAnswer.toFixed(2)}€.<br><br>
+                    <em>María: "¡Increíble! Has dominado la mediana y la detección de outliers. Estas sucursales con ventas de ${outliersValues.join('€ y ')}€ necesitan investigación: ¿son errores o eventos especiales? La mediana nos da una visión clara de la venta típica."</em><br><br>
+                    <strong style="color: #32cd32;">Decisión de negocio:</strong> Investigar sucursales ${outliers.map(i => i + 1).join(', ')} antes de tomar decisiones basadas en la media.<br><br>
+                    +125 XP ganados<br><br>
+                    <button class="submit-btn" onclick="nextMission()" style="margin-top: 10px;">
+                        ➡️ CONTINUAR
+                    </button>
+                `;
+
+                // Add XP
+                addXP(125);
+
+                // Save mission
+                if (!gameState.missionsCompleted.includes('mission_2b')) {
+                    gameState.missionsCompleted.push('mission_2b');
+                    saveGame();
+                }
+
+                document.getElementById('submitBtn').disabled = true;
+            } else {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `
+                    ❌ <strong>Incorrecto.</strong><br><br>
+                    <em>María: "Con 9 valores, la mediana es el 5º valor después de ordenar."<br><br>
+                    Ordena los ${mision2B_ventas.length} valores de menor a mayor y encuentra el del centro.<br>
+                    Usa la calculadora para ayudarte.</em>
+                `;
+            }
+        }
+
         // Add XP
         function addXP(amount) {
             gameState.xp += amount;
@@ -1501,7 +1884,136 @@
 
         // Next mission
         function nextMission() {
-            alert('🎮 ¡Próximamente más misiones!\n\nHas completado tu primera misión como Data Engineer.\n\nMaría: "Excelente trabajo. Mañana te daré un desafío más complejo: aprenderás sobre la mediana y los outliers."\n\n¡Hasta pronto! 🚀');
+            const completedMissions = gameState.missionsCompleted;
+
+            if (completedMissions.includes('mission_1_1') && !completedMissions.includes('mission_2a')) {
+                // Ir a tutorial de Misión 2
+                document.getElementById('gameScreen').style.display = 'none';
+                document.getElementById('storyScreen').style.display = 'block';
+                showScene(5);
+            } else if (completedMissions.includes('mission_2a') && !completedMissions.includes('mission_2b')) {
+                // Ir a tutorial de Misión 2B
+                document.getElementById('gameScreen').style.display = 'none';
+                document.getElementById('storyScreen').style.display = 'block';
+                showScene(7);
+            } else {
+                alert('🎮 ¡Próximamente más misiones!\n\nHas completado las misiones del Módulo 1.\n\nMaría: "¡Increíble progreso! Pronto aprenderás sobre la moda, percentiles y más."\n\n¡Hasta pronto! 🚀');
+            }
+        }
+
+        // Start Mission 2A
+        function startMission2A() {
+            // Hide story, show game
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('storyScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+
+            // Set mission data
+            gameState.currentMissionData = mision2A_ventas;
+            gameState.currentMissionType = 'mission_2a';
+
+            // Update mission title and description
+            document.querySelector('.mission-title').textContent = '📋 Misión 2A: Detectar Outliers Evidentes';
+            document.querySelector('.mission-description').innerHTML = `
+                <p><strong>🏢 Cliente: RestaurantData Co.</strong></p>
+                <p style="margin-top: 10px;">
+                    Calcula la <strong>mediana</strong> de las ventas de 7 sucursales.
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong style="color: #ff4757;">Nota:</strong> Una sucursal tiene un error evidente (marcada en rojo).
+                    La mediana te dará un valor más representativo que la media.
+                </p>
+            `;
+
+            // Update hints
+            document.querySelector('.hints').innerHTML = `
+                <div class="hint-title">💡 Recuerda:</div>
+                <p><strong>Mediana</strong> = Valor del medio después de ordenar</p>
+                <p style="margin-top: 10px;">Pasos: 1) Ordena los valores, 2) Toma el del centro</p>
+                <p style="margin-top: 10px;">Los valores en <strong style="color: #ff4757;">rojo</strong> son outliers →</p>
+            `;
+
+            // Update UI
+            document.getElementById('playerName').textContent = gameState.playerName;
+            document.getElementById('playerLevel').textContent = gameState.level;
+            updateXPBar();
+
+            // Detect outliers (simple: valores > 10x la mediana)
+            const mediana = calcularMediana(mision2A_ventas);
+            const outliers = mision2A_ventas.map((v, i) => v > mediana * 5 ? i : null).filter(i => i !== null);
+
+            // Load data with outliers highlighted
+            loadDataItems(mision2A_ventas, mision2A_dias, outliers);
+            loadBarChart(mision2A_ventas, mision2A_dias, outliers);
+            updateStatsHelper();
+
+            // Clear previous feedback
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('answerInput').value = '';
+            document.getElementById('submitBtn').disabled = false;
+
+            // Save game
+            saveGame();
+        }
+
+        // Start Mission 2B
+        function startMission2B() {
+            // Hide story, show game
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('storyScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+
+            // Set mission data
+            gameState.currentMissionData = mision2B_ventas;
+            gameState.currentMissionType = 'mission_2b';
+
+            // Update mission title and description
+            document.querySelector('.mission-title').textContent = '📋 Misión 2B: Outliers Sutiles (Avanzado)';
+            document.querySelector('.mission-description').innerHTML = `
+                <p><strong>🏢 Cliente: RestaurantData Co. (Zona Premium)</strong></p>
+                <p style="margin-top: 10px;">
+                    Calcula la <strong>mediana</strong> de las ventas de 9 sucursales en zona premium.
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong style="color: #ff4757;">Desafío:</strong> Los outliers son más sutiles.
+                    Usa la regla IQR (ya aplicada, marcados en rojo) para identificarlos.
+                </p>
+            `;
+
+            // Update hints
+            document.querySelector('.hints').innerHTML = `
+                <div class="hint-title">💡 Recuerda:</div>
+                <p><strong>Mediana</strong> = Valor del medio después de ordenar</p>
+                <p style="margin-top: 10px;">Con 9 valores (impar), la mediana es el 5º valor ordenado</p>
+                <p style="margin-top: 10px;">Los <strong style="color: #ff4757;">rojos</strong> son outliers detectados con IQR →</p>
+            `;
+
+            // Update UI
+            document.getElementById('playerName').textContent = gameState.playerName;
+            document.getElementById('playerLevel').textContent = gameState.level;
+            updateXPBar();
+
+            // Detect outliers using IQR
+            const outliers = detectarOutliersIQR(mision2B_ventas);
+
+            // Load data with outliers highlighted
+            loadDataItems(mision2B_ventas, mision2B_dias, outliers);
+            loadBarChart(mision2B_ventas, mision2B_dias, outliers);
+            updateStatsHelper();
+
+            // Clear previous feedback
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('answerInput').value = '';
+            document.getElementById('submitBtn').disabled = false;
+
+            // Save game
+            saveGame();
+        }
+
+        // Back to game (from tutorial)
+        function backToGame() {
+            document.getElementById('storyScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
         }
     </script>
 </body>
