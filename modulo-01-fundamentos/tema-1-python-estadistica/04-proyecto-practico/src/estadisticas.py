@@ -89,7 +89,8 @@ def calcular_media(datos: List[Union[int, float]]) -> float:
         if not isinstance(valor, (int, float)):
             raise TypeError(
                 f"Todos los elementos deben ser números. "
-                f"El elemento en la posición {i} es de tipo {type(valor).__name__}: {valor}"
+                f"El elemento en la posición {i} es de tipo "
+                f"{type(valor).__name__}: {valor}"
             )
         # Validación adicional: None se considera como bool en algunos contextos
         if valor is None:
@@ -115,7 +116,8 @@ def calcular_mediana(datos: List[Union[int, float]]) -> float:
     extremos (outliers).
 
     - Si la cantidad de elementos es impar: la mediana es el valor central
-    - Si la cantidad de elementos es par: la mediana es el promedio de los dos valores centrales
+    - Si la cantidad de elementos es par: la mediana es el promedio de los
+      dos valores centrales
 
     Parámetros
     ----------
@@ -182,7 +184,8 @@ def calcular_mediana(datos: List[Union[int, float]]) -> float:
         if not isinstance(valor, (int, float)):
             raise TypeError(
                 f"Todos los elementos deben ser números. "
-                f"El elemento en la posición {i} es de tipo {type(valor).__name__}: {valor}"
+                f"El elemento en la posición {i} es de tipo "
+                f"{type(valor).__name__}: {valor}"
             )
         if valor is None:
             raise TypeError(
@@ -275,7 +278,8 @@ def calcular_moda(datos: List[Union[int, float]]) -> List[Union[int, float]]:
         if not isinstance(valor, (int, float)):
             raise TypeError(
                 f"Todos los elementos deben ser números. "
-                f"El elemento en la posición {i} es de tipo {type(valor).__name__}: {valor}"
+                f"El elemento en la posición {i} es de tipo "
+                f"{type(valor).__name__}: {valor}"
             )
         if valor is None:
             raise TypeError(

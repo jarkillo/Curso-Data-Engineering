@@ -1,6 +1,6 @@
 # 🔐 Variables de Entorno - Plantilla
 
-Este archivo contiene un ejemplo de las variables de entorno necesarias para el proyecto.
+Est[e archivo](https://obsidian.md/download) contiene un ejemplo de las variables de entorno necesarias para el proyecto.
 
 ---
 
@@ -261,4 +261,3 @@ print(str(uuid.uuid4()))
 ---
 
 *Última actualización: 2025-10-18*
-
