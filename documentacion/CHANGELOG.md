@@ -10,6 +10,63 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 ## [Unreleased]
 
 ### Added
+- **JAR-185: Módulo 1 - Tema 1 - Ejercicios Prácticos de Estadística** (2025-10-19):
+  - ✅ **COMPLETADO**: Archivo `03-EJERCICIOS.md` creado con 15 ejercicios prácticos
+  - **Estructura pedagógica**:
+    - 3 niveles de dificultad progresiva (Básico → Intermedio → Avanzado)
+    - 5 ejercicios por nivel
+    - Soluciones detalladas al final con código Python
+  - **Ejercicios Básicos (1-5)**:
+    - Ejercicio 1: Calcular media de ventas diarias
+    - Ejercicio 2: Calcular mediana de salarios (con outlier)
+    - Ejercicio 3: Identificar moda en ventas de productos
+    - Ejercicio 4: Comparar media vs mediana para detectar outliers
+    - Ejercicio 5: Interpretar medidas de tendencia central
+  - **Ejercicios Intermedios (6-10)**:
+    - Ejercicio 6: Calcular varianza y desviación estándar
+    - Ejercicio 7: Comparar estabilidad de procesos
+    - Ejercicio 8: Calcular percentiles (P25, P50, P75, P95)
+    - Ejercicio 9: Análisis estadístico completo
+    - Ejercicio 10: Detectar outliers con desviación estándar
+  - **Ejercicios Avanzados (11-15)**:
+    - Ejercicio 11: Cumplimiento de SLA usando percentiles
+    - Ejercicio 12: Comparar rendimiento de dos equipos
+    - Ejercicio 13: Decidir qué métrica usar (media vs mediana)
+    - Ejercicio 14: Caso integrador - análisis de ventas mensuales
+    - Ejercicio 15: Decisiones de negocio basadas en estadísticas (ROI)
+  - **Características**:
+    - Contextos empresariales realistas y variados (8 contextos diferentes)
+    - Ejercicios de interpretación, no solo cálculo
+    - Soluciones con cálculo manual + código Python
+    - Interpretación de resultados para toma de decisiones
+    - Tabla de autoevaluación para tracking de progreso
+    - ~1,535 líneas de contenido educativo
+  - **Contextos utilizados**:
+    - 🏪 Tiendas de electrónica y retail
+    - 💼 Recursos humanos y salarios
+    - 📦 Inventario y logística
+    - 🎵 Plataformas de streaming
+    - 🏭 Control de calidad industrial
+    - 🚀 APIs y rendimiento de sistemas
+    - 💰 E-commerce y análisis de pedidos
+    - 🏦 Detección de fraude bancario
+    - ☎️ Call centers y operaciones
+    - 🏠 Mercado inmobiliario
+    - ☕ Cafeterías y restaurantes
+    - 📱 Aplicaciones móviles y ROI
+  - **Integración con el tema**:
+    - Alineado con `01-TEORIA.md` (conceptos teóricos)
+    - Complementa `02-EJEMPLOS.md` (ejemplos trabajados)
+    - Preparación para `04-proyecto-practico/` (implementación)
+  - **Beneficios pedagógicos**:
+    - ✅ Dificultad progresiva sin saltos conceptuales
+    - ✅ Práctica de todos los conceptos del tema
+    - ✅ Desarrollo de pensamiento analítico
+    - ✅ Conexión con casos de negocio reales
+    - ✅ Preparación para trabajo como Data Engineer
+  - **Duración estimada**: 3-4 horas (todos los ejercicios)
+  - **Próximo paso**: Módulo 1, Tema 2 - Procesamiento de CSV
+
 - **Quality Check - Suite de Calidad Completa** (2025-10-19):
   - ✅ Ejecutada suite completa de calidad en todos los módulos del Tema de Fundamentos
   - **Herramientas utilizadas**:
