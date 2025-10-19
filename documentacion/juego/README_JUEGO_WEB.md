@@ -80,11 +80,26 @@ http://localhost:8000/game.html
 - ✅ **Tutorial de regla IQR** integrado
 - ✅ **+125 XP** al completar
 
+### Misión 3A: Moda Simple ✅
+- ✅ **Primera misión con datos categóricos** (tallas, no números)
+- ✅ **Tutorial integrado** sobre la moda
+- ✅ **Visualización con destaque dorado** para la moda
+- ✅ **Empresa ficticia**: TrendyShop Analytics
+- ✅ **Diferencia entre frecuencia y suma** clarificada
+- ✅ **+100 XP** al completar
+
+### Misión 3B: Distribución Bimodal ✅
+- ✅ **Concepto avanzado**: Distribución bimodal
+- ✅ **Validación flexible** (acepta "M,L" o "L,M" o "M y L")
+- ✅ **Tabla de frecuencias** con destaque de modas
+- ✅ **Feedback pedagógico** sobre bimodalidad
+- ✅ **+150 XP + 25 XP bonus** al completar
+
 ### Sistema de Progresión ✅
-- ✅ **Desbloqueo progresivo**: Misión 1 → 2A → 2B
+- ✅ **Desbloqueo progresivo**: Misión 1 → 2A → 2B → 3A → 3B
 - ✅ **Guardado automático** en localStorage
 - ✅ **Botón "Continuar"** lleva a la siguiente misión
-- ✅ **Total: 300 XP** disponibles (100 + 75 + 125)
+- ✅ **Total: 575 XP** disponibles (100 + 75 + 125 + 100 + 175)
 
 ---
 
@@ -215,18 +230,20 @@ Desblocas más misiones
 
 ## 🚀 Roadmap Versión Web
 
-### ✅ Implementado (v1.1)
+### ✅ Implementado (v1.2)
 - Misión 1 completa (Media)
 - Misión 2A completa (Mediana con outliers evidentes)
 - Misión 2B completa (Mediana con outliers sutiles)
+- Misión 3A completa (Moda simple)
+- Misión 3B completa (Distribución bimodal)
 - Calculadora funcional
 - Sistema de XP y progresión
-- Visualizaciones con outliers destacados
+- Visualizaciones con outliers y modas destacados
 - Guardado automático
 - Sistema de desbloqueo progresivo
+- Tabla de frecuencias interactiva
 
-### 🚧 Próximo (v1.2)
-- [ ] Misión 3: Identificar moda (productos más vendidos)
+### 🚧 Próximo (v1.3)
 - [ ] Misión 4: Percentiles y cuartiles
 - [ ] Misión 5: Varianza y desviación estándar
 - [ ] Dashboard completo de stats
@@ -393,6 +410,6 @@ python -m http.server 8000
 
 ---
 
-**Versión:** 1.1 Web (con mejoras pedagógicas y de accesibilidad)
+**Versión:** 1.2 Web (con Misión 3: Moda y Distribuciones Bimodales)
 **Última actualización:** 2025-10-19
 **Creado con:** ❤️, HTML, CSS y JavaScript

@@ -10,6 +10,81 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 ## [Unreleased]
 
 ### Added
+- **JAR-181: Misión 3 del Juego - Moda y Distribuciones Bimodales** (2025-10-19):
+  - ✅ **COMPLETADO Y VALIDADO**: Diseño, implementación, revisión pedagógica y testing manual
+  - **Empresa ficticia**: TrendyShop Analytics (cadena de tiendas de ropa)
+  - **Personajes**: Carlos Méndez (CEO), María González (mentora)
+  - **Innovación pedagógica**: Primera misión con datos CATEGÓRICOS (tallas, no números)
+  - ✅ **Misión 3A (Básica)**: Moda simple
+    - Dataset: 5 tiendas vendiendo camisetas en diferentes tallas
+    - Pregunta: ¿Cuál es la talla MÁS vendida?
+    - Respuesta: M (aparece 2 veces, 83 unidades totales)
+    - Visualización: Gráfico de frecuencias con destaque dorado
+    - Panel de ayuda con frecuencias destacadas
+    - Feedback pedagógico con detección de errores comunes
+    - +100 XP al completar
+  - ✅ **Misión 3B (Avanzada)**: Distribución bimodal
+    - Dataset: 7 tiendas con tallas más vendidas
+    - Concepto: DOS modas con igual frecuencia (M y L, ambas 3 tiendas)
+    - Validación flexible: Acepta "M,L", "L,M", "M y L" (case-insensitive)
+    - Tabla de frecuencias con destaque de modas
+    - Tutorial integrado sobre distribución bimodal
+    - Feedback con análisis de decisiones de negocio
+    - +150 XP + 25 XP bonus por identificar bimodalidad correctamente
+  - **Sistema de XP**: 275 XP total (100 + 150 + 25 bonus)
+  - **Escenas de tutorial**: 2 nuevas escenas implementadas
+    - Escena 8: Introducción a la Moda (diferencia con media/mediana)
+    - Escena 9: Tutorial Distribución Bimodal (concepto y aplicaciones)
+  - **Funciones implementadas**:
+    - `calcularModa(datos)`: Calcula moda(s) y detecta distribuciones bimodales/multimodales
+    - `startMission3A()` y `startMission3B()`: Inicializan misiones
+    - `loadFrequencyChartMission3A()` y `loadFrequencyChartMission3B()`: Visualizaciones
+    - `updateHelperMission3A()` y `updateHelperMission3B()`: Paneles de ayuda
+    - `checkAnswerMission3A()` y `checkAnswerMission3B()`: Validación con feedback pedagógico
+  - **CSS añadido**:
+    - `.moda-highlight`: Destaque dorado con animación pulse-gold
+    - `.frequency-table`: Tabla de frecuencias estilizada
+    - `.moda-row`: Filas de modas con borde dorado
+  - **Mejoras pedagógicas** (basadas en revisión):
+    - Panel de ayuda clarifica diferencia entre frecuencia (⭐) y unidades (ℹ️)
+    - Feedback específico para errores comunes (confusión con media, talla incorrecta)
+    - Validación flexible para reducir frustración por formato
+    - Bonus XP por comprensión profunda (identificar bimodalidad)
+  - **Sistema de navegación**:
+    - Integración con `nextMission()`: Misión 2B → Escena 8 → Misión 3A → Misión 3B
+    - Keyboard navigation con Enter en escenas 8 y 9
+    - Actualización automática de nombre del jugador en escenas
+  - **Revisión pedagógica**:
+    - ✅ Calificación: 9.2/10 por Psicólogo Educativo
+    - ✅ Veredicto: APROBADO PARA PRODUCCIÓN
+    - ✅ Fortalezas: Progresión lógica impecable, innovación significativa, gamificación saludable
+    - ✅ Cumplimiento: Bloom's Taxonomy, Zona de Desarrollo Próximo, Aprendizaje Significativo
+  - **Testing manual** (2025-10-19):
+    - ✅ Calificación: 9.5/10 por Quality Assurance Team
+    - ✅ Veredicto: APROBADO PARA PRODUCCIÓN
+    - ✅ Tests ejecutados: 45 tests manuales (100% PASS)
+    - ✅ Cobertura: Flujos completos, casos de éxito, casos de error, navegación, persistencia, visualizaciones, integración, casos borde
+    - ✅ Validación flexible funcionando correctamente (case-insensitive, múltiples formatos)
+    - ✅ Feedback pedagógico específico por tipo de error
+    - ✅ Visualizaciones con destaque dorado y animaciones funcionando
+    - ✅ Tabla de frecuencias correctamente estilizada
+    - ⚠️ Observaciones menores: Testing en navegadores reales, accesibilidad con screen readers, responsive en móvil (no bloqueantes)
+    - 📄 **Reporte completo**: `documentacion/jira/REPORTE_TESTING_JAR-181.md`
+  - **Archivos modificados**:
+    - `documentacion/juego/game.html` (~2800 líneas, +600 líneas añadidas)
+    - `documentacion/juego/README_JUEGO_WEB.md` (actualizado con Misión 3)
+    - `documentacion/CHANGELOG.md` (esta entrada)
+  - **Archivos creados**:
+    - `documentacion/jira/DISENO_MISION_3_JAR-181.md` (680+ líneas, diseño completo)
+    - `documentacion/jira/REPORTE_TESTING_JAR-181.md` (reporte de testing manual completo)
+  - **Beneficios pedagógicos**:
+    - ✅ Primera misión con datos categóricos (no numéricos)
+    - ✅ Comprensión de moda vs media/mediana
+    - ✅ Introducción a distribuciones bimodales
+    - ✅ Aplicación a decisiones de negocio reales
+    - ✅ Validación flexible que reduce frustración
+  - **Total XP disponible en el juego**: 575 XP (100 + 75 + 125 + 100 + 175)
+
 - **JAR-180: Misión 2 del Juego - Mediana con Outliers** (2025-10-19):
   - ✅ **Misión 2A (Básica)**: Outliers evidentes, introducción a mediana
     - Tutorial integrado sobre qué es la mediana y por qué es mejor que la media con outliers

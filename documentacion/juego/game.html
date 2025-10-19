@@ -51,6 +51,56 @@
             }
         }
 
+        /* Moda highlight (Misión 3) */
+        .moda-highlight {
+            background: linear-gradient(180deg, #ffd700 0%, #ff8c00 100%) !important;
+            border: 2px solid #ffd700 !important;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5) !important;
+            animation: pulse-gold 2s infinite;
+        }
+
+        @keyframes pulse-gold {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            }
+        }
+
+        /* Tabla de frecuencias (Misión 3B) */
+        .frequency-table {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .frequency-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .frequency-table th {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            text-align: left;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .frequency-table td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .moda-row {
+            background: rgba(255, 215, 0, 0.2);
+            border-left: 4px solid #ffd700;
+        }
+
         .game-subtitle {
             font-size: 1.5rem;
             margin-bottom: 50px;
@@ -1100,6 +1150,138 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Escena 8: Introducción a la Moda -->
+            <div class="story-scene" id="scene8">
+                <h2 style="font-size: 2rem; margin-bottom: 30px;">📊 Nueva Métrica: La Moda</h2>
+
+                <div class="dialogue">
+                    <strong>María:</strong> "¡Excelente trabajo con media y mediana!
+                    Ahora te presento a un nuevo cliente..."
+                </div>
+
+                <div class="character">
+                    <div class="character-avatar">👔</div>
+                    <div class="character-info">
+                        <div class="character-name">Carlos Méndez</div>
+                        <div class="character-role">CEO - TrendyShop Analytics</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <strong>Carlos:</strong> "Vendemos camisetas en diferentes tallas.
+                    Necesito saber: ¿En qué tallas debo invertir más stock?"
+                    <br><br>
+                    <em>Muestra una hoja con datos de ventas</em>
+                    <br><br>
+                    "Tengo las ventas de la última semana, pero no sé cómo interpretarlas."
+                </div>
+
+                <div class="dialogue">
+                    <strong>María:</strong> "Mira estos datos, <span id="playerNameScene8"></span>:"
+                    <br><br>
+                    <code style="background: rgba(0,0,0,0.3); padding: 10px; display: block; border-radius: 5px;">
+                    Tallas vendidas: S, M, L, M, S, M, L, M, XL, M, S, M
+                    </code>
+                    <br>
+                    "¿Puedes calcular la media o mediana de esto?"
+                    <br><br>
+                    <em>Pausa para reflexión</em>
+                    <br><br>
+                    "¡NO! Porque son CATEGORÍAS, no números. Aquí necesitamos la <strong
+                        style="color: #ffd700;">MODA</strong>."
+                </div>
+
+                <div class="tutorial-box">
+                    <div class="tutorial-title">💡 ¿Qué es la Moda?</div>
+                    <div class="tutorial-content">
+                        La <strong>moda</strong> es el valor que aparece con
+                        <strong>MÁS FRECUENCIA</strong> en un conjunto de datos.
+                        <br><br>
+                        <strong>Diferencia clave:</strong>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>📊 <strong>Media</strong>: Promedio (solo para números)</li>
+                            <li>📍 <strong>Mediana</strong>: Valor del medio (solo para números)</li>
+                            <li>⭐ <strong>Moda</strong>: Más frecuente (¡funciona con categorías!)</li>
+                        </ul>
+                        <br>
+                        <strong>Ejemplo:</strong><br>
+                        Tallas vendidas: S, M, L, M, S, M<br>
+                        Moda = <strong>M</strong> (aparece 3 veces)
+                        <br><br>
+                        <strong>¿Para qué sirve?</strong>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>Identificar productos más vendidos</li>
+                            <li>Encontrar tallas más demandadas</li>
+                            <li>Detectar patrones de comportamiento</li>
+                            <li>Decidir qué stock mantener</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="story-actions">
+                    <button class="story-btn" onclick="backToGame()">⬅️ Volver al Juego</button>
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <div class="keyboard-hint">⌨️ <span class="key-indicator">Enter</span></div>
+                        <button class="story-btn primary" onclick="nextScene(9)">➡️ Continuar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Escena 9: Tutorial Distribución Bimodal -->
+            <div class="story-scene" id="scene9">
+                <h2 style="font-size: 2rem; margin-bottom: 30px;">📈 Distribución Bimodal</h2>
+
+                <div class="dialogue">
+                    <strong>María:</strong> "Antes de empezar, déjame explicarte algo importante..."
+                    <br><br>
+                    "A veces, NO hay una sola moda. Puede haber DOS o más valores
+                    con la misma frecuencia máxima."
+                </div>
+
+                <div class="tutorial-box">
+                    <div class="tutorial-title">📊 Distribución Bimodal</div>
+                    <div class="tutorial-content">
+                        Cuando <strong>DOS valores</strong> tienen la misma frecuencia máxima,
+                        tenemos una <strong>distribución BIMODAL</strong>.
+                        <br><br>
+                        <strong>Ejemplo:</strong><br>
+                        Ventas: M, M, M, L, L, L, S<br>
+                        Modas = <strong>M y L</strong> (ambas aparecen 3 veces)
+                        <br><br>
+                        <strong>¿Qué significa en negocio?</strong>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>✅ Dos segmentos de clientes distintos</li>
+                            <li>✅ Dos productos igual de populares</li>
+                            <li>✅ Necesidad de stock balanceado</li>
+                            <li>✅ No priorizar uno sobre el otro</li>
+                        </ul>
+                        <br>
+                        <strong style="color: #32cd32;">Importante:</strong>
+                        Si encuentras una distribución bimodal, debes reportar
+                        <strong>AMBAS modas</strong>, no solo una.
+                        <br><br>
+                        <strong>Ejemplo real:</strong><br>
+                        Si TrendyShop vende igual cantidad de tallas M y L, debe
+                        mantener stock equilibrado de ambas. Priorizar solo una
+                        causaría pérdida de ventas de la otra.
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <strong>María:</strong> "En la primera parte de esta misión,
+                    trabajarás con una moda simple. En la segunda parte, te enfrentarás
+                    a una distribución bimodal. ¿Listo/a?"
+                </div>
+
+                <div class="story-actions">
+                    <button class="story-btn" onclick="nextScene(8)">⬅️ Atrás</button>
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <div class="keyboard-hint">⌨️ <span class="key-indicator">Enter</span></div>
+                        <button class="story-btn primary" onclick="startMission3A()">🚀 ¡EMPEZAR MISIÓN 3A!</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1280,6 +1462,26 @@
         const mision2B_ventas = [120, 135, 128, 200, 125, 132, 210, 130, 122];
         const mision2B_dias = ['Suc 1', 'Suc 2', 'Suc 3', 'Suc 4', 'Suc 5', 'Suc 6', 'Suc 7', 'Suc 8', 'Suc 9'];
 
+        // Misión 3A: Moda Simple
+        const mision3A_ventas = [
+            { producto: 'Camiseta Azul', talla: 'M', cantidad: 45 },
+            { producto: 'Camiseta Azul', talla: 'L', cantidad: 32 },
+            { producto: 'Camiseta Azul', talla: 'S', cantidad: 28 },
+            { producto: 'Camiseta Azul', talla: 'XL', cantidad: 15 },
+            { producto: 'Camiseta Azul', talla: 'M', cantidad: 38 }
+        ];
+
+        // Misión 3B: Distribución Bimodal
+        const mision3B_ventas = [
+            { tienda: 'Tienda 1', talla_mas_vendida: 'M', unidades: 45 },
+            { tienda: 'Tienda 2', talla_mas_vendida: 'L', unidades: 43 },
+            { tienda: 'Tienda 3', talla_mas_vendida: 'M', unidades: 41 },
+            { tienda: 'Tienda 4', talla_mas_vendida: 'L', unidades: 42 },
+            { tienda: 'Tienda 5', talla_mas_vendida: 'M', unidades: 38 },
+            { tienda: 'Tienda 6', talla_mas_vendida: 'L', unidades: 44 },
+            { tienda: 'Tienda 7', talla_mas_vendida: 'S', unidades: 25 }
+        ];
+
         let gameState = {
             playerName: '',
             level: 1,
@@ -1365,6 +1567,14 @@
                 scene.classList.remove('active');
             });
             document.getElementById('scene' + sceneNum).classList.add('active');
+
+            // Update player name in Scene 8 if exists
+            if (sceneNum === 8) {
+                const playerNameSpan = document.getElementById('playerNameScene8');
+                if (playerNameSpan) {
+                    playerNameSpan.textContent = gameState.playerName;
+                }
+            }
         }
 
         // Keyboard navigation for story screens
@@ -1393,6 +1603,10 @@
                     startMission2A();
                 } else if (document.getElementById('scene7').classList.contains('active')) {
                     startMission2B();
+                } else if (document.getElementById('scene8').classList.contains('active')) {
+                    nextScene(9);
+                } else if (document.getElementById('scene9').classList.contains('active')) {
+                    startMission3A();
                 }
             }
         });
@@ -1704,17 +1918,36 @@
 
         // Check answer
         function checkAnswer() {
-            const answer = parseFloat(document.getElementById('answerInput').value);
+            const answerInput = document.getElementById('answerInput');
             const feedback = document.getElementById('feedback');
+            const missionType = gameState.currentMissionType || 'mission_1_1';
+
+            // For Mission 3A and 3B, answer is text (talla)
+            if (missionType === 'mission_3a' || missionType === 'mission_3b') {
+                const answer = answerInput.value.trim();
+
+                if (answer === '') {
+                    feedback.className = 'feedback error';
+                    feedback.textContent = '❌ Por favor ingresa una respuesta';
+                    return;
+                }
+
+                if (missionType === 'mission_3a') {
+                    checkAnswerMission3A(answer, feedback);
+                } else if (missionType === 'mission_3b') {
+                    checkAnswerMission3B(answer, feedback);
+                }
+                return;
+            }
+
+            // For other missions, answer is numeric
+            const answer = parseFloat(answerInput.value);
 
             if (isNaN(answer)) {
                 feedback.className = 'feedback error';
                 feedback.textContent = '❌ Por favor ingresa un número válido';
                 return;
             }
-
-            // Determine which mission is active
-            const missionType = gameState.currentMissionType || 'mission_1_1';
 
             if (missionType === 'mission_1_1') {
                 checkAnswerMission1(answer, feedback);
@@ -1853,6 +2086,172 @@
             }
         }
 
+        // Check answer for Mission 3A
+        function checkAnswerMission3A(answer, feedback) {
+            // Normalizar respuesta
+            const normalized = answer.trim().toUpperCase();
+
+            // Respuestas aceptadas
+            const correctAnswers = ['M', 'MEDIANA', 'MEDIUM'];
+            const isCorrect = correctAnswers.includes(normalized);
+
+            if (isCorrect) {
+                feedback.className = 'feedback success';
+                feedback.innerHTML = `
+                    ✅ <strong>¡CORRECTO, ${gameState.playerName.toUpperCase()}!</strong><br><br>
+                    <strong>La moda es:</strong> M (talla Mediana)<br><br>
+                    <strong>Análisis:</strong><br>
+                    - Talla M: 83 unidades (2 tiendas) ⭐<br>
+                    - Talla L: 32 unidades (1 tienda)<br>
+                    - Talla S: 28 unidades (1 tienda)<br>
+                    - Talla XL: 15 unidades (1 tienda)<br><br>
+                    La talla M es la MÁS FRECUENTE (aparece en más tiendas).<br><br>
+                    <strong style="color: #32cd32;">Decisión de negocio:</strong><br>
+                    TrendyShop debe priorizar stock de talla M en sus próximos pedidos.<br><br>
+                    <em>María: "¡Perfecto! Ahora el CEO sabe en qué talla invertir más.
+                    Pero... ¿qué pasa cuando HAY DOS tallas igual de populares?
+                    Eso lo veremos en la siguiente misión."</em><br><br>
+                    +100 XP ganados<br><br>
+                    <button class="submit-btn" onclick="nextMission()" style="margin-top: 10px;">
+                        ➡️ CONTINUAR A MISIÓN 3B
+                    </button>
+                `;
+
+                // Add XP
+                addXP(100);
+
+                // Save mission
+                if (!gameState.missionsCompleted.includes('mission_3a')) {
+                    gameState.missionsCompleted.push('mission_3a');
+                    saveGame();
+                }
+
+                document.getElementById('submitBtn').disabled = true;
+            } else {
+                // Analizar error común
+                if (['L', 'S', 'XL'].includes(normalized)) {
+                    feedback.className = 'feedback error';
+                    feedback.innerHTML = `
+                        ❌ <strong>Incorrecto.</strong><br><br>
+                        La talla ${normalized} no es la más frecuente.<br><br>
+                        💡 <strong>Hint:</strong> Cuenta cuántas veces aparece CADA talla en la lista.
+                        La moda es la que aparece MÁS VECES.<br><br>
+                        <em>Mira el panel de <strong>📊 Ayuda</strong> → Frecuencias (tiendas)</em>
+                    `;
+                } else if (!isNaN(parseFloat(answer))) {
+                    feedback.className = 'feedback error';
+                    feedback.innerHTML = `
+                        ❌ <strong>Incorrecto.</strong><br><br>
+                        <em>María: "Parece que estás intentando calcular la MEDIA de las unidades.
+                        Pero aquí no queremos el promedio, queremos la MODA."</em><br><br>
+                        💡 <strong>Recuerda:</strong><br>
+                        - MEDIA = promedio de valores numéricos<br>
+                        - MODA = valor que aparece MÁS VECES<br><br>
+                        En este caso, no sumes las unidades. Solo cuenta:
+                        ¿Qué talla aparece en MÁS TIENDAS?
+                    `;
+                } else {
+                    feedback.className = 'feedback error';
+                    feedback.innerHTML = `
+                        ❌ <strong>Incorrecto.</strong><br><br>
+                        💡 <strong>Hint:</strong> La moda es el valor que aparece con MÁS FRECUENCIA.
+                        Revisa el gráfico y cuenta cuántas veces aparece cada talla.<br><br>
+                        <em>Usa el panel de <strong>📊 Ayuda</strong> para ver las frecuencias →</em>
+                    `;
+                }
+            }
+        }
+
+        // Check answer for Mission 3B
+        function checkAnswerMission3B(answer, feedback) {
+            // Normalizar respuesta
+            const normalized = answer
+                .toUpperCase()
+                .replace(/\s+/g, '')      // Eliminar espacios
+                .replace(/Y/g, ',')       // Reemplazar "y" por coma
+                .split(',')               // Separar por coma
+                .filter(x => x.length > 0) // Eliminar vacíos
+                .sort()                   // Ordenar alfabéticamente
+                .join(',');
+
+            // Respuestas correctas posibles
+            const correctAnswers = ['L,M', 'M,L'];
+            const isCorrect = correctAnswers.includes(normalized);
+
+            if (isCorrect) {
+                feedback.className = 'feedback success';
+                feedback.innerHTML = `
+                    ✅ <strong>¡EXCELENTE! Has identificado la distribución BIMODAL.</strong><br><br>
+                    <strong>Análisis:</strong><br>
+                    - Talla M: 3 tiendas (124 unidades totales) ⭐<br>
+                    - Talla L: 3 tiendas (129 unidades totales) ⭐<br>
+                    - Talla S: 1 tienda (25 unidades totales)<br><br>
+                    Ambas tienen la MISMA FRECUENCIA (3 tiendas), por lo que
+                    ambas son MODAS.<br><br>
+                    <strong style="color: #ffd700;">📊 Distribución Bimodal:</strong><br>
+                    Cuando DOS valores tienen la misma frecuencia máxima, tenemos
+                    una distribución bimodal. Esto indica:<br>
+                    - Dos segmentos de clientes distintos<br>
+                    - Dos productos igual de populares<br>
+                    - Necesidad de stock balanceado<br><br>
+                    <strong style="color: #32cd32;">Decisión de negocio:</strong><br>
+                    TrendyShop debe mantener stock EQUILIBRADO de tallas M y L,
+                    ya que ambas son igual de populares en diferentes tiendas.<br><br>
+                    +150 XP ganados<br>
+                    +25 XP BONUS por identificar distribución bimodal correctamente<br><br>
+                    <button class="submit-btn" onclick="nextMission()" style="margin-top: 10px;">
+                        ➡️ CONTINUAR
+                    </button>
+                `;
+
+                // Add XP
+                addXP(150);
+                addXP(25); // Bonus
+
+                // Save mission
+                if (!gameState.missionsCompleted.includes('mission_3b')) {
+                    gameState.missionsCompleted.push('mission_3b');
+                    saveGame();
+                }
+
+                document.getElementById('submitBtn').disabled = true;
+            } else {
+                // Analizar error común
+                if (normalized === 'M' || normalized === 'L') {
+                    feedback.className = 'feedback error';
+                    feedback.innerHTML = `
+                        ❌ <strong>¡Casi lo tienes!</strong><br><br>
+                        Has identificado UNA de las modas, pero falta la otra.<br><br>
+                        💡 <strong>Hint:</strong> Mira la tabla de frecuencias. ¿Hay OTRA talla
+                        que también aparezca 3 veces?<br><br>
+                        <strong>Recuerda:</strong> Si dos valores tienen la misma frecuencia máxima,
+                        AMBOS son modas (distribución bimodal).<br><br>
+                        <em>Formato: Separa ambas tallas con coma (ej: "M,L" o "L,M")</em>
+                    `;
+                } else if (normalized.includes('S')) {
+                    feedback.className = 'feedback error';
+                    feedback.innerHTML = `
+                        ❌ <strong>Incorrecto.</strong><br><br>
+                        La talla S solo aparece en 1 tienda, no es una moda.<br><br>
+                        💡 <strong>Hint:</strong> Las modas son las tallas con MAYOR frecuencia.
+                        Busca las que aparecen MÁS VECES.<br><br>
+                        <em>Mira el panel de <strong>📊 Ayuda</strong> → Tabla de Frecuencias</em>
+                    `;
+                } else {
+                    feedback.className = 'feedback error';
+                    feedback.innerHTML = `
+                        ❌ <strong>Incorrecto.</strong><br><br>
+                        💡 <strong>Hint:</strong> No te fijes en las UNIDADES vendidas, sino en
+                        cuántas TIENDAS vendieron más cada talla.<br><br>
+                        Cuenta: ¿Cuántas tiendas tienen M como talla más vendida?
+                        ¿Y cuántas tienen L?<br><br>
+                        Si dos tallas tienen la misma frecuencia máxima, ambas son modas.<br>
+                        <em>Formato: "M,L" o "L,M"</em>
+                    `;
+                }
+            }
+        }
+
         // Add XP
         function addXP(amount) {
             gameState.xp += amount;
@@ -1896,8 +2295,16 @@
                 document.getElementById('gameScreen').style.display = 'none';
                 document.getElementById('storyScreen').style.display = 'block';
                 showScene(7);
+            } else if (completedMissions.includes('mission_2b') && !completedMissions.includes('mission_3a')) {
+                // Ir a tutorial de Misión 3
+                document.getElementById('gameScreen').style.display = 'none';
+                document.getElementById('storyScreen').style.display = 'block';
+                showScene(8);
+            } else if (completedMissions.includes('mission_3a') && !completedMissions.includes('mission_3b')) {
+                // Ir a Misión 3B directamente (ya vio el tutorial)
+                startMission3B();
             } else {
-                alert('🎮 ¡Próximamente más misiones!\n\nHas completado las misiones del Módulo 1.\n\nMaría: "¡Increíble progreso! Pronto aprenderás sobre la moda, percentiles y más."\n\n¡Hasta pronto! 🚀');
+                alert('🎮 ¡Próximamente más misiones!\n\nHas completado las misiones disponibles.\n\nMaría: "¡Increíble progreso! Pronto aprenderás sobre percentiles, varianza y más."\n\n¡Hasta pronto! 🚀');
             }
         }
 
@@ -2014,6 +2421,407 @@
         function backToGame() {
             document.getElementById('storyScreen').style.display = 'none';
             document.getElementById('gameScreen').style.display = 'block';
+        }
+
+        // ============================================
+        // MISIÓN 3: MODA Y DISTRIBUCIONES BIMODALES
+        // ============================================
+
+        /**
+         * Calcula la moda (valor más frecuente) de un array de datos
+         * @param {Array} datos - Array de valores (pueden ser strings o números)
+         * @returns {Object} - Objeto con modas, frecuencias y tipo de distribución
+         */
+        function calcularModa(datos) {
+            // Contar frecuencias
+            const frequencies = {};
+            datos.forEach(valor => {
+                frequencies[valor] = (frequencies[valor] || 0) + 1;
+            });
+
+            // Encontrar frecuencia máxima
+            const maxFreq = Math.max(...Object.values(frequencies));
+
+            // Encontrar todos los valores con frecuencia máxima
+            const modas = Object.entries(frequencies)
+                .filter(([_, freq]) => freq === maxFreq)
+                .map(([valor, _]) => valor);
+
+            return {
+                modas: modas,
+                frequencies: frequencies,
+                maxFrequency: maxFreq,
+                esBimodal: modas.length === 2,
+                esMultimodal: modas.length > 2,
+                esUnimodal: modas.length === 1
+            };
+        }
+
+        /**
+         * Iniciar Misión 3A: Moda Simple
+         */
+        function startMission3A() {
+            // Hide story, show game
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('storyScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+
+            // Set mission data
+            gameState.currentMissionData = mision3A_ventas;
+            gameState.currentMissionType = 'mission_3a';
+
+            // Update mission title and description
+            document.querySelector('.mission-title').textContent = '📋 Misión 3A: Identificar la Talla Más Vendida';
+            document.querySelector('.mission-description').innerHTML = `
+                <p><strong>🏢 Cliente: TrendyShop Analytics</strong></p>
+                <p style="margin-top: 10px;">
+                    Analiza las ventas de camisetas azules en diferentes tiendas.
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>Tu tarea:</strong> Identifica la <strong>talla MÁS VENDIDA</strong>
+                    (la que aparece en más tiendas).
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">
+                    💡 Pista: No sumes las unidades, cuenta la <strong>frecuencia</strong>
+                    (cuántas veces aparece cada talla).
+                </p>
+            `;
+
+            // Update hints
+            document.querySelector('.hints').innerHTML = `
+                <div class="hint-title">💡 Recuerda:</div>
+                <p><strong>Moda</strong> = Valor que aparece MÁS VECES</p>
+                <p style="margin-top: 10px;">
+                    No sumes las unidades, cuenta cuántas veces aparece cada talla.
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">
+                    Usa el panel de <strong>📊 Ayuda</strong> para ver las frecuencias →
+                </p>
+            `;
+
+            // Update UI
+            document.getElementById('playerName').textContent = gameState.playerName;
+            document.getElementById('playerLevel').textContent = gameState.level;
+            updateXPBar();
+
+            // Load frequency chart for Mission 3A
+            loadFrequencyChartMission3A();
+            updateHelperMission3A();
+
+            // Change input to text (for talla)
+            const answerInput = document.getElementById('answerInput');
+            answerInput.type = 'text';
+            answerInput.value = '';
+            answerInput.placeholder = 'Ingresa la talla (ej: M)';
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('submitBtn').disabled = false;
+
+            // Save game
+            saveGame();
+        }
+
+        /**
+         * Cargar gráfico de frecuencias para Misión 3A
+         */
+        function loadFrequencyChartMission3A() {
+            // Calculate frequencies
+            const frequencies = {};
+            const totalUnits = {};
+
+            mision3A_ventas.forEach(item => {
+                frequencies[item.talla] = (frequencies[item.talla] || 0) + 1;
+                totalUnits[item.talla] = (totalUnits[item.talla] || 0) + item.cantidad;
+            });
+
+            // Find max frequency for scaling
+            const maxFreq = Math.max(...Object.values(totalUnits));
+
+            // Create chart HTML
+            const chartHTML = Object.entries(totalUnits)
+                .sort((a, b) => b[1] - a[1])
+                .map(([talla, units]) => {
+                    const percentage = (units / maxFreq) * 100;
+                    const freq = frequencies[talla];
+                    const isModa = freq === Math.max(...Object.values(frequencies));
+
+                    return `
+                        <div class="bar-container">
+                            <div class="bar ${isModa ? 'moda-highlight' : ''}"
+                                 style="height: ${percentage}%">
+                                <span class="bar-value">${units} u.</span>
+                            </div>
+                            <span class="bar-label">${talla}<br>(${freq} ${freq > 1 ? 'tiendas' : 'tienda'})</span>
+                        </div>
+                    `;
+                }).join('');
+
+            document.getElementById('barChart').innerHTML = chartHTML;
+
+            // Load data items
+            const itemsHTML = mision3A_ventas.map((item, index) => `
+                <div class="data-item">
+                    <span class="data-label">Tienda ${index + 1}:</span>
+                    <span class="data-value">Talla ${item.talla} - ${item.cantidad} unidades</span>
+                </div>
+            `).join('');
+
+            document.getElementById('dataItems').innerHTML = itemsHTML;
+        }
+
+        /**
+         * Actualizar panel de ayuda para Misión 3A
+         */
+        function updateHelperMission3A() {
+            // Calculate frequencies
+            const frequencies = {};
+            mision3A_ventas.forEach(item => {
+                frequencies[item.talla] = (frequencies[item.talla] || 0) + 1;
+            });
+
+            const totalUnits = {};
+            mision3A_ventas.forEach(item => {
+                totalUnits[item.talla] = (totalUnits[item.talla] || 0) + item.cantidad;
+            });
+
+            const maxFreq = Math.max(...Object.values(frequencies));
+
+            document.getElementById('helperTab').innerHTML = `
+                <div class="stats-helper">
+                    <h3 style="margin-bottom: 15px;">📊 Ayuda Estadística</h3>
+
+                    <div class="helper-item">
+                        <div class="helper-label">Total de tiendas:</div>
+                        <div class="helper-value">${mision3A_ventas.length}</div>
+                    </div>
+
+                    <div class="helper-item">
+                        <div class="helper-label">Tallas diferentes:</div>
+                        <div class="helper-value">${Object.keys(frequencies).length}</div>
+                    </div>
+
+                    <div class="helper-item" style="background: rgba(255, 215, 0, 0.1); border: 2px solid #ffd700;">
+                        <div class="helper-label">⭐ Frecuencias (tiendas) - ESTO ES LO QUE BUSCAS:</div>
+                        <div style="margin-top: 10px;">
+                            ${Object.entries(frequencies)
+                    .sort((a, b) => b[1] - a[1])
+                    .map(([talla, freq]) => {
+                        const highlight = freq === maxFreq ? 'style="color: #ffd700; font-weight: bold;"' : '';
+                        return `
+                                        <div style="margin-bottom: 5px;" ${highlight}>
+                                            ${talla}: ${freq} ${freq > 1 ? 'tiendas' : 'tienda'}
+                                        </div>
+                                    `;
+                    }).join('')}
+                        </div>
+                    </div>
+
+                    <div class="helper-item" style="opacity: 0.7;">
+                        <div class="helper-label">ℹ️ Total unidades por talla (solo referencia):</div>
+                        <div style="margin-top: 10px;">
+                            ${Object.entries(totalUnits)
+                    .sort((a, b) => b[1] - a[1])
+                    .map(([talla, units]) => `
+                                    <div style="margin-bottom: 5px;">
+                                        ${talla}: ${units} unidades
+                                    </div>
+                                `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="helper-item" style="background: rgba(255, 215, 0, 0.2); border: 2px solid #ffd700;">
+                        <div class="helper-label">💡 Recuerda:</div>
+                        <div style="margin-top: 10px; font-size: 0.95rem;">
+                            La <strong>moda</strong> es el valor que aparece
+                            <strong>MÁS VECES</strong>.
+                            <br><br>
+                            Busca la talla con mayor <strong>frecuencia</strong>
+                            (no la que tiene más unidades totales).
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /**
+         * Iniciar Misión 3B: Distribución Bimodal
+         */
+        function startMission3B() {
+            // Hide story, show game
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('storyScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+
+            // Set mission data
+            gameState.currentMissionData = mision3B_ventas;
+            gameState.currentMissionType = 'mission_3b';
+
+            // Update mission title and description
+            document.querySelector('.mission-title').textContent = '📋 Misión 3B: Distribución Bimodal (Avanzado)';
+            document.querySelector('.mission-description').innerHTML = `
+                <p><strong>🏢 Cliente: TrendyShop Analytics (Zona Premium)</strong></p>
+                <p style="margin-top: 10px;">
+                    Analiza las ventas de 7 tiendas en zona premium. Cada tienda reporta
+                    su talla más vendida.
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>Tu tarea:</strong> Identifica la(s) <strong>talla(s) MÁS FRECUENTE(s)</strong>.
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">
+                    ⚠️ <strong>Importante:</strong> Si hay DOS tallas con la misma frecuencia máxima,
+                    debes reportar AMBAS separadas por coma (ej: "M,L").
+                </p>
+            `;
+
+            // Update hints
+            document.querySelector('.hints').innerHTML = `
+                <div class="hint-title">💡 Recuerda:</div>
+                <p><strong>Distribución Bimodal</strong> = DOS modas con igual frecuencia</p>
+                <p style="margin-top: 10px;">
+                    Cuenta cuántas tiendas tienen cada talla como la más vendida.
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">
+                    Si dos tallas aparecen el mismo número de veces, ambas son modas.
+                </p>
+            `;
+
+            // Update UI
+            document.getElementById('playerName').textContent = gameState.playerName;
+            document.getElementById('playerLevel').textContent = gameState.level;
+            updateXPBar();
+
+            // Load frequency chart for Mission 3B
+            loadFrequencyChartMission3B();
+            updateHelperMission3B();
+
+            // Change input to text (for tallas)
+            const answerInput = document.getElementById('answerInput');
+            answerInput.type = 'text';
+            answerInput.value = '';
+            answerInput.placeholder = 'Ingresa la(s) talla(s) (ej: M,L)';
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('submitBtn').disabled = false;
+
+            // Save game
+            saveGame();
+        }
+
+        /**
+         * Cargar gráfico de frecuencias para Misión 3B
+         */
+        function loadFrequencyChartMission3B() {
+            // Calculate frequencies
+            const frequencies = {};
+            const totalUnits = {};
+
+            mision3B_ventas.forEach(item => {
+                frequencies[item.talla_mas_vendida] = (frequencies[item.talla_mas_vendida] || 0) + 1;
+                totalUnits[item.talla_mas_vendida] = (totalUnits[item.talla_mas_vendida] || 0) + item.unidades;
+            });
+
+            // Find max frequency
+            const maxFreq = Math.max(...Object.values(frequencies));
+
+            // Create chart HTML (frequency-based, not units)
+            const chartHTML = Object.entries(frequencies)
+                .sort((a, b) => b[1] - a[1])
+                .map(([talla, freq]) => {
+                    const percentage = (freq / maxFreq) * 100;
+                    const isModa = freq === maxFreq;
+
+                    return `
+                        <div class="bar-container">
+                            <div class="bar ${isModa ? 'moda-highlight' : ''}"
+                                 style="height: ${percentage}%">
+                                <span class="bar-value">${freq} tiendas</span>
+                            </div>
+                            <span class="bar-label">${talla}</span>
+                        </div>
+                    `;
+                }).join('');
+
+            document.getElementById('barChart').innerHTML = chartHTML;
+
+            // Load data items
+            const itemsHTML = mision3B_ventas.map((item, index) => `
+                <div class="data-item">
+                    <span class="data-label">${item.tienda}:</span>
+                    <span class="data-value">Talla ${item.talla_mas_vendida} (${item.unidades} unidades)</span>
+                </div>
+            `).join('');
+
+            document.getElementById('dataItems').innerHTML = itemsHTML;
+        }
+
+        /**
+         * Actualizar panel de ayuda para Misión 3B
+         */
+        function updateHelperMission3B() {
+            // Calculate frequencies
+            const frequencies = {};
+            mision3B_ventas.forEach(item => {
+                frequencies[item.talla_mas_vendida] = (frequencies[item.talla_mas_vendida] || 0) + 1;
+            });
+
+            const totalUnits = {};
+            mision3B_ventas.forEach(item => {
+                totalUnits[item.talla_mas_vendida] = (totalUnits[item.talla_mas_vendida] || 0) + item.unidades;
+            });
+
+            const maxFreq = Math.max(...Object.values(frequencies));
+
+            document.getElementById('helperTab').innerHTML = `
+                <div class="stats-helper">
+                    <h3 style="margin-bottom: 15px;">📊 Ayuda Estadística</h3>
+
+                    <div class="helper-item">
+                        <div class="helper-label">Total de tiendas:</div>
+                        <div class="helper-value">${mision3B_ventas.length}</div>
+                    </div>
+
+                    <div class="helper-item">
+                        <div class="helper-label">Tallas diferentes:</div>
+                        <div class="helper-value">${Object.keys(frequencies).length}</div>
+                    </div>
+
+                    <div class="helper-item">
+                        <div class="helper-label">Tabla de Frecuencias:</div>
+                        <table style="width: 100%; margin-top: 10px; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: rgba(255,255,255,0.1);">
+                                    <th style="padding: 5px; text-align: left;">Talla</th>
+                                    <th style="padding: 5px; text-align: center;">Frecuencia</th>
+                                    <th style="padding: 5px; text-align: right;">Unidades</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${Object.entries(frequencies)
+                    .sort((a, b) => b[1] - a[1])
+                    .map(([talla, freq]) => {
+                        const isModa = freq === maxFreq;
+                        const style = isModa ? 'background: rgba(255,215,0,0.2); border-left: 3px solid #ffd700;' : '';
+                        return `
+                                            <tr style="${style}">
+                                                <td style="padding: 5px;">${isModa ? '⭐ ' : ''}${talla}</td>
+                                                <td style="padding: 5px; text-align: center;">${freq} tiendas</td>
+                                                <td style="padding: 5px; text-align: right;">${totalUnits[talla]} u.</td>
+                                            </tr>
+                                        `;
+                    }).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="helper-item" style="background: rgba(255, 215, 0, 0.2); border: 2px solid #ffd700;">
+                        <div class="helper-label">💡 Recuerda:</div>
+                        <div style="margin-top: 10px; font-size: 0.95rem;">
+                            Si <strong>DOS tallas</strong> tienen la misma frecuencia máxima,
+                            ambas son <strong>MODAS</strong> (distribución bimodal).
+                            <br><br>
+                            Formato de respuesta: "M,L" o "L,M"
+                        </div>
+                    </div>
+                </div>
+            `;
         }
     </script>
 </body>
