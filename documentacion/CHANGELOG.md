@@ -10,6 +10,115 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 ## [Unreleased]
 
 ### Added
+- **JAR-180: Misión 2 del Juego - Mediana con Outliers** (2025-10-19):
+  - ✅ **Misión 2A (Básica)**: Outliers evidentes, introducción a mediana
+    - Tutorial integrado sobre qué es la mediana y por qué es mejor que la media con outliers
+    - Dataset con outlier evidente (500€ en ventas de ~55€)
+    - Outliers destacados en rojo en visualización
+    - Comparación automática media vs mediana en el feedback
+    - Narrativa continuada con RestaurantData Co.
+    - +75 XP al completar
+  - ✅ **Misión 2B (Compleja)**: Outliers sutiles, regla IQR
+    - Dataset más complejo (9 sucursales, zona premium)
+    - Detección automática de outliers usando regla IQR (Interquartile Range)
+    - Tutorial integrado sobre la regla IQR
+    - Outliers sutiles marcados en rojo
+    - Análisis de decisiones de negocio en el feedback
+    - +125 XP al completar
+  - **Sistema de progresión**: Misión 1 → 2A → 2B (desbloqueo secuencial)
+  - **Funciones auxiliares**:
+    - `calcularMediana(datos)`: Calcula mediana con soporte para cantidad par/impar
+    - `detectarOutliersIQR(datos)`: Detecta outliers usando regla IQR
+    - `loadDataItems()` y `loadBarChart()`: Actualizadas para destacar outliers en rojo
+  - **Escenas de tutorial**: 3 nuevas escenas (5, 6, 7) con explicaciones pedagógicas
+  - **Validación específica por misión**: Feedback personalizado para cada nivel
+  - **Total XP disponible**: 300 XP (100 + 75 + 125)
+  - **Archivos modificados**:
+    - `documentacion/juego/game.html` (~1850 líneas, +400 líneas añadidas)
+    - `documentacion/juego/README_JUEGO_WEB.md` (actualizado roadmap)
+  - **Beneficios pedagógicos**:
+    - ✅ Aprendizaje progresivo de mediana (básico → avanzado)
+    - ✅ Comprensión visual de outliers
+    - ✅ Comparación práctica media vs mediana
+    - ✅ Introducción a métodos estadísticos (regla IQR)
+    - ✅ Conexión con decisiones de negocio reales
+  - **Revisión pedagógica** (2025-10-19):
+    - ✅ **Calificación**: 9.2/10 por Psicólogo Educativo (Equipo Teaching)
+    - ✅ **Veredicto**: APROBADO PARA PRODUCCIÓN
+    - ✅ **Fortalezas**: Progresión lógica impecable, explicaciones claras, implementación técnica correcta
+    - ✅ **Conceptos validados**: Mediana, outliers, regla IQR, media vs mediana
+    - ✅ **Cumplimiento de estándares**: Bloom's Taxonomy, Zona de Desarrollo Próximo, Aprendizaje Significativo
+    - 🟡 **Mejoras opcionales identificadas**: 5 mejoras sugeridas para futuras iteraciones (no bloquean producción)
+    - 📄 **Reporte completo**: `documentacion/juego/REVISION_PEDAGOGICA_MISION_2.md`
+  - **Mejoras pedagógicas implementadas** (2025-10-19):
+    - ✅ **Mejora 1**: Comentarios explicativos sobre cálculo de percentiles en `detectarOutliersIQR()`
+    - ✅ **Mejora 2**: Aclaración de inconsistencia de métodos (2A usa heurística simple, 2B usa IQR)
+    - ✅ **Mejora 3**: Clarificación de que mediana incluye outliers (no los excluye)
+    - ✅ **Mejora 4**: Nota sobre tolerancia ±0.5€ en panel de ayuda
+  - **Mejoras UX/UI implementadas** (2025-10-19):
+    - ✅ **Accesibilidad**: Etiquetas ARIA añadidas (role="alert", aria-live, aria-label)
+    - ✅ **Navegación por teclado**: Estilos :focus y :focus-visible para Tab navigation
+    - ✅ **Feedback visual**: Outline dorado (#ffd700) al navegar con teclado
+    - ✅ **Calificación UX/UI**: 9.0/10 por Especialista UX/UI (Equipo Game Design)
+    - 📄 **Reporte completo**: `documentacion/juego/REVISION_UX_UI_GAME.md`
+
+- **JAR-185: Módulo 1 - Tema 1 - Ejercicios Prácticos de Estadística** (2025-10-19):
+  - ✅ **COMPLETADO**: Archivo `03-EJERCICIOS.md` creado con 15 ejercicios prácticos
+  - **Estructura pedagógica**:
+    - 3 niveles de dificultad progresiva (Básico → Intermedio → Avanzado)
+    - 5 ejercicios por nivel
+    - Soluciones detalladas al final con código Python
+  - **Ejercicios Básicos (1-5)**:
+    - Ejercicio 1: Calcular media de ventas diarias
+    - Ejercicio 2: Calcular mediana de salarios (con outlier)
+    - Ejercicio 3: Identificar moda en ventas de productos
+    - Ejercicio 4: Comparar media vs mediana para detectar outliers
+    - Ejercicio 5: Interpretar medidas de tendencia central
+  - **Ejercicios Intermedios (6-10)**:
+    - Ejercicio 6: Calcular varianza y desviación estándar
+    - Ejercicio 7: Comparar estabilidad de procesos
+    - Ejercicio 8: Calcular percentiles (P25, P50, P75, P95)
+    - Ejercicio 9: Análisis estadístico completo
+    - Ejercicio 10: Detectar outliers con desviación estándar
+  - **Ejercicios Avanzados (11-15)**:
+    - Ejercicio 11: Cumplimiento de SLA usando percentiles
+    - Ejercicio 12: Comparar rendimiento de dos equipos
+    - Ejercicio 13: Decidir qué métrica usar (media vs mediana)
+    - Ejercicio 14: Caso integrador - análisis de ventas mensuales
+    - Ejercicio 15: Decisiones de negocio basadas en estadísticas (ROI)
+  - **Características**:
+    - Contextos empresariales realistas y variados (8 contextos diferentes)
+    - Ejercicios de interpretación, no solo cálculo
+    - Soluciones con cálculo manual + código Python
+    - Interpretación de resultados para toma de decisiones
+    - Tabla de autoevaluación para tracking de progreso
+    - ~1,535 líneas de contenido educativo
+  - **Contextos utilizados**:
+    - 🏪 Tiendas de electrónica y retail
+    - 💼 Recursos humanos y salarios
+    - 📦 Inventario y logística
+    - 🎵 Plataformas de streaming
+    - 🏭 Control de calidad industrial
+    - 🚀 APIs y rendimiento de sistemas
+    - 💰 E-commerce y análisis de pedidos
+    - 🏦 Detección de fraude bancario
+    - ☎️ Call centers y operaciones
+    - 🏠 Mercado inmobiliario
+    - ☕ Cafeterías y restaurantes
+    - 📱 Aplicaciones móviles y ROI
+  - **Integración con el tema**:
+    - Alineado con `01-TEORIA.md` (conceptos teóricos)
+    - Complementa `02-EJEMPLOS.md` (ejemplos trabajados)
+    - Preparación para `04-proyecto-practico/` (implementación)
+  - **Beneficios pedagógicos**:
+    - ✅ Dificultad progresiva sin saltos conceptuales
+    - ✅ Práctica de todos los conceptos del tema
+    - ✅ Desarrollo de pensamiento analítico
+    - ✅ Conexión con casos de negocio reales
+    - ✅ Preparación para trabajo como Data Engineer
+  - **Duración estimada**: 3-4 horas (todos los ejercicios)
+  - **Próximo paso**: Módulo 1, Tema 2 - Procesamiento de CSV
+
 - **Quality Check - Suite de Calidad Completa** (2025-10-19):
   - ✅ Ejecutada suite completa de calidad en todos los módulos del Tema de Fundamentos
   - **Herramientas utilizadas**:
