@@ -101,122 +101,151 @@
             border-left: 4px solid #ffd700;
         }
 
-        /* Estilos para Misión 4: Percentiles y Cuartiles */
-        .quartile-line {
-            stroke: #ffd700;
-            stroke-width: 3px;
-            stroke-dasharray: 5, 5;
-            animation: pulse-gold-line 2s infinite;
+        /* ========================================
+           MISIÓN 5: VARIANZA Y DESVIACIÓN ESTÁNDAR
+           ======================================== */
+
+        /* Gráficos de dispersión (Misión 5A) */
+        .scatter-plots {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
         }
 
-        @keyframes pulse-gold-line {
-
-            0%,
-            100% {
-                opacity: 1;
-                stroke-width: 3px;
-            }
-
-            50% {
-                opacity: 0.7;
-                stroke-width: 4px;
-            }
+        .scatter-plot {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
         }
 
-        /* Zonas de boxplot */
-        .zone-q1 {
-            fill: rgba(0, 255, 0, 0.1);
-            transition: fill 0.3s ease;
+        .scatter-plot h4 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #fff;
+            font-size: 1.1rem;
         }
 
-        .zone-q1:hover {
-            fill: rgba(0, 255, 0, 0.2);
+        .plot-area {
+            position: relative;
+            height: 300px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            border-left: 2px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
         }
 
-        .zone-q2 {
-            fill: rgba(255, 255, 0, 0.1);
-            transition: fill 0.3s ease;
-        }
-
-        .zone-q2:hover {
-            fill: rgba(255, 255, 0, 0.2);
-        }
-
-        .zone-q3 {
-            fill: rgba(255, 165, 0, 0.1);
-            transition: fill 0.3s ease;
-        }
-
-        .zone-q3:hover {
-            fill: rgba(255, 165, 0, 0.2);
-        }
-
-        .zone-q4 {
-            fill: rgba(255, 0, 0, 0.1);
-            transition: fill 0.3s ease;
-        }
-
-        .zone-q4:hover {
-            fill: rgba(255, 0, 0, 0.2);
-        }
-
-        /* Timeline point */
-        .timeline-point {
-            fill: #00c6ff;
-            r: 6;
+        .scatter-point {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #00ff88;
+            border-radius: 50%;
+            transform: translate(-50%, 50%);
+            cursor: pointer;
             transition: all 0.3s ease;
-            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
         }
 
-        .timeline-point:hover {
-            r: 8;
-            fill: #ffd700;
+        .scatter-point.orange {
+            background: #ff9500;
+            box-shadow: 0 0 10px rgba(255, 149, 0, 0.5);
         }
 
-        /* Boxplot elements */
-        .boxplot-box {
-            fill: rgba(255, 255, 255, 0.2);
-            stroke: #ffd700;
-            stroke-width: 2px;
+        .scatter-point:hover {
+            transform: translate(-50%, 50%) scale(1.5);
         }
 
-        .boxplot-median {
-            stroke: #ffd700;
-            stroke-width: 4px;
+        .scatter-point:hover .point-label {
+            display: block;
         }
 
-        .boxplot-whisker {
-            stroke: #fff;
-            stroke-width: 2px;
+        .point-label {
+            display: none;
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            white-space: nowrap;
         }
 
-        /* Outlier point */
-        .outlier-point {
-            fill: #ff4444;
-            r: 8;
-            animation: pulse-red 2s infinite;
-            cursor: pointer;
+        .mean-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.5);
+            border-top: 2px dashed rgba(255, 255, 255, 0.7);
         }
 
-        @keyframes pulse-red {
+        .mean-line span {
+            position: absolute;
+            right: 10px;
+            top: -20px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+        }
 
-            0%,
-            100% {
-                opacity: 1;
+        /* Campana gaussiana (Misión 5B) */
+        .gaussian-chart {
+            position: relative;
+            height: 300px;
+            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .gaussian-curve {
+            position: relative;
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .gaussian-bar {
+            width: 3%;
+            background: linear-gradient(to top, #00ff88, transparent);
+            margin: 0 1px;
+            transition: all 0.3s ease;
+        }
+
+        .gaussian-bar.shaded {
+            background: linear-gradient(to top, rgba(0, 255, 136, 0.5), transparent);
+        }
+
+        .gaussian-axis {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding: 0 2rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .gaussian-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        /* Responsive para Misión 5 */
+        @media (max-width: 768px) {
+            .scatter-plots {
+                grid-template-columns: 1fr;
             }
-
-            50% {
-                opacity: 0.6;
-            }
-        }
-
-        /* Zonas de timeline */
-        .zone-above-q2 {
-            fill: rgba(255, 0, 0, 0.1);
-        }
-
-        .zone-below-q2 {
-            fill: rgba(0, 255, 0, 0.1);
         }
 
         .game-subtitle {
@@ -1401,87 +1430,152 @@
                 </div>
             </div>
 
-            <!-- Escena 10: Tutorial de Percentiles -->
+            <!-- Scene 10: Tutorial de Dispersión (antes de Misión 5A) -->
             <div class="story-scene" id="scene10">
-                <h2 style="font-size: 2rem; margin-bottom: 30px;">📊 Percentiles y Cuartiles</h2>
+                <h2 style="font-size: 2rem; margin-bottom: 30px;">📊 Entendiendo la Dispersión</h2>
 
                 <div class="dialogue">
-                    <strong>María:</strong> "¡Excelente trabajo con TrendyShop, <span id="playerNameScene10"></span>!
-                    Tu análisis de las tallas más vendidas les ayudó a optimizar su inventario."
+                    <strong>Laura Martínez (Gerente de Calidad - QualityControl Systems):</strong>
+                    "¡Bienvenido/a! Soy Laura, y necesito tu ayuda urgente..."
                     <br><br>
-                    <strong>Tú:</strong> "Gracias, María. ¿Cuál es el siguiente desafío?"
-                    <br><br>
-                    <strong>María:</strong> "Tenemos un nuevo cliente: <strong>PerformanceAPI Analytics</strong>.
-                    Monitorean APIs y necesitan establecer SLAs realistas."
-                    <br><br>
-                    <strong>Tú:</strong> "¿SLAs?"
-                    <br><br>
-                    <strong>María:</strong> "Service Level Agreements. Promesas de tiempo de respuesta.
-                    Por ejemplo: 'Tu API responderá en menos de 150 ms el 95% del tiempo'."
-                    <br><br>
-                    "Para establecer SLAs, usaremos <strong>PERCENTILES</strong>."
+                    "Tenemos dos máquinas de producción. Ambas producen piezas con una
+                    <strong>media de 50mm</strong>, pero una es confiable y la otra no.
+                    ¿Cómo es posible?"
                 </div>
 
                 <div class="tutorial-box">
-                    <div class="tutorial-title">🎯 ¿Qué son los percentiles?</div>
+                    <div class="tutorial-title">🎯 ¿Por qué la media NO es suficiente?</div>
                     <div class="tutorial-content">
-                        Imagina que ordenas <strong>100 estudiantes</strong> por nota (de menor a mayor):
-                        <ul style="margin-top: 10px; margin-left: 20px;">
-                            <li>El <strong>percentil 25 (P25)</strong> es la nota del estudiante #25</li>
-                            <li>El <strong>percentil 50 (P50)</strong> es la nota del estudiante #50</li>
-                            <li>El <strong>percentil 75 (P75)</strong> es la nota del estudiante #75</li>
-                        </ul>
-                        <br>
-                        <strong>💡 Interpretación:</strong>
-                        <ul style="margin-top: 10px; margin-left: 20px;">
-                            <li><strong>P25</strong> → El 25% de estudiantes tiene esa nota o menos</li>
-                            <li><strong>P50</strong> → El 50% de estudiantes tiene esa nota o menos</li>
-                            <li><strong>P75</strong> → El 75% de estudiantes tiene esa nota o menos</li>
-                        </ul>
-                        <br>
-                        <strong style="color: #32cd32;">¿Y sabes qué? ¡Ya conoces uno!</strong>
+                        La <strong>media</strong> te dice el valor central, pero NO te dice
+                        <strong>qué tan esparcidos</strong> están los datos.
                         <br><br>
-                        <strong style="font-size: 1.2rem; color: #ffd700;">P50 = MEDIANA</strong>
-                        (¡la aprendiste en la Misión 2!)
+                        <strong>Ejemplo:</strong>
+                        <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                            <strong>Máquina A (Estable):</strong> 50, 51, 49, 50, 50, 51, 49<br>
+                            → Media = 50mm, Dispersión = <strong>BAJA</strong> ✅
+                            <br><br>
+                            <strong>Máquina B (Variable):</strong> 35, 55, 60, 40, 65, 45, 50<br>
+                            → Media = 50mm, Dispersión = <strong>ALTA</strong> ❌
+                        </div>
+                        <strong>¿Cuál preferirías para producción?</strong>
+                        <br><br>
+                        La Máquina A es <strong>confiable</strong> (valores cercanos a la media).
+                        <br>
+                        La Máquina B es <strong>impredecible</strong> (valores muy dispersos).
                     </div>
                 </div>
 
                 <div class="tutorial-box">
-                    <div class="tutorial-title">📊 Cuartiles = Percentiles especiales</div>
+                    <div class="tutorial-title">📐 Desviación Estándar: La Medida de Dispersión</div>
                     <div class="tutorial-content">
-                        Los cuartiles dividen los datos en <strong>4 partes iguales</strong> (25% cada una):
+                        La <strong>desviación estándar (σ)</strong> mide qué tan esparcidos
+                        están los datos respecto a la media.
+                        <br><br>
+                        <strong>Fórmula:</strong>
+                        <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; margin: 15px 0; font-family: monospace;">
+                            σ = √[ Σ(x - μ)² / N ]
+                        </div>
+                        <strong>Interpretación:</strong>
                         <ul style="margin-top: 10px; margin-left: 20px;">
-                            <li><strong>Q1 = P25</strong> (primer cuartil)</li>
-                            <li><strong>Q2 = P50</strong> (segundo cuartil = mediana)</li>
-                            <li><strong>Q3 = P75</strong> (tercer cuartil)</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="tutorial-box">
-                    <div class="tutorial-title">🚀 ¿Por qué son útiles en APIs?</div>
-                    <div class="tutorial-content">
-                        <ul style="margin-left: 20px;">
-                            <li><strong>P50 (mediana)</strong>: Tiempo de respuesta típico</li>
-                            <li><strong>P95</strong>: Tiempo que el 95% de requests cumple</li>
-                            <li><strong>P99</strong>: Tiempo que el 99% de requests cumple</li>
+                            <li>✅ <strong>σ baja</strong> → Datos cercanos a la media (confiable)</li>
+                            <li>❌ <strong>σ alta</strong> → Datos dispersos (impredecible)</li>
                         </ul>
                         <br>
-                        <strong style="color: #ffd700;">Importante:</strong> Los SLAs suelen basarse en
-                        <strong>P95 o P99</strong>, no en la media, porque la media se ve muy afectada
-                        por outliers.
+                        <strong style="color: #32cd32;">En control de calidad:</strong>
+                        Una desviación baja significa <strong>producción consistente</strong>.
                     </div>
                 </div>
 
                 <div class="dialogue">
-                    <strong>María:</strong> "¿Listo/a para tu primera misión con percentiles?"
+                    <strong>María González (tu mentora):</strong>
+                    "Perfecto. Ahora vas a calcular la desviación estándar de ambas máquinas
+                    y descubrir cuál es más confiable. ¡Adelante!"
                 </div>
 
                 <div class="story-actions">
                     <button class="story-btn" onclick="nextScene(9)">⬅️ Atrás</button>
                     <div style="display: flex; gap: 15px; align-items: center;">
                         <div class="keyboard-hint">⌨️ <span class="key-indicator">Enter</span></div>
-                        <button class="story-btn primary" onclick="startMission4A()">🚀 ¡VAMOS!</button>
+                        <button class="story-btn primary" onclick="startMission5A()">🚀 ¡EMPEZAR MISIÓN 5A!</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scene 11: Tutorial N vs N-1 (antes de Misión 5B) -->
+            <div class="story-scene" id="scene11">
+                <h2 style="font-size: 2rem; margin-bottom: 30px;">🔬 Varianza Poblacional vs Muestral</h2>
+
+                <div class="dialogue">
+                    <strong>Laura:</strong> "¡Excelente trabajo! Ahora viene algo más avanzado..."
+                    <br><br>
+                    "Cuando trabajas con datos, hay una diferencia crítica entre
+                    analizar la <strong>población completa</strong> o solo una <strong>muestra</strong>."
+                </div>
+
+                <div class="tutorial-box">
+                    <div class="tutorial-title">📊 Población vs Muestra</div>
+                    <div class="tutorial-content">
+                        <strong>Población:</strong> TODOS los datos disponibles (N elementos)
+                        <br>
+                        <strong>Muestra:</strong> Un SUBCONJUNTO de la población (n elementos)
+                        <br><br>
+                        <strong>Ejemplo:</strong>
+                        <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                            <strong>Población:</strong> Todas las piezas producidas hoy (N=1000)<br>
+                            <strong>Muestra:</strong> 5 piezas seleccionadas al azar (n=5)
+                        </div>
+                        <strong style="color: #ff9500;">Problema:</strong>
+                        Una muestra tiende a <strong>subestimar</strong> la variabilidad real
+                        de la población.
+                    </div>
+                </div>
+
+                <div class="tutorial-box">
+                    <div class="tutorial-title">🧮 Corrección de Bessel: ¿Por qué N-1?</div>
+                    <div class="tutorial-content">
+                        Para compensar el sesgo de la muestra, usamos <strong>N-1</strong>
+                        en lugar de N al calcular la varianza muestral.
+                        <br><br>
+                        <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                            <thead>
+                                <tr style="background: rgba(0,0,0,0.3);">
+                                    <th style="padding: 10px; border: 1px solid rgba(255,255,255,0.2);">Tipo</th>
+                                    <th style="padding: 10px; border: 1px solid rgba(255,255,255,0.2);">Fórmula</th>
+                                    <th style="padding: 10px; border: 1px solid rgba(255,255,255,0.2);">Cuándo usar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2);"><strong>Poblacional</strong></td>
+                                    <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); font-family: monospace;">σ² = Σ(x-μ)² / N</td>
+                                    <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2);">Tienes TODOS los datos</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2);"><strong>Muestral</strong></td>
+                                    <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); font-family: monospace;">s² = Σ(x-x̄)² / (n-1)</td>
+                                    <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2);">Solo tienes una MUESTRA</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <strong style="color: #32cd32;">Regla práctica:</strong>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>✅ Si analizas una <strong>muestra</strong> → Usa <strong>N-1</strong></li>
+                            <li>✅ Si analizas la <strong>población completa</strong> → Usa <strong>N</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <strong>María:</strong>
+                    "En la siguiente misión, trabajarás con una MUESTRA de tiempos de respuesta.
+                    Recuerda usar N-1 para calcular la varianza correctamente. ¡Adelante!"
+                </div>
+
+                <div class="story-actions">
+                    <button class="story-btn" onclick="nextScene(10)">⬅️ Atrás</button>
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <div class="keyboard-hint">⌨️ <span class="key-indicator">Enter</span></div>
+                        <button class="story-btn primary" onclick="startMission5B()">🚀 ¡EMPEZAR MISIÓN 5B!</button>
                     </div>
                 </div>
             </div>
@@ -2158,10 +2252,6 @@
                 checkAnswerMission2A(answer, feedback);
             } else if (missionType === 'mission_2b') {
                 checkAnswerMission2B(answer, feedback);
-            } else if (missionType === 'mission_4a') {
-                checkAnswerMission4A(answer, feedback);
-            } else if (missionType === 'mission_4b') {
-                checkAnswerMission4B(answer, feedback);
             }
         }
 
@@ -2510,16 +2600,18 @@
             } else if (completedMissions.includes('mission_3a') && !completedMissions.includes('mission_3b')) {
                 // Ir a Misión 3B directamente (ya vio el tutorial)
                 startMission3B();
-            } else if (completedMissions.includes('mission_3b') && !completedMissions.includes('mission_4a')) {
-                // Ir a tutorial de Misión 4 (Percentiles)
+            } else if (completedMissions.includes('mission_3b') && !completedMissions.includes('mission_5a')) {
+                // Ir a tutorial de Misión 5
                 document.getElementById('gameScreen').style.display = 'none';
                 document.getElementById('storyScreen').style.display = 'block';
                 showScene(10);
-            } else if (completedMissions.includes('mission_4a') && !completedMissions.includes('mission_4b')) {
-                // Ir a Misión 4B directamente (ya vio el tutorial)
-                startMission4B();
+            } else if (completedMissions.includes('mission_5a') && !completedMissions.includes('mission_5b')) {
+                // Ir a tutorial de Misión 5B
+                document.getElementById('gameScreen').style.display = 'none';
+                document.getElementById('storyScreen').style.display = 'block';
+                showScene(11);
             } else {
-                alert('🎮 ¡Próximamente más misiones!\n\nHas completado las misiones disponibles.\n\nMaría: "¡Increíble progreso! Pronto aprenderás sobre varianza, desviación estándar y más."\n\n¡Hasta pronto! 🚀');
+                alert('🎮 ¡Próximamente más misiones!\n\nHas completado las misiones disponibles.\n\nMaría: "¡Increíble progreso! Pronto aprenderás sobre percentiles y más."\n\n¡Hasta pronto! 🚀');
             }
         }
 
@@ -3039,75 +3131,91 @@
             `;
         }
 
-        // ============================================
-        // MISIÓN 4: PERCENTILES Y CUARTILES
-        // ============================================
+        /* ========================================
+           MISIÓN 5: VARIANZA Y DESVIACIÓN ESTÁNDAR
+           ======================================== */
 
-        // Datos de Misión 4A: Tiempos de respuesta API (9 requests)
-        const tiempos_4A = [120, 145, 135, 150, 140, 160, 138, 142, 155];
+        // Datos de Misión 5A: Dos máquinas con misma media pero diferente dispersión
+        const mision5A_maquinas = {
+            maquinaA: [50, 51, 49, 50, 50, 51, 49],
+            maquinaB: [35, 55, 60, 40, 65, 45, 50]
+        };
 
-        // Datos de Misión 4B: Tiempos de respuesta API (13 requests - día completo)
-        const tiempos_4B = [95, 110, 125, 130, 140, 145, 150, 155, 160, 170, 185, 200, 250];
+        // Datos de Misión 5B: Muestra de tiempos de respuesta
+        const mision5B_tiempos = [47, 50, 48, 51, 49];
 
         /**
-         * Calcula los cuartiles Q1, Q2, Q3 de un array de datos
-         * Método simplificado educativo
+         * Calcular desviación estándar
+         * @param {Array<number>} datos - Array de números
+         * @param {boolean} muestral - Si es true, usa N-1 (muestral), si es false usa N (poblacional)
+         * @returns {number} - Desviación estándar
          */
-        function calcularCuartiles(datos) {
-            const sorted = [...datos].sort((a, b) => a - b);
-            const n = sorted.length;
-
-            // Q2 (mediana)
-            const q2 = calcularMediana(sorted);
-
-            // Q1 (mediana de la mitad inferior)
-            const mitadInferior = sorted.slice(0, Math.floor(n / 2));
-            const q1 = calcularMediana(mitadInferior);
-
-            // Q3 (mediana de la mitad superior)
-            const mitadSuperior = sorted.slice(Math.ceil(n / 2));
-            const q3 = calcularMediana(mitadSuperior);
-
-            return { q1, q2, q3 };
+        function calcularDesviacionEstandar(datos, muestral = false) {
+            const n = datos.length;
+            const media = datos.reduce((sum, val) => sum + val, 0) / n;
+            const sumaCuadrados = datos.reduce((sum, val) => sum + Math.pow(val - media, 2), 0);
+            const divisor = muestral ? (n - 1) : n;
+            const varianza = sumaCuadrados / divisor;
+            return Math.sqrt(varianza);
         }
 
         /**
-         * Inicia la Misión 4A: Percentil 50 (Mediana)
+         * Calcular varianza
+         * @param {Array<number>} datos - Array de números
+         * @param {boolean} muestral - Si es true, usa N-1 (muestral), si es false usa N (poblacional)
+         * @returns {number} - Varianza
          */
-        function startMission4A() {
+        function calcularVarianza(datos, muestral = false) {
+            const n = datos.length;
+            const media = datos.reduce((sum, val) => sum + val, 0) / n;
+            const sumaCuadrados = datos.reduce((sum, val) => sum + Math.pow(val - media, 2), 0);
+            const divisor = muestral ? (n - 1) : n;
+            return sumaCuadrados / divisor;
+        }
+
+        /**
+         * Iniciar Misión 5A: Desviación Estándar
+         */
+        function startMission5A() {
             // Hide story, show game
             document.getElementById('startScreen').style.display = 'none';
             document.getElementById('storyScreen').style.display = 'none';
             document.getElementById('gameScreen').style.display = 'block';
 
             // Set mission data
-            gameState.currentMissionData = tiempos_4A;
-            gameState.currentMissionType = 'mission_4a';
+            gameState.currentMissionData = mision5A_maquinas;
+            gameState.currentMissionType = 'mission_5a';
 
             // Update mission title and description
-            document.querySelector('.mission-title').textContent = '📊 Misión 4A: Percentil 50 (Básico)';
+            document.querySelector('.mission-title').textContent = '📋 Misión 5A: Desviación Estándar (Básico)';
             document.querySelector('.mission-description').innerHTML = `
-                <p><strong>🏢 Cliente: PerformanceAPI Analytics</strong></p>
+                <p><strong>🏢 Cliente: QualityControl Systems</strong></p>
                 <p style="margin-top: 10px;">
-                    La CEO Laura Martínez necesita analizar los tiempos de respuesta de su API principal.
+                    Tienes dos máquinas de producción. Ambas tienen una <strong>media de 50mm</strong>,
+                    pero una es más confiable que la otra.
                 </p>
                 <p style="margin-top: 10px;">
-                    <strong>Tu tarea:</strong> Calcula el <strong>percentil 50 (Q2)</strong> de los tiempos de respuesta.
+                    <strong>Tu tarea:</strong> Calcula la <strong>desviación estándar</strong> de AMBAS máquinas
+                    para determinar cuál es más confiable.
                 </p>
                 <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">
-                    💡 <strong>Recuerda:</strong> P50 = Q2 = MEDIANA (¡ya la conoces de la Misión 2!)
+                    💡 Responde con dos decimales (ej: 0.76)
                 </p>
             `;
 
             // Update hints
             document.querySelector('.hints').innerHTML = `
-                <div class="hint-title">💡 Recuerda:</div>
-                <p><strong>Q2 (P50)</strong> = Percentil 50 = Mediana</p>
+                <div class="hint-title">💡 Ayuda:</div>
+                <p><strong>Desviación Estándar</strong> mide qué tan dispersos están los datos</p>
                 <p style="margin-top: 10px;">
-                    Ordena los datos y encuentra el valor del medio.
+                    σ = √[ Σ(x - μ)² / N ]
                 </p>
                 <p style="margin-top: 10px; font-size: 0.9rem;">
-                    Con 9 valores, el del medio está en la posición 5.
+                    1. Calcula la media (μ)<br>
+                    2. Resta cada valor de la media y eleva al cuadrado<br>
+                    3. Suma todos los cuadrados<br>
+                    4. Divide entre N (cantidad de datos)<br>
+                    5. Saca la raíz cuadrada
                 </p>
             `;
 
@@ -3116,64 +3224,259 @@
             document.getElementById('playerLevel').textContent = gameState.level;
             updateXPBar();
 
-            // Load timeline chart for Mission 4A
-            loadTimelineChartMission4A();
-            updateHelperMission4A();
+            // Load scatter plot for Mission 5A
+            loadScatterPlotMission5A();
 
-            // Change input to number
-            const answerInput = document.getElementById('answerInput');
-            answerInput.type = 'number';
-            answerInput.value = '';
-            answerInput.placeholder = 'Ingresa el valor de Q2 en ms';
-            answerInput.step = '0.1';
-            document.getElementById('feedback').innerHTML = '';
-            document.getElementById('submitBtn').disabled = false;
+            // Update answer section for two questions
+            document.querySelector('.answer-section').innerHTML = `
+                <div class="answer-input-container">
+                    <label for="answerInput5A_A" style="display: block; margin-bottom: 10px; font-size: 1.1rem;">
+                        <strong>Paso 1:</strong> Desviación estándar de Máquina A:
+                    </label>
+                    <input type="number" id="answerInput5A_A" step="0.01" placeholder="Ej: 0.76"
+                           style="width: 100%; padding: 15px; font-size: 1.2rem; border-radius: 10px;
+                                  border: 2px solid rgba(255,255,255,0.3); background: rgba(0,0,0,0.3);
+                                  color: #fff; margin-bottom: 20px;">
 
-            // Update player name in scene 10
-            document.getElementById('playerNameScene10').textContent = gameState.playerName;
+                    <label for="answerInput5A_B" style="display: block; margin-bottom: 10px; font-size: 1.1rem;">
+                        <strong>Paso 2:</strong> Desviación estándar de Máquina B:
+                    </label>
+                    <input type="number" id="answerInput5A_B" step="0.01" placeholder="Ej: 10.00"
+                           style="width: 100%; padding: 15px; font-size: 1.2rem; border-radius: 10px;
+                                  border: 2px solid rgba(255,255,255,0.3); background: rgba(0,0,0,0.3);
+                                  color: #fff; margin-bottom: 20px;">
 
-            // Save game
-            saveGame();
+                    <button class="submit-btn" onclick="checkAnswerMission5A()">
+                        ✅ ENVIAR RESPUESTA
+                    </button>
+                </div>
+                <div class="feedback" id="feedback"></div>
+            `;
+
+            // Add keyboard listener for Enter key
+            document.getElementById('answerInput5A_A').addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('answerInput5A_B').focus();
+                }
+            });
+
+            document.getElementById('answerInput5A_B').addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    checkAnswerMission5A();
+                }
+            });
         }
 
         /**
-         * Inicia la Misión 4B: Cuartiles (Q1, Q2, Q3)
+         * Cargar gráfico de dispersión para Misión 5A
          */
-        function startMission4B() {
+        function loadScatterPlotMission5A() {
+            const maquinaA = mision5A_maquinas.maquinaA;
+            const maquinaB = mision5A_maquinas.maquinaB;
+
+            const mediaA = maquinaA.reduce((sum, val) => sum + val, 0) / maquinaA.length;
+            const mediaB = maquinaB.reduce((sum, val) => sum + val, 0) / maquinaB.length;
+
+            // Calcular posiciones para los puntos (escala de 0 a 100%)
+            const minVal = 30;
+            const maxVal = 70;
+            const range = maxVal - minVal;
+
+            function calcularPosicion(valor) {
+                return ((valor - minVal) / range) * 100;
+            }
+
+            // Generar puntos para Máquina A
+            const puntosA = maquinaA.map((val, idx) => {
+                const bottom = calcularPosicion(val);
+                const left = (idx + 1) * (100 / (maquinaA.length + 1));
+                return `<div class="scatter-point" style="bottom: ${bottom}%; left: ${left}%;">
+                            <div class="point-label">${val}mm</div>
+                        </div>`;
+            }).join('');
+
+            // Generar puntos para Máquina B
+            const puntosB = maquinaB.map((val, idx) => {
+                const bottom = calcularPosicion(val);
+                const left = (idx + 1) * (100 / (maquinaB.length + 1));
+                return `<div class="scatter-point orange" style="bottom: ${bottom}%; left: ${left}%;">
+                            <div class="point-label">${val}mm</div>
+                        </div>`;
+            }).join('');
+
+            // Calcular posición de la línea de media
+            const meanLineA = calcularPosicion(mediaA);
+            const meanLineB = calcularPosicion(mediaB);
+
+            document.querySelector('.data-display').innerHTML = `
+                <div class="scatter-plots">
+                    <div class="scatter-plot">
+                        <h4>🟢 Máquina A (Estable)</h4>
+                        <div class="plot-area">
+                            ${puntosA}
+                            <div class="mean-line" style="bottom: ${meanLineA}%;">
+                                <span>Media: ${mediaA.toFixed(1)}mm</span>
+                            </div>
+                        </div>
+                        <p style="text-align: center; margin-top: 10px; font-size: 0.9rem;">
+                            Datos: ${maquinaA.join(', ')} mm
+                        </p>
+                    </div>
+
+                    <div class="scatter-plot">
+                        <h4>🟠 Máquina B (Variable)</h4>
+                        <div class="plot-area">
+                            ${puntosB}
+                            <div class="mean-line" style="bottom: ${meanLineB}%;">
+                                <span>Media: ${mediaB.toFixed(1)}mm</span>
+                            </div>
+                        </div>
+                        <p style="text-align: center; margin-top: 10px; font-size: 0.9rem;">
+                            Datos: ${maquinaB.join(', ')} mm
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        /**
+         * Validar respuesta de Misión 5A
+         */
+        function checkAnswerMission5A() {
+            const answerA = parseFloat(document.getElementById('answerInput5A_A').value);
+            const answerB = parseFloat(document.getElementById('answerInput5A_B').value);
+            const feedback = document.getElementById('feedback');
+
+            // Calcular respuestas correctas
+            const correctA = calcularDesviacionEstandar(mision5A_maquinas.maquinaA, false);
+            const correctB = calcularDesviacionEstandar(mision5A_maquinas.maquinaB, false);
+
+            const tolerancia = 0.5;
+
+            // Validar ambas respuestas
+            const correctAnswerA = Math.abs(answerA - correctA) <= tolerancia;
+            const correctAnswerB = Math.abs(answerB - correctB) <= tolerancia;
+
+            if (isNaN(answerA) || isNaN(answerB)) {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `
+                    <strong>❌ Error:</strong> Por favor, ingresa valores numéricos en ambos campos.
+                `;
+                return;
+            }
+
+            if (correctAnswerA && correctAnswerB) {
+                // Respuesta correcta
+                feedback.className = 'feedback success';
+                feedback.innerHTML = `
+                    <strong>✅ ¡EXCELENTE!</strong><br><br>
+                    <strong>Máquina A:</strong> σ = ${correctA.toFixed(2)}mm (dispersión BAJA)<br>
+                    <strong>Máquina B:</strong> σ = ${correctB.toFixed(2)}mm (dispersión ALTA)<br><br>
+                    <strong>Conclusión:</strong> La Máquina A es más <strong>confiable</strong> porque
+                    sus valores están más cercanos a la media (50mm). La Máquina B es impredecible
+                    con valores muy dispersos (35-65mm).
+                    <br><br>
+                    <strong>+100 XP</strong> 🎉
+                    <br><br>
+                    <button class="next-btn" onclick="completeMission5A()">➡️ Continuar</button>
+                `;
+            } else {
+                // Respuesta incorrecta - feedback pedagógico específico
+                let errorMsg = '<strong>❌ Respuesta incorrecta.</strong><br><br>';
+
+                if (!correctAnswerA && !correctAnswerB) {
+                    // Ambas incorrectas
+                    errorMsg += `Ambas desviaciones están incorrectas.<br><br>`;
+                    errorMsg += `<strong>Tus respuestas:</strong><br>`;
+                    errorMsg += `Máquina A: ${answerA.toFixed(2)}mm (esperado: ~${correctA.toFixed(2)}mm)<br>`;
+                    errorMsg += `Máquina B: ${answerB.toFixed(2)}mm (esperado: ~${correctB.toFixed(2)}mm)<br><br>`;
+
+                    // Detectar errores comunes
+                    const mediaA = mision5A_maquinas.maquinaA.reduce((sum, val) => sum + val, 0) / mision5A_maquinas.maquinaA.length;
+                    const mediaB = mision5A_maquinas.maquinaB.reduce((sum, val) => sum + val, 0) / mision5A_maquinas.maquinaB.length;
+
+                    if (Math.abs(answerA - mediaA) < 1 || Math.abs(answerB - mediaB) < 1) {
+                        errorMsg += `💡 <strong>Pista:</strong> Parece que calculaste la MEDIA en lugar de la desviación estándar.`;
+                    } else {
+                        errorMsg += `💡 <strong>Pista:</strong> Recuerda la fórmula: σ = √[ Σ(x - μ)² / N ]<br>`;
+                        errorMsg += `No olvides sacar la raíz cuadrada al final.`;
+                    }
+                } else if (!correctAnswerA) {
+                    errorMsg += `La desviación de <strong>Máquina A</strong> está incorrecta.<br><br>`;
+                    errorMsg += `Tu respuesta: ${answerA.toFixed(2)}mm (esperado: ~${correctA.toFixed(2)}mm)<br><br>`;
+                    errorMsg += `💡 <strong>Pista:</strong> Máquina A tiene valores muy cercanos a 50mm (49-51mm).`;
+                } else {
+                    errorMsg += `La desviación de <strong>Máquina B</strong> está incorrecta.<br><br>`;
+                    errorMsg += `Tu respuesta: ${answerB.toFixed(2)}mm (esperado: ~${correctB.toFixed(2)}mm)<br><br>`;
+                    errorMsg += `💡 <strong>Pista:</strong> Máquina B tiene valores muy dispersos (35-65mm).`;
+                }
+
+                feedback.className = 'feedback error';
+                feedback.innerHTML = errorMsg;
+            }
+        }
+
+        /**
+         * Completar Misión 5A
+         */
+        function completeMission5A() {
+            // Add XP
+            gameState.xp += 100;
+            updateXPBar();
+
+            // Mark mission as completed
+            if (!gameState.missionsCompleted.includes('mission_5a')) {
+                gameState.missionsCompleted.push('mission_5a');
+                saveGame();
+            }
+
+            // Go to next mission
+            nextMission();
+        }
+
+        /**
+         * Iniciar Misión 5B: Varianza Muestral
+         */
+        function startMission5B() {
             // Hide story, show game
             document.getElementById('startScreen').style.display = 'none';
             document.getElementById('storyScreen').style.display = 'none';
             document.getElementById('gameScreen').style.display = 'block';
 
             // Set mission data
-            gameState.currentMissionData = tiempos_4B;
-            gameState.currentMissionType = 'mission_4b';
+            gameState.currentMissionData = mision5B_tiempos;
+            gameState.currentMissionType = 'mission_5b';
 
             // Update mission title and description
-            document.querySelector('.mission-title').textContent = '📊 Misión 4B: Cuartiles Completos (Avanzado)';
+            document.querySelector('.mission-title').textContent = '📋 Misión 5B: Varianza Muestral (Avanzado)';
             document.querySelector('.mission-description').innerHTML = `
-                <p><strong>🏢 Cliente: PerformanceAPI Analytics (Día Completo)</strong></p>
+                <p><strong>🏢 Cliente: QualityControl Systems</strong></p>
                 <p style="margin-top: 10px;">
-                    Laura necesita analizar un día completo de datos para establecer 3 niveles de SLA:
-                    Premium, Estándar y Básico.
+                    Tienes una <strong>MUESTRA</strong> de 5 tiempos de respuesta del sistema (en ms).
+                    No tienes acceso a todos los datos de la población.
                 </p>
                 <p style="margin-top: 10px;">
-                    <strong>Tu tarea:</strong> Calcula el <strong>cuartil Q2 (mediana)</strong> de los tiempos de respuesta.
+                    <strong>Tu tarea:</strong> Calcula la <strong>varianza MUESTRAL</strong> usando la
+                    fórmula correcta con <strong>N-1</strong>.
                 </p>
                 <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">
-                    💡 <strong>Nota:</strong> Solo te pedimos Q2. El gráfico muestra Q1 y Q3 automáticamente.
+                    💡 Responde con dos decimales (ej: 2.50)
                 </p>
             `;
 
             // Update hints
             document.querySelector('.hints').innerHTML = `
-                <div class="hint-title">💡 Recuerda:</div>
-                <p><strong>Q2 (P50)</strong> = Mediana (valor central)</p>
+                <div class="hint-title">💡 Ayuda:</div>
+                <p><strong>Varianza Muestral</strong> usa N-1 en lugar de N</p>
                 <p style="margin-top: 10px;">
-                    Con 13 valores, el del medio está en la posición 7.
+                    s² = Σ(x - x̄)² / (n-1)
                 </p>
                 <p style="margin-top: 10px; font-size: 0.9rem;">
-                    Los cuartiles dividen los datos en 4 partes iguales (25% cada una).
+                    1. Calcula la media (x̄)<br>
+                    2. Resta cada valor de la media y eleva al cuadrado<br>
+                    3. Suma todos los cuadrados<br>
+                    4. Divide entre <strong>N-1</strong> (no N)<br>
+                    5. Ese es el resultado (NO saques raíz cuadrada)
                 </p>
             `;
 
@@ -3182,207 +3485,84 @@
             document.getElementById('playerLevel').textContent = gameState.level;
             updateXPBar();
 
-            // Load boxplot chart for Mission 4B
-            loadBoxplotChartMission4B();
-            updateHelperMission4B();
+            // Load Gaussian chart for Mission 5B
+            loadGaussianChartMission5B();
 
-            // Change input to number
-            const answerInput = document.getElementById('answerInput');
-            answerInput.type = 'number';
-            answerInput.value = '';
-            answerInput.placeholder = 'Ingresa el valor de Q2 en ms';
-            answerInput.step = '0.1';
-            document.getElementById('feedback').innerHTML = '';
-            document.getElementById('submitBtn').disabled = false;
+            // Update answer section
+            document.querySelector('.answer-section').innerHTML = `
+                <div class="answer-input-container">
+                    <label for="answerInput" style="display: block; margin-bottom: 10px; font-size: 1.1rem;">
+                        <strong>Varianza muestral (con N-1):</strong>
+                    </label>
+                    <input type="number" id="answerInput" step="0.01" placeholder="Ej: 2.50"
+                           style="width: 100%; padding: 15px; font-size: 1.2rem; border-radius: 10px;
+                                  border: 2px solid rgba(255,255,255,0.3); background: rgba(0,0,0,0.3);
+                                  color: #fff;">
 
-            // Save game
-            saveGame();
+                    <button class="submit-btn" onclick="checkAnswerMission5B()">
+                        ✅ ENVIAR RESPUESTA
+                    </button>
+                </div>
+                <div class="feedback" id="feedback"></div>
+            `;
+
+            // Add keyboard listener for Enter key
+            document.getElementById('answerInput').addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    checkAnswerMission5B();
+                }
+            });
         }
 
         /**
-         * Visualización de línea temporal con Q2 marcado (Misión 4A)
+         * Cargar gráfico gaussiano para Misión 5B
          */
-        function loadTimelineChartMission4A() {
-            const datos = tiempos_4A;
-            const sorted = [...datos].sort((a, b) => a - b);
-            const q2 = calcularMediana(sorted);
+        function loadGaussianChartMission5B() {
+            const tiempos = mision5B_tiempos;
+            const media = tiempos.reduce((sum, val) => sum + val, 0) / tiempos.length;
+            const desviacion = calcularDesviacionEstandar(tiempos, true);
 
-            const container = document.getElementById('chartContainer');
-            const width = container.clientWidth;
-            const height = 300;
-            const padding = 50;
+            // Generar campana gaussiana (distribución normal)
+            const numBars = 30;
+            const minVal = media - 3 * desviacion;
+            const maxVal = media + 3 * desviacion;
+            const step = (maxVal - minVal) / numBars;
 
-            const maxValue = Math.max(...datos);
-            const minValue = Math.min(...datos);
-            const range = maxValue - minValue;
+            let bars = '';
+            for (let i = 0; i < numBars; i++) {
+                const x = minVal + i * step;
+                const exponent = -Math.pow(x - media, 2) / (2 * Math.pow(desviacion, 2));
+                const height = Math.exp(exponent) * 100;
 
-            let svg = `<svg width="${width}" height="${height}" class="timeline-chart" style="background: rgba(0,0,0,0.2); border-radius: 10px;">`;
+                // Marcar área dentro de ±1σ
+                const isWithinSigma = Math.abs(x - media) <= desviacion;
+                const className = isWithinSigma ? 'gaussian-bar shaded' : 'gaussian-bar';
 
-            // Eje Y (valores)
-            svg += `<text x="10" y="20" fill="#fff" font-size="12">ms</text>`;
+                bars += `<div class="${className}" style="height: ${height}%;"></div>`;
+            }
 
-            // Línea horizontal de Q2
-            const q2Y = height - padding - ((q2 - minValue) / range) * (height - 2 * padding);
-            svg += `<line x1="${padding}" y1="${q2Y}" x2="${width - padding}" y2="${q2Y}"
-                    class="quartile-line" />`;
-            svg += `<text x="${width - padding - 80}" y="${q2Y - 10}" fill="#ffd700" font-size="14" font-weight="bold">Q2 = ${q2} ms</text>`;
+            document.querySelector('.data-display').innerHTML = `
+                <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 2rem; margin: 2rem 0;">
+                    <h4 style="text-align: center; margin-bottom: 1rem;">📊 Distribución de Tiempos de Respuesta</h4>
 
-            // Zona superior (50% más lentos)
-            svg += `<rect x="${padding}" y="${padding}" width="${width - 2 * padding}" height="${q2Y - padding}"
-                    class="zone-above-q2" />`;
-            svg += `<text x="${width / 2}" y="${padding + 20}" fill="#fff" font-size="12" text-anchor="middle" opacity="0.7">50% más lentos</text>`;
-
-            // Zona inferior (50% más rápidos)
-            svg += `<rect x="${padding}" y="${q2Y}" width="${width - 2 * padding}" height="${height - padding - q2Y}"
-                    class="zone-below-q2" />`;
-            svg += `<text x="${width / 2}" y="${height - padding + 20}" fill="#fff" font-size="12" text-anchor="middle" opacity="0.7">50% más rápidos</text>`;
-
-            // Puntos de datos
-            datos.forEach((value, index) => {
-                const x = padding + (index / (datos.length - 1)) * (width - 2 * padding);
-                const y = height - padding - ((value - minValue) / range) * (height - 2 * padding);
-
-                svg += `<circle cx="${x}" cy="${y}" class="timeline-point" r="6">
-                    <title>Request #${index + 1}: ${value} ms</title>
-                </circle>`;
-            });
-
-            svg += `</svg>`;
-            container.innerHTML = svg;
-        }
-
-        /**
-         * Visualización de boxplot con zonas coloreadas (Misión 4B)
-         */
-        function loadBoxplotChartMission4B() {
-            const datos = tiempos_4B;
-            const sorted = [...datos].sort((a, b) => a - b);
-            const { q1, q2, q3 } = calcularCuartiles(datos);
-
-            const container = document.getElementById('chartContainer');
-            const width = container.clientWidth;
-            const height = 300;
-            const padding = 50;
-
-            const min = sorted[0];
-            const max = sorted[sorted.length - 1];
-            const range = max - min;
-
-            // Detectar outliers (regla IQR)
-            const iqr = q3 - q1;
-            const lowerBound = q1 - 1.5 * iqr;
-            const upperBound = q3 + 1.5 * iqr;
-            const outliers = sorted.filter(v => v < lowerBound || v > upperBound);
-            const maxNormal = Math.max(...sorted.filter(v => v <= upperBound));
-
-            // Función para convertir valor a coordenada X
-            const valueToX = (value) => {
-                return padding + ((value - min) / range) * (width - 2 * padding);
-            };
-
-            let svg = `<svg width="${width}" height="${height}" class="boxplot-chart" style="background: rgba(0,0,0,0.2); border-radius: 10px;">`;
-
-            const centerY = height / 2;
-
-            // Zonas coloreadas
-            const zones = [
-                { start: min, end: q1, class: 'zone-q1', label: '25%' },
-                { start: q1, end: q2, class: 'zone-q2', label: '25%' },
-                { start: q2, end: q3, class: 'zone-q3', label: '25%' },
-                { start: q3, end: maxNormal, class: 'zone-q4', label: '25%' }
-            ];
-
-            zones.forEach(zone => {
-                const x1 = valueToX(zone.start);
-                const x2 = valueToX(zone.end);
-                svg += `<rect x="${x1}" y="${centerY - 40}" width="${x2 - x1}" height="80"
-                        class="${zone.class}" />`;
-                svg += `<text x="${(x1 + x2) / 2}" y="${centerY - 50}" fill="#fff" font-size="11" text-anchor="middle" opacity="0.7">${zone.label}</text>`;
-            });
-
-            // Whiskers (líneas)
-            const minX = valueToX(min);
-            const maxX = valueToX(maxNormal);
-
-            svg += `<line x1="${minX}" y1="${centerY}" x2="${valueToX(q1)}" y2="${centerY}"
-                    class="boxplot-whisker" />`;
-            svg += `<line x1="${valueToX(q3)}" y1="${centerY}" x2="${maxX}" y2="${centerY}"
-                    class="boxplot-whisker" />`;
-
-            // Caja (Q1 a Q3)
-            const boxX = valueToX(q1);
-            const boxWidth = valueToX(q3) - boxX;
-            svg += `<rect x="${boxX}" y="${centerY - 40}" width="${boxWidth}" height="80"
-                    class="boxplot-box" />`;
-
-            // Mediana (Q2) - línea gruesa dorada
-            const q2X = valueToX(q2);
-            svg += `<line x1="${q2X}" y1="${centerY - 40}" x2="${q2X}" y2="${centerY + 40}"
-                    class="boxplot-median" />`;
-
-            // Etiquetas de cuartiles
-            svg += `<text x="${valueToX(q1)}" y="${centerY - 50}" fill="#fff" font-size="12" text-anchor="middle">Q1=${Math.round(q1)}</text>`;
-            svg += `<text x="${valueToX(q2)}" y="${centerY - 60}" fill="#ffd700" font-size="14" text-anchor="middle" font-weight="bold">Q2=${q2}</text>`;
-            svg += `<text x="${valueToX(q3)}" y="${centerY - 50}" fill="#fff" font-size="12" text-anchor="middle">Q3=${Math.round(q3)}</text>`;
-
-            // Puntos de datos
-            sorted.forEach((value) => {
-                const x = valueToX(value);
-                const isOutlier = outliers.includes(value);
-                const className = isOutlier ? 'outlier-point' : 'timeline-point';
-
-                svg += `<circle cx="${x}" cy="${centerY + 60}" class="${className}" r="${isOutlier ? 8 : 6}">
-                    <title>Request: ${value} ms${isOutlier ? ' (outlier)' : ''}</title>
-                </circle>`;
-            });
-
-            svg += `</svg>`;
-            container.innerHTML = svg;
-        }
-
-        /**
-         * Actualiza el panel de ayuda para Misión 4A
-         */
-        function updateHelperMission4A() {
-            const datos = tiempos_4A;
-            const sorted = [...datos].sort((a, b) => a - b);
-            const q2 = calcularMediana(sorted);
-
-            document.getElementById('helperTab').innerHTML = `
-                <div class="stats-helper">
-                    <h3 style="margin-bottom: 15px;">📊 Ayuda Estadística</h3>
-
-                    <div class="helper-item">
-                        <div class="helper-label">📊 Datos de tiempos de respuesta (ms):</div>
-                        <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; margin-top: 10px; font-family: monospace;">
-                            [${datos.join(', ')}]
-                        </div>
+                    <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                        <strong>Muestra (n=5):</strong> ${tiempos.join(', ')} ms
+                        <br><br>
+                        <strong>Media:</strong> ${media.toFixed(2)} ms<br>
+                        <strong>Desviación estándar:</strong> ${desviacion.toFixed(2)} ms
                     </div>
 
-                    <div class="helper-item">
-                        <div class="helper-label">📈 Datos ordenados:</div>
-                        <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; margin-top: 10px; font-family: monospace;">
-                            [${sorted.join(', ')}]
+                    <div class="gaussian-chart">
+                        <div class="gaussian-curve">
+                            ${bars}
                         </div>
-                        <div style="text-align: center; margin-top: 10px; color: #ffd700; font-weight: bold;">
-                            ↓<br>
-                            50% | Q2 | 50%
+                        <div class="gaussian-label">
+                            Área sombreada = ±1σ (68% de los datos)
                         </div>
-                    </div>
-
-                    <div class="helper-item" style="background: rgba(255, 215, 0, 0.2); border: 2px solid #ffd700;">
-                        <div class="helper-label">💡 Pista:</div>
-                        <ul style="margin-top: 10px; margin-left: 20px;">
-                            <li>Q2 es el percentil 50 (P50)</li>
-                            <li>P50 es la MEDIANA (valor del medio)</li>
-                            <li>Con ${sorted.length} valores, el del medio está en la posición ${Math.ceil(sorted.length / 2)}</li>
-                        </ul>
-                    </div>
-
-                    <div class="helper-item">
-                        <div class="helper-label">🧮 Recuerda de la Misión 2:</div>
-                        <div style="margin-top: 10px;">
-                            Para calcular la mediana, ordena los datos y encuentra el valor central.
+                        <div class="gaussian-axis">
+                            <span>${minVal.toFixed(0)}ms</span>
+                            <span>${media.toFixed(0)}ms</span>
+                            <span>${maxVal.toFixed(0)}ms</span>
                         </div>
                     </div>
                 </div>
@@ -3390,286 +3570,95 @@
         }
 
         /**
-         * Actualiza el panel de ayuda para Misión 4B
+         * Validar respuesta de Misión 5B
          */
-        function updateHelperMission4B() {
-            const datos = tiempos_4B;
-            const sorted = [...datos].sort((a, b) => a - b);
-            const { q1, q2, q3 } = calcularCuartiles(datos);
-            const iqr = q3 - q1;
+        function checkAnswerMission5B() {
+            const answer = parseFloat(document.getElementById('answerInput').value);
+            const feedback = document.getElementById('feedback');
 
-            document.getElementById('helperTab').innerHTML = `
-                <div class="stats-helper">
-                    <h3 style="margin-bottom: 15px;">📊 Ayuda Estadística</h3>
+            // Calcular respuesta correcta (varianza MUESTRAL con N-1)
+            const correctMuestral = calcularVarianza(mision5B_tiempos, true);
+            const correctPoblacional = calcularVarianza(mision5B_tiempos, false);
 
-                    <div class="helper-item">
-                        <div class="helper-label">📊 Datos de tiempos de respuesta (ms) - ${datos.length} requests:</div>
-                        <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; margin-top: 10px; font-family: monospace; font-size: 0.9rem;">
-                            [${sorted.join(', ')}]
-                        </div>
-                    </div>
+            const tolerancia = 0.5;
 
-                    <div class="helper-item">
-                        <div class="helper-label">📈 Datos ordenados con cuartiles marcados:</div>
-                        <div style="text-align: center; margin-top: 10px; color: #ffd700; font-weight: bold; font-family: monospace;">
-                            Q1        Q2        Q3<br>
-                            ↓         ↓         ↓
-                        </div>
-                    </div>
+            if (isNaN(answer)) {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `
+                    <strong>❌ Error:</strong> Por favor, ingresa un valor numérico.
+                `;
+                return;
+            }
 
-                    <div class="helper-item">
-                        <div class="helper-label">💡 Cuartiles dividen los datos en 4 partes iguales:</div>
-                        <ul style="margin-top: 10px; margin-left: 20px; font-size: 0.95rem;">
-                            <li><strong>Q1 (P25)</strong>: 25% de datos están por debajo → ~${Math.round(q1)} ms</li>
-                            <li><strong>Q2 (P50)</strong>: 50% de datos están por debajo → ${q2} ms (mediana)</li>
-                            <li><strong>Q3 (P75)</strong>: 75% de datos están por debajo → ~${Math.round(q3)} ms</li>
-                        </ul>
-                    </div>
+            // Verificar si usó N-1 correctamente
+            const usedMuestral = Math.abs(answer - correctMuestral) <= tolerancia;
+            const usedPoblacional = Math.abs(answer - correctPoblacional) <= tolerancia;
 
-                    <div class="helper-item" style="background: rgba(255, 215, 0, 0.2); border: 2px solid #ffd700;">
-                        <div class="helper-label">🧮 Método simplificado para Q2:</div>
-                        <div style="margin-top: 10px;">
-                            Con ${datos.length} valores, la mediana está en la posición ${Math.ceil(datos.length / 2)} (el del medio).
-                            <br><br>
-                            Cuenta: 1, 2, 3, 4, 5, 6, 7 ← este es Q2
-                        </div>
-                    </div>
-
-                    <div class="helper-item">
-                        <div class="helper-label">📝 Nota:</div>
-                        <div style="margin-top: 10px; font-size: 0.9rem;">
-                            Existen varios métodos para calcular cuartiles. Este es el más simple y educativo.
-                            En Python, numpy y pandas pueden dar valores ligeramente diferentes debido a métodos
-                            de interpolación más avanzados.
-                        </div>
-                    </div>
-
-                    <div class="helper-item">
-                        <div class="helper-label">🔗 ¿Recuerdas la Misión 2B?</div>
-                        <div style="margin-top: 10px;">
-                            Usamos IQR (Rango Intercuartílico) para detectar outliers.
-                            <br><br>
-                            <strong>IQR = Q3 - Q1 = ${Math.round(q3)} - ${Math.round(q1)} = ${Math.round(iqr)} ms</strong>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        /**
-         * Verifica respuesta de Misión 4A
-         */
-        function checkAnswerMission4A(answer, feedback) {
-            const correctAnswer = 142;
-            const tolerance = 0.5;
-
-            if (Math.abs(answer - correctAnswer) <= tolerance) {
-                // Correcto
+            if (usedMuestral) {
+                // Respuesta correcta con N-1
                 feedback.className = 'feedback success';
                 feedback.innerHTML = `
-                    <div style="font-size: 1.5rem; margin-bottom: 15px;">✅ ¡Excelente! Q2 = 142 ms</div>
-
-                    <div style="margin-top: 15px;">
-                        <strong>📊 Interpretación:</strong>
-                        <ul style="margin-top: 10px; margin-left: 20px;">
-                            <li>El 50% de las requests responden en 142 ms o menos</li>
-                            <li>El 50% de las requests responden en 142 ms o más</li>
-                            <li>Q2 es la MEDIANA (¡ya la conocías de la Misión 2!)</li>
-                        </ul>
-                    </div>
-
-                    <div style="margin-top: 15px;">
-                        <strong>💼 Decisión de negocio:</strong>
-                        <p style="margin-top: 10px;">
-                            Laura puede establecer un SLA Estándar de 150 ms con confianza,
-                            ya que el 50% de requests ya están por debajo de 142 ms.
-                            Esto significa que cumplirá el SLA más del 50% del tiempo.
-                        </p>
-                    </div>
-
-                    <div style="margin-top: 15px;">
-                        <strong>🎯 Dato curioso:</strong>
-                        <p style="margin-top: 10px;">
-                            Si hubiera usado la MEDIA (143.9 ms), habría sido similar en este caso.
-                            Pero con outliers, la mediana (P50) es más confiable.
-                        </p>
-                    </div>
-
-                    <div style="margin-top: 20px; padding: 15px; background: rgba(0, 255, 0, 0.2); border-radius: 10px;">
-                        <strong style="color: #32cd32;">🎉 +100 XP</strong>
-                    </div>
+                    <strong>✅ ¡PERFECTO!</strong><br><br>
+                    <strong>Varianza muestral:</strong> s² = ${correctMuestral.toFixed(2)} ms²<br><br>
+                    Usaste correctamente <strong>N-1 = 4</strong> como divisor (no N=5).
+                    <br><br>
+                    <strong>¿Por qué N-1?</strong> Porque estás trabajando con una MUESTRA,
+                    no con la población completa. La corrección de Bessel compensa el sesgo.
+                    <br><br>
+                    <strong>+150 XP</strong> 🎉<br>
+                    <strong>+25 XP BONUS</strong> por usar N-1 correctamente! 🌟
+                    <br><br>
+                    <button class="next-btn" onclick="completeMission5B()">➡️ Continuar</button>
                 `;
-
-                // Give XP
-                addXP(100);
-
-                // Mark as completed
-                if (!gameState.missionsCompleted.includes('mission_4a')) {
-                    gameState.missionsCompleted.push('mission_4a');
-                    saveGame();
-                }
-
-                // Show continue button
-                setTimeout(() => {
-                    feedback.innerHTML += `
-                        <button class="story-btn primary" onclick="startMission4B()" style="margin-top: 20px;">
-                            🚀 CONTINUAR → Misión 4B
-                        </button>
-                    `;
-                }, 1000);
-
-            } else if (answer === 140) {
+            } else if (usedPoblacional) {
+                // Error común: usó N en lugar de N-1
                 feedback.className = 'feedback error';
                 feedback.innerHTML = `
-                    ❌ Estás cerca, pero no es el valor exacto del medio.
-                    Revisa los datos ordenados en el panel de ayuda.
-                    Con 9 valores, el del medio está en la posición 5.
-                `;
-            } else if (answer === 145) {
-                feedback.className = 'feedback error';
-                feedback.innerHTML = `
-                    ❌ Ese es el valor siguiente al medio.
-                    El Q2 es el valor CENTRAL (posición 5 en datos ordenados).
-                `;
-            } else if (Math.abs(answer - 143.9) < 1) {
-                feedback.className = 'feedback error';
-                feedback.innerHTML = `
-                    ❌ Ese valor parece ser la MEDIA.
-                    Recuerda: Q2 es la MEDIANA (valor del medio), no la media.
-                    Ordena los datos y encuentra el valor central.
+                    <strong>⚠️ Casi correcto, pero...</strong><br><br>
+                    Tu respuesta: ${answer.toFixed(2)} ms²<br>
+                    Esperado: ${correctMuestral.toFixed(2)} ms²<br><br>
+                    <strong>Error detectado:</strong> Usaste <strong>N=5</strong> como divisor,
+                    pero deberías usar <strong>N-1=4</strong> porque estás trabajando con una MUESTRA.
+                    <br><br>
+                    💡 <strong>Pista:</strong> Revisa la fórmula de varianza MUESTRAL:<br>
+                    s² = Σ(x - x̄)² / <strong>(n-1)</strong>
+                    <br><br>
+                    Intenta nuevamente usando N-1 como divisor.
                 `;
             } else {
+                // Otro error
                 feedback.className = 'feedback error';
                 feedback.innerHTML = `
-                    ❌ No es correcto. Recuerda:
-                    Q2 es la mediana (valor del medio en datos ordenados).
-                    Usa el panel de ayuda para ver los datos ordenados.
+                    <strong>❌ Respuesta incorrecta.</strong><br><br>
+                    Tu respuesta: ${answer.toFixed(2)} ms²<br>
+                    Esperado: ${correctMuestral.toFixed(2)} ms²<br><br>
+                    💡 <strong>Pista:</strong> Recuerda la fórmula de varianza MUESTRAL:<br>
+                    s² = Σ(x - x̄)² / (n-1)
+                    <br><br>
+                    1. Calcula la media: (47+50+48+51+49)/5 = 49<br>
+                    2. Calcula las desviaciones al cuadrado: (47-49)², (50-49)², ...<br>
+                    3. Suma todas las desviaciones al cuadrado<br>
+                    4. Divide entre <strong>N-1 = 4</strong> (no 5)
                 `;
             }
         }
 
         /**
-         * Verifica respuesta de Misión 4B
+         * Completar Misión 5B
          */
-        function checkAnswerMission4B(answer, feedback) {
-            const correctAnswer = 150;
-            const tolerance = 1;
+        function completeMission5B() {
+            // Add XP (150 base + 25 bonus)
+            gameState.xp += 175;
+            updateXPBar();
 
-            if (Math.abs(answer - correctAnswer) <= tolerance) {
-                // Correcto
-                feedback.className = 'feedback success';
-                feedback.innerHTML = `
-                    <div style="font-size: 1.5rem; margin-bottom: 15px;">✅ ¡Perfecto! Q2 = 150 ms</div>
-
-                    <div style="margin-top: 15px;">
-                        <strong>📊 Análisis completo de cuartiles:</strong>
-                        <ul style="margin-top: 10px; margin-left: 20px;">
-                            <li>Q1 = 130 ms → 25% de requests son más rápidas</li>
-                            <li>Q2 = 150 ms → 50% de requests son más rápidas (mediana)</li>
-                            <li>Q3 = 170 ms → 75% de requests son más rápidas</li>
-                        </ul>
-                    </div>
-
-                    <div style="margin-top: 15px;">
-                        <strong>📈 Interpretación:</strong>
-                        <ul style="margin-top: 10px; margin-left: 20px;">
-                            <li>El 50% central de requests está entre 130-170 ms</li>
-                            <li>Rango Intercuartílico (IQR) = Q3 - Q1 = 40 ms</li>
-                            <li>La variabilidad es moderada (IQR no muy grande)</li>
-                        </ul>
-                    </div>
-
-                    <div style="margin-top: 15px;">
-                        <strong>💼 Decisión de negocio:</strong>
-                        <p style="margin-top: 10px;">Laura puede establecer SLAs por niveles:</p>
-                        <ul style="margin-top: 10px; margin-left: 20px;">
-                            <li><strong>SLA Premium:</strong> 130 ms (satisface al 25% más exigente)</li>
-                            <li><strong>SLA Estándar:</strong> 150 ms (satisface al 50% - típico)</li>
-                            <li><strong>SLA Básico:</strong> 170 ms (satisface al 75% - mayoría)</li>
-                        </ul>
-                    </div>
-
-                    <div style="margin-top: 15px;">
-                        <strong>🎯 Outliers detectados:</strong>
-                        <ul style="margin-top: 10px; margin-left: 20px;">
-                            <li>250 ms está muy por encima de Q3 (170 ms)</li>
-                            <li>Usando la regla IQR de la Misión 2B:<br>
-                                Outlier si > Q3 + 1.5*IQR = 170 + 1.5*40 = 230 ms</li>
-                            <li>¡250 ms es outlier! Laura debe investigar esa request específica.</li>
-                        </ul>
-                    </div>
-
-                    <div style="margin-top: 15px;">
-                        <strong>🔗 ¿Ves cómo todo se conecta?</strong>
-                        <ul style="margin-top: 10px; margin-left: 20px;">
-                            <li>Misión 2: Aprendiste mediana y regla IQR</li>
-                            <li>Misión 4: Ahora sabes de dónde vienen Q1, Q2, Q3</li>
-                            <li>¡Estás construyendo tu toolkit de Data Engineer! 🚀</li>
-                        </ul>
-                    </div>
-
-                    <div style="margin-top: 20px; padding: 15px; background: rgba(0, 255, 0, 0.2); border-radius: 10px;">
-                        <strong style="color: #32cd32;">🎉 +150 XP</strong>
-                    </div>
-                `;
-
-                // Give XP
-                addXP(150);
-
-                // Mark as completed
-                if (!gameState.missionsCompleted.includes('mission_4b')) {
-                    gameState.missionsCompleted.push('mission_4b');
-                    saveGame();
-                }
-
-                // Show completion message
-                setTimeout(() => {
-                    feedback.innerHTML += `
-                        <div style="margin-top: 20px; padding: 20px; background: rgba(255, 215, 0, 0.2); border: 2px solid #ffd700; border-radius: 10px;">
-                            <strong style="font-size: 1.2rem;">🎊 ¡MISIÓN 4 COMPLETADA!</strong>
-                            <p style="margin-top: 10px;">
-                                Has dominado los percentiles y cuartiles. ¡Excelente trabajo!
-                            </p>
-                        </div>
-                    `;
-                }, 1000);
-
-            } else if (answer === 145 || answer === 155) {
-                feedback.className = 'feedback error';
-                feedback.innerHTML = `
-                    ❌ Estás muy cerca. El Q2 está exactamente en el centro.
-                    Con 13 valores, la posición 7 es el medio.
-                    Cuenta desde el inicio en los datos ordenados del panel de ayuda.
-                `;
-            } else if (answer === 130 || Math.abs(answer - 130) < 2) {
-                feedback.className = 'feedback error';
-                feedback.innerHTML = `
-                    ❌ Ese es Q1 (percentil 25).
-                    Te pedimos Q2 (percentil 50 = mediana).
-                    Q2 está más a la derecha, en la posición 7.
-                `;
-            } else if (answer === 170 || Math.abs(answer - 170) < 2) {
-                feedback.className = 'feedback error';
-                feedback.innerHTML = `
-                    ❌ Ese es Q3 (percentil 75).
-                    Te pedimos Q2 (percentil 50 = mediana).
-                    Q2 está en el centro, en la posición 7.
-                `;
-            } else if (Math.abs(answer - 153.8) < 2) {
-                feedback.className = 'feedback error';
-                feedback.innerHTML = `
-                    ❌ Ese valor parece ser la MEDIA.
-                    Recuerda: Q2 es la MEDIANA (valor del medio), no la media.
-                    Con 13 valores ordenados, el del medio está en la posición 7.
-                `;
-            } else {
-                feedback.className = 'feedback error';
-                feedback.innerHTML = `
-                    ❌ No es correcto. Q2 es la MEDIANA (valor central en datos ordenados).
-                    Con 13 valores, está en la posición 7.
-                    Mira el panel de ayuda: los datos ya están ordenados y Q2 está marcado.
-                `;
+            // Mark mission as completed
+            if (!gameState.missionsCompleted.includes('mission_5b')) {
+                gameState.missionsCompleted.push('mission_5b');
+                saveGame();
             }
+
+            // Go to next mission
+            nextMission();
         }
     </script>
 </body>
