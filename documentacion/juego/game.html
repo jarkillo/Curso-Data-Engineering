@@ -961,6 +961,288 @@
             font-weight: bold;
             color: #00d2ff;
         }
+
+        /* ============================================
+           BOTÓN DE CONFIGURACIÓN
+           ============================================ */
+        .config-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .config-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg) scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .config-button:active {
+            transform: rotate(90deg) scale(0.95);
+        }
+
+        .config-button:focus {
+            outline: 2px solid #ffd700;
+            outline-offset: 2px;
+        }
+
+        /* ============================================
+           MODAL DE CONFIGURACIÓN
+           ============================================ */
+        .config-modal {
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .config-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .config-section h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            color: #ffd700;
+        }
+
+        .config-option {
+            margin: 15px 0;
+        }
+
+        .config-option label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        /* Toggle Switch */
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .toggle-label input[type="checkbox"] {
+            display: none;
+        }
+
+        .toggle-slider {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 13px;
+            margin-right: 12px;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-slider::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-label input[type="checkbox"]:checked + .toggle-slider {
+            background: #00d2ff;
+        }
+
+        .toggle-label input[type="checkbox"]:checked + .toggle-slider::after {
+            transform: translateX(24px);
+        }
+
+        .toggle-text {
+            font-size: 1rem;
+        }
+
+        /* Volume Control */
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .volume-control input[type="range"] {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .volume-control input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #00d2ff;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .volume-control input[type="range"]::-moz-range-track {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .volume-control input[type="range"]::-webkit-slider-thumb:hover {
+            background: #00e5ff;
+            transform: scale(1.2);
+        }
+
+        .volume-control input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: #00d2ff;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .volume-control input[type="range"]::-moz-range-thumb:hover {
+            background: #00e5ff;
+            transform: scale(1.2);
+        }
+
+        #volumeValue {
+            min-width: 45px;
+            text-align: right;
+            font-weight: bold;
+            color: #00d2ff;
+        }
+
+        /* Config Buttons */
+        .config-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .config-buttons .modal-btn {
+            flex: 1;
+        }
+
+        .modal-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ============================================
+           ANIMACIONES DE PARTÍCULAS
+           ============================================ */
+        .confetti-particle {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            pointer-events: none;
+            z-index: 9999;
+            top: -20px;
+        }
+
+        .floating-xp {
+            position: fixed;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Animaciones CSS (Fallback) */
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) translateX(calc((random() - 0.5) * 200px)) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes float-up-xp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        @keyframes level-up-pulse {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+            }
+            25% {
+                transform: scale(1.2) rotate(90deg);
+            }
+            50% {
+                transform: scale(1.3) rotate(180deg);
+            }
+            75% {
+                transform: scale(1.2) rotate(270deg);
+            }
+        }
+
+        .level-up-animation {
+            animation: level-up-pulse 1s ease-in-out;
+        }
+
+        @keyframes xp-bar-pulse {
+            0%, 100% {
+                transform: scaleY(1);
+            }
+            50% {
+                transform: scaleY(1.1);
+            }
+        }
+
+        .xp-bar-pulse {
+            animation: xp-bar-pulse 0.3s ease-in-out;
+        }
+
+        /* Responsive para botón de config */
+        @media (max-width: 768px) {
+            .config-button {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
     </style>
 </head>
 
@@ -1588,6 +1870,9 @@
             <!-- Header -->
             <div class="header">
                 <h1>🎮 DATA ENGINEER: THE GAME</h1>
+                <button class="config-button" onclick="openConfigModal()" aria-label="Abrir configuración" title="Configuración">
+                    ⚙️
+                </button>
                 <div class="player-stats">
                     <div class="stat-card">
                         <div class="stat-label">👤 Jugador</div>
@@ -1644,7 +1929,7 @@
                             placeholder="Ingresa la media (promedio) en €" step="0.01"
                             aria-label="Ingresa tu respuesta en euros" aria-describedby="feedback helper-text"
                             tabindex="0">
-                        <button class="submit-btn" id="submitBtn" onclick="checkAnswer()"
+                        <button class="submit-btn" id="submitBtn" onclick="playSound('click'); checkAnswer()"
                             aria-label="Enviar respuesta y verificar si es correcta" tabindex="0">
                             🚀 ENVIAR RESPUESTA
                         </button>
@@ -1778,6 +2063,319 @@
             { tienda: 'Tienda 6', talla_mas_vendida: 'L', unidades: 44 },
             { tienda: 'Tienda 7', talla_mas_vendida: 'S', unidades: 25 }
         ];
+
+        // ============================================
+        // SISTEMA DE SONIDOS (Web Audio API)
+        // ============================================
+
+        // Inicializar Audio Context
+        let audioContext = null;
+        let soundsEnabled = true;
+        let volume = 0.5;
+
+        /**
+         * Inicializar Audio Context (debe hacerse después de interacción del usuario)
+         */
+        function initAudioContext() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioContext;
+        }
+
+        /**
+         * Reproducir un sonido específico
+         * @param {string} type - Tipo de sonido: 'click', 'correct', 'incorrect', 'levelup', 'xp'
+         */
+        function playSound(type) {
+            if (!soundsEnabled) return;
+
+            const ctx = initAudioContext();
+
+            switch(type) {
+                case 'click':
+                    playNote(800, 0.05, volume * 0.3);
+                    break;
+                case 'correct':
+                    // Acorde ascendente (3 notas)
+                    playNote(523.25, 0.1, volume); // C5
+                    playNote(659.25, 0.1, volume, 0.1); // E5
+                    playNote(783.99, 0.2, volume, 0.2); // G5
+                    break;
+                case 'incorrect':
+                    // Beep descendente (2 notas)
+                    playNote(400, 0.1, volume);
+                    playNote(300, 0.15, volume, 0.1);
+                    break;
+                case 'levelup':
+                    // Fanfarria (5 notas)
+                    playNote(523.25, 0.1, volume);
+                    playNote(659.25, 0.1, volume, 0.1);
+                    playNote(783.99, 0.1, volume, 0.2);
+                    playNote(1046.50, 0.1, volume, 0.3);
+                    playNote(1318.51, 0.3, volume, 0.4);
+                    break;
+                case 'xp':
+                    playNote(1200, 0.1, volume * 0.5);
+                    break;
+            }
+        }
+
+        /**
+         * Reproducir una nota individual
+         * @param {number} frequency - Frecuencia en Hz
+         * @param {number} duration - Duración en segundos
+         * @param {number} vol - Volumen (0-1)
+         * @param {number} delay - Retraso en segundos
+         */
+        function playNote(frequency, duration, vol, delay = 0) {
+            const ctx = initAudioContext();
+            const oscillator = ctx.createOscillator();
+            const gainNode = ctx.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(ctx.destination);
+
+            oscillator.frequency.value = frequency;
+            oscillator.type = 'sine';
+
+            gainNode.gain.value = vol;
+
+            const startTime = ctx.currentTime + delay;
+            const endTime = startTime + duration;
+
+            // Envelope para suavizar el sonido
+            gainNode.gain.setValueAtTime(0, startTime);
+            gainNode.gain.linearRampToValueAtTime(vol, startTime + 0.01);
+            gainNode.gain.linearRampToValueAtTime(vol * 0.7, endTime - 0.05);
+            gainNode.gain.linearRampToValueAtTime(0, endTime);
+
+            oscillator.start(startTime);
+            oscillator.stop(endTime);
+        }
+
+        // ============================================
+        // SISTEMA DE ANIMACIONES
+        // ============================================
+
+        let animationsEnabled = true;
+
+        /**
+         * Mostrar confetti al completar misión
+         */
+        function showConfetti() {
+            if (!animationsEnabled) return;
+
+            // Crear 50 partículas de confetti
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => createConfettiParticle(), i * 20);
+            }
+        }
+
+        /**
+         * Crear una partícula de confetti individual
+         */
+        function createConfettiParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'confetti-particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.backgroundColor = getRandomColor();
+            document.body.appendChild(particle);
+
+            // Animar con anime.js o CSS fallback
+            if (typeof anime !== 'undefined') {
+                anime({
+                    targets: particle,
+                    translateY: [0, window.innerHeight + 50],
+                    translateX: [0, (Math.random() - 0.5) * 200],
+                    rotate: Math.random() * 720,
+                    opacity: [1, 0],
+                    duration: 2000 + Math.random() * 1000,
+                    easing: 'easeInQuad',
+                    complete: () => particle.remove()
+                });
+            } else {
+                // Fallback CSS
+                particle.style.animation = 'confetti-fall 2s ease-in forwards';
+                setTimeout(() => particle.remove(), 2000);
+            }
+        }
+
+        /**
+         * Obtener color aleatorio para confetti
+         */
+        function getRandomColor() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffd93d', '#6bcf7f', '#a8e6cf', '#ff8b94', '#c7ceea'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        /**
+         * Mostrar XP flotante
+         * @param {number} amount - Cantidad de XP
+         */
+        function showFloatingXP(amount) {
+            if (!animationsEnabled) return;
+
+            const xpText = document.createElement('div');
+            xpText.className = 'floating-xp';
+            xpText.textContent = `+${amount} XP`;
+
+            // Posicionar cerca del botón de enviar
+            const submitBtn = document.getElementById('submitBtn');
+            const rect = submitBtn.getBoundingClientRect();
+            xpText.style.left = rect.left + rect.width / 2 + 'px';
+            xpText.style.top = rect.top + 'px';
+
+            document.body.appendChild(xpText);
+
+            if (typeof anime !== 'undefined') {
+                anime({
+                    targets: xpText,
+                    translateY: -100,
+                    opacity: [1, 0],
+                    scale: [1, 1.5],
+                    duration: 1500,
+                    easing: 'easeOutQuad',
+                    complete: () => xpText.remove()
+                });
+            } else {
+                xpText.style.animation = 'float-up-xp 1.5s ease-out forwards';
+                setTimeout(() => xpText.remove(), 1500);
+            }
+        }
+
+        /**
+         * Animar level up
+         */
+        function animateLevelUp() {
+            if (!animationsEnabled) return;
+
+            const levelElement = document.getElementById('playerLevel');
+
+            if (typeof anime !== 'undefined') {
+                anime({
+                    targets: levelElement,
+                    scale: [1, 1.3, 1],
+                    rotate: [0, 360],
+                    duration: 1000,
+                    easing: 'easeInOutQuad'
+                });
+            } else {
+                levelElement.classList.add('level-up-animation');
+                setTimeout(() => levelElement.classList.remove('level-up-animation'), 1000);
+            }
+        }
+
+        /**
+         * Pulso en la barra de XP
+         */
+        function pulseXPBar() {
+            if (!animationsEnabled) return;
+
+            const xpBar = document.getElementById('xpBar');
+
+            if (typeof anime !== 'undefined') {
+                anime({
+                    targets: xpBar,
+                    scaleY: [1, 1.1, 1],
+                    duration: 300,
+                    easing: 'easeInOutQuad'
+                });
+            } else {
+                xpBar.classList.add('xp-bar-pulse');
+                setTimeout(() => xpBar.classList.remove('xp-bar-pulse'), 300);
+            }
+        }
+
+        // ============================================
+        // CONFIGURACIÓN
+        // ============================================
+
+        /**
+         * Cargar configuración desde localStorage
+         */
+        function loadConfig() {
+            const config = JSON.parse(localStorage.getItem('gameConfig') || '{}');
+            soundsEnabled = config.soundsEnabled !== false; // Default true
+            volume = config.volume !== undefined ? config.volume : 0.5;
+            animationsEnabled = config.animationsEnabled !== false; // Default true
+        }
+
+        /**
+         * Guardar configuración en localStorage
+         */
+        function saveConfig() {
+            const config = {
+                soundsEnabled: document.getElementById('soundsEnabled').checked,
+                volume: parseInt(document.getElementById('volumeSlider').value) / 100,
+                animationsEnabled: document.getElementById('animationsEnabled').checked
+            };
+
+            soundsEnabled = config.soundsEnabled;
+            volume = config.volume;
+            animationsEnabled = config.animationsEnabled;
+
+            localStorage.setItem('gameConfig', JSON.stringify(config));
+
+            // Feedback visual
+            playSound('xp');
+
+            // Cerrar modal
+            closeConfigModal();
+        }
+
+        /**
+         * Abrir modal de configuración
+         */
+        function openConfigModal() {
+            playSound('click');
+
+            const modal = document.getElementById('configModal');
+            modal.style.display = 'flex';
+
+            // Cargar valores actuales
+            document.getElementById('soundsEnabled').checked = soundsEnabled;
+            document.getElementById('volumeSlider').value = Math.round(volume * 100);
+            document.getElementById('volumeValue').textContent = Math.round(volume * 100) + '%';
+            document.getElementById('animationsEnabled').checked = animationsEnabled;
+
+            // Focus en el primer elemento
+            setTimeout(() => document.getElementById('soundsEnabled').focus(), 100);
+        }
+
+        /**
+         * Cerrar modal de configuración
+         */
+        function closeConfigModal() {
+            playSound('click');
+            document.getElementById('configModal').style.display = 'none';
+        }
+
+        // Event listener para el slider de volumen
+        document.addEventListener('DOMContentLoaded', function() {
+            const volumeSlider = document.getElementById('volumeSlider');
+            const volumeValue = document.getElementById('volumeValue');
+
+            volumeSlider.addEventListener('input', function() {
+                volumeValue.textContent = this.value + '%';
+                volume = this.value / 100;
+            });
+
+            // Preview del sonido al soltar el slider
+            volumeSlider.addEventListener('change', function() {
+                playSound('xp');
+            });
+
+            // Cerrar modal con Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && document.getElementById('configModal').style.display === 'flex') {
+                    closeConfigModal();
+                }
+            });
+
+            // Cargar configuración al iniciar
+            loadConfig();
+        });
 
         let gameState = {
             playerName: '',
@@ -2224,6 +2822,7 @@
                 const answer = answerInput.value.trim();
 
                 if (answer === '') {
+                    playSound('incorrect');
                     feedback.className = 'feedback error';
                     feedback.textContent = '❌ Por favor ingresa una respuesta';
                     return;
@@ -2241,6 +2840,7 @@
             const answer = parseFloat(answerInput.value);
 
             if (isNaN(answer)) {
+                playSound('incorrect');
                 feedback.className = 'feedback error';
                 feedback.textContent = '❌ Por favor ingresa un número válido';
                 return;
@@ -2260,7 +2860,11 @@
             const correctAnswer = ventasSemana.reduce((a, b) => a + b, 0) / ventasSemana.length;
 
             if (Math.abs(answer - correctAnswer) < 0.5) {
-                // Correct!
+                // Correct! Play sound and animations
+                playSound('correct');
+                showFloatingXP(100);
+                showConfetti();
+
                 feedback.className = 'feedback success';
                 feedback.innerHTML = `
                     ✅ <strong>¡EXCELENTE, ${gameState.playerName.toUpperCase()}!</strong><br><br>
@@ -2554,10 +3158,19 @@
             gameState.xp += amount;
             gameState.totalXP += amount;
 
+            // Play XP sound and pulse bar
+            playSound('xp');
+            pulseXPBar();
+
             const xpNeeded = gameState.level * 100;
             if (gameState.xp >= xpNeeded) {
                 gameState.level++;
                 gameState.xp -= xpNeeded;
+
+                // Level up! Play fanfare and animate
+                playSound('levelup');
+                animateLevelUp();
+                showConfetti();
 
                 setTimeout(() => {
                     alert(`🎊 ¡LEVEL UP! 🎊\n\nNivel ${gameState.level - 1} → Nivel ${gameState.level}\n\n✨ Nuevas misiones desbloqueadas`);
@@ -3420,9 +4033,15 @@
          * Completar Misión 5A
          */
         function completeMission5A() {
+            // Play success sound and show animations
+            playSound('correct');
+            showFloatingXP(100);
+            showConfetti();
+
             // Add XP
             gameState.xp += 100;
             updateXPBar();
+            pulseXPBar();
 
             // Mark mission as completed
             if (!gameState.missionsCompleted.includes('mission_5a')) {
@@ -3647,9 +4266,15 @@
          * Completar Misión 5B
          */
         function completeMission5B() {
+            // Play success sound and show animations
+            playSound('correct');
+            showFloatingXP(175);
+            showConfetti();
+
             // Add XP (150 base + 25 bonus)
             gameState.xp += 175;
             updateXPBar();
+            pulseXPBar();
 
             // Mark mission as completed
             if (!gameState.missionsCompleted.includes('mission_5b')) {
@@ -3661,6 +4286,54 @@
             nextMission();
         }
     </script>
+
+    <!-- Modal de Configuración -->
+    <div id="configModal" class="modal-overlay" style="display: none;">
+        <div class="modal config-modal">
+            <h2>⚙️ Configuración</h2>
+
+            <div class="config-section">
+                <h3>🔊 Sonidos</h3>
+                <div class="config-option">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="soundsEnabled" checked>
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-text">Activar sonidos</span>
+                    </label>
+                </div>
+
+                <div class="config-option">
+                    <label for="volumeSlider">Volumen:</label>
+                    <div class="volume-control">
+                        <input type="range" id="volumeSlider" min="0" max="100" value="50" step="1">
+                        <span id="volumeValue">50%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h3>✨ Animaciones</h3>
+                <div class="config-option">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="animationsEnabled" checked>
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-text">Activar animaciones épicas</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="config-buttons">
+                <button class="modal-btn" onclick="saveConfig()">💾 Guardar</button>
+                <button class="modal-btn secondary" onclick="closeConfigModal()">❌ Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cargar anime.js desde CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+            integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
