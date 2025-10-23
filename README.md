@@ -15,11 +15,11 @@ Crear una ruta de aprendizaje completa y práctica que cubra todas las competenc
 ## 📊 Progreso General
 
 ### Módulos Completados: 1/10 (10%)
-### Proyectos Completados: 3/31 (10%)
+### Proyectos Completados: 4/31 (13%)
 
 ```
 Módulo 1:  ████████████████████ 100%  ✅ COMPLETADO
-Módulo 2:  ░░░░░░░░░░░░░░░░░░░░   0%  ⏳ Pendiente
+Módulo 2:  ██████░░░░░░░░░░░░░░  33%  🔄 En progreso
 Módulo 3:  ░░░░░░░░░░░░░░░░░░░░   0%  ⏳ Pendiente
 Módulo 4:  ░░░░░░░░░░░░░░░░░░░░   0%  ⏳ Pendiente
 Módulo 5:  ░░░░░░░░░░░░░░░░░░░░   0%  ⏳ Pendiente
@@ -44,7 +44,8 @@ Curso Data Engineering/
 │   ├── tema-1-python-estadistica/  ✅ COMPLETADO (89% cobertura)
 │   ├── tema-2-procesamiento-csv/   ✅ COMPLETADO (99% cobertura)
 │   └── tema-3-logs-debugging/      ✅ COMPLETADO (79% cobertura)
-├── modulo-02-sql/             # ⏳ PENDIENTE
+├── modulo-02-sql/             # 🔄 EN PROGRESO (33%)
+│   └── tema-1-sql-basico/          ✅ COMPLETADO (96% cobertura)
 ├── modulo-03-etl/             # ⏳ PENDIENTE
 ├── modulo-04-modelado/        # ⏳ PENDIENTE
 ├── modulo-05-big-data/        # ⏳ PENDIENTE
@@ -59,14 +60,31 @@ Curso Data Engineering/
 
 ### ✅ Completado Recientemente
 
-**Módulo 1: Fundamentos de Programación** (2025-10-19) - ✅ 100% COMPLETADO
+**Módulo 2 - Tema 1: SQL Básico** (2025-10-23) - ✅ 100% COMPLETADO
 
-**Quality Check Ejecutado** (2025-10-19):
-- ✅ **143 tests** (100% pasando)
-- ✅ **89.06% cobertura promedio** (objetivo: 80%)
+**Quality Check Ejecutado** (2025-10-23):
+- ✅ **69 tests** (100% pasando)
+- ✅ **96% cobertura** (objetivo: >80%)
 - ✅ Código formateado con **black**
-- ✅ Sin errores críticos de **flake8**
-- ✅ Documentación completa
+- ✅ **0 errores de flake8**
+- ✅ Documentación completa y revisión pedagógica aprobada
+
+**Proyecto Completado:**
+
+4. **Tema 1: SQL Básico** (96% cobertura) - **CALIDAD EXCELENTE 10/10**
+   - 16 funciones Python para interactuar con SQLite
+   - 69 tests unitarios con TDD estricto
+   - Módulos: `conexion_db`, `validaciones`, `consultas_basicas`, `consultas_agregadas`, `consultas_agrupadas`
+   - Contenido educativo: `01-TEORIA.md` (~4,000 palabras), `02-EJEMPLOS.md` (5 ejemplos), `03-EJERCICIOS.md` (15 ejercicios)
+   - Revisión pedagógica: 9.3/10 ⭐⭐⭐⭐⭐ (Aprobado para producción)
+   - Prevención de SQL injection, context managers, funciones puras
+
+Ver detalles: [`modulo-02-sql/tema-1-sql-basico/`](./modulo-02-sql/tema-1-sql-basico/)
+Reporte completo: [`modulo-02-sql/tema-1-sql-basico/04-proyecto-practico/REPORTE_CALIDAD_FINAL.md`](./modulo-02-sql/tema-1-sql-basico/04-proyecto-practico/REPORTE_CALIDAD_FINAL.md)
+
+---
+
+**Módulo 1: Fundamentos de Programación** (2025-10-19) - ✅ 100% COMPLETADO
 
 **Proyectos Completados:**
 
@@ -86,17 +104,19 @@ Curso Data Engineering/
    - Módulos: `logger_config`, `pipeline_logs`
 
 Ver detalles: [`modulo-01-fundamentos/`](./modulo-01-fundamentos/)
-Reporte completo: [`documentacion/jira/REPORTE_CALIDAD_QUALITY_CHECK.md`](./documentacion/jira/REPORTE_CALIDAD_QUALITY_CHECK.md)
 
 ### 🔄 En Progreso
 
-**Módulo 2: Bases de Datos y SQL** (Próximamente)
+**Módulo 2: Bases de Datos y SQL** (33% completado)
+- ✅ Tema 1: SQL Básico (Completado)
+- ⏳ Tema 2: SQL Intermedio (Pendiente)
+- ⏳ Tema 3: Optimización SQL (Pendiente)
 
 ### ⏳ Próximos Pasos
 
-1. Comenzar Módulo 2: Bases de Datos y SQL
-2. Proyecto 2.1: Modelado de Base de Datos
-3. Proyecto 2.2: Consultas SQL Avanzadas
+1. Tema 2: SQL Intermedio (JOINs, subconsultas, CTEs, funciones de ventana)
+2. Tema 3: Optimización SQL (índices, EXPLAIN ANALYZE)
+3. Módulo 3: Ingeniería de Datos Core (ETL/ELT, Pandas)
 
 ## 🎓 Programa del Master
 
@@ -105,8 +125,10 @@ Reporte completo: [`documentacion/jira/REPORTE_CALIDAD_QUALITY_CHECK.md`](./docu
 1. **✅ Fundamentos de Programación** (100% completado) - 8-10 semanas
    - Python, Git, Testing, TDD, Clean Code, Estadística, CSV, Logs
 
-2. **⏳ Bases de Datos y SQL** - 8-10 semanas
-   - SQL avanzado, Modelado relacional, NoSQL
+2. **🔄 Bases de Datos y SQL** (33% completado) - 8-10 semanas
+   - ✅ SQL Básico (SELECT, WHERE, ORDER BY, funciones agregadas, GROUP BY)
+   - ⏳ SQL Intermedio (JOINs, subconsultas, CTEs, funciones de ventana)
+   - ⏳ Optimización SQL (índices, EXPLAIN ANALYZE)
 
 3. **⏳ Ingeniería de Datos Core** - 10-12 semanas
    - ETL/ELT, Pandas, Data Quality, Pipelines
@@ -195,6 +217,8 @@ Este Master se basa en principios sólidos de ingeniería de software:
 
 ### Por Módulo
 - [Módulo 1: Fundamentos](./modulo-01-fundamentos/README.md) - ✅ 100% completado
+- [Módulo 2: SQL](./modulo-02-sql/README.md) - 🔄 33% completado
+  - [Tema 1: SQL Básico](./modulo-02-sql/tema-1-sql-basico/README.md) - ✅ 100% completado
 
 ## 🎯 Objetivos de Aprendizaje
 
@@ -324,7 +348,7 @@ pytest --cov=src --cov-report=term --cov-fail-under=80
 
 ---
 
-**Última actualización:** 2025-10-19
-**Versión:** 1.1.0 (Módulo 1 completado ✅)
+**Última actualización:** 2025-10-23
+**Versión:** 1.2.0 (Módulo 2 - Tema 1 completado ✅)
 
 **¡Bienvenido al viaje de convertirte en Data Engineer! 🚀📊**
