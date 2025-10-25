@@ -57,8 +57,8 @@ def ejemplo_paginacion_automatica():
 
     url = "https://jsonplaceholder.typicode.com/posts"
 
-    print(f"\n📡 Obteniendo TODOS los posts automáticamente...")
-    print(f"  (paginando de 20 en 20)")
+    print("\n📡 Obteniendo TODOS los posts automáticamente...")
+    print("  (paginando de 20 en 20)")
 
     # ¡Una sola línea para obtener TODO!
     todos_posts = paginar_offset_limit(
@@ -88,7 +88,7 @@ def ejemplo_paginacion_con_filtros():
 
     url = "https://jsonplaceholder.typicode.com/comments"
 
-    print(f"\n📡 Obteniendo comentarios del post 1...")
+    print("\n📡 Obteniendo comentarios del post 1...")
 
     # Paginar + filtrar por postId
     comentarios = paginar_offset_limit(
@@ -116,7 +116,7 @@ def ejemplo_paginacion_limitada():
 
     url = "https://jsonplaceholder.typicode.com/posts"
 
-    print(f"\n📡 Obteniendo solo 2 páginas (máximo)...")
+    print("\n📡 Obteniendo solo 2 páginas (máximo)...")
 
     posts_limitados = paginar_offset_limit(
         url=url,

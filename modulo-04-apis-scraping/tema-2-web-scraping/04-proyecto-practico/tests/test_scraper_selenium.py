@@ -5,7 +5,7 @@ Tests para el módulo scraper_selenium.py
 12 tests que cubren scraping dinámico con Selenium.
 """
 
-from unittest.mock import MagicMock, Mock, patch
+from unittest.mock import Mock, patch
 
 import pytest
 from selenium.common.exceptions import TimeoutException

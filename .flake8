@@ -42,6 +42,7 @@ exclude =
 per-file-ignores =
     __init__.py:F401
     tests/*:S101,S105,S106
+    */ejemplos/*.py:E402
 
 # Mostrar el código fuente del error
 show-source = True

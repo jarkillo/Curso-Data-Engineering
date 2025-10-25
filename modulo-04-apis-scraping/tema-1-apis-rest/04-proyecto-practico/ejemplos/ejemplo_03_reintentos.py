@@ -10,7 +10,6 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import requests
-from src.autenticacion import crear_headers_api_key
 from src.reintentos import calcular_delay_exponencial, reintentar_con_backoff
 
 
@@ -53,13 +52,13 @@ def ejemplo_request_con_reintentos():
 
     url = "https://jsonplaceholder.typicode.com/users/1"
 
-    print(f"\n📡 Haciendo request con hasta 3 intentos...")
+    print("\n📡 Haciendo request con hasta 3 intentos...")
     print(f"  URL: {url}")
 
     try:
         response = reintentar_con_backoff(url=url, max_intentos=3)
 
-        print(f"\n✅ Request exitoso!")
+        print("\n✅ Request exitoso!")
         print(f"  Status Code: {response.status_code}")
         print(f"  Respuesta: {response.json()['name']}")
 
@@ -107,7 +106,7 @@ def ejemplo_post_con_reintentos():
 
     data = {"title": "Título de ejemplo", "body": "Contenido del post", "userId": 1}
 
-    print(f"\n📡 Enviando POST con reintentos...")
+    print("\n📡 Enviando POST con reintentos...")
     print(f"  URL: {url}")
     print(f"  Datos: {data}")
 
@@ -116,7 +115,7 @@ def ejemplo_post_con_reintentos():
             url=url, metodo="POST", json=data, max_intentos=3
         )
 
-        print(f"\n✅ POST exitoso!")
+        print("\n✅ POST exitoso!")
         print(f"  Status Code: {response.status_code}")
         print(f"  ID creado: {response.json().get('id')}")
 

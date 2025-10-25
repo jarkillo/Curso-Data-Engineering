@@ -68,7 +68,7 @@ def ejemplo_get_usuario_especifico():
     response = hacer_get(url)
     usuario = extraer_json_seguro(response)
 
-    print(f"\n✅ Usuario encontrado:")
+    print("\n✅ Usuario encontrado:")
     print(f"  ID: {usuario['id']}")
     print(f"  Nombre: {usuario['name']}")
     print(f"  Username: {usuario['username']}")

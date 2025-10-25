@@ -32,7 +32,7 @@ def test_hacer_get_con_headers(url_base):
     responses.add(responses.GET, url_base + "/users", json={"status": "ok"}, status=200)
 
     headers = {"X-Custom-Header": "test-value"}
-    response = hacer_get(url_base + "/users", headers=headers)
+    _ = hacer_get(url_base + "/users", headers=headers)
 
     # Verificar que el header fue enviado
     assert len(responses.calls) == 1
@@ -46,7 +46,7 @@ def test_hacer_get_con_params(url_base):
     responses.add(responses.GET, url_base + "/users", json=[], status=200)
 
     params = {"page": 1, "limit": 10}
-    response = hacer_get(url_base + "/users", params=params)
+    _ = hacer_get(url_base + "/users", params=params)
 
     # Verificar que params fueron enviados
     assert "page=1" in responses.calls[0].request.url
@@ -110,7 +110,7 @@ def test_hacer_post_con_json(url_base):
     responses.add(responses.POST, url_base + "/users", json={"id": 1}, status=201)
 
     data = {"name": "Test"}
-    response = hacer_post(url_base + "/users", json=data)
+    _ = hacer_post(url_base + "/users", json=data)
 
     # Verificar que se envió como JSON
     assert len(responses.calls) == 1
@@ -134,7 +134,7 @@ def test_hacer_post_con_headers(url_base):
     responses.add(responses.POST, url_base + "/users", json={"id": 1}, status=201)
 
     headers = {"Authorization": "Bearer token123"}
-    response = hacer_post(url_base + "/users", json={"test": "data"}, headers=headers)
+    _ = hacer_post(url_base + "/users", json={"test": "data"}, headers=headers)
 
     assert "Authorization" in responses.calls[0].request.headers
 
@@ -165,7 +165,7 @@ def test_hacer_put_con_json(url_base):
     responses.add(responses.PUT, url_base + "/users/1", json={"id": 1}, status=200)
 
     data = {"name": "Updated"}
-    response = hacer_put(url_base + "/users/1", json=data)
+    _ = hacer_put(url_base + "/users/1", json=data)
 
     # Verificar que se envió como JSON
     assert responses.calls[0].request.headers["Content-Type"] == "application/json"
@@ -190,7 +190,7 @@ def test_hacer_delete_con_headers(url_base):
     responses.add(responses.DELETE, url_base + "/users/1", status=204)
 
     headers = {"Authorization": "Bearer token123"}
-    response = hacer_delete(url_base + "/users/1", headers=headers)
+    _ = hacer_delete(url_base + "/users/1", headers=headers)
 
     assert "Authorization" in responses.calls[0].request.headers
 

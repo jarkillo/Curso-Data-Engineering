@@ -59,7 +59,7 @@ def calcular_delay_exponencial(intento: int, base: int = 2, max_delay: int = 60)
     return min(delay, max_delay)
 
 
-def reintentar_con_backoff(
+def reintentar_con_backoff(  # noqa: C901
     url: str,
     metodo: str = "GET",
     max_intentos: int = 3,

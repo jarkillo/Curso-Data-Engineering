@@ -6,7 +6,6 @@ Funciones para validar robots.txt, rate limiting y buenas prácticas.
 """
 
 import time
-from typing import Optional
 from urllib.parse import urlparse
 from urllib.robotparser import RobotFileParser
 
@@ -46,7 +45,7 @@ def validar_robots_txt(url: str, user_agent: str = "*") -> bool:
 
         return rp.can_fetch(user_agent, url)
 
-    except Exception as e:
+    except Exception:
         # En caso de error, ser permisivo
         return True
 

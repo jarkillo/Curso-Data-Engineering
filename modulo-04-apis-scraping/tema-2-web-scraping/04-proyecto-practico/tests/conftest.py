@@ -5,7 +5,6 @@ Configuración global de pytest y fixtures compartidos
 Fixtures disponibles para todos los tests.
 """
 
-import os
 import sys
 from pathlib import Path
 
