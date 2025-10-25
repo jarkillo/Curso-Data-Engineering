@@ -92,7 +92,9 @@ def test_guardar_reporte_txt(tmp_path):
         contenido = f.read()
         assert "REPORTE DE VENTAS" in contenido
         # El número puede aparecer con o sin ceros decimales y con formato de miles
-        assert "1,250.50" in contenido or "1250.50" in contenido or "1,250.5" in contenido
+        assert (
+            "1,250.50" in contenido or "1250.50" in contenido or "1,250.5" in contenido
+        )
 
 
 def test_guardar_reporte_txt_formato_humano(tmp_path):

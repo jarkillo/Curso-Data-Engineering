@@ -63,7 +63,9 @@ def test_simular_envio_email_con_anomalia():
 
     assert "ALERTA" in email["asunto"] or "ALERTA" in email["cuerpo"]
     # El porcentaje puede aparecer como "45%", "45.0%", o "0.45"
-    assert "45" in email["cuerpo"] and ("%" in email["cuerpo"] or "0.45" in email["cuerpo"])
+    assert "45" in email["cuerpo"] and (
+        "%" in email["cuerpo"] or "0.45" in email["cuerpo"]
+    )
 
 
 def test_simular_envio_email_formato_correcto():

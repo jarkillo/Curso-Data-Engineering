@@ -101,30 +101,32 @@ def test_calcular_promedio_historico(tmp_path, monkeypatch):
 
     # Crear CSVs de prueba
     fechas = ["2025-10-20", "2025-10-21", "2025-10-22"]
-    
+
     # Crear directorio de datos en la ubicación real del proyecto
     project_root = Path(__file__).parent.parent
     data_dir = project_root / "data" / "input"
     data_dir.mkdir(parents=True, exist_ok=True)
-    
+
     # Crear CSVs con ventas conocidas (1000, 1500, 2000)
     created_files = []
     for i, fecha in enumerate(fechas):
         total = 1000 + (i * 500)
-        df = pd.DataFrame({
-            "venta_id": [1, 2],
-            "fecha": [fecha, fecha],
-            "cliente_id": ["C001", "C002"],
-            "producto": ["Producto A", "Producto B"],
-            "categoria": ["Cat1", "Cat2"],
-            "cantidad": [1, 1],
-            "precio_unitario": [total/2, total/2],
-            "total": [total/2, total/2]
-        })
+        df = pd.DataFrame(
+            {
+                "venta_id": [1, 2],
+                "fecha": [fecha, fecha],
+                "cliente_id": ["C001", "C002"],
+                "producto": ["Producto A", "Producto B"],
+                "categoria": ["Cat1", "Cat2"],
+                "cantidad": [1, 1],
+                "precio_unitario": [total / 2, total / 2],
+                "total": [total / 2, total / 2],
+            }
+        )
         csv_path = data_dir / f"ventas_{fecha.replace('-', '_')}.csv"
         df.to_csv(csv_path, index=False)
         created_files.append(csv_path)
-    
+
     try:
         # Calcular promedio (debería ser (1000 + 1500 + 2000) / 3 = 1500)
         promedio = calcular_promedio_historico(fechas)
