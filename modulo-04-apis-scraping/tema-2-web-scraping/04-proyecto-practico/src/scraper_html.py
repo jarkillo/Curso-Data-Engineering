@@ -65,9 +65,9 @@ def extraer_enlaces(html: str, selector: str = "a") -> List[Dict[str, str]]:
     return resultado
 
 
-def extraer_tabla(
+def extraer_tabla(  # noqa: C901
     html: str, selector: str = "table"
-) -> List[Dict[str, str]]:  # noqa: C901
+) -> List[Dict[str, str]]:
     """
     Convierte una tabla HTML en lista de diccionarios.
 
