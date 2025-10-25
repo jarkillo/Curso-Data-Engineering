@@ -9,6 +9,41 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 
 ## [Unreleased]
 
+### Added
+- **JAR-191: Módulo 5 - Bases de Datos Avanzadas (PostgreSQL + MongoDB) ✅ FASE 1 COMPLETADA** (2025-10-25):
+  - 🎯 **Estado**: Tema 1 (PostgreSQL) 100% completo, Módulo 5 al 33%
+  - **Quality Check**: ✅ 100% aprobado (black, flake8, pytest, cobertura 100%)
+  - **Contenido Educativo Creado**:
+    - `tema-1-postgresql-avanzado/01-TEORIA.md` - ~9,000 palabras: JSONB, Arrays, UUID, funciones almacenadas, triggers, ACID
+    - `tema-1-postgresql-avanzado/02-EJEMPLOS.md` - 5 ejemplos ejecutables completos
+    - `tema-1-postgresql-avanzado/03-EJERCICIOS.md` - 15 ejercicios (6 básicos, 6 intermedios, 3 avanzados)
+    - `tema-2-mongodb/01-TEORIA.md` - ~6,500 palabras: NoSQL, documentos, agregaciones, índices
+    - `tema-3-modelado-datos/01-TEORIA.md` - ~5,000 palabras: Normalización, Star/Snowflake Schema, OLTP vs OLAP
+    - **Total teoría**: ~20,500 palabras
+  - **Proyecto Práctico PostgreSQL Avanzado** (TDD - 100% funcional):
+    - 📂 **Ruta**: `modulo-05-bases-datos-avanzadas/tema-1-postgresql-avanzado/04-proyecto-practico`
+    - 🧪 **Tests**: 28 tests unitarios (28/28 pasados, 0 fallidos, 0.37s)
+    - 📊 **Cobertura**: **100%** (src/__init__.py: 100%, conexion.py: 100%, operaciones_json.py: 100%)
+    - 🎯 **Funciones**: 6 funciones Python con type hints y docstrings al 100%
+    - 📝 **Módulos**:
+      * `src/conexion.py` (3 funciones) - Gestión segura de conexiones, validación credenciales, queries parametrizadas
+      * `src/operaciones_json.py` (3 funciones) - CRUD completo con JSONB, prevención SQL injection
+    - ✅ **Quality Checks**: Black (7 archivos), Flake8 (0 errores), Pytest (100%)
+    - 🐳 **Docker**: PostgreSQL 15 + MongoDB 6 listos y configurados
+    - 📖 **Documentación**: README completo con instalación, ejemplos de uso, troubleshooting
+  - **Documentación Actualizada**:
+    - 5 READMEs creados (módulo + 3 temas + proyecto)
+    - CHANGELOG.md actualizado con JAR-191
+    - README.md raíz actualizado (Módulo 5: 33%)
+    - Reporte de progreso detallado en `documentacion/jira/`
+  - **Métricas Alcanzadas**:
+    - 📝 Tests: 28 (objetivo: 20+) ✅
+    - 📊 Cobertura: 100% (objetivo: >80%) ⭐ +20 puntos
+    - 📚 Teoría: 20,500 palabras (objetivo: 12,000) ⭐ +71%
+    - 🎯 Type hints: 100% ✅
+    - 📖 Docstrings: 100% ✅
+  - **Próximos Pasos**: Completar ejemplos/ejercicios Temas 2-3, proyectos MongoDB y Modelado (estimado: 1-1.5 semanas)
+
 ### Security
 - **Actualización crítica de seguridad: black 23.11.0 → 24.3.0** (2025-10-25):
   - 🔒 **CVE-2024-21503 CORREGIDO**: Vulnerabilidad de rendimiento catastrófico en docstrings con múltiples tabs

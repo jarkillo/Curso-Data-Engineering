@@ -22,7 +22,7 @@ Módulo 1:  ████████████████████ 100%  �
 Módulo 2:  ██████░░░░░░░░░░░░░░  33%  🔄 En progreso
 Módulo 3:  ██████░░░░░░░░░░░░░░  33%  🔄 En progreso
 Módulo 4:  ████████████████████ 100%  ✅ COMPLETADO
-Módulo 5:  ░░░░░░░░░░░░░░░░░░░░   0%  ⏳ Pendiente
+Módulo 5:  ██████░░░░░░░░░░░░░░  33%  🔄 En progreso
 Módulo 6:  ░░░░░░░░░░░░░░░░░░░░   0%  ⏳ Pendiente
 Módulo 7:  ░░░░░░░░░░░░░░░░░░░░   0%  ⏳ Pendiente
 Módulo 8:  ░░░░░░░░░░░░░░░░░░░░   0%  ⏳ Pendiente
@@ -52,7 +52,9 @@ Curso Data Engineering/
 │   ├── tema-1-apis-rest/           ✅ COMPLETADO (100% cobertura)
 │   ├── tema-2-web-scraping/        ✅ COMPLETADO (90% cobertura)
 │   └── tema-3-rate-limiting-caching/  ✅ COMPLETADO (88% cobertura)
-├── modulo-05-big-data/        # ⏳ PENDIENTE
+├── modulo-05-bases-datos-avanzadas/  # 🔄 EN PROGRESO (33%)
+│   └── tema-1-postgresql-avanzado/    ✅ COMPLETADO (100% cobertura)
+├── modulo-06-big-data/        # ⏳ PENDIENTE
 ├── modulo-06-cloud/           # ⏳ PENDIENTE
 ├── modulo-07-orquestacion/    # ⏳ PENDIENTE
 ├── modulo-08-ia-ml/           # ⏳ PENDIENTE
