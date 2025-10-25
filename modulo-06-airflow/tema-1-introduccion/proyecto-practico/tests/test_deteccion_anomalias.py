@@ -95,9 +95,10 @@ def test_calcular_promedio_historico(tmp_path, monkeypatch):
     When: Se llama a calcular_promedio_historico
     Then: Retorna el promedio de ventas totales
     """
-    from src.deteccion_anomalias import calcular_promedio_historico
-    import pandas as pd
     from pathlib import Path
+
+    import pandas as pd
+    from src.deteccion_anomalias import calcular_promedio_historico
 
     # Crear CSVs de prueba
     fechas = ["2025-10-20", "2025-10-21", "2025-10-22"]
