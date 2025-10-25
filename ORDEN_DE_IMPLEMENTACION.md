@@ -118,10 +118,25 @@ Este documento define el orden lógico y pedagógico para implementar todo el co
 
 ---
 
-### 🔟 JAR-192: Módulo 6 - Apache Airflow y Orquestación
+### 🔟 JAR-192: Módulo 6 - Apache Airflow y Orquestación ⏳ EN PROGRESO
 - **Duración estimada**: 1-2 semanas
-- **Temas**: Introducción Airflow, nivel intermedio, producción
-- **Proyectos**: Pipeline ETL simple, pipeline complejo, pipeline productivo
+- **Estado**: Tema 1 completado (100%) - 2025-10-25
+- **Temas**:
+  - ✅ Tema 1: Introducción a Airflow (100% completado)
+    - ✅ 01-TEORIA.md (~6,000 palabras)
+    - ✅ 02-EJEMPLOS.md (5 ejemplos ejecutables)
+    - ✅ 03-EJERCICIOS.md (15 ejercicios + soluciones completas)
+    - ✅ Proyecto práctico TDD: Sistema de Monitoreo de Ventas
+      - 6 módulos implementados (extracción, validación, transformación, detección de anomalías, carga, notificaciones)
+      - 30+ tests unitarios (pytest)
+      - DAG completo de Airflow
+      - Cobertura esperada: >80%
+    - ✅ Validación pedagógica: 9.2/10
+  - 🔜 Tema 2: Airflow Intermedio (pendiente)
+  - 🔜 Tema 3: Airflow en Producción (pendiente)
+- **Calificación pedagógica Tema 1**: 9.2/10 ⭐⭐⭐⭐⭐
+- **Prerequisitos**: Docker y Docker Compose
+- **Infraestructura**: ✅ Docker Compose con PostgreSQL, MongoDB, Airflow
 
 ---
 
