@@ -112,7 +112,7 @@ def verificar_tipos_datos(df: pd.DataFrame) -> bool:
     return True
 
 
-def validar_datos_ventas(df: pd.DataFrame) -> Dict:
+def validar_datos_ventas(df: pd.DataFrame) -> Dict:  # noqa: C901
     """
     Ejecuta todas las validaciones sobre el DataFrame de ventas.
 

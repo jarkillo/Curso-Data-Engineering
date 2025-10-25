@@ -29,12 +29,13 @@ from airflow import DAG
 proyecto_dir = Path(__file__).parent.parent
 sys.path.insert(0, str(proyecto_dir))
 
-from src.carga import guardar_reporte_csv, guardar_reporte_txt
-from src.deteccion_anomalias import calcular_promedio_historico, detectar_caida_ventas
-from src.extraccion import extraer_ventas_csv, obtener_ruta_archivo
-from src.notificaciones import simular_envio_email
-from src.transformacion import calcular_metricas_ventas
-from src.validacion import validar_datos_ventas
+# Imports locales después de modificar sys.path (necesario para Airflow)
+from src.carga import guardar_reporte_csv, guardar_reporte_txt  # noqa: E402
+from src.deteccion_anomalias import detectar_caida_ventas  # noqa: E402
+from src.extraccion import extraer_ventas_csv, obtener_ruta_archivo  # noqa: E402
+from src.notificaciones import simular_envio_email  # noqa: E402
+from src.transformacion import calcular_metricas_ventas  # noqa: E402
+from src.validacion import validar_datos_ventas  # noqa: E402
 
 # Configuración
 FECHA_PROCESO = "{{ ds }}"  # Templating de Airflow (fecha de ejecución)
@@ -171,7 +172,10 @@ default_args = {
 
 with DAG(
     dag_id="pipeline_ventas_cloudmart",
-    description="Pipeline ETL completo para monitoreo de ventas diarias con detección de anomalías",
+    description=(
+        "Pipeline ETL completo para monitoreo de ventas diarias "
+        "con detección de anomalías"
+    ),
     default_args=default_args,
     start_date=datetime(2025, 10, 1),
     schedule="0 7 * * *",  # Diario a las 7 AM
