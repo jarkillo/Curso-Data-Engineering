@@ -63,6 +63,39 @@ Contenido:
 
 ---
 
+### ⭐ [SISTEMA_EVALUACION_CALIDAD.md](SISTEMA_EVALUACION_CALIDAD.md)
+**Resumen ejecutivo del sistema de evaluación de calidad**
+
+Contenido:
+- Sistema de puntuación (8 categorías con pesos específicos)
+- Escala de calificación (0-10)
+- Checklist rápido de calidad
+- Comandos de verificación
+- Criterios de aprobación
+- Ejemplo de evaluación (JAR-190)
+- Plantilla de reporte
+
+**Úsalo cuando** → Necesites verificar si tu código cumple los estándares antes de enviarlo o marcar una issue como completada.
+
+---
+
+### 🔍 [guias/GUIA_QUALITY_CHECK.md](guias/GUIA_QUALITY_CHECK.md)
+**Guía completa del proceso de evaluación de calidad**
+
+Contenido:
+- Checklist detallado de evaluación por categoría
+- Sistema de puntuación con ejemplos
+- Comandos de verificación automática
+- Script de quality check completo
+- Plantilla de reporte detallada
+- Anti-patrones a detectar
+- Ejemplos de código correcto e incorrecto
+- Criterios específicos por tipo de issue
+
+**Úsalo como** → Referencia completa para realizar quality checks exhaustivos en cada módulo o proyecto.
+
+---
+
 ## Cómo Navegar Este Master
 
 ### Para Principiantes Absolutos
@@ -145,21 +178,21 @@ Si ya tienes experiencia en programación o data:
 
 ### Tiempo Estimado por Módulo
 
-| Módulo | Nivel | Semanas | Horas/Semana | Total Horas |
-|--------|-------|---------|--------------|-------------|
-| 1. Fundamentos | Principiante | 8-10 | 10-15 | 80-150 |
-| 2. Bases de Datos | Principiante | 8-10 | 10-15 | 80-150 |
-| 3. Data Engineering Core | Intermedio | 10-12 | 15-20 | 150-240 |
-| 4. Modelado | Intermedio-Avanzado | 8-10 | 15-20 | 120-200 |
-| 5. Big Data | Avanzado | 10-12 | 15-20 | 150-240 |
-| 6. Cloud | Avanzado | 10-12 | 15-20 | 150-240 |
-| 7. Orquestación | Intermedio-Avanzado | 8-10 | 15-20 | 120-200 |
-| 8. IA y ML | Avanzado | 10-12 | 15-20 | 150-240 |
-| 9. DataOps | Avanzado | 6-8 | 15-20 | 90-160 |
-| 10. Proyecto Final | Master | 12-16 | 20-25 | 240-400 |
-| **TOTAL** | | **90-112 sem** | | **1330-2220h** |
+| Módulo                   | Nivel               | Semanas        | Horas/Semana | Total Horas    |
+| ------------------------ | ------------------- | -------------- | ------------ | -------------- |
+| 1. Fundamentos           | Principiante        | 8-10           | 10-15        | 80-150         |
+| 2. Bases de Datos        | Principiante        | 8-10           | 10-15        | 80-150         |
+| 3. Data Engineering Core | Intermedio          | 10-12          | 15-20        | 150-240        |
+| 4. Modelado              | Intermedio-Avanzado | 8-10           | 15-20        | 120-200        |
+| 5. Big Data              | Avanzado            | 10-12          | 15-20        | 150-240        |
+| 6. Cloud                 | Avanzado            | 10-12          | 15-20        | 150-240        |
+| 7. Orquestación          | Intermedio-Avanzado | 8-10           | 15-20        | 120-200        |
+| 8. IA y ML               | Avanzado            | 10-12          | 15-20        | 150-240        |
+| 9. DataOps               | Avanzado            | 6-8            | 15-20        | 90-160         |
+| 10. Proyecto Final       | Master              | 12-16          | 20-25        | 240-400        |
+| **TOTAL**                |                     | **90-112 sem** |              | **1330-2220h** |
 
-**Dedicación intensiva (20h/semana)**: ~18 meses  
+**Dedicación intensiva (20h/semana)**: ~18 meses
 **Dedicación moderada (10h/semana)**: ~24 meses
 
 ---
@@ -563,14 +596,13 @@ Cada línea de código que escribas, cada proyecto que completes, cada error del
 
 **¿Listo para comenzar?**
 
-→ [PROGRAMA_MASTER.md](PROGRAMA_MASTER.md) - Empieza aquí  
-→ [PROYECTOS_PRACTICOS.md](PROYECTOS_PRACTICOS.md) - Tus desafíos prácticos  
-→ [RECURSOS.md](RECURSOS.md) - Tu biblioteca de conocimiento  
+→ [PROGRAMA_MASTER.md](PROGRAMA_MASTER.md) - Empieza aquí
+→ [PROYECTOS_PRACTICOS.md](PROYECTOS_PRACTICOS.md) - Tus desafíos prácticos
+→ [RECURSOS.md](RECURSOS.md) - Tu biblioteca de conocimiento
 
 **¡Éxito en tu camino hacia convertirte en Data Engineer! 🚀📊**
 
 ---
 
-*Última actualización: Octubre 2024*  
+*Última actualización: Octubre 2024*
 *Versión: 1.0*
-

@@ -1,0 +1,2 @@
+# Archivos de cache persistente (.db) se almacenan aquí
+# Esta carpeta debe existir para que shelve funcione correctamente

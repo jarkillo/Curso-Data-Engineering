@@ -1,0 +1,17 @@
+# Proyecto Práctico: Scraper Masivo Optimizado
+# Módulo 4 - Tema 3: Rate Limiting y Caching
+
+# Cliente HTTP Asíncrono (versión con wheels para Windows)
+aiohttp>=3.10.0
+
+# Testing
+pytest==7.4.3
+pytest-cov==4.1.0
+pytest-asyncio==0.21.1
+
+# Linting y Formatting
+black>=23.11.0
+flake8==6.1.0
+
+# Utilidades
+python-dotenv==1.0.0

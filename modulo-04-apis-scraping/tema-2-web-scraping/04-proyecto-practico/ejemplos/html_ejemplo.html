@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce DataHub - Productos</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .producto { border: 1px solid #ddd; padding: 15px; margin: 10px 0; }
+        .precio { color: #28a745; font-weight: bold; font-size: 1.2em; }
+        .rating { color: #ffc107; }
+        .stock { color: #6c757d; font-size: 0.9em; }
+        .agotado { color: #dc3545; }
+    </style>
+</head>
+<body>
+    <h1>Catálogo de Productos - DataHub Store</h1>
+
+    <div class="productos-grid">
+        <div class="producto" data-id="001">
+            <h2 class="nombre">Laptop Dell XPS 13</h2>
+            <p class="descripcion">Ultrabook potente con procesador Intel i7 y pantalla 4K</p>
+            <div class="rating" data-rating="4.8">
+                <span>★★★★★</span>
+                <span class="rating-num">(4.8/5)</span>
+            </div>
+            <span class="precio">$1,299.99</span>
+            <p class="stock">En stock: 15 unidades</p>
+            <a href="/producto/001" class="btn-ver">Ver detalles</a>
+        </div>
+
+        <div class="producto" data-id="002">
+            <h2 class="nombre">MacBook Pro M3</h2>
+            <p class="descripcion">Laptop profesional con chip M3 de Apple, 16GB RAM</p>
+            <div class="rating" data-rating="4.9">
+                <span>★★★★★</span>
+                <span class="rating-num">(4.9/5)</span>
+            </div>
+            <span class="precio">$2,499.00</span>
+            <p class="stock">En stock: 8 unidades</p>
+            <a href="/producto/002" class="btn-ver">Ver detalles</a>
+        </div>
+
+        <div class="producto" data-id="003">
+            <h2 class="nombre">Lenovo ThinkPad X1 Carbon</h2>
+            <p class="descripcion">Laptop empresarial ligera con teclado excepcional</p>
+            <div class="rating" data-rating="4.7">
+                <span>★★★★☆</span>
+                <span class="rating-num">(4.7/5)</span>
+            </div>
+            <span class="precio">$1,799.50</span>
+            <p class="stock">En stock: 12 unidades</p>
+            <a href="/producto/003" class="btn-ver">Ver detalles</a>
+        </div>
+
+        <div class="producto" data-id="004">
+            <h2 class="nombre">HP Spectre x360</h2>
+            <p class="descripcion">Convertible 2 en 1 con pantalla táctil y lápiz incluido</p>
+            <div class="rating" data-rating="4.6">
+                <span>★★★★☆</span>
+                <span class="rating-num">(4.6/5)</span>
+            </div>
+            <span class="precio">$1,599.99</span>
+            <p class="stock agotado">Agotado</p>
+            <a href="/producto/004" class="btn-ver">Ver detalles</a>
+        </div>
+
+        <div class="producto" data-id="005">
+            <h2 class="nombre">ASUS ZenBook 14</h2>
+            <p class="descripcion">Laptop ultraligera con pantalla OLED y diseño premium</p>
+            <div class="rating" data-rating="4.5">
+                <span>★★★★☆</span>
+                <span class="rating-num">(4.5/5)</span>
+            </div>
+            <span class="precio">$1,099.00</span>
+            <p class="stock">En stock: 20 unidades</p>
+            <a href="/producto/005" class="btn-ver">Ver detalles</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 DataHub Store - Master en Ingeniería de Datos</p>
+    </footer>
+</body>
+</html>
