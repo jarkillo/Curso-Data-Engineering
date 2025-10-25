@@ -1,7 +1,7 @@
 # Core Scraping
 beautifulsoup4==4.12.2
 selenium==4.15.2
-requests==2.31.0
+requests==2.32.4
 
 # WebDriver Manager (facilita instalación de ChromeDriver)
 webdriver-manager==4.0.1
@@ -19,7 +19,7 @@ python-dotenv==1.0.0
 mypy==1.7.1
 
 # Code Quality
-black==23.11.0
+black==24.3.0
 flake8==6.1.0
 isort==5.12.0
 
