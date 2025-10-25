@@ -1,0 +1,16 @@
+# Dependencias del Proyecto Práctico: Sistema de Monitoreo de Ventas
+
+# Core
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Code Quality
+flake8>=6.0.0
+black>=23.0.0
+
+# Utilities
+python-dateutil>=2.8.2
