@@ -9,6 +9,16 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 
 ## [Unreleased]
 
+### Security
+- **Actualización crítica de seguridad: black 23.11.0 → 24.3.0** (2025-10-25):
+  - 🔒 **CVE-2024-21503 CORREGIDO**: Vulnerabilidad de rendimiento catastrófico en docstrings con múltiples tabs
+  - 🛡️ Fortalecimiento del AST safety check para prevenir cambios incorrectos en f-strings
+  - ⚡ Mejoras de performance en procesamiento de docstrings
+  - 🐛 Corrección de bugs en manejo de comentarios y delimitadores
+  - 📦 **Alcance**: `modulo-02-sql/tema-2-sql-intermedio/04-proyecto-practico`
+  - ✅ **Tests**: Todos los checks de CI/CD pasados (build, tests, linting, seguridad)
+  - 📋 **PR**: #19 (dependabot) - Aprobado y mergeado
+
 ### Added
 - **JAR-263: Módulo 2 - Tema 2: SQL Intermedio (JOINs, Subconsultas) ✅ COMPLETADO** (2025-10-25):
   - ✅ **COMPLETADO**: Tema completo con contenido educativo y proyecto práctico TDD
