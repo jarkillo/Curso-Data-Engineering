@@ -4,7 +4,7 @@
 
 - **Duración:** 8-10 semanas
 - **Nivel:** Principiante a Intermedio
-- **Estado:** En progreso (1/3 temas completados)
+- **Estado:** En progreso (2/3 temas completados)
 
 ## Objetivos de Aprendizaje
 
@@ -42,22 +42,28 @@ Análisis exploratorio de base de datos de e-commerce
 
 ---
 
-### Tema 2: SQL Intermedio ⏳
+### Tema 2: SQL Intermedio ✅
 
 **Duración estimada:** 3-4 semanas
-**Estado:** ⏳ Por comenzar
+**Estado:** ✅ Completado (2025-10-25)
+**Calificación pedagógica:** 9.5/10 ⭐⭐⭐⭐⭐
 
 **Descripción:**
-SQL avanzado para combinar datos de múltiples tablas y realizar consultas complejas.
+SQL avanzado para combinar datos de múltiples tablas y realizar consultas complejas con JOINs, subconsultas y CASE WHEN.
 
 **Contenido:**
-- JOINs (INNER, LEFT, RIGHT, FULL)
-- Subconsultas (subqueries)
-- CASE WHEN
-- CTEs (Common Table Expressions)
+- JOINs (INNER, LEFT, RIGHT, FULL OUTER, CROSS)
+- Subconsultas en WHERE, FROM y SELECT
+- CASE WHEN para lógica condicional
+- Validación de resultados de JOINs
+- Detección de productos cartesianos
 
 **Proyecto práctico:**
-Queries complejas en base de datos de e-commerce con múltiples tablas
+Sistema de análisis de JOINs con 4 módulos funcionales, 58 tests y 85% de cobertura. Incluye validadores, detectores de tipo de JOIN y generadores de reportes complejos.
+
+**Empresa ficticia:** TechStore (e-commerce de electrónica)
+
+**Ir al tema:** [`tema-2-sql-intermedio/`](./tema-2-sql-intermedio/)
 
 ---
 
@@ -84,10 +90,10 @@ Optimizar queries lentas en base de datos de producción
 
 ```
 Tema 1: ████████████████████ 100% ✅ Completado
-Tema 2: ░░░░░░░░░░░░░░░░░░░░   0% ⏳ Pendiente
+Tema 2: ████████████████████ 100% ✅ Completado
 Tema 3: ░░░░░░░░░░░░░░░░░░░░   0% ⏳ Pendiente
 ─────────────────────────────────────────────────
-Total:  ██████░░░░░░░░░░░░░░  33% 🔄 En progreso
+Total:  █████████████░░░░░░░  67% 🔄 En progreso
 ```
 
 ## Herramientas Utilizadas

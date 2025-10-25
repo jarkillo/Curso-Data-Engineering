@@ -4,8 +4,7 @@ Tests para el módulo de reintentos con exponential backoff.
 TDD: Tests escritos PRIMERO, implementación DESPUÉS.
 """
 
-import time
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pytest
 import requests
@@ -139,7 +138,7 @@ def test_reintentar_con_headers(url_base):
     responses.add(responses.GET, url_base + "/users", json={"data": "ok"}, status=200)
 
     headers = {"Authorization": "Bearer token"}
-    response = reintentar_con_backoff(url=url_base + "/users", headers=headers)
+    _ = reintentar_con_backoff(url=url_base + "/users", headers=headers)
 
     assert "Authorization" in responses.calls[0].request.headers
 

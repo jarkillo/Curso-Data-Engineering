@@ -185,9 +185,8 @@ repos:
         always_run: false
         args:
           - 'tests/'
-          - '--cov=.'
-          - '--cov-report=term-missing'
-          - '--cov-fail-under=0'
+          - '-v'
+          - '--tb=short'
         stages: [pre-push]
 
 # ===============================================

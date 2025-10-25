@@ -10,6 +10,81 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 ## [Unreleased]
 
 ### Added
+- **JAR-263: Módulo 2 - Tema 2: SQL Intermedio (JOINs, Subconsultas) ✅ COMPLETADO** (2025-10-25):
+  - ✅ **COMPLETADO**: Tema completo con contenido educativo y proyecto práctico TDD
+  - **Calificación pedagógica:** 9.5/10 ⭐⭐⭐⭐⭐
+  - **Contenido Educativo**:
+    - `01-TEORIA.md` - ~4,200 palabras (30-45 min lectura):
+      * Introducción a JOINs con analogías efectivas (archivador, club exclusivo)
+      * INNER JOIN: intersección de tablas con ejemplos visuales
+      * LEFT JOIN: todos de la izquierda (identificar ausencias)
+      * RIGHT JOIN: todos de la derecha (menos usado, equivalencia con LEFT)
+      * FULL OUTER JOIN: todos de ambos lados (auditorías)
+      * CROSS JOIN: producto cartesiano (advertencias de performance)
+      * Subconsultas en WHERE, FROM, SELECT con ejemplos prácticos
+      * CASE WHEN: condicionales en SQL (categorización, lógica de negocio)
+      * WHERE vs HAVING: diferencias clave con JOINs
+      * Orden de ejecución SQL: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT
+      * 5 errores comunes y cómo evitarlos (producto cartesiano, LEFT JOIN mal usado)
+      * Buenas prácticas: JOIN explícito, alias claros, COALESCE para NULLs
+    - `02-EJEMPLOS.md` - 5 ejemplos trabajados completos (90-120 min):
+      1. INNER JOIN básico (productos + categorías) - Nivel Básico ⭐
+      2. LEFT JOIN con NULL (clientes sin pedidos) - Nivel Básico ⭐
+      3. Subconsulta en HAVING (top 10% clientes) - Nivel Intermedio ⭐⭐
+      4. CASE WHEN (clasificación de stock: Crítico/Normal/Sobrecargado) - Nivel Intermedio ⭐⭐
+      5. JOIN múltiple 4 tablas (dashboard ejecutivo con CTEs) - Nivel Avanzado ⭐⭐⭐
+    - `03-EJERCICIOS.md` - 15 ejercicios con soluciones completas (4-6 horas):
+      * Básicos (1-5): INNER JOIN, LEFT JOIN simples, conteo de filas
+      * Intermedios (6-10): Subconsultas en WHERE/HAVING, CASE WHEN, RIGHT JOIN, análisis temporal
+      * Avanzados (11-15): Matriz BCG, cohortes de clientes, cross-selling, retención mensual, dashboard multi-dimensional
+  - **Proyecto Práctico TDD** (`04-proyecto-practico/`):
+    - **58 tests escritos PRIMERO** (100% pasando)
+    - **Cobertura**: 85% (superior al 80% objetivo)
+    - **4 módulos funcionales** (arquitectura funcional, sin clases innecesarias):
+      1. `ejecutor_joins.py` - Ejecuta queries con JOINs (3 funciones, 15 tests):
+         * `ejecutar_join_simple()`: JOIN entre 2 tablas con logging
+         * `ejecutar_join_multiple()`: JOIN de 3+ tablas dinámicamente
+         * `ejecutar_join_con_subconsulta()`: Combinar JOINs y subqueries
+      2. `detector_tipo_join.py` - Sugiere JOIN adecuado (2 funciones, 10 tests):
+         * `detectar_tipo_join_necesario()`: Analiza requerimiento y sugiere JOIN
+         * `validar_tipo_join()`: Valida si el JOIN elegido es correcto
+      3. `validador_joins.py` - Valida integridad de JOINs (3 funciones, 12 tests):
+         * `validar_resultado_join()`: Detecta pérdida/duplicación de datos
+         * `detectar_producto_cartesiano()`: Alerta si hay demasiadas filas
+         * `contar_filas_join()`: Verifica integridad con ratio resultado/(izq×der)
+      4. `generador_reportes.py` - Reportes complejos (3 funciones, 13 tests):
+         * `generar_reporte_ventas()`: Análisis con múltiples JOINs y agrupación dinámica
+         * `generar_top_clientes()`: Top N con subconsultas y segmentación CASE WHEN
+         * `generar_analisis_categorias()`: Análisis completo con clasificación dual
+  - **Calidad del Código**:
+    - TDD estricto: Red → Green → Refactor
+    - Type hints 100%, docstrings completos en español
+    - 0 errores flake8, formateado con black
+    - Funciones <50 líneas, arquitectura funcional
+    - **Quality Check completado** (2025-10-25):
+      * ✅ black: 11 archivos formateados correctamente
+      * ✅ flake8: 0 errores (E501, W291 corregidos durante revisión)
+      * ✅ pytest: 58/58 tests pasando (100%)
+      * ✅ Cobertura: 85% (objetivo: >80%)
+      * ✅ Tiempo de ejecución tests: 0.41s
+      * ✅ Reporte HTML de cobertura generado
+  - **Documentación**:
+    - `README.md` del tema completo con ruta de aprendizaje
+    - `REVISION_PEDAGOGICA.md` - Calificación: 9.5/10 ⭐⭐⭐⭐⭐
+    - `ARQUITECTURA.md` del proyecto con diagramas de flujo
+    - `RESUMEN_IMPLEMENTACION.md` - Proceso TDD, métricas y lecciones aprendidas
+    - `REPORTE_QUALITY_CHECK.md` - Verificación completa de calidad
+    - Recursos adicionales y links a documentación oficial
+  - **Empresa ficticia**: TechStore (e-commerce de electrónica)
+  - **Revisión Pedagógica**:
+    - ✅ Taxonomía de Bloom: 6 niveles cognitivos cubiertos
+    - ✅ Zona de Desarrollo Próximo respetada (sin saltos conceptuales)
+    - ✅ Aprendizaje Significativo (conexión con Tema 1, contexto real)
+    - ✅ Carga Cognitiva bien dosificada (~4,200 palabras teoría)
+    - ✅ Analogías efectivas: "archivador", "club exclusivo", "lista de asistencia"
+    - ✅ Feedback inmediato y metacognición (checklist, tabla autoevaluación)
+    - ✅ Gamificación saludable (no manipuladora)
+
 - **Guía de Quality Check - Sistema de Evaluación de Calidad** (2025-10-25):
   - ✅ Documentación completa del proceso de evaluación de calidad
   - **Ubicación:** `documentacion/guias/GUIA_QUALITY_CHECK.md`

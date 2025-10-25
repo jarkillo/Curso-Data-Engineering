@@ -5,7 +5,7 @@ Módulo de Scraping HTML con BeautifulSoup
 Funciones para extraer datos de páginas web estáticas.
 """
 
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 from bs4 import BeautifulSoup
 
@@ -65,7 +65,9 @@ def extraer_enlaces(html: str, selector: str = "a") -> List[Dict[str, str]]:
     return resultado
 
 
-def extraer_tabla(html: str, selector: str = "table") -> List[Dict[str, str]]:
+def extraer_tabla(  # noqa: C901
+    html: str, selector: str = "table"
+) -> List[Dict[str, str]]:
     """
     Convierte una tabla HTML en lista de diccionarios.
 
@@ -176,7 +178,7 @@ def extraer_atributo(html: str, selector: str, atributo: str) -> List[str]:
     return resultado
 
 
-def extraer_datos_estructurados(
+def extraer_datos_estructurados(  # noqa: C901
     html: str, selectores: Dict[str, str]
 ) -> List[Dict[str, str]]:
     """

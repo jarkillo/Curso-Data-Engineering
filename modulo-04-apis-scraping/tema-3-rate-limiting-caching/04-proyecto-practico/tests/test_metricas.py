@@ -9,7 +9,6 @@ Cobertura objetivo: >85%
 import json
 import os
 
-import pytest
 from src.metricas import (
     crear_monitor_metricas,
     exportar_metricas_json,

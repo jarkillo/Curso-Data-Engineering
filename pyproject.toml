@@ -12,9 +12,9 @@ version = "1.0.0"
 description = "Master completo en Ingeniería de Datos"
 readme = "README.md"
 requires-python = ">=3.13"
-license = {text = "MIT"}
+license = { text = "MIT" }
 authors = [
-    {name = "Master Data Engineering", email = "master@dataengineering.com"}
+    { name = "Master Data Engineering", email = "master@dataengineering.com" },
 ]
 keywords = ["data-engineering", "python", "etl", "data-pipeline"]
 classifiers = [
@@ -30,7 +30,7 @@ classifiers = [
 # ===============================================
 [tool.black]
 line-length = 88
-target-version = ['py313']
+target-version = ['py312']
 include = '\.pyi?$'
 extend-exclude = '''
 /(
@@ -84,7 +84,7 @@ skip_glob = [
     "documentacion/juego/**/*",
     "data_engineer_game.py",
     "game.html",
-    "game_save.json"
+    "game_save.json",
 ]
 
 # ===============================================
@@ -102,7 +102,7 @@ addopts = [
     "--strict-config",
     "--showlocals",
     "--tb=short",
-    "-v"
+    "-v",
 ]
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
@@ -110,11 +110,7 @@ markers = [
     "unit: marks tests as unit tests",
     "security: marks tests as security tests",
 ]
-filterwarnings = [
-    "error",
-    "ignore::UserWarning",
-    "ignore::DeprecationWarning",
-]
+filterwarnings = ["error", "ignore::UserWarning", "ignore::DeprecationWarning"]
 
 # ===============================================
 # COVERAGE - COBERTURA DE TESTS
@@ -139,7 +135,7 @@ omit = [
     "*/documentacion/juego/*",
     "data_engineer_game.py",
     "game.html",
-    "game_save.json"
+    "game_save.json",
 ]
 branch = true
 
@@ -147,7 +143,7 @@ branch = true
 precision = 2
 show_missing = true
 skip_covered = false
-fail_under = 0  # Temporalmente 0% hasta que haya código de producción
+fail_under = 0 # Temporalmente 0% hasta que haya código de producción
 exclude_lines = [
     "pragma: no cover",
     "def __repr__",
@@ -205,11 +201,12 @@ exclude_dirs = [
     "airflow/logs",
     "htmlcov",
     "modulo-01-fundamentos",
-    "documentacion/juego"
+    "documentacion/juego",
 ]
 skips = [
-    "B101",  # assert_used - permitido en tests
-    "B601",  # paramiko_calls - usado en algunos módulos
+    "B101", # assert_used - permitido en tests
+    "B601", # paramiko_calls - usado en algunos módulos
+    "B608", # hardcoded_sql_expressions - contexto educativo con SQLite en memoria
 ]
 # Niveles: LOW, MEDIUM, HIGH
 severity = "MEDIUM"
@@ -236,28 +233,25 @@ exclude = [
     ".cursor",
     ".claude",
     "airflow/logs",
-    "htmlcov"
+    "htmlcov",
 ]
-per-file-ignores = [
-    "__init__.py:F401",
-    "tests/*:S101,S105,S106"
-]
+per-file-ignores = ["__init__.py:F401", "tests/*:S101,S105,S106"]
 
 # ===============================================
 # PYLINT - LINTING AVANZADO
 # ===============================================
 [tool.pylint.main]
 py-version = "3.13"
-jobs = 0  # Usar todos los cores disponibles
+jobs = 0            # Usar todos los cores disponibles
 fail-under = 8.0
 
 [tool.pylint.messages_control]
 disable = [
-    "C0111",  # missing-docstring
-    "C0103",  # invalid-name
-    "R0903",  # too-few-public-methods
-    "R0913",  # too-many-arguments
-    "W0212",  # protected-access
+    "C0111", # missing-docstring
+    "C0103", # invalid-name
+    "R0903", # too-few-public-methods
+    "R0913", # too-many-arguments
+    "W0212", # protected-access
 ]
 
 [tool.pylint.format]

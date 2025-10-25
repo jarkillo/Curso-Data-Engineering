@@ -8,7 +8,6 @@ Soporta:
 
 from typing import Any, Dict, List, Optional
 
-import requests
 from src.cliente_http import hacer_get
 from src.validaciones import extraer_json_seguro, validar_url
 

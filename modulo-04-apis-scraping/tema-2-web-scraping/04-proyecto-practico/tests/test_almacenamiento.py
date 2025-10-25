@@ -5,9 +5,7 @@ Tests para el módulo almacenamiento.py
 12 tests que cubren almacenamiento en SQLite.
 """
 
-import os
 import sqlite3
-from pathlib import Path
 
 import pytest
 from src.almacenamiento import (

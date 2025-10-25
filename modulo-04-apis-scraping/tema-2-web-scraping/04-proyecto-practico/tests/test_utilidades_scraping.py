@@ -82,17 +82,6 @@ def test_crear_headers_aleatorios_user_agent_valido():
 
 def test_crear_headers_aleatorios_variacion():
     """Test 62: Headers varían entre llamadas (aleatorización)"""
-    headers_1 = crear_headers_aleatorios()
-    headers_2 = crear_headers_aleatorios()
-    headers_3 = crear_headers_aleatorios()
-
-    # Al menos en algún momento deben diferir (aleatorización)
-    user_agents = [
-        headers_1["User-Agent"],
-        headers_2["User-Agent"],
-        headers_3["User-Agent"],
-    ]
-
     # Si llamamos varias veces, eventualmente debemos ver variación
     # (esto podría fallar ocasionalmente por aleatoriedad, pero es improbable)
     llamadas = [crear_headers_aleatorios()["User-Agent"] for _ in range(10)]

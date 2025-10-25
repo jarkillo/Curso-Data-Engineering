@@ -31,13 +31,13 @@ def ejemplo_api_key():
 
     # Header default: X-API-Key
     headers = crear_headers_api_key(api_key)
-    print(f"\n✅ Headers con API Key (default):")
+    print("\n✅ Headers con API Key (default):")
     for key, value in headers.items():
         print(f"  {key}: {value}")
 
     # Header personalizado
     headers_custom = crear_headers_api_key(api_key, header_name="Authorization")
-    print(f"\n✅ Headers con API Key (personalizado):")
+    print("\n✅ Headers con API Key (personalizado):")
     for key, value in headers_custom.items():
         print(f"  {key}: {value}")
 
@@ -59,7 +59,7 @@ def ejemplo_bearer_token():
     token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ejemplo.token"
 
     headers = crear_headers_bearer(token)
-    print(f"\n✅ Headers con Bearer Token:")
+    print("\n✅ Headers con Bearer Token:")
     for key, value in headers.items():
         print(f"  {key}: {value[:50]}...")
 
@@ -83,7 +83,7 @@ def ejemplo_basic_auth():
     password = "secreto123"
 
     headers = crear_headers_basic_auth(username, password)
-    print(f"\n✅ Headers con Basic Auth:")
+    print("\n✅ Headers con Basic Auth:")
     for key, value in headers.items():
         print(f"  {key}: {value}")
 
@@ -114,7 +114,7 @@ def ejemplo_combinar_headers():
     # Combinar
     headers_completos = combinar_headers(auth_headers, extra_headers)
 
-    print(f"\n✅ Headers combinados:")
+    print("\n✅ Headers combinados:")
     for key, value in headers_completos.items():
         print(f"  {key}: {value}")
 

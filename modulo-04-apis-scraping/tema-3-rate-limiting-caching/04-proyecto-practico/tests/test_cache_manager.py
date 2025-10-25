@@ -6,7 +6,6 @@ Total de tests: 18
 Cobertura objetivo: >90%
 """
 
-import os
 import time
 
 import pytest
