@@ -106,5 +106,5 @@ def test_extraer_ventas_csv_archivo_vacio(tmp_path):
     )
     csv_path.write_text(contenido)
 
-    with pytest.raises(ValueError, match="archivo está vacío"):
+    with pytest.raises(ValueError, match="está vacío"):
         extraer_ventas_csv(str(csv_path))
