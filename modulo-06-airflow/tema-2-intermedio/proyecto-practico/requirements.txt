@@ -2,6 +2,7 @@
 # Módulo 6: Apache Airflow y Orquestación
 
 # Apache Airflow
+
 apache-airflow==3.0.4rc1
 apache-airflow-providers-common-sql==1.24.1
 
@@ -15,6 +16,7 @@ pytest-cov==4.1.0
 pytest-mock==3.12.0
 
 # Code Quality
+
 black==24.3.0
 flake8==6.1.0
 isort==5.13.2
