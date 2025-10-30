@@ -1,0 +1,30 @@
+# Framework de Calidad de Datos - Dependencias
+# Módulo 3 - Tema 4
+
+# Core data processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Schema validation
+pandera>=0.18.0
+
+# Fuzzy matching
+rapidfuzz>=3.0.0
+
+# Data profiling
+ydata-profiling>=4.5.0
+
+# Outlier detection
+scikit-learn>=1.3.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Code quality
+flake8>=6.0.0
+black>=23.0.0
