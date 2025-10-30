@@ -10,6 +10,36 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 ## [Unreleased]
 
 ### Added
+- **JAR-268: Módulo 3 - Tema 5: Formatos de Datos Modernos ✅ COMPLETADO** (2025-10-30):
+  - 🎯 **Estado**: Tema 5 100% completo (5/6 temas del Módulo 3)
+  - **Contenido Educativo Creado**:
+    - `tema-5-formatos-modernos/01-TEORIA.md` - ~8,200 palabras: JSON vs JSON Lines, Parquet (almacenamiento columnar), Avro (schemas evolutivos), comparación completa de formatos (CSV, JSON, Parquet, Avro), compresión (gzip, snappy, zstd, lz4), particionamiento de datos, benchmarks reales, 5 errores comunes, buenas prácticas
+    - `tema-5-formatos-modernos/02-EJEMPLOS.md` - 4 ejemplos completos: (1) CSV → Parquet con particiones, (2) JSON nested → Parquet normalizado, (3) Benchmark de tamaños/velocidades, (4) Pipeline multi-formato con compresión y metadata
+    - `tema-5-formatos-modernos/03-EJERCICIOS.md` - 12 ejercicios progresivos: 5 básicos ⭐, 4 intermedios ⭐⭐, 3 avanzados ⭐⭐⭐
+    - **Total teoría**: ~15,000 palabras + 12 ejercicios completos
+  - **Proyecto Práctico: Conversor Multi-formato** (TDD Estricto):
+    - 📂 **Ruta**: `modulo-03-ingenieria-datos/tema-5-formatos-modernos/04-proyecto-practico`
+    - 🧪 **Tests**: 58 tests unitarios (26 conversor + 17 compresión + 15 analizador)
+    - 📊 **Cobertura esperada**: >85% (tests escritos con TDD)
+    - 🔧 **Módulos implementados**:
+      * `src/conversor_formatos.py` - 8 funciones: conversiones entre CSV/JSON/JSON Lines/Parquet, lectura con autodetección, guardado automático, particionamiento
+      * `src/gestor_compresion.py` - 4 funciones: compresión/descompresión (gzip, bz2, xz), comparación de algoritmos, compresión en memoria
+      * `src/analizador_formatos.py` - 5 funciones: detección de formato, metadata Parquet, comparación de tamaños, benchmark lectura/escritura, reporte completo
+    - 📝 **Documentación**:
+      * README.md completo con ejemplos de uso
+      * requirements.txt con pandas, pyarrow, pytest
+      * pytest.ini configurado (cobertura >85%)
+      * Datos de ejemplo (CSV y JSON nested)
+      * Script de pipeline completo en `ejemplos/`
+    - ✨ **Características**:
+      * Conversión universal entre 4 formatos
+      * Autodetección de formatos por extensión y contenido
+      * Compresión con 3 algoritmos
+      * Particionamiento para Big Data
+      * Benchmarking integrado
+      * Tipado explícito completo
+      * Manejo robusto de errores
+
 - **JAR-267: Módulo 3 - Tema 4: Calidad de Datos ✅ COMPLETADO** (2025-10-30):
   - 🎯 **Estado**: Tema 4 100% completo (4/6 temas del Módulo 3)
   - **Quality Check**: ✅ EXCELENTE - Calificación: 10/10 ⭐⭐⭐⭐⭐
