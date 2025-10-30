@@ -1,0 +1,19 @@
+# Core Dependencies
+requests>=2.32.4
+beautifulsoup4>=4.12.0
+pandas>=2.1.0
+openpyxl>=3.1.0
+chardet>=5.2.0
+
+# Testing
+pytest>=8.0.0
+pytest-cov>=4.1.0
+pytest-mock>=3.12.0
+
+# Development
+black>=24.0.0
+flake8>=7.0.0
+mypy>=1.8.0
+
+# Optional (para logging avanzado)
+colorlog>=6.8.0
