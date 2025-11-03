@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900;
+    @apply bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors;
   }
 }
 
@@ -14,19 +14,19 @@
   }
 
   .btn-primary {
-    @apply bg-primary text-white hover:bg-primary-600;
+    @apply bg-primary text-white hover:bg-primary-600 dark:hover:bg-primary-500;
   }
 
   .btn-secondary {
-    @apply bg-secondary text-white hover:bg-secondary-600;
+    @apply bg-secondary text-white hover:bg-secondary-600 dark:hover:bg-secondary-500;
   }
 
   .btn-outline {
-    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white;
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white dark:border-primary-400 dark:text-primary-400;
   }
 
   .card {
-    @apply bg-white rounded-lg shadow-md p-6;
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900 p-6 transition-colors;
   }
 
   .badge {
@@ -34,23 +34,23 @@
   }
 
   .badge-success {
-    @apply bg-green-100 text-green-800;
+    @apply bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300;
   }
 
   .badge-warning {
-    @apply bg-yellow-100 text-yellow-800;
+    @apply bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300;
   }
 
   .badge-info {
-    @apply bg-blue-100 text-blue-800;
+    @apply bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300;
   }
 
   .badge-danger {
-    @apply bg-red-100 text-red-800;
+    @apply bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300;
   }
 
   .progress-bar {
-    @apply bg-gray-200 rounded-full h-2 overflow-hidden;
+    @apply bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden;
   }
 
   .progress-fill {
@@ -65,44 +65,44 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100;
+  @apply bg-gray-100 dark:bg-gray-800;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 rounded-full;
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-400;
+  @apply bg-gray-400 dark:bg-gray-500;
 }
 
 /* Markdown styles */
 .markdown-content {
-  @apply prose prose-lg max-w-none;
+  @apply prose prose-lg dark:prose-invert max-w-none;
 }
 
 .markdown-content h1 {
-  @apply text-3xl font-bold mt-8 mb-4 text-gray-900;
+  @apply text-3xl font-bold mt-8 mb-4 text-gray-900 dark:text-white;
 }
 
 .markdown-content h2 {
-  @apply text-2xl font-bold mt-6 mb-3 text-gray-800;
+  @apply text-2xl font-bold mt-6 mb-3 text-gray-800 dark:text-gray-100;
 }
 
 .markdown-content h3 {
-  @apply text-xl font-semibold mt-4 mb-2 text-gray-700;
+  @apply text-xl font-semibold mt-4 mb-2 text-gray-700 dark:text-gray-200;
 }
 
 .markdown-content p {
-  @apply mb-4 leading-relaxed;
+  @apply mb-4 leading-relaxed text-gray-900 dark:text-gray-300;
 }
 
 .markdown-content code {
-  @apply bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono;
+  @apply bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-sm font-mono text-gray-900 dark:text-gray-100;
 }
 
 .markdown-content pre {
-  @apply bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-4;
+  @apply bg-gray-900 dark:bg-gray-950 text-gray-100 p-4 rounded-lg overflow-x-auto my-4;
 }
 
 .markdown-content ul {
@@ -114,11 +114,11 @@
 }
 
 .markdown-content a {
-  @apply text-primary hover:text-primary-600 underline;
+  @apply text-primary hover:text-primary-600 dark:hover:text-primary-400 underline;
 }
 
 .markdown-content blockquote {
-  @apply border-l-4 border-primary pl-4 italic text-gray-700 my-4;
+  @apply border-l-4 border-primary pl-4 italic text-gray-700 dark:text-gray-300 my-4;
 }
 
 .markdown-content table {
@@ -126,9 +126,9 @@
 }
 
 .markdown-content th {
-  @apply bg-gray-100 border border-gray-300 px-4 py-2 font-semibold;
+  @apply bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 px-4 py-2 font-semibold text-gray-900 dark:text-white;
 }
 
 .markdown-content td {
-  @apply border border-gray-300 px-4 py-2;
+  @apply border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100;
 }

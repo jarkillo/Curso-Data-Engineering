@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import type { User, LoginRequest, RegisterRequest } from '../types/auth'
 import { authApi } from '../services/api'
+import { showToast } from '../components/common/Toast'
 
 interface AuthContextType {
   user: User | null
@@ -44,25 +45,38 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const login = async (data: LoginRequest) => {
-    const response = await authApi.login(data)
-    setToken(response.access_token)
-    localStorage.setItem('token', response.access_token)
+    try {
+      const response = await authApi.login(data)
+      setToken(response.access_token)
+      localStorage.setItem('token', response.access_token)
 
-    // Fetch user info
-    const userData = await authApi.getMe(response.access_token)
-    setUser(userData)
+      // Fetch user info
+      const userData = await authApi.getMe(response.access_token)
+      setUser(userData)
+      showToast.success(`¡Bienvenido, ${userData.username}!`)
+    } catch (error: any) {
+      showToast.error(error.response?.data?.detail || 'Error al iniciar sesión')
+      throw error
+    }
   }
 
   const register = async (data: RegisterRequest) => {
-    const user = await authApi.register(data)
-    // Auto-login after register
-    await login({ email: data.email, password: data.password })
+    try {
+      await authApi.register(data)
+      // Auto-login after register
+      await login({ email: data.email, password: data.password })
+      showToast.success('¡Cuenta creada exitosamente!')
+    } catch (error: any) {
+      showToast.error(error.response?.data?.detail || 'Error al registrarse')
+      throw error
+    }
   }
 
   const logout = () => {
     setUser(null)
     setToken(null)
     localStorage.removeItem('token')
+    showToast.info('Sesión cerrada')
   }
 
   return (
