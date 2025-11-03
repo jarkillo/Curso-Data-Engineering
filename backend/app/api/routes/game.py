@@ -9,49 +9,64 @@ from typing import List
 from app.database import get_db
 from app.schemas.game import GameStateResponse, Mission, Achievement, AddXPRequest
 from app.services.game_service import GameService
+from app.api.dependencies import get_current_user
+from app.models.user import User
 
 router = APIRouter()
 game_service = GameService()
 
 
 @router.get("/state", response_model=GameStateResponse)
-async def get_game_state(db: Session = Depends(get_db)):
+async def get_game_state(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
     """
     Get current game state.
 
     Returns:
         Game state with all player information
     """
-    game_state = game_service.get_or_create_game_state(db)
+    game_state = game_service.get_or_create_game_state(db, current_user.id)
     return game_service.get_game_state_response(game_state)
 
 
 @router.get("/missions", response_model=List[Mission])
-async def get_missions(db: Session = Depends(get_db)):
+async def get_missions(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
     """
     Get all available missions.
 
     Returns:
         List of missions with completion status
     """
-    game_state = game_service.get_or_create_game_state(db)
+    game_state = game_service.get_or_create_game_state(db, current_user.id)
     return game_service.get_available_missions(game_state.completed_missions or [])
 
 
 @router.get("/achievements", response_model=List[Achievement])
-async def get_achievements(db: Session = Depends(get_db)):
+async def get_achievements(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
     """
     Get all achievements.
 
     Returns:
         List of achievements with unlock status
     """
-    game_state = game_service.get_or_create_game_state(db)
+    game_state = game_service.get_or_create_game_state(db, current_user.id)
     return game_service.get_achievements(game_state.unlocked_achievements or [])
 
 
 @router.post("/mission/{mission_id}/complete", response_model=GameStateResponse)
-async def complete_mission(mission_id: str, db: Session = Depends(get_db)):
+async def complete_mission(
+    mission_id: str,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
     """
     Complete a mission and award XP.
 
@@ -64,7 +79,7 @@ async def complete_mission(mission_id: str, db: Session = Depends(get_db)):
     Raises:
         HTTPException: If mission not found or already completed
     """
-    game_state = game_service.get_or_create_game_state(db)
+    game_state = game_service.get_or_create_game_state(db, current_user.id)
 
     # Find mission
     mission = next(
@@ -111,7 +126,11 @@ async def complete_mission(mission_id: str, db: Session = Depends(get_db)):
 
 
 @router.post("/xp", response_model=GameStateResponse)
-async def add_xp(request: AddXPRequest, db: Session = Depends(get_db)):
+async def add_xp(
+    request: AddXPRequest,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
     """
     Add XP to player.
 
@@ -121,7 +140,7 @@ async def add_xp(request: AddXPRequest, db: Session = Depends(get_db)):
     Returns:
         Updated game state
     """
-    game_state = game_service.get_or_create_game_state(db)
+    game_state = game_service.get_or_create_game_state(db, current_user.id)
 
     # Add XP
     game_state.xp += request.amount

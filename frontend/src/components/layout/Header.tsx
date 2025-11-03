@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
-import { Gamepad2, User } from 'lucide-react'
+import { Gamepad2, User, LogOut } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 import { gameApi } from '@/services/api'
+import { useAuth } from '@/context/AuthContext'
 
 export default function Header() {
+  const { user, logout } = useAuth()
   const { data: gameState } = useQuery({
     queryKey: ['gameState'],
     queryFn: gameApi.getGameState,
@@ -40,9 +42,22 @@ export default function Header() {
             <div className="flex items-center space-x-2 px-4 py-2 bg-gray-50 rounded-lg">
               <User className="w-5 h-5 text-gray-600" />
               <span className="text-sm font-medium text-gray-700">
-                {gameState?.player_name || 'Usuario'}
+                {user?.username || 'Usuario'}
               </span>
+              {user?.tier === 'pro' && (
+                <span className="ml-2 px-2 py-0.5 bg-yellow-500 text-white rounded-full text-xs">
+                  PRO
+                </span>
+              )}
             </div>
+
+            <button
+              onClick={logout}
+              className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+              title="Cerrar sesión"
+            >
+              <LogOut className="w-5 h-5" />
+            </button>
           </div>
         </div>
       </div>
