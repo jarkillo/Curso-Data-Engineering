@@ -45,9 +45,9 @@ Un **Data Engineer** no es un estadístico, pero usa estadística constantemente
    ¿Cuál es el ticket promedio?
    ```
 
-### Ejemplo Real: Tu Primer Día en Yurest
+### Ejemplo Real: Tu Primer Día en Yunques
 
-Imagina que hoy es tu primer día trabajando con datos del sistema **Yurest** (ventas de restaurantes).
+Imagina que hoy es tu primer día trabajando con datos del sistema **Yunques** (ventas de restaurantes).
 
 Te pasan este archivo CSV con las ventas del día:
 
