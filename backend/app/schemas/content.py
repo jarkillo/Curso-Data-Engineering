@@ -1,0 +1,60 @@
+"""
+Schemas for course content.
+"""
+
+from typing import List, Optional
+from pydantic import BaseModel
+
+
+class TopicContent(BaseModel):
+    """Content of a topic section."""
+
+    section: str  # 'teoria', 'ejemplos', 'ejercicios', 'proyecto'
+    content: str  # Markdown content
+    file_path: str
+
+
+class Topic(BaseModel):
+    """A topic within a module."""
+
+    id: str  # e.g., "tema-1-sql-basico"
+    number: int  # 1, 2, 3...
+    title: str  # "SQL Básico"
+    description: Optional[str] = None
+    completed: bool = False
+    coverage: Optional[int] = None  # Test coverage percentage
+    available_sections: List[str] = []  # ['teoria', 'ejemplos', 'ejercicios', 'proyecto']
+
+
+class Module(BaseModel):
+    """A course module."""
+
+    id: str  # e.g., "modulo-01-fundamentos"
+    number: int  # 1, 2, 3...
+    title: str  # "Fundamentos de Programación"
+    description: Optional[str] = None
+    status: str  # "completed", "in_progress", "locked"
+    progress_percentage: int = 0
+    topics: List[Topic] = []
+
+
+class ModuleSummary(BaseModel):
+    """Summary of a module without topics."""
+
+    id: str
+    number: int
+    title: str
+    description: Optional[str] = None
+    status: str
+    progress_percentage: int = 0
+    topic_count: int = 0
+
+
+class ContentResponse(BaseModel):
+    """Response with markdown content."""
+
+    module_id: str
+    topic_id: str
+    section: str
+    content: str
+    metadata: Optional[dict] = None
