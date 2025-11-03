@@ -453,7 +453,7 @@ Si sacaste P95 = 90 puntos:
 
 ### 3.3 Uso en SLAs (Service Level Agreements)
 
-**Caso real en Agora:**
+**Caso real en Ancora:**
 
 Queremos que nuestra API responda rápido. ¿Cómo definimos "rápido"?
 
