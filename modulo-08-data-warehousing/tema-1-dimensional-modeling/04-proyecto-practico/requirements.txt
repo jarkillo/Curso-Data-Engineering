@@ -1,0 +1,20 @@
+# Dependencias del proyecto: Data Warehouse Dimensional
+
+# Core
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Code quality
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.4.0
+
+# Type hints for pandas
+pandas-stubs>=2.0.0
+
+# Para generación de datos sintéticos
+Faker>=18.0.0
