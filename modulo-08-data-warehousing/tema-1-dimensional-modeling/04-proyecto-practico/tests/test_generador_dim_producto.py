@@ -85,6 +85,7 @@ class TestGenerarDimProducto:
             "Hogar",
             "Deportes",
             "Libros",
+            "General",  # Categoría fallback para productos sin coincidencia
         ]
 
         # Todas las categorías deben estar en la lista válida

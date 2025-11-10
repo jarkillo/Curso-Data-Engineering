@@ -11,27 +11,29 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 
 ### Added
 - **JAR-194: Módulo 8 - Data Warehousing y Analytics ⏳ EN PROGRESO** (2025-11-10):
-  - 🎯 **Estado**: Tema 1 contenido pedagógico 100% completo, proyecto práctico 50% completo (5/10 módulos)
-  - **Tema 1: Dimensional Modeling** (PARCIAL - 50% proyecto):
+  - 🎯 **Estado**: Tema 1 contenido pedagógico 100% completo, proyecto práctico 95% completo (9/10 módulos)
+  - **Tema 1: Dimensional Modeling** (PARCIAL - 95% proyecto):
     * ✅ **Contenido Pedagógico (100% completo)**:
       - `01-TEORIA.md` - ~10,000 palabras: Fact Tables, Dimension Tables, Star Schema, Snowflake Schema, SCD Tipos 0-6
       - `02-EJEMPLOS.md` - 4 ejemplos completos con código ejecutable
       - `03-EJERCICIOS.md` - 15 ejercicios graduados con soluciones
       - `REVISION_PEDAGOGICA.md` - Validación: 9.5/10 (APROBADO - Excelente)
       - `ARQUITECTURA.md` - Diseño completo de 9 módulos con TDD
-    * ✅ **Proyecto Práctico (90% completo - 8/9 módulos)**:
+    * ✅ **Proyecto Práctico (90% completo - 9/10 módulos)**:
       - `generador_dim_fecha.py` - 12 tests (100% passing, cobertura >85%)
-      - `generador_dim_producto.py` - 14 tests escritos (pendiente Faker)
-      - `generador_dim_cliente.py` - Código implementado con SCD Type 2 (pendiente Faker)
+      - `generador_dim_producto.py` - 14 tests (100% passing con Faker, cobertura >90%)
+      - `generador_dim_cliente.py` - 14 tests (100% passing con Faker, cobertura >90%) - Con SCD Type 2
+      - `generador_dim_vendedor.py` ✅ **[NEW]** - 17 tests (100% passing, 93% coverage) - Estructura jerárquica
       - `scd_tipo2.py` ✅ **[CRÍTICO]** - 12 tests (100% passing, 88% coverage) - Lógica genérica reutilizable
       - `validaciones.py` ✅ **[CALIDAD]** - 13 tests (100% passing, 80% coverage) - Módulo de validaciones completo
       - `database.py` ✅ **[DATABASE]** - 11 tests (100% passing, 85% coverage) - Context manager + transacciones
       - `queries_analiticos.py` ✅ **[OLAP]** - 26 tests (100% passing, 100% coverage) - 6 queries analíticos
       - `utilidades.py` ✅ **[UTILS]** - 16 tests (100% passing, 94% coverage) - 8 funciones helper + context managers
       - `main.py` ✅ **[PIPELINE]** - Script principal end-to-end, logging, validación, carga DWH
-    * ⏳ **Pendientes (1/9 módulos)**:
-      - `generador_dim_vendedor.py` (requiere Faker)
-  - **Issues Completadas (6/20 - 2025-11-10)**:
+      - `README.md` ✅ **[DOCS]** - Documentación completa con estructura CLAUDE.md, ejemplos, troubleshooting
+    * ⏳ **Pendientes (1/10 módulos)**:
+      - `generador_fact_ventas.py` (requiere todas las dimensiones completas)
+  - **Issues Completadas (7/20 - 2025-11-10)**:
     * ✅ **JAR-329**: DimCliente con SCD Type 2
       - Código completo con type hints y docstrings
       - 14 tests escritos (pendiente instalación de Faker)
@@ -79,10 +81,27 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
         * Logging estructurado con timestamps
         * Manejo de errores y excepciones
         * Tablas de resumen formateadas
+      - README.md: Documentación completa (867 líneas)
+        * Estructura mandatoria CLAUDE.md
+        * Objetivos pedagógicos con analogías (Star Schema como estrella, SCD Type 2 como historial direcciones)
+        * 45+ funciones documentadas con ejemplos de uso
+        * Troubleshooting de 5 problemas comunes
+    * ✅ **JAR-330**: DimVendedor con estructura jerárquica [NEW - 2025-11-10]
+      - 17 tests (100% passing) - TDD estricto
+      - Cobertura: 93% (supera objetivo ≥80%)
+      - Funciones implementadas:
+        * generar_dim_vendedor (con Faker instalado)
+        * generar_email_corporativo (helper para emails válidos)
+      - Campos: vendedor_id, nombre, email, telefono, region, comision_porcentaje, supervisor_id, gerente_regional
+      - Estructura jerárquica: 20% gerentes (sin supervisor), 80% vendedores con supervisor
+      - Regiones: Norte, Sur, Centro, Este, Oeste
+      - Comisión: 0-20% (gerentes 5-10%, vendedores 2-15%)
+      - Validaciones: ValueError para números negativos/cero
+      - Integridad: supervisor_id referencia vendedor_id existente
   - **Issues Creados (20 issues granulares - 50-65h estimadas)**:
     * **Tema 1 - Proyecto Práctico (9 issues)**:
       - JAR-329: DimCliente con SCD Type 2 ✅ COMPLETADO
-      - JAR-330: DimVendedor (1.5-2h)
+      - JAR-330: DimVendedor con estructura jerárquica ✅ COMPLETADO
       - JAR-331: Lógica genérica SCD Type 2 [CRÍTICO] ✅ COMPLETADO
       - JAR-332: FactVentas (tabla de hechos) (2-3h)
       - JAR-333: Módulo de validaciones ✅ COMPLETADO
