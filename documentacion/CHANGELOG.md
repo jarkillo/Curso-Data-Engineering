@@ -19,7 +19,7 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
       - `03-EJERCICIOS.md` - 15 ejercicios graduados con soluciones
       - `REVISION_PEDAGOGICA.md` - Validación: 9.5/10 (APROBADO - Excelente)
       - `ARQUITECTURA.md` - Diseño completo de 9 módulos con TDD
-    * ✅ **Proyecto Práctico (70% completo - 7/10 módulos)**:
+    * ✅ **Proyecto Práctico (90% completo - 8/9 módulos)**:
       - `generador_dim_fecha.py` - 12 tests (100% passing, cobertura >85%)
       - `generador_dim_producto.py` - 14 tests escritos (pendiente Faker)
       - `generador_dim_cliente.py` - Código implementado con SCD Type 2 (pendiente Faker)
@@ -27,11 +27,11 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
       - `validaciones.py` ✅ **[CALIDAD]** - 13 tests (100% passing, 80% coverage) - Módulo de validaciones completo
       - `database.py` ✅ **[DATABASE]** - 11 tests (100% passing, 85% coverage) - Context manager + transacciones
       - `queries_analiticos.py` ✅ **[OLAP]** - 26 tests (100% passing, 100% coverage) - 6 queries analíticos
-    * ⏳ **Pendientes (3/10 módulos)**:
+      - `utilidades.py` ✅ **[UTILS]** - 16 tests (100% passing, 94% coverage) - 8 funciones helper + context managers
+      - `main.py` ✅ **[PIPELINE]** - Script principal end-to-end, logging, validación, carga DWH
+    * ⏳ **Pendientes (1/9 módulos)**:
       - `generador_dim_vendedor.py` (requiere Faker)
-      - `generador_fact_ventas.py` (requiere dimensiones completas)
-      - `utilidades.py` + script principal
-  - **Issues Completadas (5/20 - 2025-11-10)**:
+  - **Issues Completadas (6/20 - 2025-11-10)**:
     * ✅ **JAR-329**: DimCliente con SCD Type 2
       - Código completo con type hints y docstrings
       - 14 tests escritos (pendiente instalación de Faker)
@@ -65,6 +65,20 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
         * clientes_frecuentes (top N por compras)
         * kpis_dashboard (6 KPIs ejecutivos)
       - Soporte OLAP: filtros opcionales, agregaciones, ordenamiento
+    * ✅ **JAR-336**: Utilidades y script principal [UTILS + PIPELINE]
+      - 16 tests (100% passing) - TDD estricto
+      - Cobertura: 94% (cumple objetivo ≥80%)
+      - 8 funciones helper:
+        * configurar_logging (niveles DEBUG/INFO/WARNING/ERROR)
+        * formatear_numero, formatear_porcentaje (salida formateada)
+        * imprimir_tabla (tablas ASCII con títulos)
+        * validar_archivo_existe, crear_directorio_si_no_existe
+        * medir_tiempo (context manager para performance)
+      - main.py: Pipeline completo end-to-end
+        * 4 fases: Generación dimensiones → Validación → Carga DWH → Queries OLAP
+        * Logging estructurado con timestamps
+        * Manejo de errores y excepciones
+        * Tablas de resumen formateadas
   - **Issues Creados (20 issues granulares - 50-65h estimadas)**:
     * **Tema 1 - Proyecto Práctico (9 issues)**:
       - JAR-329: DimCliente con SCD Type 2 ✅ COMPLETADO
@@ -74,7 +88,7 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
       - JAR-333: Módulo de validaciones ✅ COMPLETADO
       - JAR-334: Conector de base de datos ✅ COMPLETADO
       - JAR-335: Queries analíticos ✅ COMPLETADO
-      - JAR-336: Utilidades y script principal (1.5-2h)
+      - JAR-336: Utilidades y script principal ✅ COMPLETADO
       - JAR-337: Quality checks y documentación (1-2h)
     * **Tema 2 - DWH Tools/dbt (5 issues)**:
       - JAR-338: Teoría DWH Tools (dbt) - 01-TEORIA.md (4-5h)
