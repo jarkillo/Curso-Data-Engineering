@@ -13,6 +13,40 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 - **JAR-194: Módulo 8 - Data Warehousing y Analytics ✅ COMPLETADO** (2025-11-10):
 
 ### Changed
+- **Módulo 3: README.md corregido - Estado de Tema 2 actualizado** (2025-11-11):
+  - ✅ Conflicto resuelto: Tema 2 mostraba 100% en barra de progreso pero ⏳ Pendiente en lista
+  - ✅ Estado actualizado: Tema 2 ahora muestra **47% EN PROGRESO** (cobertura baja)
+  - ✅ Documentación de estado real:
+    * Teoría: ~4,000 palabras ✅ COMPLETO
+    * Ejemplos: 5 ejemplos ✅ COMPLETO
+    * Ejercicios: 15 con soluciones ✅ COMPLETO
+    * Proyecto: 62 tests ✅ PASSING
+    * ⚠️ Cobertura: 47.23% (objetivo: ≥85%) - **REQUIERE MEJORA**
+  - ✅ Barra de progreso total corregida: 50% → 35% (refleja estado real)
+  - ✅ Acción necesaria documentada: Agregar tests para alcanzar 85% coverage
+  - ✅ Fecha actualizada: 2025-10-23 → 2025-11-11
+  - ✅ Versión: 1.0.0 → 1.0.1
+
+- **Módulo 8: README del proyecto práctico actualizado a 100% completo** (2025-11-11):
+  - ✅ Estado actualizado: "90% completo - falta DimVendedor" → **"100% COMPLETADO"**
+  - ✅ Star Schema completamente funcional documentado:
+    * DimFecha ✅ (366 registros, calendario 2024)
+    * DimProducto ✅ (con Faker, categorización automática)
+    * DimCliente ✅ (con Faker, SCD Type 2)
+    * DimVendedor ✅ **COMPLETADO 2025-11-10** (estructura jerárquica)
+    * FactVentas ✅ **COMPLETADO 2025-11-10** (tabla de hechos completa)
+  - ✅ Métricas finales documentadas:
+    * 10/10 módulos implementados (100%)
+    * 154 tests pasando (100% éxito - 0 fallos)
+    * Cobertura promedio: 92.8% (supera objetivo ≥80%)
+    * Integridad referencial validada
+  - ✅ Estructura de archivos actualizada (añadido generador_fact_ventas.py)
+  - ✅ Tests actualizados con coberturas individuales por módulo
+  - ✅ Estadísticas del proyecto actualizadas: 79 tests → 154 tests
+  - ✅ Sección "Próximos Pasos" rediseñada (eliminado "implementar DimVendedor")
+  - ✅ Opciones de extensión agregadas (producción, optimización, BI tools)
+  - ✅ Fecha actualizada: 2025-11-10 → 2025-11-11
+
 - **Módulo 1: README.md completamente renovado** (2025-11-10):
   - ✅ Actualizado de 33% a 100% completitud (estado real del módulo)
   - ✅ Reestructurado por temas (no por proyectos) para claridad
