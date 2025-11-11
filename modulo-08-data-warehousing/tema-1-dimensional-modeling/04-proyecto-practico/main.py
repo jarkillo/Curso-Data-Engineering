@@ -20,16 +20,16 @@ from pathlib import Path
 # Agregar src al path
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
-from src.database import DatabaseConnection
-from src.generador_dim_fecha import generar_dim_fecha
-from src.utilidades import (
+from src.database import DatabaseConnection  # noqa: E402
+from src.generador_dim_fecha import generar_dim_fecha  # noqa: E402
+from src.utilidades import (  # noqa: E402
     configurar_logging,
     crear_directorio_si_no_existe,
     formatear_numero,
     imprimir_tabla,
     medir_tiempo,
 )
-from src.validaciones import (
+from src.validaciones import (  # noqa: E402
     validar_no_nulos,
     validar_rangos,
     validar_tipos,
