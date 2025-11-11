@@ -10,20 +10,21 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 ## [Unreleased]
 
 ### Added
-- **JAR-194: Módulo 8 - Data Warehousing y Analytics ⏳ EN PROGRESO** (2025-11-10):
-  - 🎯 **Estado**: Tema 1 contenido pedagógico 100% completo, proyecto práctico 95% completo (9/10 módulos)
-  - **Tema 1: Dimensional Modeling** (PARCIAL - 95% proyecto):
+- **JAR-194: Módulo 8 - Data Warehousing y Analytics ✅ COMPLETADO** (2025-11-10):
+  - 🎯 **Estado**: Tema 1 contenido pedagógico 100% completo, proyecto práctico 100% completo (10/10 módulos)
+  - **Tema 1: Dimensional Modeling** (COMPLETADO - 100% proyecto):
     * ✅ **Contenido Pedagógico (100% completo)**:
       - `01-TEORIA.md` - ~10,000 palabras: Fact Tables, Dimension Tables, Star Schema, Snowflake Schema, SCD Tipos 0-6
       - `02-EJEMPLOS.md` - 4 ejemplos completos con código ejecutable
       - `03-EJERCICIOS.md` - 15 ejercicios graduados con soluciones
       - `REVISION_PEDAGOGICA.md` - Validación: 9.5/10 (APROBADO - Excelente)
-      - `ARQUITECTURA.md` - Diseño completo de 9 módulos con TDD
-    * ✅ **Proyecto Práctico (90% completo - 9/10 módulos)**:
-      - `generador_dim_fecha.py` - 12 tests (100% passing, cobertura >85%)
+      - `ARQUITECTURA.md` - Diseño completo de 10 módulos con TDD
+    * ✅ **Proyecto Práctico (100% completo - 10/10 módulos, 154 tests, 92.8% cobertura promedio)**:
+      - `generador_dim_fecha.py` - 12 tests (100% passing, cobertura 85%)
       - `generador_dim_producto.py` - 14 tests (100% passing con Faker, cobertura >90%)
       - `generador_dim_cliente.py` - 14 tests (100% passing con Faker, cobertura >90%) - Con SCD Type 2
-      - `generador_dim_vendedor.py` ✅ **[NEW]** - 17 tests (100% passing, 93% coverage) - Estructura jerárquica
+      - `generador_dim_vendedor.py` ✅ - 17 tests (100% passing, 93% coverage) - Estructura jerárquica
+      - `generador_fact_ventas.py` ✅ **[NEW]** - 19 tests (100% passing, 91% coverage) - Fact table con todas las FK
       - `scd_tipo2.py` ✅ **[CRÍTICO]** - 12 tests (100% passing, 88% coverage) - Lógica genérica reutilizable
       - `validaciones.py` ✅ **[CALIDAD]** - 13 tests (100% passing, 80% coverage) - Módulo de validaciones completo
       - `database.py` ✅ **[DATABASE]** - 11 tests (100% passing, 85% coverage) - Context manager + transacciones
@@ -31,9 +32,8 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
       - `utilidades.py` ✅ **[UTILS]** - 16 tests (100% passing, 94% coverage) - 8 funciones helper + context managers
       - `main.py` ✅ **[PIPELINE]** - Script principal end-to-end, logging, validación, carga DWH
       - `README.md` ✅ **[DOCS]** - Documentación completa con estructura CLAUDE.md, ejemplos, troubleshooting
-    * ⏳ **Pendientes (1/10 módulos)**:
-      - `generador_fact_ventas.py` (requiere todas las dimensiones completas)
-  - **Issues Completadas (7/20 - 2025-11-10)**:
+    * ✅ **Todos los módulos completados - Star Schema funcional completo**
+  - **Issues Completadas (8/20 - 2025-11-10)**:
     * ✅ **JAR-329**: DimCliente con SCD Type 2
       - Código completo con type hints y docstrings
       - 14 tests escritos (pendiente instalación de Faker)
@@ -98,12 +98,23 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
       - Comisión: 0-20% (gerentes 5-10%, vendedores 2-15%)
       - Validaciones: ValueError para números negativos/cero
       - Integridad: supervisor_id referencia vendedor_id existente
+    * ✅ **JAR-332**: FactVentas - Tabla de hechos completa [NEW - 2025-11-10]
+      - 19 tests (100% passing) - TDD estricto
+      - Cobertura: 91% (supera objetivo ≥80%)
+      - Función principal: generar_fact_ventas (conecta todas las dimensiones)
+      - Campos: venta_id, fecha_id (FK), producto_id (FK), cliente_id (FK), vendedor_id (FK)
+      - Métricas: cantidad (1-10 unidades), precio_unitario (±20% precio catálogo)
+      - Finanzas: descuento (0-40% subtotal), impuesto (16% base imponible), monto_neto (calculado)
+      - Validaciones: num_ventas positivo, dimensiones no vacías, columnas requeridas
+      - Integridad referencial: Todas las FK referencian IDs existentes en dimensiones
+      - Fórmula monto_neto: (cantidad * precio_unitario - descuento) + impuesto
+      - Star Schema completo funcional: 4 dimensiones + 1 fact table
   - **Issues Creados (20 issues granulares - 50-65h estimadas)**:
     * **Tema 1 - Proyecto Práctico (9 issues)**:
       - JAR-329: DimCliente con SCD Type 2 ✅ COMPLETADO
       - JAR-330: DimVendedor con estructura jerárquica ✅ COMPLETADO
       - JAR-331: Lógica genérica SCD Type 2 [CRÍTICO] ✅ COMPLETADO
-      - JAR-332: FactVentas (tabla de hechos) (2-3h)
+      - JAR-332: FactVentas (tabla de hechos) ✅ COMPLETADO
       - JAR-333: Módulo de validaciones ✅ COMPLETADO
       - JAR-334: Conector de base de datos ✅ COMPLETADO
       - JAR-335: Queries analíticos ✅ COMPLETADO
