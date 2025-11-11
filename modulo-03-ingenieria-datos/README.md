@@ -34,16 +34,18 @@ Al completar este módulo, serás capaz de:
   - ✅ `04-proyecto-practico/`: Pipeline ETL completo con TDD (64 tests)
 - **Proyecto**: Pipeline ETL de Ventas de E-commerce con validación, logging, métricas e idempotencia
 
-### Tema 2: Extracción de Datos ⏳
+### Tema 2: Extracción de Datos 🔄
 - **Duración**: 1-2 semanas
-- **Estado**: ⏳ Pendiente
+- **Estado**: 🔄 **EN PROGRESO** (2025-10-30)
+- **Calificación pedagógica**: ⚠️ Pendiente de validación
 - **Contenido**:
-  - Lectura de archivos (CSV, JSON, Excel)
-  - Consumo de APIs REST
-  - Web scraping ético
-  - Rate limiting y paginación
-  - Manejo de errores y retries
-- **Proyecto**: Sistema de extracción multi-fuente
+  - ✅ `01-TEORIA.md`: ~4,000 palabras sobre extracción de datos
+  - ✅ `02-EJEMPLOS.md`: 5 ejemplos progresivos ejecutables
+  - ✅ `03-EJERCICIOS.md`: 15 ejercicios con soluciones
+  - ✅ `04-proyecto-practico/`: Sistema de extracción con 62 tests
+  - ⚠️ **Cobertura: 47.23%** (objetivo: ≥85%) - **REQUIERE MEJORA**
+- **Proyecto**: Sistema de extracción multi-fuente con APIs, archivos y web scraping
+- **Acción necesaria**: Agregar tests para alcanzar cobertura mínima del 85%
 
 ### Tema 3: Transformación con Pandas ✅
 - **Duración**: 1-2 semanas
@@ -106,14 +108,14 @@ Al completar este módulo, serás capaz de:
 
 ```
 Tema 1: ████████████████████ 100% ✅ COMPLETADO
-Tema 2: ████████████████████ 100% ✅ COMPLETADO
+Tema 2: █████████░░░░░░░░░░░  47% 🔄 EN PROGRESO (cobertura baja)
 Tema 3: ████████████████████ 100% ✅ COMPLETADO
 Tema 4: ░░░░░░░░░░░░░░░░░░░░   0% ⏳ Pendiente
 Tema 5: ░░░░░░░░░░░░░░░░░░░░   0% ⏳ Pendiente
 Tema 6: ░░░░░░░░░░░░░░░░░░░░   0% ⏳ Pendiente
 Integrador: ░░░░░░░░░░░░░░░░░░░░   0% ⏳ Pendiente
 ───────────────────────────────────────────────
-Total:  █████████░░░░░░░░░░░  50% 🔄 En progreso
+Total:  ████████░░░░░░░░░░░░  35% 🔄 En progreso
 ```
 
 ---
@@ -310,8 +312,8 @@ Este módulo es material educativo de código abierto para aprendizaje personal.
 
 ---
 
-**Última actualización**: 2025-10-23
-**Versión**: 1.0.0
+**Última actualización**: 2025-11-11
+**Versión**: 1.0.1 (Actualización de estado - Tema 2 en progreso por cobertura baja)
 **Issue Linear**: [JAR-189](https://linear.app/jarko/issue/JAR-189)
 
 **¡Bienvenido al Módulo 3! Prepárate para convertirte en un experto en pipelines de datos 🚀📊**

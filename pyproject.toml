@@ -205,6 +205,7 @@ exclude_dirs = [
 ]
 skips = [
     "B101", # assert_used - permitido en tests
+    "B311", # random - apropiado para generadores de datos sintéticos educativos
     "B601", # paramiko_calls - usado en algunos módulos
     "B608", # hardcoded_sql_expressions - contexto educativo con SQLite en memoria
 ]
