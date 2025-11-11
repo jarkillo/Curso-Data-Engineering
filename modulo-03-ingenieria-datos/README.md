@@ -59,26 +59,32 @@ Al completar este módulo, serás capaz de:
   - ✅ `04-proyecto-practico/`: Pipeline completo con TDD (130+ tests, 98% cobertura)
 - **Proyecto**: Pipeline de Transformación de Ventas con 4 módulos (limpiador, transformador, agregador, validador)
 
-### Tema 4: Calidad de Datos ⏳
+### Tema 4: Calidad de Datos ✅
 - **Duración**: 1 semana
-- **Estado**: ⏳ Pendiente
+- **Estado**: ✅ **COMPLETADO 100%** (2025-10-30)
+- **Calificación pedagógica**: ⭐⭐⭐⭐⭐
 - **Contenido**:
-  - Dimensiones de calidad
-  - Validación de esquemas
-  - Detección de duplicados
-  - Manejo de outliers
-  - Data profiling
-- **Proyecto**: Framework de calidad reutilizable
+  - ✅ `01-TEORIA.md`: ~3,850 palabras con 30+ ejemplos integrados
+  - ✅ `02-EJEMPLOS.md`: 3 ejemplos prácticos ejecutables (Pandera, RapidFuzz, Outliers)
+  - ✅ `03-EJERCICIOS.md`: 10 ejercicios progresivos con soluciones completas
+  - ✅ `04-proyecto-practico/`: 22 funciones, 82 tests, 93% cobertura
+  - ✅ `REVISION_PEDAGOGICA.md`: Validación pedagógica aprobada
+- **Proyecto**: Framework de calidad con validador_esquema, detector_duplicados, detector_outliers, profiler
+- **PR**: [#28](https://github.com/jarkillo/Curso-Data-Engineering/pull/28)
 
-### Tema 5: Formatos de Datos Modernos ⏳
+### Tema 5: Formatos de Datos Modernos ⚠️
 - **Duración**: 1 semana
-- **Estado**: ⏳ Pendiente
+- **Estado**: ⚠️ **98% COMPLETO** (2025-10-30) - 1 test flaky pendiente
+- **Calificación pedagógica**: ⭐⭐⭐⭐⭐
 - **Contenido**:
-  - JSON y JSON Lines
-  - Parquet (columnar storage)
-  - Avro (schemas evolutivos)
-  - Comparación de formatos
-- **Proyecto**: Conversor multi-formato
+  - ✅ `01-TEORIA.md`: Conceptos de JSON, Parquet, Avro, comparación de formatos
+  - ✅ `02-EJEMPLOS.md`: Ejemplos prácticos ejecutables
+  - ✅ `03-EJERCICIOS.md`: Ejercicios progresivos con soluciones completas
+  - ✅ `04-proyecto-practico/`: 78 tests (77 passing, 1 flaky), 93% cobertura
+  - ✅ `REVISION_PEDAGOGICA.md`: Validación pedagógica aprobada
+- **Proyecto**: Conversor multi-formato con JSON, Parquet, Avro, análisis y compresión
+- **Issue conocido**: Test `test_parquet_es_mas_pequenio_que_csv` es intermitente (no determinista por compresión)
+- **PR**: [#30](https://github.com/jarkillo/Curso-Data-Engineering/pull/30)
 
 ### Tema 6: Carga de Datos y Pipelines Completos ⏳
 - **Duración**: 1-2 semanas
@@ -110,12 +116,12 @@ Al completar este módulo, serás capaz de:
 Tema 1: ████████████████████ 100% ✅ COMPLETADO
 Tema 2: █████████░░░░░░░░░░░  47% 🔄 EN PROGRESO (cobertura baja)
 Tema 3: ████████████████████ 100% ✅ COMPLETADO
-Tema 4: ░░░░░░░░░░░░░░░░░░░░   0% ⏳ Pendiente
-Tema 5: ░░░░░░░░░░░░░░░░░░░░   0% ⏳ Pendiente
+Tema 4: ████████████████████ 100% ✅ COMPLETADO (82 tests, 93% cov)
+Tema 5: ███████████████████░  98% ⚠️ CASI COMPLETO (1 test flaky)
 Tema 6: ░░░░░░░░░░░░░░░░░░░░   0% ⏳ Pendiente
 Integrador: ░░░░░░░░░░░░░░░░░░░░   0% ⏳ Pendiente
 ───────────────────────────────────────────────
-Total:  ████████░░░░░░░░░░░░  35% 🔄 En progreso
+Total:  ███████████████░░░░░  75% 🔄 En progreso
 ```
 
 ---
@@ -313,7 +319,7 @@ Este módulo es material educativo de código abierto para aprendizaje personal.
 ---
 
 **Última actualización**: 2025-11-11
-**Versión**: 1.0.1 (Actualización de estado - Tema 2 en progreso por cobertura baja)
+**Versión**: 1.1.0 (Actualización completa - Temas 4 y 5 completados, 75% progreso total)
 **Issue Linear**: [JAR-189](https://linear.app/jarko/issue/JAR-189)
 
 **¡Bienvenido al Módulo 3! Prepárate para convertirte en un experto en pipelines de datos 🚀📊**

@@ -13,6 +13,18 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 - **JAR-194: Módulo 8 - Data Warehousing y Analytics ✅ COMPLETADO** (2025-11-10):
 
 ### Changed
+- **Módulo 3: README.md actualizado - Progreso real 75% (no 35%)** (2025-11-11):
+  - ✅ Tema 4 (Calidad de Datos) documentado como COMPLETADO:
+    * 82 tests pasando, 93% cobertura
+    * PR #28 mergeado a main el 2025-10-30
+    * 4 módulos: validador_esquema, detector_duplicados, detector_outliers, profiler
+  - ✅ Tema 5 (Formatos Modernos) documentado como 98% COMPLETO:
+    * 78 tests (77 passing, 1 flaky), 93% cobertura
+    * PR #30 mergeado a main el 2025-10-30
+    * Issue conocido: test de comparación tamaños es intermitente
+  - ✅ Progreso total actualizado: 35% → 75% (4.5/6 temas completados)
+  - ✅ Versión: 1.0.1 → 1.1.0
+
 - **Módulo 3: README.md corregido - Estado de Tema 2 actualizado** (2025-11-11):
   - ✅ Conflicto resuelto: Tema 2 mostraba 100% en barra de progreso pero ⏳ Pendiente en lista
   - ✅ Estado actualizado: Tema 2 ahora muestra **47% EN PROGRESO** (cobertura baja)
