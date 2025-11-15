@@ -6,8 +6,7 @@ dbt-postgres==1.7.0
 # Alternativa: dbt con DuckDB (más simple para desarrollo local)
 # dbt-duckdb==1.7.0
 
-# dbt utils (macros útiles)
-dbt-utils==1.1.1
+# Nota: dbt-utils se instala con 'dbt deps' desde packages.yml, no con pip
 
 # Testing y calidad
 sqlfluff==2.3.5
