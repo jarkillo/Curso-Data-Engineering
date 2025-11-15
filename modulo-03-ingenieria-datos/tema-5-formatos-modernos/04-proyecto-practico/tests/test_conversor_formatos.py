@@ -1,5 +1,5 @@
 """
-Tests para conversor_formatos.py
+Tests para conversor_formatos.py.
 
 Siguiendo metodología TDD - Tests escritos antes de implementación.
 """
@@ -291,12 +291,12 @@ class TestConvertirConParticiones:
     def test_particionamiento_formato_csv(
         self, df_con_particiones, directorio_temporal
     ):
-        """Verifica que el particionamiento también funciona con CSV (aunque menos común)."""
+        """Verifica que particionamiento funciona con CSV (menos común)."""
         # Este test verifica que la función acepta otros formatos
         # aunque Parquet es el más usado para particionamiento
         ruta_base = directorio_temporal / "particionado_csv"
 
-        # La función debería rechazar CSV para particionamiento o manejarlo adecuadamente
+        # La función debería rechazar CSV para particionamiento
         with pytest.raises(ValueError, match="solo soporta Parquet"):
             convertir_con_particiones(
                 df_con_particiones, str(ruta_base), ["año", "mes"], formato="csv"

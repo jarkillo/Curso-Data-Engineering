@@ -4,6 +4,7 @@ Módulo de análisis y comparación de formatos de datos.
 Proporciona funciones para detectar formatos, obtener metadata y realizar benchmarks.
 """
 
+import json
 import os
 import tempfile
 import time
@@ -14,7 +15,7 @@ import pandas as pd
 import pyarrow.parquet as pq
 
 
-def detectar_formato_archivo(ruta: str) -> str:
+def detectar_formato_archivo(ruta: str) -> str:  # noqa: C901
     """
     Detecta automáticamente el formato de un archivo.
 
@@ -200,7 +201,9 @@ def comparar_tamanios_formatos(df: pd.DataFrame) -> Dict[str, float]:
     return {k: round(v, 2) for k, v in resultados.items()}
 
 
-def benchmark_lectura_escritura(df: pd.DataFrame, formatos: List[str]) -> pd.DataFrame:
+def benchmark_lectura_escritura(  # noqa: C901
+    df: pd.DataFrame, formatos: List[str]
+) -> pd.DataFrame:
     """
     Realiza benchmark de lectura/escritura para diferentes formatos.
 
@@ -337,7 +340,7 @@ def generar_reporte_formato(ruta: str) -> Dict:
             metadata_parquet = obtener_metadata_parquet(ruta)
             reporte["metadata_parquet"] = metadata_parquet
             reporte["compresion"] = metadata_parquet["compresion"]
-        except Exception:
+        except Exception:  # nosec B110
             pass  # Si falla, continuar sin metadata adicional
 
     return reporte

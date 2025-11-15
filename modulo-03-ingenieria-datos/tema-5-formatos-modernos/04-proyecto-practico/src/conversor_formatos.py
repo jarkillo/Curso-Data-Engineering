@@ -52,7 +52,8 @@ def convertir_json_a_parquet(
     Args:
         ruta_json: Ruta del archivo JSON de entrada
         ruta_parquet: Ruta del archivo Parquet de salida
-        orient: Orientación del JSON ('records', 'split', 'index', 'columns', 'values', 'lines')
+        orient: Orientación del JSON ('records', 'split', 'index',
+            'columns', 'values', 'lines')
 
     Raises:
         FileNotFoundError: Si el archivo JSON no existe
