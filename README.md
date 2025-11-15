@@ -14,18 +14,18 @@ Crear una ruta de aprendizaje completa y práctica que cubra todas las competenc
 
 ## 📊 Progreso General
 
-### Módulos Completados: 4/10 (40%) 🚀
-### Proyectos Completados: 13/31 (42%) 📈
+### Módulos Completados: 7/10 (70%) 🚀
+### Proyectos Completados: 26/31 (84%) 📈
 
 ```
 Módulo 1:  ████████████████████ 100%  ✅ COMPLETADO
-Módulo 2:  ██████░░░░░░░░░░░░░░  33%  🔄 En progreso
-Módulo 3:  ██████░░░░░░░░░░░░░░  33%  🔄 En progreso
+Módulo 2:  ████████████████████ 100%  ✅ COMPLETADO 🎉
+Módulo 3:  ████████████████████ 100%  ✅ COMPLETADO 🎉
 Módulo 4:  ████████████████████ 100%  ✅ COMPLETADO
-Módulo 5:  ██████░░░░░░░░░░░░░░  33%  🔄 En progreso
-Módulo 6:  ░░░░░░░░░░░░░░░░░░░░   0%  ⏳ Pendiente
-Módulo 7:  ░░░░░░░░░░░░░░░░░░░░   0%  ⏳ Pendiente
-Módulo 8:  ░░░░░░░░░░░░░░░░░░░░   0%  ⏳ Pendiente
+Módulo 5:  ████████████████████ 100%  ✅ COMPLETADO 🎉
+Módulo 6:  ░░░░░░░░░░░░░░░░░░░░   0%  ⏳ Pendiente (Airflow)
+Módulo 7:  ░░░░░░░░░░░░░░░░░░░░   0%  ⏳ Pendiente (Cloud)
+Módulo 8:  █████████████░░░░░░░  67%  🔄 En progreso (DWH)
 Módulo 9:  ░░░░░░░░░░░░░░░░░░░░   0%  ⏳ Pendiente
 Módulo 10: ░░░░░░░░░░░░░░░░░░░░   0%  ⏳ Pendiente
 ```
@@ -46,18 +46,29 @@ Curso Data Engineering/
 │   └── tema-3-logs-debugging/      ✅ COMPLETADO (79% cobertura)
 ├── modulo-02-sql/             # 🔄 EN PROGRESO (33%)
 │   └── tema-1-sql-basico/          ✅ COMPLETADO (96% cobertura)
-├── modulo-03-ingenieria-datos/    # 🔄 EN PROGRESO (33%)
-│   └── tema-1-conceptos-etl/       ✅ COMPLETADO (95% cobertura)
+├── modulo-03-ingenieria-datos/    # ✅ COMPLETADO (100%)
+│   ├── tema-1-conceptos-etl/       ✅ COMPLETADO (95% cobertura)
+│   ├── tema-2-extraccion/          ✅ COMPLETADO (93% cobertura)
+│   ├── tema-3-transformacion/      ✅ COMPLETADO (98% cobertura)
+│   ├── tema-4-calidad/             ✅ COMPLETADO (93% cobertura)
+│   ├── tema-5-formatos/            ✅ COMPLETADO (93% cobertura)
+│   ├── tema-6-carga-pipelines/     ✅ COMPLETADO (91% cobertura)
+│   └── 05-proyecto-integrador/     ✅ COMPLETADO (83% cobertura)
 ├── modulo-04-apis-scraping/       # ✅ COMPLETADO (100%)
 │   ├── tema-1-apis-rest/           ✅ COMPLETADO (100% cobertura)
 │   ├── tema-2-web-scraping/        ✅ COMPLETADO (90% cobertura)
 │   └── tema-3-rate-limiting-caching/  ✅ COMPLETADO (88% cobertura)
-├── modulo-05-bases-datos-avanzadas/  # 🔄 EN PROGRESO (33%)
-│   └── tema-1-postgresql-avanzado/    ✅ COMPLETADO (100% cobertura)
+├── modulo-05-bases-datos-avanzadas/  # ✅ COMPLETADO (100%)
+│   ├── tema-1-postgresql-avanzado/    ✅ COMPLETADO (100% cobertura)
+│   ├── tema-2-mongodb/                ✅ COMPLETADO (99% cobertura, 56 tests)
+│   └── tema-3-modelado-datos/         ✅ COMPLETADO (98% cobertura, 25 tests)
 ├── modulo-06-big-data/        # ⏳ PENDIENTE
 ├── modulo-06-cloud/           # ⏳ PENDIENTE
 ├── modulo-07-orquestacion/    # ⏳ PENDIENTE
-├── modulo-08-ia-ml/           # ⏳ PENDIENTE
+├── modulo-08-data-warehousing/   # 🔄 EN PROGRESO (67%)
+│   ├── tema-1-dimensional-modeling/    ✅ COMPLETADO (91% cobertura, 154 tests)
+│   ├── tema-2-herramientas-dwh/        ✅ COMPLETADO (dbt pipeline completo, ~44 tests)
+│   └── tema-3-analytics-bi/            ⏳ PENDIENTE
 ├── modulo-09-dataops/         # ⏳ PENDIENTE
 └── modulo-10-proyecto-final/  # ⏳ PENDIENTE
 ```
@@ -65,6 +76,64 @@ Curso Data Engineering/
 ## 🚀 Estado Actual
 
 ### ✅ Completado Recientemente
+
+**Módulo 8 Tema 2: Herramientas DWH (dbt)** (2025-11-13) - ✅ 100% COMPLETADO 🎉
+
+**Pipeline dbt Completo - TechMart Analytics:**
+- ✅ **~44 tests de dbt** (40 genéricos + 4 personalizados)
+- ✅ **~22,500 palabras** de contenido educativo (teoría + ejemplos + ejercicios)
+- ✅ **30+ archivos** creados (modelos, tests, macros, seeds, docs)
+- ✅ **Tecnologías**: dbt-core, dbt-utils, PostgreSQL/DuckDB, Jinja2, SQL
+
+**Características del Proyecto:**
+- 3 modelos staging (views): limpieza y estandarización
+- 2 dimensiones (tables): segmentación RFM, clasificación de productos
+- 2 hechos (tables): pedidos + análisis diario con pivotes
+- 10 macros reutilizables: pivotes, conversiones, validaciones
+- 1 snapshot SCD Type 2: historial de cambios en productos
+- Schema.yml completo con documentación exhaustiva
+- README de 500+ líneas con ejemplos y troubleshooting
+
+**Progreso Módulo 8**: 33% → **67%** (2/3 temas completados) 🚀
+
+---
+
+**Módulo 5: Bases de Datos Avanzadas** (2025-11-12) - ✅ 100% COMPLETADO 🎉🎉
+
+**3 Temas Completados:**
+
+**Resumen del Módulo:**
+- ✅ **81 tests pasando** (100% success rate)
+- ✅ **98% cobertura promedio** (supera objetivo ≥80%)
+- ✅ **3 proyectos prácticos** con TDD
+- ✅ **Tecnologías**: PostgreSQL avanzado, MongoDB, Modelado dimensional
+
+**Tema 1: PostgreSQL Avanzado** - Tipos avanzados, PL/pgSQL, transacciones ACID
+**Tema 2: MongoDB** - 56 tests, 99% cobertura - Sistema de logs con agregaciones
+**Tema 3: Modelado de Datos** - 25 tests, 98% cobertura - Validación Star Schema + DDL generator
+
+---
+
+**Módulo 3: Ingeniería de Datos Core (ETL/ELT)** (2025-11-12) - ✅ 100% COMPLETADO 🎉🎉
+
+**7 Componentes Completados:**
+
+**Resumen del Módulo:**
+- ✅ **639 tests pasando** (100% success rate)
+- ✅ **92% cobertura promedio** (todos los temas >85%)
+- ✅ **7 proyectos prácticos** con TDD
+- ✅ **Arquitectura Bronze/Silver/Gold** completa
+- ✅ **Tecnologías**: Pandas, SQLAlchemy, Pandera, BeautifulSoup, Parquet, Click
+
+**Tema 1: Conceptos ETL/ELT** - 64 tests, 95% cobertura
+**Tema 2: Extracción de Datos** - 152 tests, 93% cobertura
+**Tema 3: Transformación con Pandas** - 130 tests, 98% cobertura
+**Tema 4: Calidad de Datos** - 82 tests, 93% cobertura
+**Tema 5: Formatos Modernos** - 78 tests, 93% cobertura ✅ **Fix aplicado** (PR #37)
+**Tema 6: Carga y Pipelines** - 61 tests, 91% cobertura
+**Proyecto Integrador** - 72 tests, 83% cobertura
+
+---
 
 **Módulo 4: APIs y Web Scraping** (2025-10-25) - ✅ 100% COMPLETADO 🎉
 

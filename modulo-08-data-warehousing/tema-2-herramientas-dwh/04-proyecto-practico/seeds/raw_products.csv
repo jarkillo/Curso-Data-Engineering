@@ -1,0 +1,16 @@
+product_id,sku,name,description,price,category,stock,updated_at
+1,TECH-LAP-001,Laptop Pro 15,Professional laptop with 16GB RAM,1299.99,electronics,45,2024-01-01 00:00:00
+2,TECH-LAP-002,Laptop Air 13,Lightweight laptop for everyday use,899.99,electronics,62,2024-01-01 00:00:00
+3,TECH-PHONE-001,Smartphone X,Latest smartphone with 5G,799.99,electronics,120,2024-01-01 00:00:00
+4,TECH-PHONE-002,Smartphone SE,Budget-friendly smartphone,399.99,electronics,85,2024-01-01 00:00:00
+5,ACC-MOUSE-001,Wireless Mouse,Ergonomic wireless mouse,29.99,accessories,200,2024-01-01 00:00:00
+6,ACC-KEYB-001,Mechanical Keyboard,RGB mechanical keyboard,89.99,accessories,150,2024-01-01 00:00:00
+7,ACC-HEAD-001,Noise Cancelling Headphones,Premium headphones with ANC,249.99,accessories,95,2024-01-01 00:00:00
+8,CLOTH-SHIRT-001,Tech Company T-Shirt,Comfortable cotton t-shirt,19.99,clothing,500,2024-01-01 00:00:00
+9,CLOTH-HOODIE-001,Developer Hoodie,Warm hoodie for developers,49.99,clothing,300,2024-01-01 00:00:00
+10,TECH-TAB-001,Tablet Pro,10-inch tablet for productivity,599.99,electronics,75,2024-01-01 00:00:00
+11,ACC-CASE-001,Laptop Sleeve,Protective laptop sleeve,24.99,accessories,180,2024-01-01 00:00:00
+12,ACC-CHAR-001,Fast Charger,65W USB-C fast charger,39.99,accessories,220,2024-01-01 00:00:00
+1,TECH-LAP-001,Laptop Pro 15,Professional laptop with 16GB RAM,1249.99,electronics,45,2024-03-15 10:00:00
+3,TECH-PHONE-001,Smartphone X,Latest smartphone with 5G,749.99,electronics,120,2024-03-20 14:30:00
+7,ACC-HEAD-001,Noise Cancelling Headphones,Premium headphones with ANC,229.99,accessories,95,2024-04-01 09:15:00

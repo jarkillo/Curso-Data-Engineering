@@ -1,0 +1,21 @@
+# Dependencias del proyecto dbt - TechMart Analytics
+
+# dbt Core (versión PostgreSQL)
+dbt-postgres==1.7.0
+
+# Alternativa: dbt con DuckDB (más simple para desarrollo local)
+# dbt-duckdb==1.7.0
+
+# Nota: dbt-utils se instala con 'dbt deps' desde packages.yml, no con pip
+
+# Testing y calidad
+sqlfluff==2.3.5
+sqlfluff-templater-dbt==2.3.5
+
+# Visualización de documentación
+mkdocs==1.5.3
+mkdocs-material==9.5.3
+
+# Utilidades
+pyyaml==6.0.1
+jinja2==3.1.2

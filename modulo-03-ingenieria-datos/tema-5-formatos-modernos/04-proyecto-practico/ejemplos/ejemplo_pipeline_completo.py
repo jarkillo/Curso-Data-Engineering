@@ -190,7 +190,7 @@ def limpiar_archivos():
         try:
             if os.path.exists(archivo):
                 os.remove(archivo)
-        except:
+        except OSError:
             pass
 
     # Limpiar directorios
@@ -200,7 +200,7 @@ def limpiar_archivos():
         try:
             if os.path.exists(directorio):
                 shutil.rmtree(directorio)
-        except:
+        except OSError:
             pass
 
     print("✅ Limpieza completada")

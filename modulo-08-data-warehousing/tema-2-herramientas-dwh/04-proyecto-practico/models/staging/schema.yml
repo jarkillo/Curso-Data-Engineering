@@ -1,0 +1,185 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: |
+      Tabla de staging de clientes con datos limpios y estandarizados.
+      Aplica transformaciones básicas como normalización de emails, formato de nombres,
+      y limpieza de números de teléfono.
+    columns:
+      - name: customer_id
+        description: Identificador único del cliente
+        tests:
+          - unique
+          - not_null
+
+      - name: email
+        description: Email del cliente (lowercase, trimmed)
+        tests:
+          - not_null
+          - unique
+
+      - name: first_name
+        description: Nombre del cliente (formato título)
+        tests:
+          - not_null
+
+      - name: last_name
+        description: Apellido del cliente (formato título)
+        tests:
+          - not_null
+
+      - name: full_name
+        description: Nombre completo construido
+        tests:
+          - not_null
+
+      - name: phone_cleaned
+        description: Teléfono limpio (solo dígitos)
+
+      - name: country
+        description: Código de país (ISO 3166-1 alpha-2)
+        tests:
+          - accepted_values:
+              values: ['ES', 'MX', 'US', 'AR', 'CO', 'CL', 'PE']
+
+      - name: created_at
+        description: Timestamp de creación del cliente
+        tests:
+          - not_null
+
+      - name: dbt_loaded_at
+        description: Timestamp de carga en dbt
+
+  - name: stg_products
+    description: |
+      Catálogo de productos limpio y deduplicado.
+      Mantiene solo la versión más reciente de cada producto basándose en updated_at.
+    columns:
+      - name: product_id
+        description: Identificador único del producto
+        tests:
+          - unique
+          - not_null
+
+      - name: sku
+        description: SKU del producto (Stock Keeping Unit)
+        tests:
+          - unique
+          - not_null
+
+      - name: name
+        description: Nombre del producto
+        tests:
+          - not_null
+
+      - name: description
+        description: Descripción detallada del producto
+
+      - name: price
+        description: Precio del producto en USD
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+
+      - name: category
+        description: Categoría del producto
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['electronics', 'accessories', 'clothing']
+
+      - name: stock
+        description: Cantidad en inventario
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: updated_at
+        description: Última actualización del producto
+        tests:
+          - not_null
+
+  - name: stg_orders
+    description: |
+      Pedidos con información limpia y métricas calculadas.
+      Incluye flags de estado y cálculo de días hasta envío.
+    columns:
+      - name: order_id
+        description: Identificador único del pedido
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        description: ID del cliente que realizó el pedido
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+
+      - name: product_id
+        description: ID del producto pedido
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+
+      - name: quantity
+        description: Cantidad de productos
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+
+      - name: unit_price
+        description: Precio unitario del producto
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+
+      - name: total_amount
+        description: Monto total del pedido
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+
+      - name: payment_method
+        description: Método de pago utilizado
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['credit_card', 'debit_card', 'paypal', 'bank_transfer']
+
+      - name: order_status
+        description: Estado actual del pedido
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['pending', 'processing', 'shipped', 'delivered', 'cancelled']
+
+      - name: order_date
+        description: Fecha en que se realizó el pedido
+        tests:
+          - not_null
+
+      - name: shipped_date
+        description: Fecha de envío (puede ser NULL si aún no se envió)
+
+      - name: days_to_ship
+        description: Días desde pedido hasta envío
+
+      - name: is_shipped
+        description: Flag indicando si el pedido fue enviado
+
+      - name: is_delivered
+        description: Flag indicando si el pedido fue entregado
+
+      - name: is_cancelled
+        description: Flag indicando si el pedido fue cancelado
