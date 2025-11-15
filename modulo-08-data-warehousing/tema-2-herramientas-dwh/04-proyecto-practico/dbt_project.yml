@@ -1,0 +1,62 @@
+# Configuración del proyecto dbt para TechMart Analytics
+# Este proyecto demuestra un pipeline completo de transformación ELT
+
+name: 'techmart_analytics'
+version: '1.0.0'
+config-version: 2
+
+# Directorio de modelos
+model-paths: ["models"]
+# Directorio de macros reutilizables
+macro-paths: ["macros"]
+# Directorio de seeds (datos CSV)
+seed-paths: ["seeds"]
+# Directorio de tests personalizados
+test-paths: ["tests"]
+# Directorio de snapshots (SCD Type 2)
+snapshot-paths: ["snapshots"]
+
+# Configuración de materialización por defecto
+models:
+  techmart_analytics:
+    # Staging: vistas para transformaciones iniciales
+    staging:
+      +materialized: view
+      +tags: ['staging']
+
+    # Marts: tablas físicas para análisis final
+    marts:
+      +materialized: table
+      +tags: ['marts']
+
+      # Dimensiones: tablas que cambian lentamente
+      dimensions:
+        +tags: ['dimensions']
+
+      # Hechos: tablas con métricas y transacciones
+      facts:
+        +tags: ['facts']
+
+# Configuración de seeds
+seeds:
+  techmart_analytics:
+    +schema: raw
+    +quote_columns: false
+
+# Configuración de snapshots
+snapshots:
+  techmart_analytics:
+    +target_schema: snapshots
+    +strategy: timestamp
+    +unique_key: id
+
+# Variables del proyecto
+vars:
+  # Fecha de corte para datos históricos
+  start_date: '2024-01-01'
+
+  # Segmentos de clientes
+  customer_segments:
+    platinum_threshold: 1000
+    gold_threshold: 500
+    silver_threshold: 100

@@ -1,0 +1,234 @@
+version: 2
+
+models:
+  # ========================================
+  # DIMENSIONES
+  # ========================================
+
+  - name: dim_customers
+    description: |
+      Dimensión de clientes con segmentación RFM (Recency, Frequency, Monetary).
+      Incluye métricas agregadas de comportamiento de compra y clasificación de clientes.
+    columns:
+      - name: customer_id
+        description: Clave primaria de la dimensión
+        tests:
+          - unique
+          - not_null
+
+      - name: email
+        description: Email único del cliente
+        tests:
+          - unique
+          - not_null
+
+      - name: full_name
+        description: Nombre completo del cliente
+        tests:
+          - not_null
+
+      - name: country
+        description: País del cliente
+
+      - name: total_orders
+        description: Total de pedidos realizados (excluyendo cancelados)
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: lifetime_value
+        description: Valor total gastado por el cliente
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: customer_segment
+        description: Segmento del cliente basado en lifetime value
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Bronze', 'Silver', 'Gold', 'Platinum']
+
+      - name: purchase_frequency
+        description: Frecuencia de compra del cliente
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Low', 'Medium', 'High', 'Very High']
+
+      - name: customer_status
+        description: Estado del cliente basado en recencia
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Active', 'At Risk', 'Inactive']
+
+  - name: dim_products
+    description: |
+      Dimensión de productos enriquecida con métricas de ventas.
+      Incluye clasificación por popularidad e ingresos generados.
+    columns:
+      - name: product_id
+        description: Clave primaria de la dimensión
+        tests:
+          - unique
+          - not_null
+
+      - name: sku
+        description: SKU único del producto
+        tests:
+          - unique
+          - not_null
+
+      - name: name
+        description: Nombre del producto
+        tests:
+          - not_null
+
+      - name: current_price
+        description: Precio actual del producto
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+
+      - name: category
+        description: Categoría del producto
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['electronics', 'accessories', 'clothing']
+
+      - name: current_stock
+        description: Stock actual disponible
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: times_ordered
+        description: Veces que el producto ha sido pedido
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: total_units_sold
+        description: Total de unidades vendidas
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: total_revenue
+        description: Ingresos totales generados
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: popularity_tier
+        description: Clasificación de popularidad
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['No Sales', 'Normal', 'Popular', 'Best Seller']
+
+      - name: revenue_tier
+        description: Clasificación por ingresos
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['No Revenue', 'Low Revenue', 'Medium Revenue', 'High Revenue']
+
+  # ========================================
+  # HECHOS
+  # ========================================
+
+  - name: fct_orders
+    description: |
+      Tabla de hechos de pedidos con métricas y dimensiones desnormalizadas.
+      Incluye análisis de precios, tiempo de envío y segmentación temporal.
+    columns:
+      - name: order_id
+        description: Clave primaria del hecho
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        description: FK a dim_customers
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+
+      - name: product_id
+        description: FK a dim_products
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_products')
+              field: product_id
+
+      - name: quantity
+        description: Cantidad de productos en el pedido
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+
+      - name: unit_price
+        description: Precio unitario al momento del pedido
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+
+      - name: total_amount
+        description: Monto total del pedido
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+
+      - name: payment_method
+        description: Método de pago utilizado
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['credit_card', 'debit_card', 'paypal', 'bank_transfer']
+
+      - name: order_status
+        description: Estado del pedido
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['pending', 'processing', 'shipped', 'delivered', 'cancelled']
+
+      - name: order_date
+        description: Fecha del pedido
+        tests:
+          - not_null
+
+      - name: order_year
+        description: Año del pedido (para análisis temporal)
+        tests:
+          - not_null
+
+      - name: order_month
+        description: Mes del pedido (1-12)
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "BETWEEN 1 AND 12"
+
+      - name: customer_segment
+        description: Segmento del cliente (desnormalizado)
+        tests:
+          - accepted_values:
+              values: ['Bronze', 'Silver', 'Gold', 'Platinum']
+
+      - name: product_category
+        description: Categoría del producto (desnormalizado)
+        tests:
+          - accepted_values:
+              values: ['electronics', 'accessories', 'clothing']

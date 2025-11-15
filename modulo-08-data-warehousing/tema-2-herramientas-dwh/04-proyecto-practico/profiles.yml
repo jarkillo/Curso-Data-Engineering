@@ -1,0 +1,46 @@
+# Configuración de conexión a base de datos para dbt
+# NOTA: Este archivo debe estar en ~/.dbt/ en tu sistema (no en el proyecto)
+# Este archivo es un EJEMPLO de configuración
+
+techmart_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      port: 5432
+      user: dataeng_user
+      password: "{{ env_var('DBT_PASSWORD') }}"
+      dbname: techmart_dw
+      schema: dbt_dev
+      threads: 4
+      keepalives_idle: 0
+
+    prod:
+      type: postgres
+      host: localhost
+      port: 5432
+      user: dataeng_user
+      password: "{{ env_var('DBT_PASSWORD') }}"
+      dbname: techmart_dw
+      schema: dbt_prod
+      threads: 8
+      keepalives_idle: 0
+
+# INSTRUCCIONES DE USO:
+#
+# 1. Copia este archivo a ~/.dbt/profiles.yml (Linux/Mac) o %USERPROFILE%\.dbt\profiles.yml (Windows)
+# 2. Configura la variable de entorno DBT_PASSWORD con tu contraseña:
+#    - Linux/Mac: export DBT_PASSWORD='tu_password'
+#    - Windows: $env:DBT_PASSWORD='tu_password'
+# 3. Ajusta host, port, user, dbname según tu entorno
+#
+# Para este proyecto de práctica, puedes usar DuckDB (más simple):
+#
+# techmart_analytics:
+#   target: dev
+#   outputs:
+#     dev:
+#       type: duckdb
+#       path: techmart.duckdb
+#       threads: 4
