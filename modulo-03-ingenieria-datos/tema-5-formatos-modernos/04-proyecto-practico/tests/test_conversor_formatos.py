@@ -4,9 +4,6 @@ Tests para conversor_formatos.py
 Siguiendo metodología TDD - Tests escritos antes de implementación.
 """
 
-import os
-from pathlib import Path
-
 import pandas as pd
 import pytest
 from src.conversor_formatos import (

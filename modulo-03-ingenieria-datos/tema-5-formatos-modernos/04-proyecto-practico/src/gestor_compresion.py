@@ -168,7 +168,7 @@ def comparar_compresiones(ruta_archivo: str, algoritmos: List[str]) -> Dict[str,
         for archivo_temp in archivos_temporales:
             try:
                 os.remove(archivo_temp)
-            except:
+            except OSError:
                 pass  # Ignorar errores de limpieza
 
     return resultados

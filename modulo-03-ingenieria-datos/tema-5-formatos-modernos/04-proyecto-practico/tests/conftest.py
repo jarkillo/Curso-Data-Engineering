@@ -2,10 +2,6 @@
 Fixtures compartidas para tests del conversor multi-formato.
 """
 
-import shutil
-import tempfile
-from pathlib import Path
-
 import numpy as np
 import pandas as pd
 import pytest

@@ -63,7 +63,7 @@ def detectar_formato_archivo(ruta: str) -> str:
                         ):
                             # Probablemente JSON estándar
                             return "json"
-                except:
+                except (OSError, IndexError):
                     return "json"
 
                 # Si todas las líneas empiezan con {, es JSON Lines
@@ -71,7 +71,7 @@ def detectar_formato_archivo(ruta: str) -> str:
             else:
                 # Formato desconocido
                 return "jsonl"  # Asumir JSON Lines por defecto
-        except:
+        except (OSError, json.JSONDecodeError):
             return "json"
     else:
         raise ValueError(
@@ -108,7 +108,6 @@ def obtener_metadata_parquet(ruta: str) -> Dict:
     # Leer metadata con PyArrow
     parquet_file = pq.ParquetFile(ruta)
     metadata = parquet_file.metadata
-    schema = parquet_file.schema_arrow
 
     # Leer DataFrame para obtener tipos de pandas
     df = pd.read_parquet(ruta)
@@ -338,7 +337,7 @@ def generar_reporte_formato(ruta: str) -> Dict:
             metadata_parquet = obtener_metadata_parquet(ruta)
             reporte["metadata_parquet"] = metadata_parquet
             reporte["compresion"] = metadata_parquet["compresion"]
-        except:
+        except Exception:
             pass  # Si falla, continuar sin metadata adicional
 
     return reporte
