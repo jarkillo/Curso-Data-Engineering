@@ -527,8 +527,8 @@ class TestAplicarSCDTipo2:
 
         # Cliente con solo versión cerrada (sin es_actual=True)
         # Este es un caso anómalo pero el código debe manejarlo
-        # Nota: En este caso edge, el código creará una nueva versión 1
-        # y sobrescribirá la anterior (caso muy raro en producción)
+        # IMPORTANTE: Debe preservar la versión histórica existente
+        # y crear la siguiente versión, no sobrescribir
         df_actual = pd.DataFrame(
             [
                 {
@@ -561,13 +561,20 @@ class TestAplicarSCDTipo2:
             df_actual, df_nuevos, "cliente_id", campos_rastreables, fecha_proceso
         )
 
-        # Cuando no hay versión actual, el código crea una nueva versión 1
-        assert len(df_result) == 1
+        # Debe preservar la v1 histórica Y crear nueva v2
+        assert len(df_result) == 2
 
-        # Verificar que se creó nueva versión actual con datos nuevos
-        nueva = df_result[df_result["es_actual"]]
-        assert len(nueva) == 1
-        assert nueva.iloc[0]["email"] == "juan@new.com"
-        assert nueva.iloc[0]["version"] == 1
-        assert nueva.iloc[0]["fecha_inicio"] == fecha_proceso
-        assert pd.isna(nueva.iloc[0]["fecha_fin"])
+        # Verificar que la versión histórica v1 se preservó
+        v1_historica = df_result[df_result["version"] == 1]
+        assert len(v1_historica) == 1
+        assert v1_historica.iloc[0]["email"] == "juan@old.com"
+        assert not v1_historica.iloc[0]["es_actual"]
+        assert v1_historica.iloc[0]["fecha_fin"] == date(2024, 1, 1)
+
+        # Verificar que se creó nueva versión 2 (siguiente a la máxima)
+        v2_nueva = df_result[df_result["version"] == 2]
+        assert len(v2_nueva) == 1
+        assert v2_nueva.iloc[0]["email"] == "juan@new.com"
+        assert v2_nueva.iloc[0]["es_actual"]
+        assert v2_nueva.iloc[0]["fecha_inicio"] == fecha_proceso
+        assert pd.isna(v2_nueva.iloc[0]["fecha_fin"])
