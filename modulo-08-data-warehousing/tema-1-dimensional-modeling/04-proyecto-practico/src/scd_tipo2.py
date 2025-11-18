@@ -229,12 +229,15 @@ def aplicar_scd_tipo2(  # noqa: C901
             df_version_actual = df_actual_id[df_actual_id["es_actual"]]
 
             if df_version_actual.empty:
-                # No debería pasar, pero manejar caso edge
-                # Crear versión 1 si no hay actual
+                # Caso edge: Existe el ID pero no hay versión actual
+                # Obtener la versión máxima existente y crear la siguiente
+                max_version = df_actual_id["version"].max()
+
+                # Crear nueva versión siguiente
                 nuevo_registro = row_nuevo.to_dict()
                 nuevo_registro["fecha_inicio"] = fecha_proceso
                 nuevo_registro["fecha_fin"] = None
-                nuevo_registro["version"] = 1
+                nuevo_registro["version"] = max_version + 1
                 nuevo_registro["es_actual"] = True
                 resultado.append(nuevo_registro)
             else:
