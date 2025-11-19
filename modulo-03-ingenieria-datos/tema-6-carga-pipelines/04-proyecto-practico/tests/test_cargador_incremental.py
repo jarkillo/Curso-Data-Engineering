@@ -223,3 +223,53 @@ class TestIncrementalLoadConValidacion:
 
         assert resultado["cargados"] == 3  # Solo los válidos
         assert resultado["invalidos"] == 1  # El que tiene ID nulo
+
+    def test_maneja_timestamps_con_timezone(
+        self, engine_temporal, archivo_checkpoint_temporal
+    ):
+        """Should handle timezone-aware timestamps without error."""
+        from src.cargador_incremental import incremental_load
+
+        # Crear DataFrame con timestamps timezone-aware (UTC)
+        df_tz_aware = pd.DataFrame(
+            {
+                "id": [1, 2, 3],
+                "timestamp": pd.date_range("2024-01-15", periods=3, freq="h", tz="UTC"),
+                "valor": [100, 200, 300],
+            }
+        )
+
+        # Primera carga (sin checkpoint previo)
+        resultado = incremental_load(
+            df_tz_aware,
+            engine_temporal,
+            "tabla_tz",
+            "timestamp",
+            archivo_checkpoint_temporal,
+        )
+
+        # Debe cargar todos los registros sin error
+        assert resultado["cargados"] == 3
+        assert resultado["procesados"] == 3
+        assert resultado["omitidos"] == 0
+
+        # Segunda carga con solo 1 registro nuevo
+        df_nuevo = pd.DataFrame(
+            {
+                "id": [4],
+                "timestamp": pd.date_range("2024-01-15 03:00", periods=1, tz="UTC"),
+                "valor": [400],
+            }
+        )
+
+        resultado2 = incremental_load(
+            df_nuevo,
+            engine_temporal,
+            "tabla_tz",
+            "timestamp",
+            archivo_checkpoint_temporal,
+        )
+
+        # Solo debe cargar el nuevo
+        assert resultado2["cargados"] == 1
+        assert resultado2["omitidos"] == 0

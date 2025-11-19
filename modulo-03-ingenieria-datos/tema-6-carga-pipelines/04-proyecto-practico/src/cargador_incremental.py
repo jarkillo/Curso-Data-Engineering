@@ -92,14 +92,32 @@ def incremental_load(
     # Leer último checkpoint
     checkpoint = leer_checkpoint(checkpoint_file)
 
-    # Convertir a timestamp si es string
+    # Crear timestamp default
+    default_timestamp = pd.Timestamp("2000-01-01")
+
+    # Si la columna es timezone-aware, localizar el default a la misma timezone
+    if pd.api.types.is_datetime64_any_dtype(df[columna_timestamp]):
+        if (
+            hasattr(df[columna_timestamp].dtype, "tz")
+            and df[columna_timestamp].dtype.tz is not None
+        ):
+            # Columna es timezone-aware, localizar el default
+            default_timestamp = default_timestamp.tz_localize(
+                df[columna_timestamp].dtype.tz
+            )
+
+    # Convertir checkpoint a timestamp
     if isinstance(checkpoint, str) and checkpoint != "0":
         try:
             last_timestamp = pd.Timestamp(checkpoint)
+            # Si default es tz-aware, localizar last_timestamp también
+            if hasattr(default_timestamp, "tz") and default_timestamp.tz is not None:
+                if last_timestamp.tz is None:
+                    last_timestamp = last_timestamp.tz_localize(default_timestamp.tz)
         except Exception:
-            last_timestamp = pd.Timestamp("2000-01-01")
+            last_timestamp = default_timestamp
     elif checkpoint == 0:
-        last_timestamp = pd.Timestamp("2000-01-01")
+        last_timestamp = default_timestamp
     else:
         last_timestamp = checkpoint
 
