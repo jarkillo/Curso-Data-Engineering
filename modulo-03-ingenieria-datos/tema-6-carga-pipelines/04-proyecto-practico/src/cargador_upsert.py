@@ -40,16 +40,19 @@ def upsert(df: pd.DataFrame, engine: Engine, tabla: str, columna_clave: str) -> 
 
         if tabla_existe:
             # Eliminar registros con claves que vamos a insertar
+            # Usar bound parameters para evitar SQL injection
             claves = df[columna_clave].tolist()
-            placeholders = ",".join(
-                [
-                    f"'{clave}'" if isinstance(clave, str) else str(clave)
-                    for clave in claves
-                ]
-            )
-            conn.execute(
-                text(f"DELETE FROM {tabla} WHERE {columna_clave} IN ({placeholders})")
-            )
+
+            if claves:  # Solo ejecutar si hay claves
+                # Crear placeholders para bound parameters
+                placeholders = ",".join([f":key_{i}" for i in range(len(claves))])
+                # Crear dict de parámetros
+                params = {f"key_{i}": clave for i, clave in enumerate(claves)}
+
+                conn.execute(
+                    text(f"DELETE FROM {tabla} WHERE {columna_clave} IN ({placeholders})"),
+                    params
+                )
 
         # Insertar todos los registros
         df.to_sql(tabla, conn, if_exists="append", index=False, method="multi")

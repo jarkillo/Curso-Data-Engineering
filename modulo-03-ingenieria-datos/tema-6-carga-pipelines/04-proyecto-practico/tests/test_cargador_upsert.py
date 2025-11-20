@@ -121,3 +121,62 @@ class TestDetectarCambios:
 
         assert len(df_nuevos) == len(df_simple)
         assert len(df_existentes) == 0
+
+
+class TestUpsertSeguridad:
+    """Tests de seguridad para upsert."""
+
+    def test_maneja_claves_con_quotes_sin_sql_injection(self, engine_temporal):
+        """Should handle keys with quotes without SQL injection."""
+        from src.cargador_upsert import upsert
+
+        # Crear datos con claves que contienen quotes (potencial SQL injection)
+        df_peligroso = pd.DataFrame(
+            {
+                "codigo": ["ABC'123", "DEF\"456", "GHI'; DROP TABLE test; --"],
+                "valor": [100, 200, 300],
+            }
+        )
+
+        # Primera carga - debe funcionar sin error
+        upsert(df_peligroso, engine_temporal, "tabla_segura", "codigo")
+
+        # Verificar que se cargaron los 3 registros
+        resultado = pd.read_sql("SELECT * FROM tabla_segura", engine_temporal)
+        assert len(resultado) == 3
+
+        # Segunda carga con mismas claves (debe actualizar sin SQL injection)
+        df_actualizacion = pd.DataFrame(
+            {
+                "codigo": ["ABC'123", "DEF\"456", "GHI'; DROP TABLE test; --"],
+                "valor": [999, 888, 777],
+            }
+        )
+
+        upsert(df_actualizacion, engine_temporal, "tabla_segura", "codigo")
+
+        # Verificar que sigue habiendo 3 registros (no se duplicaron)
+        resultado = pd.read_sql("SELECT * FROM tabla_segura", engine_temporal)
+        assert len(resultado) == 3
+
+        # Verificar que los valores se actualizaron
+        assert set(resultado["valor"].tolist()) == {999, 888, 777}
+
+    def test_maneja_claves_con_comas(self, engine_temporal):
+        """Should handle keys containing commas."""
+        from src.cargador_upsert import upsert
+
+        # Claves con comas (podrían romper el parsing del IN clause)
+        df_comas = pd.DataFrame(
+            {
+                "codigo": ["A,B,C", "D,E,F", "G,H,I"],
+                "valor": [100, 200, 300],
+            }
+        )
+
+        # Debe funcionar sin error
+        upsert(df_comas, engine_temporal, "tabla_comas", "codigo")
+
+        resultado = pd.read_sql("SELECT * FROM tabla_comas", engine_temporal)
+        assert len(resultado) == 3
+        assert "A,B,C" in resultado["codigo"].tolist()
