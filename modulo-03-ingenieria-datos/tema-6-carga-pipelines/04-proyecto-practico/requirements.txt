@@ -1,0 +1,19 @@
+# Dependencias del Proyecto Práctico: Carga de Datos y Pipelines
+
+# Core dependencies
+pandas>=2.1.0
+sqlalchemy>=2.0.0
+pyarrow>=14.0.0  # Para Parquet
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Code quality
+black>=23.0.0
+flake8>=6.1.0
+mypy>=1.5.0
+isort>=5.12.0
+
+# Optional: para trabajar con PostgreSQL
+# psycopg2-binary>=2.9.0
