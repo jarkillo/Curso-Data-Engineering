@@ -2,6 +2,7 @@
 
 import pandas as pd
 import pytest
+
 from src.pipeline_manager import (
     ejecutar_pipeline,
     seleccionar_estrategia_carga,

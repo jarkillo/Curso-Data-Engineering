@@ -7,6 +7,7 @@ Siguiendo metodología TDD - Tests escritos antes de implementación.
 import pandas as pd
 import pytest
 from sqlalchemy import text
+
 from src.cargador_full import (
     full_load,
     full_load_con_validacion,
@@ -210,7 +211,6 @@ class TestVerificarCargaExitosa:
         assert not exito
 
     def test_verificacion_falla_si_tabla_no_existe(self, df_simple, engine_temporal):
-        """Debe retornar False si la tabla no existe."""
-        exito = verificar_carga_exitosa(df_simple, engine_temporal, "tabla_inexistente")
-
-        assert exito is False
+        """Debe levantar ValueError si la tabla no existe."""
+        with pytest.raises(ValueError, match="No se pudo verificar tabla"):
+            verificar_carga_exitosa(df_simple, engine_temporal, "tabla_inexistente")

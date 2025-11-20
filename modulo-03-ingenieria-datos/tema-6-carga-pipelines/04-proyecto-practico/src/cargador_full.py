@@ -2,10 +2,27 @@
 Módulo para estrategia de carga completa (Full Load).
 
 Implementa funciones para reemplazar completamente los datos de una tabla.
+
+SECURITY NOTE: SQL Injection y Nombres de Tablas
+------------------------------------------------
+Este módulo usa f-strings para insertar nombres de tabla en queries SQL:
+    conn.execute(text(f"DELETE FROM {tabla}"))
+
+Esto es SEGURO en este contexto porque:
+1. Los nombres de tabla vienen de código controlado, no input de usuarios
+2. SQLAlchemy no soporta nombres de tabla/columna parametrizados
+3. Se validan con validar_identificador_sql() antes de usar
+
+NUNCA uses este patrón con input de usuario sin validación.
 """
 
 import pandas as pd
 from sqlalchemy import Engine, text
+from sqlalchemy.exc import IntegrityError, OperationalError
+
+from src.error_ids import ErrorIds
+from src.logging_utils import log_error
+from src.validations import validar_dataframe_no_vacio, validar_identificador_sql
 
 
 def full_load(df: pd.DataFrame, engine: Engine, tabla: str) -> int:
@@ -21,7 +38,9 @@ def full_load(df: pd.DataFrame, engine: Engine, tabla: str) -> int:
         Número de registros cargados
 
     Raises:
-        ValueError: Si el DataFrame está vacío
+        ValueError: Si el DataFrame está vacío o nombre de tabla inválido
+        OperationalError: Si falla la operación de base de datos
+        IntegrityError: Si hay violación de constraints
 
     Examples:
         >>> engine = create_engine("sqlite:///db.db")
@@ -30,8 +49,9 @@ def full_load(df: pd.DataFrame, engine: Engine, tabla: str) -> int:
         >>> print(num_cargados)
         2
     """
-    if df.empty:
-        raise ValueError("No se puede hacer full load con DataFrame vacío")
+    # Validaciones de seguridad y entrada
+    validar_dataframe_no_vacio(df)
+    validar_identificador_sql(tabla)
 
     with engine.begin() as conn:
         # 1. Eliminar datos existentes si la tabla ya existe
@@ -58,7 +78,7 @@ def full_load_con_validacion(
         df: DataFrame a cargar
         engine: SQLAlchemy engine
         tabla: Nombre de la tabla
-        columnas_requeridas: Columnas que deben exist en el DataFrame
+        columnas_requeridas: Columnas que deben existir en el DataFrame
         columnas_no_nulas: Columnas que no deben tener valores nulos
 
     Returns:
@@ -100,9 +120,26 @@ def full_load_con_validacion(
     try:
         num_cargados = full_load(df, engine, tabla)
         resultado["cargados"] = num_cargados
-    except Exception as e:
+    except (OperationalError, IntegrityError) as e:
+        # Errores esperados de base de datos
+        log_error(
+            "Full load failed - database error",
+            {
+                "error_id": ErrorIds.DATABASE_OPERATION_FAILED,
+                "tabla": tabla,
+                "num_rows": len(df),
+                "error": str(e),
+            },
+        )
         resultado["valido"] = False
-        resultado["mensaje"] = f"Error durante carga: {str(e)}"
+        resultado["mensaje"] = f"Error de base de datos: {str(e)}"
+    except Exception as e:
+        # Errores inesperados - logear y re-raise
+        log_error(
+            "Full load failed - unexpected error",
+            {"error_id": ErrorIds.UNEXPECTED_ERROR, "tabla": tabla, "error": str(e)},
+        )
+        raise
 
     return resultado
 
@@ -155,7 +192,11 @@ def verificar_carga_exitosa(df: pd.DataFrame, engine: Engine, tabla: str) -> boo
         tabla: Nombre de la tabla
 
     Returns:
-        True si conteos coinciden, False si no
+        True si conteos coinciden
+
+    Raises:
+        OperationalError: Si la tabla no existe o query falla
+        ValueError: Si no se puede verificar la carga
 
     Examples:
         >>> full_load(df, engine, "tabla")
@@ -168,8 +209,22 @@ def verificar_carga_exitosa(df: pd.DataFrame, engine: Engine, tabla: str) -> boo
             0
         ]["total"]
         return bool(total_bd == len(df))
-    except Exception:
-        return False
+    except OperationalError as e:
+        log_error(
+            "Verification query failed",
+            {
+                "error_id": ErrorIds.DATABASE_QUERY_FAILED,
+                "tabla": tabla,
+                "error": str(e),
+            },
+        )
+        raise ValueError(f"No se pudo verificar tabla '{tabla}': {e}") from e
+    except Exception as e:
+        log_error(
+            "Unexpected error during verification",
+            {"error_id": ErrorIds.UNEXPECTED_ERROR, "tabla": tabla, "error": str(e)},
+        )
+        raise
 
 
 def _tabla_existe(engine: Engine, tabla: str) -> bool:
@@ -182,10 +237,36 @@ def _tabla_existe(engine: Engine, tabla: str) -> bool:
 
     Returns:
         True si existe, False si no
+
+    Raises:
+        OperationalError: Si hay error de BD que NO es "tabla no existe"
+        Exception: Para errores inesperados de infraestructura
     """
     try:
         with engine.connect() as conn:
             conn.execute(text(f"SELECT 1 FROM {tabla} LIMIT 1"))
         return True
-    except Exception:
-        return False
+    except OperationalError as e:
+        # Verificar si el error es específicamente "tabla no existe"
+        error_msg = str(e).lower()
+        if any(
+            msg in error_msg for msg in ["no such table", "doesn't exist", "not exist"]
+        ):
+            return False
+        else:
+            # Otros errores operacionales deben ser logueados y re-raised
+            log_error(
+                "Database query failed during table check",
+                {
+                    "error_id": ErrorIds.DATABASE_QUERY_FAILED,
+                    "tabla": tabla,
+                    "error": str(e),
+                },
+            )
+            raise
+    except Exception as e:
+        log_error(
+            "Unexpected error checking table existence",
+            {"error_id": ErrorIds.UNEXPECTED_ERROR, "tabla": tabla, "error": str(e)},
+        )
+        raise

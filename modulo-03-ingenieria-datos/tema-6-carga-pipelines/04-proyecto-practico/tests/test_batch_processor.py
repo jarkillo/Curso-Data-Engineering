@@ -1,6 +1,7 @@
 """Tests para batch_processor.py - Siguiendo TDD."""
 
 import pandas as pd
+
 from src.batch_processor import calcular_num_lotes, dividir_en_lotes, procesar_en_lotes
 
 
