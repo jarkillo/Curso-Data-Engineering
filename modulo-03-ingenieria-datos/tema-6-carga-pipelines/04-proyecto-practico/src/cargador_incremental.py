@@ -122,10 +122,19 @@ def incremental_load(
         last_timestamp = checkpoint
 
     # Filtrar solo registros nuevos
-    if pd.api.types.is_datetime64_any_dtype(df[columna_timestamp]):
+    # Si DataFrame está vacío, no hay nada que filtrar
+    if len(df) == 0:
+        df_nuevos = df.copy()
+    elif pd.api.types.is_datetime64_any_dtype(df[columna_timestamp]):
         df_nuevos = df[df[columna_timestamp] > last_timestamp].copy()
     else:
-        df_nuevos = df[df[columna_timestamp] > checkpoint].copy()
+        # Para columnas no-datetime (strings, ints), convertir last_timestamp al tipo de la columna
+        if isinstance(last_timestamp, pd.Timestamp):
+            # Convertir timestamp a string para comparar con columnas tipo string
+            last_timestamp_str = str(last_timestamp)
+            df_nuevos = df[df[columna_timestamp] > last_timestamp_str].copy()
+        else:
+            df_nuevos = df[df[columna_timestamp] > last_timestamp].copy()
 
     procesados = len(df)
     cargados = len(df_nuevos)

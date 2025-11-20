@@ -273,3 +273,53 @@ class TestIncrementalLoadConValidacion:
         # Solo debe cargar el nuevo
         assert resultado2["cargados"] == 1
         assert resultado2["omitidos"] == 0
+
+    def test_maneja_timestamps_como_strings(
+        self, engine_temporal, archivo_checkpoint_temporal
+    ):
+        """Should handle string timestamp columns without error."""
+        from src.cargador_incremental import incremental_load
+
+        # Crear DataFrame con timestamps como strings (no datetime)
+        df_strings = pd.DataFrame(
+            {
+                "id": [1, 2, 3],
+                "timestamp": ["2024-01-15 00:00:00", "2024-01-15 01:00:00", "2024-01-15 02:00:00"],
+                "valor": [100, 200, 300],
+            }
+        )
+
+        # Primera carga (sin checkpoint previo) - no debe crashear con TypeError
+        resultado = incremental_load(
+            df_strings,
+            engine_temporal,
+            "tabla_strings",
+            "timestamp",
+            archivo_checkpoint_temporal,
+        )
+
+        # Debe cargar todos los registros sin error
+        assert resultado["cargados"] == 3
+        assert resultado["procesados"] == 3
+        assert resultado["omitidos"] == 0
+
+        # Segunda carga con solo 1 registro nuevo
+        df_nuevo = pd.DataFrame(
+            {
+                "id": [4],
+                "timestamp": ["2024-01-15 03:00:00"],
+                "valor": [400],
+            }
+        )
+
+        resultado2 = incremental_load(
+            df_nuevo,
+            engine_temporal,
+            "tabla_strings",
+            "timestamp",
+            archivo_checkpoint_temporal,
+        )
+
+        # Solo debe cargar el nuevo
+        assert resultado2["cargados"] == 1
+        assert resultado2["omitidos"] == 0
