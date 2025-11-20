@@ -4,7 +4,6 @@ import json
 from dataclasses import asdict, dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
 
 
 @dataclass
@@ -12,7 +11,7 @@ class PipelineMetrics:
     """Métricas de ejecución del pipeline."""
 
     start_time: datetime
-    end_time: Optional[datetime] = None
+    end_time: datetime | None = None
     rows_extracted: int = 0
     rows_validated: int = 0
     rows_loaded: int = 0

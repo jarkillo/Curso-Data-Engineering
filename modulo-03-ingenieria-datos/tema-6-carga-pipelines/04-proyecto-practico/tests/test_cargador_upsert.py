@@ -6,6 +6,7 @@ Siguiendo metodología TDD - Tests escritos antes de implementación.
 
 import pandas as pd
 import pytest
+
 from src.cargador_upsert import detectar_cambios, upsert, upsert_con_metricas
 
 
@@ -133,7 +134,7 @@ class TestUpsertSeguridad:
         # Crear datos con claves que contienen quotes (potencial SQL injection)
         df_peligroso = pd.DataFrame(
             {
-                "codigo": ["ABC'123", "DEF\"456", "GHI'; DROP TABLE test; --"],
+                "codigo": ["ABC'123", 'DEF"456', "GHI'; DROP TABLE test; --"],
                 "valor": [100, 200, 300],
             }
         )
@@ -148,7 +149,7 @@ class TestUpsertSeguridad:
         # Segunda carga con mismas claves (debe actualizar sin SQL injection)
         df_actualizacion = pd.DataFrame(
             {
-                "codigo": ["ABC'123", "DEF\"456", "GHI'; DROP TABLE test; --"],
+                "codigo": ["ABC'123", 'DEF"456', "GHI'; DROP TABLE test; --"],
                 "valor": [999, 888, 777],
             }
         )

@@ -50,8 +50,10 @@ def upsert(df: pd.DataFrame, engine: Engine, tabla: str, columna_clave: str) -> 
                 params = {f"key_{i}": clave for i, clave in enumerate(claves)}
 
                 conn.execute(
-                    text(f"DELETE FROM {tabla} WHERE {columna_clave} IN ({placeholders})"),
-                    params
+                    text(
+                        f"DELETE FROM {tabla} WHERE {columna_clave} IN ({placeholders})"
+                    ),
+                    params,
                 )
 
         # Insertar todos los registros

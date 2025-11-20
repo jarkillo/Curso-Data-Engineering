@@ -1,6 +1,6 @@
 """Módulo para procesamiento en lotes (batch processing)."""
 
-from typing import Iterator
+from collections.abc import Iterator
 
 import pandas as pd
 from sqlalchemy import Engine

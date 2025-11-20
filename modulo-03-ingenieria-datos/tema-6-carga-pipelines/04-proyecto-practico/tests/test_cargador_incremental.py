@@ -8,6 +8,7 @@ from pathlib import Path
 
 import pandas as pd
 import pytest
+
 from src.cargador_incremental import (
     guardar_checkpoint,
     incremental_load,
@@ -284,7 +285,11 @@ class TestIncrementalLoadConValidacion:
         df_strings = pd.DataFrame(
             {
                 "id": [1, 2, 3],
-                "timestamp": ["2024-01-15 00:00:00", "2024-01-15 01:00:00", "2024-01-15 02:00:00"],
+                "timestamp": [
+                    "2024-01-15 00:00:00",
+                    "2024-01-15 01:00:00",
+                    "2024-01-15 02:00:00",
+                ],
                 "valor": [100, 200, 300],
             }
         )
