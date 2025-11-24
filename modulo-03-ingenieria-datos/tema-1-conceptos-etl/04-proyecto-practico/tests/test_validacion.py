@@ -1,6 +1,7 @@
 """Tests para el módulo de validación de datos."""
 
 import pytest
+
 from src.validacion import (
     validar_columnas_requeridas,
     validar_datos,

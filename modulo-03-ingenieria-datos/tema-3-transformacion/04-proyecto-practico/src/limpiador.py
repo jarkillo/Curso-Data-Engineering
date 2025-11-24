@@ -4,7 +4,7 @@ Módulo de limpieza de datos.
 Proporciona funciones para limpiar y normalizar datos crudos.
 """
 
-from typing import Any, Dict, List
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -67,7 +67,7 @@ def eliminar_filas_sin_id(df: pd.DataFrame, columna_id: str = "id") -> pd.DataFr
 
 
 def rellenar_valores_nulos(
-    df: pd.DataFrame, estrategias: Dict[str, Any]
+    df: pd.DataFrame, estrategias: dict[str, Any]
 ) -> pd.DataFrame:
     """
     Rellena valores nulos según estrategias específicas por columna.
@@ -119,7 +119,7 @@ def rellenar_valores_nulos(
 
 
 def normalizar_texto(
-    df: pd.DataFrame, columnas: List[str], convertir_a: str = "title"
+    df: pd.DataFrame, columnas: list[str], convertir_a: str = "title"
 ) -> pd.DataFrame:
     """
     Normaliza columnas de texto (mayúsculas, minúsculas, title case, trim).
@@ -173,7 +173,7 @@ def normalizar_texto(
 
 
 def validar_rangos_numericos(
-    df: pd.DataFrame, rangos: Dict[str, tuple]
+    df: pd.DataFrame, rangos: dict[str, tuple]
 ) -> pd.DataFrame:
     """Valida que valores numéricos estén dentro de rangos válidos.
 
@@ -216,7 +216,7 @@ def validar_rangos_numericos(
 
 
 def eliminar_filas_con_errores_criticos(
-    df: pd.DataFrame, columnas_criticas: List[str]
+    df: pd.DataFrame, columnas_criticas: list[str]
 ) -> pd.DataFrame:
     """
     Elimina filas que tengan valores nulos en columnas críticas.

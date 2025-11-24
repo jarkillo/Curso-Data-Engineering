@@ -5,7 +5,6 @@ Valida URLs, timeouts, status codes y contenido JSON de forma robusta.
 """
 
 import json
-from typing import Tuple
 
 import requests
 
@@ -63,7 +62,7 @@ def validar_timeout(timeout: int) -> None:
 
 
 def validar_status_code(
-    response: requests.Response, codigos_validos: Tuple[int, ...] = (200,)
+    response: requests.Response, codigos_validos: tuple[int, ...] = (200,)
 ) -> None:
     """
     Valida que el status code de una respuesta esté en los códigos válidos.

@@ -23,10 +23,10 @@ Ejemplo de uso:
 
 import shelve
 import time
-from typing import Any, Dict, Optional
+from typing import Any
 
 
-def crear_cache_memoria(max_size: int = 1000) -> Dict:
+def crear_cache_memoria(max_size: int = 1000) -> dict:
     """
     Crea un cache en memoria con límite de tamaño (LRU).
 
@@ -55,7 +55,7 @@ def crear_cache_memoria(max_size: int = 1000) -> Dict:
     }
 
 
-def crear_cache_disco(archivo: str, ttl: int = 3600) -> Dict:
+def crear_cache_disco(archivo: str, ttl: int = 3600) -> dict:
     """
     Crea un cache persistente en disco usando shelve.
 
@@ -87,7 +87,7 @@ def crear_cache_disco(archivo: str, ttl: int = 3600) -> Dict:
     return {"tipo": "disco", "archivo": archivo, "ttl": ttl, "datos": datos}
 
 
-def obtener_de_cache(cache: Dict, clave: str) -> Optional[Any]:
+def obtener_de_cache(cache: dict, clave: str) -> Any | None:
     """
     Obtiene un valor del cache.
 
@@ -114,7 +114,7 @@ def obtener_de_cache(cache: Dict, clave: str) -> Optional[Any]:
         raise ValueError(f"Tipo de cache desconocido: {tipo}")
 
 
-def guardar_en_cache(cache: Dict, clave: str, valor: Any) -> None:
+def guardar_en_cache(cache: dict, clave: str, valor: Any) -> None:
     """
     Guarda un valor en el cache.
 
@@ -139,7 +139,7 @@ def guardar_en_cache(cache: Dict, clave: str, valor: Any) -> None:
         raise ValueError(f"Tipo de cache desconocido: {tipo}")
 
 
-def limpiar_cache_expirado(cache: Dict) -> int:
+def limpiar_cache_expirado(cache: dict) -> int:
     """
     Limpia elementos expirados del cache.
 
@@ -172,7 +172,7 @@ def limpiar_cache_expirado(cache: Dict) -> int:
 # ===============================
 
 
-def _obtener_de_memoria(cache: Dict, clave: str) -> Optional[Any]:
+def _obtener_de_memoria(cache: dict, clave: str) -> Any | None:
     """
     Obtiene valor del cache en memoria con LRU.
     """
@@ -187,7 +187,7 @@ def _obtener_de_memoria(cache: Dict, clave: str) -> Optional[Any]:
     return cache["datos"][clave]
 
 
-def _guardar_en_memoria(cache: Dict, clave: str, valor: Any) -> None:
+def _guardar_en_memoria(cache: dict, clave: str, valor: Any) -> None:
     """
     Guarda valor en cache en memoria con LRU.
     """
@@ -218,7 +218,7 @@ def _guardar_en_memoria(cache: Dict, clave: str, valor: Any) -> None:
 # ===============================
 
 
-def _obtener_de_disco(cache: Dict, clave: str) -> Optional[Any]:
+def _obtener_de_disco(cache: dict, clave: str) -> Any | None:
     """
     Obtiene valor del cache en disco verificando TTL.
     """
@@ -246,7 +246,7 @@ def _obtener_de_disco(cache: Dict, clave: str) -> Optional[Any]:
     return entrada
 
 
-def _guardar_en_disco(cache: Dict, clave: str, valor: Any) -> None:
+def _guardar_en_disco(cache: dict, clave: str, valor: Any) -> None:
     """
     Guarda valor en cache en disco con timestamp para TTL.
     """
@@ -258,7 +258,7 @@ def _guardar_en_disco(cache: Dict, clave: str, valor: Any) -> None:
     _sincronizar_disco(cache)
 
 
-def _sincronizar_disco(cache: Dict) -> None:
+def _sincronizar_disco(cache: dict) -> None:
     """
     Sincroniza el cache en memoria con el archivo en disco.
     """
@@ -274,7 +274,7 @@ def _sincronizar_disco(cache: Dict) -> None:
         print(f"Advertencia: No se pudo sincronizar cache en disco: {e}")
 
 
-def _limpiar_disco_expirado(cache: Dict) -> int:
+def _limpiar_disco_expirado(cache: dict) -> int:
     """
     Limpia elementos expirados del cache en disco.
     """

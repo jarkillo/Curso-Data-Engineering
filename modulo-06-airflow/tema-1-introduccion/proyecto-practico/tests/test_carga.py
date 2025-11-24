@@ -36,7 +36,7 @@ def test_guardar_reporte_csv(tmp_path):
     assert ruta.endswith(".csv")
 
     # Verificar contenido
-    with open(ruta, "r") as f:
+    with open(ruta) as f:
         contenido = f.read()
         assert "total_ventas" in contenido
         assert "1250.5" in contenido or "1250.50" in contenido
@@ -88,7 +88,7 @@ def test_guardar_reporte_txt(tmp_path):
     assert ruta.endswith(".txt")
 
     # Verificar contenido legible
-    with open(ruta, "r", encoding="utf-8") as f:
+    with open(ruta, encoding="utf-8") as f:
         contenido = f.read()
         assert "REPORTE DE VENTAS" in contenido
         # El número puede aparecer con o sin ceros decimales y con formato de miles
@@ -121,7 +121,7 @@ def test_guardar_reporte_txt_formato_humano(tmp_path):
 
     ruta = guardar_reporte_txt(metricas, fecha, directorio_base=str(tmp_path))
 
-    with open(ruta, "r", encoding="utf-8") as f:
+    with open(ruta, encoding="utf-8") as f:
         contenido = f.read()
         # Verificar que tiene secciones
         assert "=" in contenido or "-" in contenido  # Separadores

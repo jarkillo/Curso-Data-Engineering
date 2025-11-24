@@ -10,8 +10,6 @@ Métricas calculadas:
 - Top N productos más vendidos
 """
 
-from typing import Dict, List
-
 import pandas as pd
 
 
@@ -41,7 +39,7 @@ def calcular_ticket_promedio(df: pd.DataFrame) -> float:
     return float(promedio)
 
 
-def obtener_top_productos(df: pd.DataFrame, n: int = 5) -> List[Dict]:
+def obtener_top_productos(df: pd.DataFrame, n: int = 5) -> list[dict]:
     """
     Obtiene los N productos más vendidos ordenados por cantidad.
 
@@ -75,7 +73,7 @@ def obtener_top_productos(df: pd.DataFrame, n: int = 5) -> List[Dict]:
     return resultado
 
 
-def calcular_metricas_ventas(df: pd.DataFrame) -> Dict:
+def calcular_metricas_ventas(df: pd.DataFrame) -> dict:
     """
     Calcula todas las métricas de ventas.
 

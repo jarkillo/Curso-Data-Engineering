@@ -4,16 +4,17 @@ Cliente HTTP para consumir APIs REST.
 Funciones básicas GET, POST, PUT, DELETE con validación robusta.
 """
 
-from typing import Any, Dict, Optional
+from typing import Any
 
 import requests
+
 from src.validaciones import validar_timeout, validar_url
 
 
 def hacer_get(
     url: str,
-    headers: Optional[Dict[str, str]] = None,
-    params: Optional[Dict[str, Any]] = None,
+    headers: dict[str, str] | None = None,
+    params: dict[str, Any] | None = None,
     timeout: int = 30,
 ) -> requests.Response:
     """
@@ -46,9 +47,9 @@ def hacer_get(
 
 def hacer_post(
     url: str,
-    json: Optional[Dict[str, Any]] = None,
-    data: Optional[Dict[str, Any]] = None,
-    headers: Optional[Dict[str, str]] = None,
+    json: dict[str, Any] | None = None,
+    data: dict[str, Any] | None = None,
+    headers: dict[str, str] | None = None,
     timeout: int = 30,
 ) -> requests.Response:
     """
@@ -89,9 +90,9 @@ def hacer_post(
 
 def hacer_put(
     url: str,
-    json: Optional[Dict[str, Any]] = None,
-    data: Optional[Dict[str, Any]] = None,
-    headers: Optional[Dict[str, str]] = None,
+    json: dict[str, Any] | None = None,
+    data: dict[str, Any] | None = None,
+    headers: dict[str, str] | None = None,
     timeout: int = 30,
 ) -> requests.Response:
     """
@@ -131,7 +132,7 @@ def hacer_put(
 
 
 def hacer_delete(
-    url: str, headers: Optional[Dict[str, str]] = None, timeout: int = 30
+    url: str, headers: dict[str, str] | None = None, timeout: int = 30
 ) -> requests.Response:
     """
     Hace un DELETE request a una URL.

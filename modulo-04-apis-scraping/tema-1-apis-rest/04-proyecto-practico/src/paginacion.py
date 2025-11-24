@@ -6,7 +6,7 @@ Soporta:
 - Paginación basada en Cursor
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from src.cliente_http import hacer_get
 from src.validaciones import extraer_json_seguro, validar_url
@@ -17,11 +17,11 @@ def paginar_offset_limit(
     limite_por_pagina: int = 100,
     nombre_param_offset: str = "offset",
     nombre_param_limit: str = "limit",
-    params_extra: Optional[Dict[str, Any]] = None,
-    headers: Optional[Dict[str, str]] = None,
-    max_paginas: Optional[int] = None,
+    params_extra: dict[str, Any] | None = None,
+    headers: dict[str, str] | None = None,
+    max_paginas: int | None = None,
     timeout: int = 30,
-) -> List[Dict[str, Any]]:
+) -> list[dict[str, Any]]:
     """
     Itera automáticamente sobre todas las páginas usando Offset/Limit.
 
@@ -102,11 +102,11 @@ def paginar_cursor(
     campo_datos: str,
     campo_cursor: str,
     nombre_param_cursor: str = "cursor",
-    params_extra: Optional[Dict[str, Any]] = None,
-    headers: Optional[Dict[str, str]] = None,
-    max_paginas: Optional[int] = None,
+    params_extra: dict[str, Any] | None = None,
+    headers: dict[str, str] | None = None,
+    max_paginas: int | None = None,
     timeout: int = 30,
-) -> List[Dict[str, Any]]:
+) -> list[dict[str, Any]]:
     """
     Itera automáticamente sobre todas las páginas usando Cursor.
 

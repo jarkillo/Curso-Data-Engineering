@@ -1,0 +1,17 @@
+# Proyecto Práctico: Diseño y Validación de Data Warehouse
+# Módulo 5: Bases de Datos Avanzadas - Tema 3: Modelado de Datos
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Code quality
+black>=23.0.0
+flake8>=6.1.0
+mypy>=1.7.0
+
+# Data manipulation
+pandas>=2.1.0
+
+# SQL utilities
+sqlparse>=0.4.4

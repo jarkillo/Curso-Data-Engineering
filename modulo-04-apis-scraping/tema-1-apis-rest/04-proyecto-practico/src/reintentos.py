@@ -5,9 +5,10 @@ Maneja errores temporales (5xx, 429) con reintentos automáticos.
 """
 
 import time
-from typing import Any, Dict, Optional
+from typing import Any
 
 import requests
+
 from src.cliente_http import hacer_delete, hacer_get, hacer_post, hacer_put
 from src.validaciones import validar_url
 
@@ -63,10 +64,10 @@ def reintentar_con_backoff(  # noqa: C901
     url: str,
     metodo: str = "GET",
     max_intentos: int = 3,
-    headers: Optional[Dict[str, str]] = None,
-    params: Optional[Dict[str, Any]] = None,
-    json: Optional[Dict[str, Any]] = None,
-    data: Optional[Dict[str, Any]] = None,
+    headers: dict[str, str] | None = None,
+    params: dict[str, Any] | None = None,
+    json: dict[str, Any] | None = None,
+    data: dict[str, Any] | None = None,
     timeout: int = 30,
 ) -> requests.Response:
     """

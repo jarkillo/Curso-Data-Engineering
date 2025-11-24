@@ -111,7 +111,7 @@ def test_exportar_reporte_json():
 
         # Verificar que el archivo existe y es válido
         assert Path(ruta_tmp).exists()
-        with open(ruta_tmp, "r") as f:
+        with open(ruta_tmp) as f:
             reporte_leido = json.load(f)
         assert reporte_leido["tipo"] == "detallado"
         assert reporte_leido["num_clientes"] == 2

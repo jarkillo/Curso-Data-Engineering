@@ -100,10 +100,7 @@ def extraer_tabla_html(soup: BeautifulSoup, selector: str | None = None) -> list
     Returns:
         Lista de diccionarios con los datos
     """
-    if selector:
-        tabla = soup.select_one(selector)
-    else:
-        tabla = soup.find("table")
+    tabla = soup.select_one(selector) if selector else soup.find("table")
 
     if not tabla:
         return []
@@ -119,7 +116,7 @@ def extraer_tabla_html(soup: BeautifulSoup, selector: str | None = None) -> list
     for tr in tabla.find_all("tr")[1 if tabla.find_all("th") else 0 :]:
         celdas = [td.get_text(strip=True) for td in tr.find_all("td")]
         if celdas:
-            fila = dict(zip(headers, celdas))
+            fila = dict(zip(headers, celdas, strict=False))
             filas.append(fila)
 
     return filas

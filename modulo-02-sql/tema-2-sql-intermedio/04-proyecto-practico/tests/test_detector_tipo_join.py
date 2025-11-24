@@ -5,6 +5,7 @@ TDD: Estos tests se escribieron PRIMERO, antes de la implementación.
 """
 
 import pytest
+
 from src.detector_tipo_join import detectar_tipo_join_necesario, validar_tipo_join
 
 

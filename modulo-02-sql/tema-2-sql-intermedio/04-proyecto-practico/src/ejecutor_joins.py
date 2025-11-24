@@ -67,10 +67,7 @@ def ejecutar_join_simple(
         raise TypeError("conexion debe ser sqlite3.Connection válida")
 
     # Construir SELECT
-    if columnas_select is None:
-        select_clause = "*"
-    else:
-        select_clause = ", ".join(columnas_select)
+    select_clause = "*" if columnas_select is None else ", ".join(columnas_select)
 
     # Construir query
     query = f"""
@@ -89,7 +86,7 @@ def ejecutar_join_simple(
 
         # Convertir a lista de diccionarios
         columnas = [descripcion[0] for descripcion in cursor.description]
-        resultado_dict = [dict(zip(columnas, fila)) for fila in resultado]
+        resultado_dict = [dict(zip(columnas, fila, strict=False)) for fila in resultado]
 
         logger.info(f"JOIN completado: {len(resultado_dict)} filas retornadas")
 
@@ -150,10 +147,7 @@ def ejecutar_join_multiple(
             )
 
     # Construir SELECT
-    if columnas_select is None:
-        select_clause = "*"
-    else:
-        select_clause = ", ".join(columnas_select)
+    select_clause = "*" if columnas_select is None else ", ".join(columnas_select)
 
     # Construir FROM con primera tabla
     from_clause = f"{tablas[0]['nombre']} {tablas[0]['alias']}"
@@ -183,7 +177,7 @@ def ejecutar_join_multiple(
 
         # Convertir a diccionarios
         columnas = [descripcion[0] for descripcion in cursor.description]
-        resultado_dict = [dict(zip(columnas, fila)) for fila in resultado]
+        resultado_dict = [dict(zip(columnas, fila, strict=False)) for fila in resultado]
 
         logger.info(f"JOIN múltiple completado: {len(resultado_dict)} filas")
 
@@ -244,7 +238,7 @@ def ejecutar_join_con_subconsulta(
 
         # Convertir a diccionarios
         columnas = [descripcion[0] for descripcion in cursor.description]
-        resultado_dict = [dict(zip(columnas, fila)) for fila in resultado]
+        resultado_dict = [dict(zip(columnas, fila, strict=False)) for fila in resultado]
 
         logger.info(f"Query con subconsulta completada: {len(resultado_dict)} filas")
 

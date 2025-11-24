@@ -5,6 +5,7 @@ Este archivo contiene fixtures de pytest que se utilizan en múltiples
 archivos de tests.
 """
 
+import contextlib
 import os
 import tempfile
 
@@ -31,10 +32,8 @@ def archivo_cache_test(tmp_path):
 
     # Limpiar archivos generados por shelve
     for ext in ["", ".db", ".dat", ".bak", ".dir"]:
-        try:
+        with contextlib.suppress(FileNotFoundError):
             os.remove(str(archivo) + ext)
-        except FileNotFoundError:
-            pass
 
 
 @pytest.fixture

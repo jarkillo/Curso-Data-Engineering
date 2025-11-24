@@ -87,7 +87,7 @@ class ConexionSQLite:
 
         for fila in cursor.fetchall():
             # sqlite3.Row se puede convertir a dict
-            resultado_dict = dict(zip(columnas, fila))
+            resultado_dict = dict(zip(columnas, fila, strict=False))
             resultados.append(resultado_dict)
 
         return resultados

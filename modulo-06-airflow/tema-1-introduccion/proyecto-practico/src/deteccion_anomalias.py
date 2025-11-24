@@ -8,12 +8,10 @@ Regla de negocio:
   se considera una anomalía que requiere investigación.
 """
 
-from typing import Dict, List
-
 
 def detectar_caida_ventas(
     total_actual: float, total_historico: float, umbral: float = 0.3
-) -> Dict:
+) -> dict:
     """
     Detecta si hay una caída significativa en las ventas.
 
@@ -81,7 +79,7 @@ def detectar_caida_ventas(
     return resultado
 
 
-def calcular_promedio_historico(fechas: List[str]) -> float:
+def calcular_promedio_historico(fechas: list[str]) -> float:
     """
     Calcula el promedio histórico de ventas basado en una lista de fechas.
 

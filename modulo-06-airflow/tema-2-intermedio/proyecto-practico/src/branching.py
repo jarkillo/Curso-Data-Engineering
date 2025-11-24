@@ -5,10 +5,8 @@ Este módulo proporciona funciones para tomar decisiones sobre qué ruta
 seguir en el pipeline basándose en métricas calculadas.
 """
 
-from typing import List
 
-
-def decidir_ruta_procesamiento(**context) -> List[str]:
+def decidir_ruta_procesamiento(**context) -> list[str]:
     """
     Decide si seguir la ruta premium o normal basándose en el total de ventas.
 

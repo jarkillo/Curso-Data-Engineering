@@ -7,11 +7,10 @@ Funciones auxiliares para logging, headers y manejo de errores.
 
 import logging
 import random
-from typing import Dict, Optional
 
 
 def configurar_logging(
-    nivel: str = "INFO", archivo: Optional[str] = None
+    nivel: str = "INFO", archivo: str | None = None
 ) -> logging.Logger:
     """
     Configura el sistema de logging para el scraper.
@@ -60,7 +59,7 @@ def configurar_logging(
     return logger
 
 
-def crear_headers_aleatorios() -> Dict[str, str]:
+def crear_headers_aleatorios() -> dict[str, str]:
     """
     Genera headers HTTP con User-Agent aleatorio para evitar bloqueos.
 

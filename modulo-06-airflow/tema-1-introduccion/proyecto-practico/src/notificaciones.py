@@ -10,8 +10,6 @@ Nota: En producción, esto se integraría con servicios reales como:
 - Slack API
 """
 
-from typing import Dict
-
 DESTINATARIOS_DEFAULT = [
     "equipo-ventas@cloudmart.com",
     "director-comercial@cloudmart.com",
@@ -19,7 +17,7 @@ DESTINATARIOS_DEFAULT = [
 ]
 
 
-def simular_envio_email(metricas: Dict, anomalia: Dict) -> Dict:
+def simular_envio_email(metricas: dict, anomalia: dict) -> dict:
     """
     Simula el envío de un email con el resumen de ventas.
 

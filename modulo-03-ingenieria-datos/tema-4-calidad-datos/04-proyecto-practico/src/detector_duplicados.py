@@ -4,13 +4,11 @@ Funciones para detectar duplicados exactos y fuzzy,
 y para eliminarlos según diferentes estrategias.
 """
 
-from typing import Dict, List
-
 import pandas as pd
 from rapidfuzz import fuzz
 
 
-def detectar_duplicados_exactos(df: pd.DataFrame, columnas: List[str]) -> pd.Series:
+def detectar_duplicados_exactos(df: pd.DataFrame, columnas: list[str]) -> pd.Series:
     """
     Identifica duplicados exactos en columnas especificadas.
 
@@ -93,7 +91,7 @@ def detectar_duplicados_fuzzy(
 
 
 def eliminar_duplicados_con_estrategia(
-    df: pd.DataFrame, columnas: List[str], estrategia: str = "primero"
+    df: pd.DataFrame, columnas: list[str], estrategia: str = "primero"
 ) -> pd.DataFrame:
     """
     Elimina duplicados según estrategia especificada.
@@ -168,7 +166,7 @@ def eliminar_duplicados_con_estrategia(
         return df_consolidado
 
 
-def marcar_duplicados_probables(df: pd.DataFrame, columnas: List[str]) -> pd.DataFrame:
+def marcar_duplicados_probables(df: pd.DataFrame, columnas: list[str]) -> pd.DataFrame:
     """
     Añade columna booleana marcando duplicados.
 
@@ -192,7 +190,7 @@ def marcar_duplicados_probables(df: pd.DataFrame, columnas: List[str]) -> pd.Dat
     return df_resultado
 
 
-def generar_reporte_duplicados(df: pd.DataFrame, columnas: List[str]) -> Dict:
+def generar_reporte_duplicados(df: pd.DataFrame, columnas: list[str]) -> dict:
     """
     Genera estadísticas detalladas de duplicados.
 

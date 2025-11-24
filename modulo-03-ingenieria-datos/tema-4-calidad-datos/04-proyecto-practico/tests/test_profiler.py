@@ -2,6 +2,7 @@
 
 import pandas as pd
 import pytest
+
 from src.profiler import (
     detectar_correlaciones,
     generar_perfil_basico,

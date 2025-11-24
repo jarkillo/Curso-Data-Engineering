@@ -6,6 +6,7 @@ TDD: Tests escritos PRIMERO, implementación DESPUÉS.
 
 import pytest
 import requests
+
 from src.validaciones import (
     extraer_json_seguro,
     validar_contenido_json,

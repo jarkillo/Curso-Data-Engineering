@@ -7,12 +7,11 @@ y exportarlos a formatos CSV y JSON.
 
 import json
 from pathlib import Path
-from typing import Dict
 
 import pandas as pd
 
 
-def generar_reporte_detallado(df: pd.DataFrame, total: float) -> Dict:
+def generar_reporte_detallado(df: pd.DataFrame, total: float) -> dict:
     """
     Genera un reporte detallado con métricas completas.
 
@@ -52,7 +51,7 @@ def generar_reporte_detallado(df: pd.DataFrame, total: float) -> Dict:
     return reporte
 
 
-def generar_reporte_simple(df: pd.DataFrame, total: float) -> Dict:
+def generar_reporte_simple(df: pd.DataFrame, total: float) -> dict:
     """
     Genera un reporte simple con métricas básicas.
 
@@ -110,7 +109,7 @@ def exportar_reporte_csv(df: pd.DataFrame, ruta: str) -> None:
     print(f"[EXPORTAR_CSV] Guardado en: {ruta}")
 
 
-def exportar_reporte_json(reporte: Dict, ruta: str) -> None:
+def exportar_reporte_json(reporte: dict, ruta: str) -> None:
     """
     Exporta un diccionario a formato JSON.
 

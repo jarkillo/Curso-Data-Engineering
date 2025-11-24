@@ -4,6 +4,7 @@ import logging
 import time
 
 import pytest
+
 from src.utilidades import (
     calcular_metricas_pipeline,
     configurar_logging,

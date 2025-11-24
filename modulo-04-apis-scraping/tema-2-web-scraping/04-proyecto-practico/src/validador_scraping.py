@@ -74,10 +74,7 @@ def validar_url(url: str) -> bool:
             return False
 
         # Validar que tenga dominio
-        if not parsed.netloc:
-            return False
-
-        return True
+        return parsed.netloc
 
     except Exception:
         return False

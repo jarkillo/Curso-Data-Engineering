@@ -37,7 +37,7 @@ def leer_csv(ruta: str) -> list[dict[str, str]]:
     if not ruta_path.exists():
         raise FileNotFoundError(f"El archivo {ruta} no existe")
 
-    with open(ruta, "r", encoding="utf-8") as archivo:
+    with open(ruta, encoding="utf-8") as archivo:
         lector = csv.DictReader(archivo)
         datos = list(lector)
 

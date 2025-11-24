@@ -1,14 +1,12 @@
 """Módulo de Detección y Tratamiento de Outliers."""
 
-from typing import Dict, List, Tuple
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import IsolationForest
 
 
-def detectar_outliers_iqr(df: pd.DataFrame, columna: str) -> Tuple[pd.Series, Dict]:
+def detectar_outliers_iqr(df: pd.DataFrame, columna: str) -> tuple[pd.Series, dict]:
     """
     Detecta outliers usando método IQR.
 
@@ -48,7 +46,7 @@ def detectar_outliers_iqr(df: pd.DataFrame, columna: str) -> Tuple[pd.Series, Di
 
 def detectar_outliers_zscore(
     df: pd.DataFrame, columna: str, umbral: float = 3.0
-) -> Tuple[pd.Series, Dict]:
+) -> tuple[pd.Series, dict]:
     """Detecta outliers usando Z-score."""
     if df.empty:
         raise ValueError("DataFrame está vacío")
@@ -78,7 +76,7 @@ def detectar_outliers_zscore(
 
 
 def detectar_outliers_isolation_forest(
-    df: pd.DataFrame, columnas: List[str], contamination: float = 0.1
+    df: pd.DataFrame, columnas: list[str], contamination: float = 0.1
 ) -> pd.Series:
     """Detecta outliers multivariados con Isolation Forest."""
     if df.empty:
@@ -156,7 +154,7 @@ def visualizar_outliers(df: pd.DataFrame, columna: str, archivo_salida: str) -> 
     plt.close()
 
 
-def generar_reporte_outliers(df: pd.DataFrame, columnas_numericas: List[str]) -> Dict:
+def generar_reporte_outliers(df: pd.DataFrame, columnas_numericas: list[str]) -> dict:
     """Estadísticas de outliers por columna."""
     if df.empty:
         raise ValueError("DataFrame está vacío")

@@ -13,12 +13,10 @@ Funciones:
     kpis_dashboard: KPIs principales para dashboard
 """
 
-from typing import Optional
-
 import pandas as pd
 
 
-def ventas_por_categoria(db, anio: Optional[int] = None) -> pd.DataFrame:
+def ventas_por_categoria(db, anio: int | None = None) -> pd.DataFrame:
     """
     Calcula ventas totales agrupadas por categoría de producto.
 
@@ -105,7 +103,7 @@ def top_productos(db, top_n: int = 10) -> pd.DataFrame:
     return db.ejecutar_query(query, params=(top_n,))
 
 
-def ventas_por_mes(db, trimestre: Optional[int] = None) -> pd.DataFrame:
+def ventas_por_mes(db, trimestre: int | None = None) -> pd.DataFrame:
     """
     Serie temporal de ventas agrupadas por mes.
 

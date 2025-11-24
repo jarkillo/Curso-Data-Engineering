@@ -5,12 +5,11 @@ Soporta API Key, Bearer Token y Basic Auth.
 """
 
 import base64
-from typing import Dict
 
 
 def crear_headers_api_key(
     api_key: str, header_name: str = "X-API-Key"
-) -> Dict[str, str]:
+) -> dict[str, str]:
     """
     Crea headers con API Key.
 
@@ -42,7 +41,7 @@ def crear_headers_api_key(
     return {header_name: api_key}
 
 
-def crear_headers_bearer(token: str) -> Dict[str, str]:
+def crear_headers_bearer(token: str) -> dict[str, str]:
     """
     Crea headers con Bearer token.
 
@@ -70,7 +69,7 @@ def crear_headers_bearer(token: str) -> Dict[str, str]:
     return {"Authorization": f"Bearer {token}"}
 
 
-def crear_headers_basic_auth(username: str, password: str) -> Dict[str, str]:
+def crear_headers_basic_auth(username: str, password: str) -> dict[str, str]:
     """
     Crea headers con Basic Authentication.
 
@@ -112,8 +111,8 @@ def crear_headers_basic_auth(username: str, password: str) -> Dict[str, str]:
 
 
 def combinar_headers(
-    headers_base: Dict[str, str], headers_extra: Dict[str, str]
-) -> Dict[str, str]:
+    headers_base: dict[str, str], headers_extra: dict[str, str]
+) -> dict[str, str]:
     """
     Combina dos diccionarios de headers.
 

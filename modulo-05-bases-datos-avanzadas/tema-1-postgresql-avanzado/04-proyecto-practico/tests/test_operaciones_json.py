@@ -8,6 +8,7 @@ from unittest.mock import Mock
 
 import psycopg2
 import pytest
+
 from src.operaciones_json import (
     actualizar_campo_json,
     consultar_json_por_campo,

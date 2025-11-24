@@ -8,6 +8,7 @@ from unittest.mock import Mock, patch
 
 import psycopg2
 import pytest
+
 from src.conexion import cerrar_conexion, crear_conexion, ejecutar_query
 
 

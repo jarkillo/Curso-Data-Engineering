@@ -1,6 +1,7 @@
 """Tests para el módulo pipeline (orquestación completa)."""
 
 import pytest
+
 from src.carga import consultar_ventas_por_fecha, crear_tabla_ventas
 from src.pipeline import pipeline_etl, pipeline_etl_con_reintentos
 

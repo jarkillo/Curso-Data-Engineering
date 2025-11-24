@@ -9,13 +9,12 @@ Funciones:
 """
 
 from datetime import datetime
-from typing import Optional
 
 import pandas as pd
 
 
 def generar_dim_fecha(
-    fecha_inicio: str, fecha_fin: str, festivos: Optional[list[dict[str, str]]] = None
+    fecha_inicio: str, fecha_fin: str, festivos: list[dict[str, str]] | None = None
 ) -> pd.DataFrame:
     """
     Genera tabla de dimensión de fecha pre-calculada.

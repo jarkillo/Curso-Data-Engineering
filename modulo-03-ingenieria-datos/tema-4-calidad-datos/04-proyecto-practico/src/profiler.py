@@ -1,12 +1,10 @@
 """Módulo de Data Profiling y Análisis de Calidad."""
 
-from typing import Dict, Optional
-
 import numpy as np
 import pandas as pd
 
 
-def generar_perfil_basico(df: pd.DataFrame) -> Dict:
+def generar_perfil_basico(df: pd.DataFrame) -> dict:
     """Estadísticas descriptivas básicas por columna."""
     if df.empty:
         raise ValueError("DataFrame está vacío")
@@ -42,8 +40,8 @@ def generar_perfil_basico(df: pd.DataFrame) -> Dict:
 
 
 def generar_perfil_completo(
-    df: pd.DataFrame, archivo_salida: Optional[str] = None
-) -> Dict:
+    df: pd.DataFrame, archivo_salida: str | None = None
+) -> dict:
     """
     Análisis completo de calidad.
 
@@ -100,7 +98,7 @@ def detectar_correlaciones(df: pd.DataFrame, umbral: float = 0.7) -> pd.DataFram
     return pd.DataFrame(pares_alta_corr)
 
 
-def generar_reporte_calidad(df: pd.DataFrame) -> Dict:
+def generar_reporte_calidad(df: pd.DataFrame) -> dict:
     """Dashboard completo con todas las métricas de calidad."""
     if df.empty:
         raise ValueError("DataFrame está vacío")

@@ -8,6 +8,7 @@ Tests para el módulo almacenamiento.py
 import sqlite3
 
 import pytest
+
 from src.almacenamiento import (
     crear_tabla_productos,
     guardar_productos,

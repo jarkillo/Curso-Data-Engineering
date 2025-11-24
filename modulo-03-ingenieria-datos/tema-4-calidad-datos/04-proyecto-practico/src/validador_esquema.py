@@ -3,14 +3,12 @@
 Funciones para validar tipos, rangos, valores permitidos y esquemas completos.
 """
 
-from typing import Dict, List, Tuple
-
 import pandas as pd
 
 
 def validar_tipos_columnas(
-    df: pd.DataFrame, esquema: Dict[str, str]
-) -> Tuple[bool, List[str]]:
+    df: pd.DataFrame, esquema: dict[str, str]
+) -> tuple[bool, list[str]]:
     """
     Valida que las columnas del DataFrame tengan los tipos esperados.
 
@@ -72,8 +70,8 @@ def validar_tipos_columnas(
 
 
 def validar_rangos_numericos(
-    df: pd.DataFrame, rangos: Dict[str, Tuple[float, float]]
-) -> Dict:
+    df: pd.DataFrame, rangos: dict[str, tuple[float, float]]
+) -> dict:
     """
     Valida que valores numéricos estén en rangos válidos.
 
@@ -125,7 +123,7 @@ def validar_rangos_numericos(
     return resultado
 
 
-def validar_valores_unicos(df: pd.DataFrame, columnas: List[str]) -> Tuple[bool, Dict]:
+def validar_valores_unicos(df: pd.DataFrame, columnas: list[str]) -> tuple[bool, dict]:
     """
     Verifica que columnas especificadas no tengan duplicados.
 
@@ -165,7 +163,7 @@ def validar_valores_unicos(df: pd.DataFrame, columnas: List[str]) -> Tuple[bool,
     return es_valido, resultado
 
 
-def validar_valores_permitidos(df: pd.DataFrame, reglas: Dict[str, List]) -> Dict:
+def validar_valores_permitidos(df: pd.DataFrame, reglas: dict[str, list]) -> dict:
     """
     Valida que valores estén en listas permitidas (enums).
 
@@ -209,7 +207,7 @@ def validar_valores_permitidos(df: pd.DataFrame, reglas: Dict[str, List]) -> Dic
     return resultado
 
 
-def validar_nulls_permitidos(df: pd.DataFrame, columnas_requeridas: List[str]) -> Dict:
+def validar_nulls_permitidos(df: pd.DataFrame, columnas_requeridas: list[str]) -> dict:
     """
     Verifica que columnas requeridas no tengan valores nulos.
 
@@ -250,8 +248,8 @@ def validar_nulls_permitidos(df: pd.DataFrame, columnas_requeridas: List[str]) -
 
 
 def validar_esquema_completo(
-    df: pd.DataFrame, configuracion: Dict
-) -> Tuple[bool, Dict]:
+    df: pd.DataFrame, configuracion: dict
+) -> tuple[bool, dict]:
     """
     Ejecuta todas las validaciones de forma integrada.
 
@@ -317,7 +315,7 @@ def validar_esquema_completo(
     return es_valido_global, reporte
 
 
-def generar_reporte_validacion(resultados_validacion: Dict) -> str:
+def generar_reporte_validacion(resultados_validacion: dict) -> str:
     """
     Genera reporte legible de resultados de validación.
 

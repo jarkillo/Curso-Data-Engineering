@@ -10,8 +10,6 @@ Reglas de negocio:
 - No debe haber valores nulos en columnas críticas
 """
 
-from typing import Dict
-
 import pandas as pd
 
 COLUMNAS_REQUERIDAS = [
@@ -112,7 +110,7 @@ def verificar_tipos_datos(df: pd.DataFrame) -> bool:
     return True
 
 
-def validar_datos_ventas(df: pd.DataFrame) -> Dict:  # noqa: C901
+def validar_datos_ventas(df: pd.DataFrame) -> dict:  # noqa: C901
     """
     Ejecuta todas las validaciones sobre el DataFrame de ventas.
 

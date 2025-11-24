@@ -9,7 +9,6 @@ import os
 import tempfile
 import time
 from pathlib import Path
-from typing import Dict, List
 
 import pandas as pd
 import pyarrow.parquet as pq
@@ -50,14 +49,14 @@ def detectar_formato_archivo(ruta: str) -> str:  # noqa: C901
     elif extension == ".json":
         # Leer primera línea para distinguir JSON de JSON Lines
         try:
-            with open(ruta, "r", encoding="utf-8") as f:
+            with open(ruta, encoding="utf-8") as f:
                 primera_linea = f.readline().strip()
 
             # JSON estándar empieza con [ o {
             if primera_linea.startswith("[") or primera_linea.startswith("{"):
                 # Verificar si es realmente JSON completo
                 try:
-                    with open(ruta, "r", encoding="utf-8") as f:
+                    with open(ruta, encoding="utf-8") as f:
                         segunda_linea = f.readlines()[1:2]
                         if segunda_linea and not segunda_linea[0].strip().startswith(
                             "{"
@@ -81,7 +80,7 @@ def detectar_formato_archivo(ruta: str) -> str:  # noqa: C901
         )
 
 
-def obtener_metadata_parquet(ruta: str) -> Dict:
+def obtener_metadata_parquet(ruta: str) -> dict:
     """
     Obtiene metadata detallada de un archivo Parquet.
 
@@ -143,7 +142,7 @@ def obtener_metadata_parquet(ruta: str) -> Dict:
     }
 
 
-def comparar_tamanios_formatos(df: pd.DataFrame) -> Dict[str, float]:
+def comparar_tamanios_formatos(df: pd.DataFrame) -> dict[str, float]:
     """
     Compara tamaños de un DataFrame guardado en diferentes formatos.
 
@@ -202,7 +201,7 @@ def comparar_tamanios_formatos(df: pd.DataFrame) -> Dict[str, float]:
 
 
 def benchmark_lectura_escritura(  # noqa: C901
-    df: pd.DataFrame, formatos: List[str]
+    df: pd.DataFrame, formatos: list[str]
 ) -> pd.DataFrame:
     """
     Realiza benchmark de lectura/escritura para diferentes formatos.
@@ -284,7 +283,7 @@ def benchmark_lectura_escritura(  # noqa: C901
     return pd.DataFrame(resultados)
 
 
-def generar_reporte_formato(ruta: str) -> Dict:
+def generar_reporte_formato(ruta: str) -> dict:
     """
     Genera reporte completo de un archivo de datos.
 

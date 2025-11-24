@@ -5,13 +5,14 @@ Este archivo define fixtures de pytest que se usan en múltiples tests.
 """
 
 import sqlite3
-from typing import Any, Generator
+from collections.abc import Generator
+from typing import Any
 
 import pytest
 
 
 @pytest.fixture
-def conexion_db() -> Generator[sqlite3.Connection, None, None]:
+def conexion_db() -> Generator[sqlite3.Connection]:
     """
     Crea una base de datos SQLite en memoria con datos de TechStore.
 

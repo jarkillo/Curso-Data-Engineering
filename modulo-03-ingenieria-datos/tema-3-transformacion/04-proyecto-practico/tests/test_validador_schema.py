@@ -2,6 +2,7 @@
 
 import pandas as pd
 import pytest
+
 from src.validador_schema import (
     generar_reporte_calidad,
     validar_columnas_requeridas,

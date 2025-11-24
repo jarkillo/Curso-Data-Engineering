@@ -6,7 +6,6 @@ Funciones para guardar datos scrapeados en SQLite.
 """
 
 import sqlite3
-from typing import Dict, List, Optional
 
 
 def crear_tabla_productos(db_path: str = "datos/productos.db") -> None:
@@ -57,7 +56,7 @@ def crear_tabla_productos(db_path: str = "datos/productos.db") -> None:
 
 
 def guardar_productos(
-    productos: List[Dict[str, str]], db_path: str = "datos/productos.db"
+    productos: list[dict[str, str]], db_path: str = "datos/productos.db"
 ) -> int:
     """
     Guarda una lista de productos en la base de datos.
@@ -109,8 +108,8 @@ def guardar_productos(
 
 
 def obtener_productos(
-    db_path: str = "datos/productos.db", limite: Optional[int] = None
-) -> List[Dict[str, str]]:
+    db_path: str = "datos/productos.db", limite: int | None = None
+) -> list[dict[str, str]]:
     """
     Obtiene productos de la base de datos.
 

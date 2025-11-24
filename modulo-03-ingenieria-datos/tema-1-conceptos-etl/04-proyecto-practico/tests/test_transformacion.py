@@ -1,6 +1,7 @@
 """Tests para el módulo de transformación de datos."""
 
 import pytest
+
 from src.transformacion import (
     calcular_total_venta,
     enriquecer_venta_con_cliente,

@@ -5,12 +5,10 @@ Módulo de Scraping HTML con BeautifulSoup
 Funciones para extraer datos de páginas web estáticas.
 """
 
-from typing import Dict, List
-
 from bs4 import BeautifulSoup
 
 
-def extraer_titulos(html: str, selector: str) -> List[str]:
+def extraer_titulos(html: str, selector: str) -> list[str]:
     """
     Extrae todos los textos de elementos que coinciden con un selector CSS.
 
@@ -36,7 +34,7 @@ def extraer_titulos(html: str, selector: str) -> List[str]:
     return [elem.get_text(strip=True) for elem in elementos]
 
 
-def extraer_enlaces(html: str, selector: str = "a") -> List[Dict[str, str]]:
+def extraer_enlaces(html: str, selector: str = "a") -> list[dict[str, str]]:
     """
     Extrae enlaces (href) y sus textos asociados.
 
@@ -67,7 +65,7 @@ def extraer_enlaces(html: str, selector: str = "a") -> List[Dict[str, str]]:
 
 def extraer_tabla(  # noqa: C901
     html: str, selector: str = "table"
-) -> List[Dict[str, str]]:
+) -> list[dict[str, str]]:
     """
     Convierte una tabla HTML en lista de diccionarios.
 
@@ -145,7 +143,7 @@ def extraer_tabla(  # noqa: C901
     return resultado
 
 
-def extraer_atributo(html: str, selector: str, atributo: str) -> List[str]:
+def extraer_atributo(html: str, selector: str, atributo: str) -> list[str]:
     """
     Extrae un atributo específico de elementos seleccionados.
 
@@ -179,8 +177,8 @@ def extraer_atributo(html: str, selector: str, atributo: str) -> List[str]:
 
 
 def extraer_datos_estructurados(  # noqa: C901
-    html: str, selectores: Dict[str, str]
-) -> List[Dict[str, str]]:
+    html: str, selectores: dict[str, str]
+) -> list[dict[str, str]]:
     """
     Extrae múltiples datos estructurados usando un mapa de selectores.
 

@@ -4,13 +4,13 @@ Módulo de agregación de datos.
 Proporciona funciones para agrupar y agregar datos de diferentes formas.
 """
 
-from typing import Any, Dict, List
+from typing import Any
 
 import pandas as pd
 
 
 def agrupar_con_multiples_metricas(
-    df: pd.DataFrame, columnas_agrupacion: List[str], agregaciones: Dict[str, List[str]]
+    df: pd.DataFrame, columnas_agrupacion: list[str], agregaciones: dict[str, list[str]]
 ) -> pd.DataFrame:
     """
     Agrupa datos y calcula múltiples métricas.
@@ -43,7 +43,7 @@ def agrupar_con_multiples_metricas(
         if col not in df.columns:
             raise ValueError(f"La columna de agrupación '{col}' no existe")
 
-    for col in agregaciones.keys():
+    for col in agregaciones:
         if col not in df.columns:
             raise ValueError(f"La columna a agregar '{col}' no existe")
 

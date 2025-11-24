@@ -28,10 +28,9 @@ Ejemplo de uso:
 
 import json
 import time
-from typing import Dict
 
 
-def crear_monitor_metricas() -> Dict:
+def crear_monitor_metricas() -> dict:
     """
     Crea un monitor de métricas inicializado en cero.
 
@@ -52,7 +51,7 @@ def crear_monitor_metricas() -> Dict:
     }
 
 
-def registrar_request(monitor: Dict, fue_cache_hit: bool, tiempo_ms: float) -> None:
+def registrar_request(monitor: dict, fue_cache_hit: bool, tiempo_ms: float) -> None:
     """
     Registra un request en el monitor de métricas.
 
@@ -79,7 +78,7 @@ def registrar_request(monitor: Dict, fue_cache_hit: bool, tiempo_ms: float) -> N
     monitor["tiempos_ms"].append(tiempo_ms)
 
 
-def obtener_reporte_metricas(monitor: Dict) -> str:
+def obtener_reporte_metricas(monitor: dict) -> str:
     """
     Genera un reporte legible de las métricas.
 
@@ -103,16 +102,10 @@ def obtener_reporte_metricas(monitor: Dict) -> str:
     cache_misses = monitor["cache_misses"]
 
     # Calcular cache hit rate
-    if total_requests > 0:
-        hit_rate = (cache_hits / total_requests) * 100
-    else:
-        hit_rate = 0.0
+    hit_rate = cache_hits / total_requests * 100 if total_requests > 0 else 0.0
 
     # Calcular throughput
-    if tiempo_total > 0:
-        throughput = total_requests / tiempo_total
-    else:
-        throughput = 0.0
+    throughput = total_requests / tiempo_total if tiempo_total > 0 else 0.0
 
     # Calcular latencia promedio
     if monitor["tiempos_ms"]:
@@ -142,7 +135,7 @@ def obtener_reporte_metricas(monitor: Dict) -> str:
     return reporte
 
 
-def exportar_metricas_json(monitor: Dict, archivo: str) -> None:
+def exportar_metricas_json(monitor: dict, archivo: str) -> None:
     """
     Exporta las métricas a un archivo JSON.
 
@@ -171,10 +164,7 @@ def exportar_metricas_json(monitor: Dict, archivo: str) -> None:
     else:
         hit_rate = 0.0
 
-    if tiempo_total > 0:
-        throughput = total_requests / tiempo_total
-    else:
-        throughput = 0.0
+    throughput = total_requests / tiempo_total if tiempo_total > 0 else 0.0
 
     if monitor["tiempos_ms"]:
         latencia_promedio = sum(monitor["tiempos_ms"]) / len(monitor["tiempos_ms"])

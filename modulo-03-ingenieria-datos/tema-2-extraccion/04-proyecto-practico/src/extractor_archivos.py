@@ -140,7 +140,7 @@ def leer_json_nested(
         raise FileNotFoundError(f"El archivo no existe: {ruta}")
 
     try:
-        with open(ruta, "r", encoding="utf-8") as archivo:
+        with open(ruta, encoding="utf-8") as archivo:
             contenido = archivo.read().strip()
 
             # Detectar si es JSON Lines (cada línea es un JSON)

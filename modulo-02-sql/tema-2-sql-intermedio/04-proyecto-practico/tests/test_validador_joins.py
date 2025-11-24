@@ -7,6 +7,7 @@ TDD: Estos tests se escribieron PRIMERO, antes de la implementación.
 import sqlite3
 
 import pytest
+
 from src.validador_joins import (
     contar_filas_join,
     detectar_producto_cartesiano,
@@ -91,7 +92,9 @@ class TestDetectarProductoCartesiano:
     def test_resultado_igual_a_producto_es_cartesiano(self):
         """Si resultado = izq × der, es producto cartesiano."""
         es_cartesiano, mensaje = detectar_producto_cartesiano(
-            filas_izq=100, filas_der=50, filas_resultado=5000  # 100 × 50 = 5000
+            filas_izq=100,
+            filas_der=50,
+            filas_resultado=5000,  # 100 × 50 = 5000
         )
 
         assert es_cartesiano is True
@@ -111,7 +114,9 @@ class TestDetectarProductoCartesiano:
     def test_resultado_pequeño_no_es_cartesiano(self):
         """Resultado pequeño no es producto cartesiano."""
         es_cartesiano, mensaje = detectar_producto_cartesiano(
-            filas_izq=100, filas_der=50, filas_resultado=100  # Solo 100 filas
+            filas_izq=100,
+            filas_der=50,
+            filas_resultado=100,  # Solo 100 filas
         )
 
         assert es_cartesiano is False

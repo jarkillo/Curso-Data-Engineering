@@ -31,12 +31,11 @@ Ejemplo de uso:
 """
 
 import asyncio
-from typing import Dict, List, Optional
 
 import aiohttp
 
 
-async def crear_sesion_http(headers: Optional[Dict] = None) -> aiohttp.ClientSession:
+async def crear_sesion_http(headers: dict | None = None) -> aiohttp.ClientSession:
     """
     Crea una sesión HTTP asíncrona con aiohttp.
 
@@ -66,7 +65,7 @@ async def crear_sesion_http(headers: Optional[Dict] = None) -> aiohttp.ClientSes
 
 async def obtener_url_async(
     session: aiohttp.ClientSession, url: str, timeout: int = 10
-) -> Dict:
+) -> dict:
     """
     Obtiene una URL de forma asíncrona.
 
@@ -111,8 +110,8 @@ async def obtener_url_async(
                     "error": status >= 400,
                 }
 
-    except asyncio.TimeoutError:
-        raise asyncio.TimeoutError(f"Timeout al obtener URL: {url}")
+    except TimeoutError:
+        raise TimeoutError(f"Timeout al obtener URL: {url}")
 
     except Exception as e:
         return {
@@ -125,8 +124,8 @@ async def obtener_url_async(
 
 
 async def obtener_urls_batch(
-    urls: List[str], max_concurrente: int = 20, timeout: int = 10
-) -> List[Dict]:
+    urls: list[str], max_concurrente: int = 20, timeout: int = 10
+) -> list[dict]:
     """
     Obtiene múltiples URLs en paralelo con control de concurrencia.
 
@@ -154,14 +153,14 @@ async def obtener_urls_batch(
     # Crear semáforo para limitar concurrencia
     semaforo = asyncio.Semaphore(max_concurrente)
 
-    async def obtener_con_semaforo(url: str) -> Dict:
+    async def obtener_con_semaforo(url: str) -> dict:
         """
         Wrapper para obtener URL respetando el semáforo.
         """
         async with semaforo:
             try:
                 return await obtener_url_async(session, url, timeout)
-            except asyncio.TimeoutError:
+            except TimeoutError:
                 return {
                     "url": url,
                     "status": 0,

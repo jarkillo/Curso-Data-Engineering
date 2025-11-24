@@ -124,7 +124,7 @@ def generar_reporte_ventas(
 
         # Convertir a diccionarios
         columnas = [descripcion[0] for descripcion in cursor.description]
-        resultado_dict = [dict(zip(columnas, fila)) for fila in resultado]
+        resultado_dict = [dict(zip(columnas, fila, strict=False)) for fila in resultado]
 
         logger.info(f"Reporte generado: {len(resultado_dict)} filas")
 
@@ -218,7 +218,7 @@ def generar_top_clientes(
 
         # Convertir a diccionarios
         columnas = [descripcion[0] for descripcion in cursor.description]
-        resultado_dict = [dict(zip(columnas, fila)) for fila in resultado]
+        resultado_dict = [dict(zip(columnas, fila, strict=False)) for fila in resultado]
 
         logger.info(f"Top clientes generado: {len(resultado_dict)} filas")
 
@@ -292,7 +292,7 @@ def generar_analisis_categorias(
 
         # Convertir a diccionarios
         columnas = [descripcion[0] for descripcion in cursor.description]
-        resultado_dict = [dict(zip(columnas, fila)) for fila in resultado]
+        resultado_dict = [dict(zip(columnas, fila, strict=False)) for fila in resultado]
 
         logger.info(f"Análisis de categorías generado: {len(resultado_dict)} filas")
 

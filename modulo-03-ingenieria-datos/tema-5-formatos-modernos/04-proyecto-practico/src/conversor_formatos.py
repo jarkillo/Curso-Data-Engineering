@@ -6,7 +6,6 @@ Proporciona funciones para convertir entre CSV, JSON, JSON Lines y Parquet.
 
 import os
 from pathlib import Path
-from typing import List, Optional
 
 import pandas as pd
 
@@ -170,7 +169,7 @@ def leer_multiple_formatos(ruta: str) -> pd.DataFrame:
         return pd.read_csv(ruta)
     elif extension == ".json":
         # Detectar si es JSON Lines por contenido
-        with open(ruta, "r", encoding="utf-8") as f:
+        with open(ruta, encoding="utf-8") as f:
             primera_linea = f.readline().strip()
 
         if primera_linea.startswith("[") or primera_linea.startswith("{"):
@@ -191,7 +190,7 @@ def leer_multiple_formatos(ruta: str) -> pd.DataFrame:
 
 
 def guardar_formato_automatico(
-    df: pd.DataFrame, ruta: str, formato: Optional[str] = None
+    df: pd.DataFrame, ruta: str, formato: str | None = None
 ) -> None:
     """
     Guarda DataFrame detectando automáticamente el formato por extensión.
@@ -240,7 +239,7 @@ def guardar_formato_automatico(
 def convertir_con_particiones(
     df: pd.DataFrame,
     ruta_base: str,
-    columnas_particion: List[str],
+    columnas_particion: list[str],
     formato: str = "parquet",
 ) -> None:
     """

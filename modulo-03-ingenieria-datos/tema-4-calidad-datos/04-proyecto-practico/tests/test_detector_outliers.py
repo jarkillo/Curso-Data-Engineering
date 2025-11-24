@@ -3,6 +3,7 @@
 import numpy as np
 import pandas as pd
 import pytest
+
 from src.detector_outliers import (
     detectar_outliers_iqr,
     detectar_outliers_isolation_forest,
