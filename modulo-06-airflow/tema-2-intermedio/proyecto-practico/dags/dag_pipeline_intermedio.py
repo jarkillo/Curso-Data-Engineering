@@ -13,12 +13,11 @@ import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 
+from airflow import DAG
 from airflow.operators.dummy import DummyOperator
 from airflow.operators.python import BranchPythonOperator, PythonOperator
 from airflow.sensors.filesystem import FileSensor
 from airflow.utils.task_group import TaskGroup
-
-from airflow import DAG
 
 # Agregar src/ al path para importar nuestros módulos
 project_root = Path(__file__).parent.parent
@@ -78,7 +77,6 @@ with DAG(
     catchup=False,
     tags=["intermedio", "tema2", "proyecto"],
 ) as dag:
-
     # ===== INICIO =====
     inicio = DummyOperator(task_id="inicio")
 

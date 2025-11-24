@@ -118,8 +118,7 @@ def eliminar_duplicados_con_estrategia(
     estrategias_validas = ["primero", "ultimo", "mas_completo"]
     if estrategia not in estrategias_validas:
         raise ValueError(
-            f"Estrategia '{estrategia}' no válida. "
-            f"Usar una de: {estrategias_validas}"
+            f"Estrategia '{estrategia}' no válida. Usar una de: {estrategias_validas}"
         )
 
     if estrategia == "primero":

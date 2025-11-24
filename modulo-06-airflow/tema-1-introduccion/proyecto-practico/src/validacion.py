@@ -160,7 +160,7 @@ def validar_datos_ventas(df: pd.DataFrame) -> dict:  # noqa: C901
     # Validación 4: Advertencias (no bloquean el pipeline)
     if len(df) < 5:
         advertencias.append(
-            f"El dataset tiene solo {len(df)} registros. " f"¿Es esto esperado?"
+            f"El dataset tiene solo {len(df)} registros. ¿Es esto esperado?"
         )
 
     # Construir resultado

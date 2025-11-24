@@ -19,9 +19,9 @@ def run_dbt_command(command: str) -> int:
     Returns:
         Código de salida del comando (0 = éxito)
     """
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print(f"Ejecutando: {command}")
-    print(f"{'='*60}\n")
+    print(f"{'=' * 60}\n")
 
     result = subprocess.run(  # nosec B602
         command,

@@ -123,7 +123,7 @@ def obtener_reporte_metricas(monitor: dict) -> str:
 ║ ⚡ Throughput:           {throughput:>6.1f} req/seg        ║
 ╠════════════════════════════════════════════════╣
 ║ ✅ Cache HITS:           {cache_hits:>6} ({hit_rate:>5.1f}%)       ║
-║ 🌐 Cache MISSES:         {cache_misses:>6} ({100-hit_rate:>5.1f}%)       ║
+║ 🌐 Cache MISSES:         {cache_misses:>6} ({100 - hit_rate:>5.1f}%)       ║
 ║ 💰 Requests ahorrados:   {cache_hits:>6}               ║
 ╠════════════════════════════════════════════════╣
 ║ 📊 Latencia promedio:    {latencia_promedio:>6.1f}ms            ║

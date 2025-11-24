@@ -101,12 +101,12 @@ def simular_envio_email(metricas: dict, anomalia: dict) -> dict:
     }
 
     # Log de simulación
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print("📧 SIMULACIÓN DE ENVÍO DE EMAIL")
-    print(f"{'='*60}")
+    print(f"{'=' * 60}")
     print(f"Asunto: {email['asunto']}")
     print(f"Destinatarios: {len(email['destinatarios'])} personas")
     print(f"Estado: {email['estado']}")
-    print(f"{'='*60}\n")
+    print(f"{'=' * 60}\n")
 
     return email

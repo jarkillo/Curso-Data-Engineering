@@ -39,7 +39,7 @@ def obtener_ruta_archivo(fecha: str) -> str:
         datetime.strptime(fecha, "%Y-%m-%d")
     except ValueError:
         raise ValueError(
-            f"Formato de fecha inválido: '{fecha}'. " f"Se esperaba formato YYYY-MM-DD"
+            f"Formato de fecha inválido: '{fecha}'. Se esperaba formato YYYY-MM-DD"
         )
 
     # Construir nombre de archivo (reemplazar guiones por guiones bajos)

@@ -56,7 +56,7 @@ def extraer_noticias_api_simulada(num_noticias: int = 100) -> pd.DataFrame:
             ),
             "source": fake.random_element(fuentes),
             "category": fake.random_element(categorias),
-            "url": f"https://{fake.domain_name()}/article-{i+1}",
+            "url": f"https://{fake.domain_name()}/article-{i + 1}",
         }
         noticias.append(noticia)
 

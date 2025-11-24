@@ -115,7 +115,7 @@ def formatear_fecha(fecha_str: str) -> str:
     except ValueError as e:
         if "time data" in str(e) or "does not match" in str(e):
             raise ValueError(
-                f"Formato de fecha inválido: {fecha_str}. " f"Use formato YYYY-MM-DD"
+                f"Formato de fecha inválido: {fecha_str}. Use formato YYYY-MM-DD"
             )
         elif "day is out of range" in str(e):
             raise ValueError(f"Fecha inválida: {fecha_str}")

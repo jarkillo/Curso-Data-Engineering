@@ -113,8 +113,7 @@ def reintentar_con_backoff(  # noqa: C901
     metodo_upper = metodo.upper()
     if metodo_upper not in METODOS_HTTP_VALIDOS:
         raise ValueError(
-            f"'{metodo}' no es un método HTTP válido. "
-            f"Válidos: {METODOS_HTTP_VALIDOS}"
+            f"'{metodo}' no es un método HTTP válido. Válidos: {METODOS_HTTP_VALIDOS}"
         )
 
     # Mapeo de métodos a funciones

@@ -156,8 +156,7 @@ def ejecutar_join_multiple(
     joins = []
     for tabla in tablas[1:]:
         join_clause = (
-            f"{tabla['join']} JOIN {tabla['nombre']} {tabla['alias']} "
-            f"ON {tabla['on']}"
+            f"{tabla['join']} JOIN {tabla['nombre']} {tabla['alias']} ON {tabla['on']}"
         )
         joins.append(join_clause)
 
@@ -165,7 +164,7 @@ def ejecutar_join_multiple(
     query = f"""
         SELECT {select_clause}
         FROM {from_clause}
-        {' '.join(joins)}
+        {" ".join(joins)}
     """
 
     # Ejecutar

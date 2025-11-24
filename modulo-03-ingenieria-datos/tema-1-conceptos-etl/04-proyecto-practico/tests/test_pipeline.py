@@ -70,11 +70,11 @@ class TestPipelineEtl:
             encoding="utf-8",
         )
         (directorio_datos / "productos.csv").write_text(
-            "producto_id,nombre,categoria,stock\n" "101,Laptop,Computadoras,50\n",
+            "producto_id,nombre,categoria,stock\n101,Laptop,Computadoras,50\n",
             encoding="utf-8",
         )
         (directorio_datos / "clientes.csv").write_text(
-            "cliente_id,nombre,email,ciudad\n" "1001,Juan,juan@example.com,Madrid\n",
+            "cliente_id,nombre,email,ciudad\n1001,Juan,juan@example.com,Madrid\n",
             encoding="utf-8",
         )
 

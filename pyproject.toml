@@ -205,6 +205,7 @@ exclude_dirs = [
 ]
 skips = [
     "B101", # assert_used - permitido en tests
+    "B108", # hardcoded_tmp_directory - educational Airflow DAG examples
     "B301", # pickle - educational use of shelve for caching examples
     "B311", # random - apropiado para generadores de datos sintéticos educativos
     "B403", # shelve imports - educational caching examples

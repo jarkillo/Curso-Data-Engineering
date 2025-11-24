@@ -224,8 +224,7 @@ def benchmark_lectura_escritura(  # noqa: C901
     for formato in formatos:
         if formato not in formatos_soportados:
             raise ValueError(
-                f"Formato no soportado: {formato}. "
-                f"Soportados: {formatos_soportados}"
+                f"Formato no soportado: {formato}. Soportados: {formatos_soportados}"
             )
 
     resultados = []

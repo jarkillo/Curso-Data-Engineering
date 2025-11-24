@@ -56,7 +56,7 @@ def detectar_caida_ventas(
     # Construir mensaje
     if es_anomalia:
         mensaje = (
-            f"⚠️  ANOMALÍA DETECTADA: Caída del {porcentaje_caida*100:.1f}% en ventas. "
+            f"⚠️  ANOMALÍA DETECTADA: Caída del {porcentaje_caida * 100:.1f}% en ventas. "
             f"Actual: ${total_actual:,.2f} vs Histórico: ${total_historico:,.2f}"
         )
     else:
