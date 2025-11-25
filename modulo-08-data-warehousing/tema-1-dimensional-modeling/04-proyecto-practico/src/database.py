@@ -10,7 +10,6 @@ Clases:
 
 import sqlite3
 from pathlib import Path
-from typing import Optional
 
 import pandas as pd
 
@@ -41,7 +40,7 @@ class DatabaseConnection:
             db_path: Ruta al archivo de BD o ":memory:" para BD en memoria
         """
         self.db_path = db_path
-        self.connection: Optional[sqlite3.Connection] = None
+        self.connection: sqlite3.Connection | None = None
 
     def __enter__(self):
         """Abre conexión cuando se entra al context manager."""
@@ -97,7 +96,7 @@ class DatabaseConnection:
             raise FileNotFoundError(f"No se encontró el archivo: {schema_path}")
 
         # Leer y ejecutar el schema SQL
-        with open(schema_file, "r", encoding="utf-8") as f:
+        with open(schema_file, encoding="utf-8") as f:
             schema_sql = f.read()
 
         # Ejecutar cada statement del schema

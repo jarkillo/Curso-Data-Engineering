@@ -2,6 +2,7 @@
 
 import pandas as pd
 import pytest
+
 from src.agregador import (
     agrupar_con_multiples_metricas,
     calcular_porcentajes_por_grupo,

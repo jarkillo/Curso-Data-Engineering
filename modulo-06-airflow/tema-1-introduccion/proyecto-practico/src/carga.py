@@ -10,12 +10,11 @@ Formatos soportados:
 
 from datetime import datetime
 from pathlib import Path
-from typing import Dict
 
 import pandas as pd
 
 
-def guardar_reporte_csv(metricas: Dict, fecha: str, directorio_base: str = None) -> str:
+def guardar_reporte_csv(metricas: dict, fecha: str, directorio_base: str = None) -> str:
     """
     Guarda un reporte de métricas en formato CSV.
 
@@ -70,7 +69,7 @@ def guardar_reporte_csv(metricas: Dict, fecha: str, directorio_base: str = None)
     return str(ruta_completa)
 
 
-def guardar_reporte_txt(metricas: Dict, fecha: str, directorio_base: str = None) -> str:
+def guardar_reporte_txt(metricas: dict, fecha: str, directorio_base: str = None) -> str:
     """
     Guarda un reporte de métricas en formato TXT legible.
 

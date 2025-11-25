@@ -2,6 +2,7 @@
 
 import pandas as pd
 import pytest
+
 from src.transformador_pandas import (
     agregar_metricas_por_grupo,
     aplicar_transformacion_condicional_compleja,

@@ -7,6 +7,7 @@ TDD: Estos tests se escribieron PRIMERO, antes de la implementación.
 import sqlite3
 
 import pytest
+
 from src.ejecutor_joins import (
     ejecutar_join_con_subconsulta,
     ejecutar_join_multiple,

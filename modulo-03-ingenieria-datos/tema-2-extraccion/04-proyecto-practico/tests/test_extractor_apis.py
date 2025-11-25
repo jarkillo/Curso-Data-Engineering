@@ -9,6 +9,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 import requests
+
 from src.extractor_apis import (
     configurar_sesion_con_reintentos,
     extraer_api_completa,

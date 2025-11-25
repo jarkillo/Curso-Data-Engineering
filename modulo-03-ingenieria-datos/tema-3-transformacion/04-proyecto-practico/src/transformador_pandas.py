@@ -4,14 +4,15 @@ Módulo de transformación de datos con Pandas.
 Proporciona funciones para aplicar transformaciones y enriquecimientos a los datos.
 """
 
-from typing import Any, Callable, Dict, List
+from collections.abc import Callable
+from typing import Any
 
 import numpy as np
 import pandas as pd
 
 
 def calcular_columnas_derivadas(
-    df: pd.DataFrame, formulas: Dict[str, str]
+    df: pd.DataFrame, formulas: dict[str, str]
 ) -> pd.DataFrame:
     """
     Calcula columnas derivadas usando expresiones eval de pandas.
@@ -85,7 +86,7 @@ def aplicar_transformacion_por_fila(
 
 
 def categorizar_valores(
-    df: pd.DataFrame, columna: str, nueva_columna: str, categorias: Dict[str, Callable]
+    df: pd.DataFrame, columna: str, nueva_columna: str, categorias: dict[str, Callable]
 ) -> pd.DataFrame:
     """
     Categoriza valores de una columna basándose en condiciones.
@@ -136,7 +137,7 @@ def agregar_metricas_por_grupo(
     df: pd.DataFrame,
     columna_agrupacion: str,
     columna_metrica: str,
-    agregaciones: List[str],
+    agregaciones: list[str],
 ) -> pd.DataFrame:
     """
     Agrega métricas calculadas por grupo a cada fila (transform).
@@ -239,7 +240,7 @@ def aplicar_ventana_movil(
 
 
 def crear_columna_condicional(
-    df: pd.DataFrame, nueva_columna: str, condiciones: List[tuple], default: Any = None
+    df: pd.DataFrame, nueva_columna: str, condiciones: list[tuple], default: Any = None
 ) -> pd.DataFrame:
     """
     Crea columna basada en múltiples condiciones (np.select style).
@@ -283,7 +284,7 @@ def crear_columna_condicional(
 
 
 def extraer_informacion_temporal(
-    df: pd.DataFrame, columna_fecha: str, componentes: List[str]
+    df: pd.DataFrame, columna_fecha: str, componentes: list[str]
 ) -> pd.DataFrame:
     """
     Extrae componentes temporales de una columna de fecha.

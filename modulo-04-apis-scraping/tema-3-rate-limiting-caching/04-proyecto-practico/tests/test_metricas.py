@@ -178,7 +178,7 @@ def test_exportar_metricas_a_json_valido(tmp_path):
     assert os.path.exists(archivo_json)
 
     # Verificar que es JSON válido
-    with open(archivo_json, "r", encoding="utf-8") as f:
+    with open(archivo_json, encoding="utf-8") as f:
         datos = json.load(f)
 
     assert datos["total_requests"] == 2

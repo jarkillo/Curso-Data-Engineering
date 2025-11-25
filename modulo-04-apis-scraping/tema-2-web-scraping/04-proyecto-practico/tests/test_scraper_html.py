@@ -6,6 +6,7 @@ Tests para el módulo scraper_html.py
 """
 
 import pytest
+
 from src.scraper_html import (
     extraer_atributo,
     extraer_datos_estructurados,

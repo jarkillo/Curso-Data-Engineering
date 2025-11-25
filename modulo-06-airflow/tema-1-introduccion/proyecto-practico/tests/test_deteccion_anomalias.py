@@ -98,6 +98,7 @@ def test_calcular_promedio_historico(tmp_path, monkeypatch):
     from pathlib import Path
 
     import pandas as pd
+
     from src.deteccion_anomalias import calcular_promedio_historico
 
     # Crear CSVs de prueba

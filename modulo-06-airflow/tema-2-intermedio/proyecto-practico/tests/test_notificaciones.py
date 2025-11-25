@@ -32,7 +32,7 @@ def test_guardar_log_ejecucion():
         guardar_log_ejecucion(mensaje, ruta_tmp)
 
         assert Path(ruta_tmp).exists()
-        with open(ruta_tmp, "r", encoding="utf-8") as f:
+        with open(ruta_tmp, encoding="utf-8") as f:
             contenido = f.read()
         assert mensaje in contenido
     finally:
@@ -50,6 +50,6 @@ def test_guardar_log_ejecucion_crea_directorio_si_no_existe():
         guardar_log_ejecucion(mensaje, str(ruta_tmp))
 
         assert ruta_tmp.exists()
-        with open(ruta_tmp, "r", encoding="utf-8") as f:
+        with open(ruta_tmp, encoding="utf-8") as f:
             contenido = f.read()
         assert mensaje in contenido

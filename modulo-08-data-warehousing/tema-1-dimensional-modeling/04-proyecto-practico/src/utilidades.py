@@ -246,6 +246,6 @@ def medir_tiempo(descripcion: str):
         duracion = fin - inicio
 
         if duracion < 1:
-            print(f"{descripcion}: Completado en {duracion*1000:.2f} ms")
+            print(f"{descripcion}: Completado en {duracion * 1000:.2f} ms")
         else:
             print(f"{descripcion}: Completado en {duracion:.2f} segundos")

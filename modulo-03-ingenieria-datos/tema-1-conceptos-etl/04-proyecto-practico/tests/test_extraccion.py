@@ -1,6 +1,7 @@
 """Tests para el módulo de extracción de datos."""
 
 import pytest
+
 from src.extraccion import extraer_clientes, extraer_productos, extraer_ventas, leer_csv
 
 

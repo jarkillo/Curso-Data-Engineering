@@ -8,6 +8,7 @@ Usa 'responses' para mockear HTTP requests.
 import pytest
 import requests
 import responses
+
 from src.cliente_http import hacer_delete, hacer_get, hacer_post, hacer_put
 
 # Tests de hacer_get()

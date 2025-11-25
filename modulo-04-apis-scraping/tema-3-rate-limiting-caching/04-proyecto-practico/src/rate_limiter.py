@@ -18,10 +18,9 @@ Ejemplo de uso:
 """
 
 import time
-from typing import Dict
 
 
-def crear_rate_limiter_fixed_window(max_requests: int, window_seconds: int) -> Dict:
+def crear_rate_limiter_fixed_window(max_requests: int, window_seconds: int) -> dict:
     """
     Crea un rate limiter con algoritmo Fixed Window.
 
@@ -55,7 +54,7 @@ def crear_rate_limiter_fixed_window(max_requests: int, window_seconds: int) -> D
     }
 
 
-def crear_rate_limiter_token_bucket(capacidad: int, tasa_reposicion: float) -> Dict:
+def crear_rate_limiter_token_bucket(capacidad: int, tasa_reposicion: float) -> dict:
     """
     Crea un rate limiter con algoritmo Token Bucket.
 
@@ -91,7 +90,7 @@ def crear_rate_limiter_token_bucket(capacidad: int, tasa_reposicion: float) -> D
     }
 
 
-def puede_hacer_request(rate_limiter: Dict) -> bool:
+def puede_hacer_request(rate_limiter: dict) -> bool:
     """
     Verifica si se puede hacer un request según el rate limiter.
 
@@ -120,7 +119,7 @@ def puede_hacer_request(rate_limiter: Dict) -> bool:
         raise ValueError(f"Tipo de rate limiter desconocido: {tipo}")
 
 
-def esperar_disponibilidad(rate_limiter: Dict, timeout: float = 60.0) -> float:
+def esperar_disponibilidad(rate_limiter: dict, timeout: float = 60.0) -> float:
     """
     Espera hasta que haya disponibilidad para hacer un request.
 
@@ -175,7 +174,7 @@ def esperar_disponibilidad(rate_limiter: Dict, timeout: float = 60.0) -> float:
 # ===============================
 
 
-def _puede_hacer_request_fixed_window(rate_limiter: Dict) -> bool:
+def _puede_hacer_request_fixed_window(rate_limiter: dict) -> bool:
     """
     Verifica disponibilidad para Fixed Window.
     """
@@ -195,7 +194,7 @@ def _puede_hacer_request_fixed_window(rate_limiter: Dict) -> bool:
     return False
 
 
-def _calcular_espera_fixed_window(rate_limiter: Dict) -> float:
+def _calcular_espera_fixed_window(rate_limiter: dict) -> float:
     """
     Calcula tiempo de espera para Fixed Window.
     """
@@ -215,7 +214,7 @@ def _calcular_espera_fixed_window(rate_limiter: Dict) -> float:
 # ===============================
 
 
-def _puede_hacer_request_token_bucket(rate_limiter: Dict) -> bool:
+def _puede_hacer_request_token_bucket(rate_limiter: dict) -> bool:
     """
     Verifica disponibilidad para Token Bucket.
     """
@@ -230,7 +229,7 @@ def _puede_hacer_request_token_bucket(rate_limiter: Dict) -> bool:
     return False
 
 
-def _reponer_tokens(rate_limiter: Dict) -> None:
+def _reponer_tokens(rate_limiter: dict) -> None:
     """
     Repone tokens según el tiempo transcurrido.
     """
@@ -248,7 +247,7 @@ def _reponer_tokens(rate_limiter: Dict) -> None:
     rate_limiter["ultima_actualizacion"] = ahora
 
 
-def _calcular_espera_token_bucket(rate_limiter: Dict) -> float:
+def _calcular_espera_token_bucket(rate_limiter: dict) -> float:
     """
     Calcula tiempo de espera para Token Bucket.
     """

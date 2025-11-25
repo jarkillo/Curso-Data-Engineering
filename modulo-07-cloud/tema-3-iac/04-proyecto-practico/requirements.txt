@@ -1,0 +1,13 @@
+# Testing de infraestructura
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Opcional: Testing avanzado con Terratest (Python wrapper)
+# python-terraform>=0.10.0
+
+# Opcional: Linting y validación
+# checkov>=2.3.0  # Security scanner for IaC
+
+# Opcional: Para scripts de automatización
+boto3>=1.34.0  # AWS SDK (si usas scripts Python para AWS)
+google-cloud-storage>=2.10.0  # GCP SDK (si usas scripts Python para GCP)

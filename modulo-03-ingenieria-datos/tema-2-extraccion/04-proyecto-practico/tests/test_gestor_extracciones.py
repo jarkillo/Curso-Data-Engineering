@@ -9,6 +9,7 @@ from unittest.mock import MagicMock, patch
 
 import pandas as pd
 import pytest
+
 from src.gestor_extracciones import (
     extraer_desde_fuente,
     generar_reporte_extraccion,

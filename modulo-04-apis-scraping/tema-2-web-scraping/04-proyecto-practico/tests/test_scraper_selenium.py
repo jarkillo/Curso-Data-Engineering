@@ -10,6 +10,7 @@ from unittest.mock import Mock, patch
 import pytest
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
+
 from src.scraper_selenium import (
     extraer_con_espera,
     extraer_tabla_dinamica,

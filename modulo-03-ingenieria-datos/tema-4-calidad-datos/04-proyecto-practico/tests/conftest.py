@@ -1,7 +1,5 @@
 """Fixtures compartidas para tests del Framework de Calidad de Datos."""
 
-from typing import Dict
-
 import numpy as np
 import pandas as pd
 import pytest
@@ -100,7 +98,7 @@ def df_vacio() -> pd.DataFrame:
 
 
 @pytest.fixture
-def esquema_basico() -> Dict[str, str]:
+def esquema_basico() -> dict[str, str]:
     """Esquema de tipos básico."""
     return {
         "id": "int",
@@ -112,7 +110,7 @@ def esquema_basico() -> Dict[str, str]:
 
 
 @pytest.fixture
-def rangos_validos() -> Dict[str, tuple]:
+def rangos_validos() -> dict[str, tuple]:
     """Rangos válidos para validación numérica."""
     return {
         "edad": (18, 70),
@@ -123,7 +121,7 @@ def rangos_validos() -> Dict[str, tuple]:
 
 
 @pytest.fixture
-def valores_permitidos() -> Dict[str, list]:
+def valores_permitidos() -> dict[str, list]:
     """Valores permitidos para validación categórica."""
     return {
         "categoria": ["A", "B", "C"],
@@ -183,7 +181,7 @@ def df_multivariado() -> pd.DataFrame:
 
 
 @pytest.fixture
-def configuracion_completa() -> Dict:
+def configuracion_completa() -> dict:
     """Configuración completa para validación de esquema."""
     return {
         "tipos": {"id": "int", "nombre": "str", "edad": "int", "salario": "float"},

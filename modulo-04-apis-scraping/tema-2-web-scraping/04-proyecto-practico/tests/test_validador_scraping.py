@@ -9,6 +9,7 @@ import time
 from unittest.mock import Mock, patch
 
 import pytest
+
 from src.validador_scraping import (
     calcular_delay_rate_limit,
     validar_contenido_html,

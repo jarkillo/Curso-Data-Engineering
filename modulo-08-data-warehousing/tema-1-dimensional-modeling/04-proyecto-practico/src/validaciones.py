@@ -12,8 +12,6 @@ Funciones:
     validar_unicidad: Verifica que campos únicos no tengan duplicados
 """
 
-from typing import Optional
-
 import pandas as pd
 
 
@@ -72,7 +70,7 @@ def validar_no_nulos(
 
 
 def validar_rangos(
-    df: pd.DataFrame, rangos: dict[str, Optional[tuple[float, float]]]
+    df: pd.DataFrame, rangos: dict[str, tuple[float, float] | None]
 ) -> dict[str, bool | list[str]]:
     """
     Valida que valores numéricos estén dentro de rangos permitidos.

@@ -89,55 +89,19 @@ repos:
         exclude: '^(modulo-01-fundamentos/|documentacion/juego/|data_engineer_game\.py|game\.html|game_save\.json)'
 
   # ===============================================
-  # FLAKE8 - LINTING
+  # RUFF - LINTING Y FORMATEO MODERNO
   # ===============================================
-  - repo: https://github.com/pycqa/flake8
-    rev: 7.1.1
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.6
     hooks:
-      - id: flake8
-        name: 🔍 Flake8 - Linting
-        args:
-          - '--max-line-length=88'
-          - '--extend-ignore=E203,E501,W503'
-          - '--max-complexity=10'
-        additional_dependencies:
-          - flake8-docstrings
-          - flake8-bugbear
-          - flake8-comprehensions
-        exclude: '^(modulo-01-fundamentos/|data_engineer_game\.py)'
+      - id: ruff
+        name: 🔍 Ruff - Linting
+        args: ['--fix']
+        exclude: '^(modulo-01-fundamentos/|documentacion/juego/|data_engineer_game\.py|game\.html|game_save\.json)'
 
-  # ===============================================
-  # MYPY - TYPE CHECKING
-  # ===============================================
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.15.0
-    hooks:
-      - id: mypy
-        name: 🔎 MyPy - Verificar tipos
-        args:
-          - '--ignore-missing-imports'
-          - '--warn-unused-ignores'
-          - '--no-implicit-optional'
-          - '--strict-equality'
-        additional_dependencies:
-          - types-requests
-          - types-PyYAML
-        exclude: '^(modulo-01-fundamentos/|documentacion/juego/|data_engineer_game\.py)'
-
-  # ===============================================
-  # ISORT - ORDENAR IMPORTS
-  # ===============================================
-  - repo: https://github.com/pycqa/isort
-    rev: 5.13.2
-    hooks:
-      - id: isort
-        name: 📚 isort - Ordenar imports
-        args:
-          - '--profile=black'
-          - '--line-length=88'
-          - '--multi-line=3'
-          - '--trailing-comma'
-        exclude: '^(modulo-01-fundamentos/|data_engineer_game\.py)'
+      - id: ruff-format
+        name: 🎨 Ruff - Formateo
+        exclude: '^(modulo-01-fundamentos/|documentacion/juego/|data_engineer_game\.py|game\.html|game_save\.json)'
 
   # ===============================================
   # BANDIT - SEGURIDAD

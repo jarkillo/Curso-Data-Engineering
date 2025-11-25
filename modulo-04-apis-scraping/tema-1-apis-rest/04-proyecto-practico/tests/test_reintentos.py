@@ -9,6 +9,7 @@ from unittest.mock import patch
 import pytest
 import requests
 import responses
+
 from src.reintentos import calcular_delay_exponencial, reintentar_con_backoff
 
 # Tests de calcular_delay_exponencial()
@@ -111,11 +112,13 @@ def test_reintentar_todos_fallan(url_base):
             status=500,
         )
 
-    with patch("time.sleep"):
-        with pytest.raises(
+    with (
+        patch("time.sleep"),
+        pytest.raises(
             requests.exceptions.HTTPError, match="Todos los intentos fallaron"
-        ):
-            reintentar_con_backoff(url=url_base + "/users", max_intentos=3)
+        ),
+    ):
+        reintentar_con_backoff(url=url_base + "/users", max_intentos=3)
 
     assert len(responses.calls) == 3  # 3 intentos
 

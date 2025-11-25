@@ -8,6 +8,7 @@ Tests para el módulo utilidades_scraping.py
 import logging
 
 import pytest
+
 from src.utilidades_scraping import (
     configurar_logging,
     crear_headers_aleatorios,

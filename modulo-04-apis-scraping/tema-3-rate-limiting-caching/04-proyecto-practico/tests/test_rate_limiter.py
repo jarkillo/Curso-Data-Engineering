@@ -9,6 +9,7 @@ Cobertura objetivo: >85%
 import time
 
 import pytest
+
 from src.rate_limiter import (
     crear_rate_limiter_fixed_window,
     crear_rate_limiter_token_bucket,
@@ -42,7 +43,7 @@ def test_fixed_window_limite_maximo_requests():
     assert limiter["requests_en_ventana"] == 1
 
     # Requests 2-5 permitidos
-    for i in range(4):
+    for _i in range(4):
         assert puede_hacer_request(limiter) is True
 
     assert limiter["requests_en_ventana"] == 5
@@ -140,7 +141,7 @@ def test_token_bucket_burst_inicial():
     limiter = crear_rate_limiter_token_bucket(capacidad=20, tasa_reposicion=5.0)
 
     # Consumir todos los 20 tokens en burst
-    for i in range(20):
+    for _i in range(20):
         assert puede_hacer_request(limiter) is True
 
     assert limiter["tokens"] < 1  # Prácticamente 0 (puede haber micro-reposición)

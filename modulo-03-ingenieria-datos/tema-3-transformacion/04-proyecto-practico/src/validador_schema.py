@@ -4,15 +4,15 @@ Módulo de validación de esquemas y calidad de datos.
 Proporciona funciones para validar la estructura y calidad de los datos.
 """
 
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any
 
 import numpy as np
 import pandas as pd
 
 
 def validar_columnas_requeridas(
-    df: pd.DataFrame, columnas_requeridas: List[str]
-) -> Tuple[bool, List[str]]:
+    df: pd.DataFrame, columnas_requeridas: list[str]
+) -> tuple[bool, list[str]]:
     """
     Valida que el DataFrame contenga las columnas requeridas.
 
@@ -48,8 +48,8 @@ def validar_columnas_requeridas(
 
 
 def validar_tipos_de_datos(
-    df: pd.DataFrame, tipos_esperados: Dict[str, str]
-) -> Tuple[bool, Dict[str, Dict]]:
+    df: pd.DataFrame, tipos_esperados: dict[str, str]
+) -> tuple[bool, dict[str, dict]]:
     """
     Valida que las columnas tengan los tipos de datos esperados.
 
@@ -120,7 +120,7 @@ def validar_tipos_de_datos(
 
 def validar_completitud_datos(
     df: pd.DataFrame, umbral_minimo: float = 0.8
-) -> Tuple[bool, pd.Series]:
+) -> tuple[bool, pd.Series]:
     """
     Valida que los datos tengan completitud mínima (% de valores no nulos).
 
@@ -162,10 +162,10 @@ def validar_completitud_datos(
 
 def generar_reporte_calidad(
     df: pd.DataFrame,
-    columnas_requeridas: Optional[List[str]] = None,
-    tipos_esperados: Optional[Dict[str, str]] = None,
+    columnas_requeridas: list[str] | None = None,
+    tipos_esperados: dict[str, str] | None = None,
     umbral_completitud: float = 0.8,
-) -> Dict:
+) -> dict:
     """
     Genera un reporte completo de calidad de datos.
 
@@ -199,7 +199,7 @@ def generar_reporte_calidad(
     if df.empty:
         raise ValueError("El DataFrame no puede estar vacío")
 
-    reporte: Dict[str, Any] = {}
+    reporte: dict[str, Any] = {}
 
     # Métricas básicas
     reporte["total_filas"] = len(df)

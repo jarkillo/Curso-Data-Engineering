@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 import numpy as np
 import pandas as pd
+
 from src.analizador_formatos import (
     benchmark_lectura_escritura,
     comparar_tamanios_formatos,

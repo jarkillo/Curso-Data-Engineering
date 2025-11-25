@@ -11,7 +11,6 @@ import lzma
 import os
 import time
 from pathlib import Path
-from typing import Dict, List
 
 import pandas as pd
 
@@ -101,7 +100,7 @@ def descomprimir_archivo(ruta_comprimida: str) -> str:
     return ruta_salida
 
 
-def comparar_compresiones(ruta_archivo: str, algoritmos: List[str]) -> Dict[str, Dict]:
+def comparar_compresiones(ruta_archivo: str, algoritmos: list[str]) -> dict[str, dict]:
     """
     Compara múltiples algoritmos de compresión para un archivo.
 

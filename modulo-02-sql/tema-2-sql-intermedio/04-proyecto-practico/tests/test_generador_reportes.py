@@ -5,6 +5,7 @@ TDD: Estos tests se escribieron PRIMERO, antes de la implementación.
 """
 
 import pytest
+
 from src.generador_reportes import (
     generar_analisis_categorias,
     generar_reporte_ventas,

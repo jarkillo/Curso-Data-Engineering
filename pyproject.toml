@@ -205,7 +205,10 @@ exclude_dirs = [
 ]
 skips = [
     "B101", # assert_used - permitido en tests
+    "B108", # hardcoded_tmp_directory - educational Airflow DAG examples
+    "B301", # pickle - educational use of shelve for caching examples
     "B311", # random - apropiado para generadores de datos sintéticos educativos
+    "B403", # shelve imports - educational caching examples
     "B601", # paramiko_calls - usado en algunos módulos
     "B608", # hardcoded_sql_expressions - contexto educativo con SQLite en memoria
 ]
@@ -279,3 +282,72 @@ include-package-data = true
 
 [tool.setuptools.package-data]
 "*" = ["*.txt", "*.md", "*.yml", "*.yaml", "*.json"]
+
+# ===============================================
+# RUFF - LINTING Y FORMATEO MODERNO
+# ===============================================
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+# Archivos y directorios a excluir
+exclude = [
+    ".git",
+    ".venv",
+    "venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "*.egg-info",
+    ".cursor",
+    ".claude",
+    "airflow/logs",
+    "htmlcov",
+    "modulo-01-fundamentos",
+    "documentacion/juego",
+    "data_engineer_game.py",
+    "game.html",
+]
+
+[tool.ruff.lint]
+# Seleccionar reglas (reemplaza flake8, isort, y más)
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "SIM", # flake8-simplify
+]
+
+# Ignorar reglas específicas
+ignore = [
+    "E501",  # line too long (manejado por black)
+    "B017",  # pytest.raises(Exception) considerado malo (pero útil en tests)
+    "C901",  # función muy compleja (permitir complejidad en algunos casos)
+    "SIM102", # nested if statements - a veces más claro que combinarlos
+    "B904",  # raise without from - requires manual review across modules
+    "SIM105", # suppressible exceptions - optional style preference
+    "SIM117", # combine with statements - optional style preference
+    "N802",  # invalid function name - test naming conventions
+    "N806",  # non-lowercase variable - allowed in some contexts
+    "N812",  # lowercase imported as non-lowercase - legacy imports
+    "E402",  # module import not at top - sometimes necessary
+    "E712",  # comparison to True/False - test assertions
+    "E721",  # type comparison - allowed in specific cases
+    "C401",  # unnecessary generator - performance tradeoff
+    "SIM108", # if-else block to ternary - readability preference
+    "UP038", # isinstance with tuple - backwards compatibility
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # unused imports
+"tests/*" = ["S101", "S105", "S106"]  # asserts, hardcoded passwords en tests
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]
+force-single-line = false
+force-sort-within-sections = false

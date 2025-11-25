@@ -5,18 +5,17 @@ Proporciona funciones para conectar y desconectar de PostgreSQL de forma segura.
 """
 
 import os
-from typing import Optional
 
 import psycopg2
 from psycopg2.extensions import connection
 
 
 def crear_conexion(
-    host: Optional[str] = None,
-    port: Optional[int] = None,
-    user: Optional[str] = None,
-    password: Optional[str] = None,
-    database: Optional[str] = None,
+    host: str | None = None,
+    port: int | None = None,
+    user: str | None = None,
+    password: str | None = None,
+    database: str | None = None,
 ) -> connection:
     """
     Crea una conexión a PostgreSQL.
@@ -87,7 +86,7 @@ def cerrar_conexion(conn: connection) -> None:
 
 
 def ejecutar_query(
-    conn: connection, query: str, params: Optional[tuple] = None
+    conn: connection, query: str, params: tuple | None = None
 ) -> list[tuple]:
     """
     Ejecuta una query SELECT y retorna los resultados.

@@ -19,11 +19,10 @@ import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 
+from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.dummy import DummyOperator
 from airflow.operators.python import PythonOperator
-
-from airflow import DAG
 
 # Añadir src al path para imports
 proyecto_dir = Path(__file__).parent.parent
@@ -182,7 +181,6 @@ with DAG(
     catchup=False,
     tags=["proyecto-practico", "etl", "ventas", "cloudmart"],
 ) as dag:
-
     # Inicio
     inicio = DummyOperator(
         task_id="inicio",

@@ -5,8 +5,6 @@ Módulo de Scraping con Selenium
 Funciones para extraer datos de páginas web dinámicas (JavaScript).
 """
 
-from typing import Dict, List
-
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -16,7 +14,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 def extraer_con_espera(
     driver: webdriver.Chrome, selector: str, by: By = By.CSS_SELECTOR, timeout: int = 10
-) -> List[str]:
+) -> list[str]:
     """
     Extrae textos de elementos esperando a que se carguen (JS dinámico).
 
@@ -48,7 +46,7 @@ def extraer_con_espera(
 
 def extraer_tabla_dinamica(  # noqa: C901
     driver: webdriver.Chrome, selector_tabla: str = "table", timeout: int = 10
-) -> List[Dict[str, str]]:
+) -> list[dict[str, str]]:
     """
     Extrae una tabla cargada dinámicamente con JavaScript.
 
@@ -159,7 +157,7 @@ def hacer_scroll_infinito(
     import time
 
     items_anteriores = 0
-    for i in range(max_scrolls):
+    for _i in range(max_scrolls):
         # Hacer scroll al final de la página
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         time.sleep(pausa)

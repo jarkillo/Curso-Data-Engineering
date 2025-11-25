@@ -9,6 +9,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 import requests
 from bs4 import BeautifulSoup
+
 from src.extractor_web import (
     extraer_elementos_por_selector,
     extraer_html,

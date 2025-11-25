@@ -7,6 +7,7 @@ TDD: Tests escritos PRIMERO, implementación DESPUÉS.
 import base64
 
 import pytest
+
 from src.autenticacion import (
     combinar_headers,
     crear_headers_api_key,
