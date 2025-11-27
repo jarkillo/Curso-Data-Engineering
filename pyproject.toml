@@ -50,6 +50,9 @@ extend-exclude = '''
   | \.cursor
   | \.claude
   | airflow/logs
+  # Web app (handled by ruff-format to avoid conflicts)
+  | backend/.*
+  | frontend/.*
   # Archivos del curso (material educativo, no código de producción)
   | modulo-01-fundamentos/.*
   | documentacion/juego/.*
