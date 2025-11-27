@@ -86,7 +86,7 @@ repos:
         name: ⚫ Black - Formatear código
         language_version: python3.13
         args: ['--line-length=88', '--target-version=py313']
-        exclude: '^(modulo-01-fundamentos/|documentacion/juego/|data_engineer_game\.py|game\.html|game_save\.json)'
+        exclude: '^(backend/|frontend/|modulo-01-fundamentos/|documentacion/juego/|data_engineer_game\.py|game\.html|game_save\.json)'
 
   # ===============================================
   # RUFF - LINTING Y FORMATEO MODERNO
