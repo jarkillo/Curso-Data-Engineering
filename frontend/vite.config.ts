@@ -12,6 +12,8 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+    host: true,
+    allowedHosts: ['curso-data.sintetikamusic.com', 'localhost'],
     proxy: {
       '/api': {
         target: 'http://localhost:8000',
