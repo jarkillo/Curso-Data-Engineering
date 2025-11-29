@@ -201,7 +201,8 @@ class TestCargarFact:
             ]
         )
 
-        # Nota: DimCliente usa cliente_sk (autoincrement), así que insertamos y obtenemos el ID
+        # Nota: DimCliente usa cliente_sk (autoincrement),
+        # así que insertamos y obtenemos el ID
         with DatabaseConnection(":memory:") as db:
             db.crear_tablas()
 
@@ -214,11 +215,13 @@ class TestCargarFact:
             db.ejecutar_comando(
                 """
                 INSERT INTO DimCliente
-                (cliente_id, nombre, email, telefono, direccion, ciudad, estado,
-                 codigo_postal, fecha_registro, segmento, fecha_inicio, fecha_fin, version, es_actual)
+                (cliente_id, nombre, email, telefono, direccion, ciudad,
+                 estado, codigo_postal, fecha_registro, segmento,
+                 fecha_inicio, fecha_fin, version, es_actual)
                 VALUES (1, 'Cliente Test', 'cliente@test.com', '555-1234',
-                        'Dirección Test', 'Ciudad Test', 'Estado Test', '12345',
-                        '2024-01-01', 'Regular', '2024-01-01', NULL, 1, 1)
+                        'Dirección Test', 'Ciudad Test', 'Estado Test',
+                        '12345', '2024-01-01', 'Regular', '2024-01-01',
+                        NULL, 1, 1)
             """
             )
 
