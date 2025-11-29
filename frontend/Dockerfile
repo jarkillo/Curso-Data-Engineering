@@ -3,9 +3,8 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Install dependencies (cache bust: v2 - added @tailwindcss/typography)
+# Copy package files
 COPY package*.json ./
-RUN npm install
 
 # Copy application
 COPY . .
@@ -13,5 +12,5 @@ COPY . .
 # Expose port
 EXPOSE 5173
 
-# Run development server
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+# Install dependencies and run development server
+CMD npm install && npm run dev -- --host 0.0.0.0
