@@ -3,7 +3,7 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Install dependencies
+# Install dependencies (cache bust: v2 - added @tailwindcss/typography)
 COPY package*.json ./
 RUN npm install
 
