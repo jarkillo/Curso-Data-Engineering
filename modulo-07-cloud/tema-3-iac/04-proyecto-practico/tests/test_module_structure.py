@@ -189,9 +189,9 @@ class TestModuleDocumentation:
 
             # Verificar que cada variable tenga descripción
             if 'variable "' in content:
-                assert (
-                    "description" in content
-                ), f"Módulo {module_dir.name} tiene variables sin descripción"
+                assert "description" in content, (
+                    f"Módulo {module_dir.name} tiene variables sin descripción"
+                )
 
 
 class TestProjectStructure:

@@ -48,9 +48,9 @@ class TestTerraformFormat:
             text=True,
         )
 
-        assert (
-            result.returncode == 0
-        ), f"Archivos sin formatear en environments: {result.stdout}"
+        assert result.returncode == 0, (
+            f"Archivos sin formatear en environments: {result.stdout}"
+        )
 
     def test_format_modules_directory(self):
         """Debe verificar formato en directorio modules"""
@@ -66,9 +66,9 @@ class TestTerraformFormat:
             text=True,
         )
 
-        assert (
-            result.returncode == 0
-        ), f"Archivos sin formatear en modules: {result.stdout}"
+        assert result.returncode == 0, (
+            f"Archivos sin formatear en modules: {result.stdout}"
+        )
 
     def test_no_trailing_whitespace(self):
         """Debe verificar que no haya espacios al final de líneas"""
