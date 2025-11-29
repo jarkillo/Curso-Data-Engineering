@@ -10,9 +10,9 @@
 |------|--------|-------|-----------|-------------|
 | **Tema 1**: Modelado Dimensional | ✅ 100% | 154/154 | 91% | Star Schema, Snowflake, dimensiones, hechos |
 | **Tema 2**: Herramientas DWH (dbt) | ✅ 100% | ~44 | N/A | dbt, ELT, transformaciones, testing |
-| **Tema 3**: Analytics y BI | ⏳ 0% | 0/0 | 0% | Dashboards, KPIs, visualización |
+| **Tema 3**: Analytics y BI | ✅ 100% | 82/82 | 92% | KPIs, dashboards, detección de anomalías |
 
-**Progreso Total**: 67% (2/3 temas completados)
+**Progreso Total**: 100% (3/3 temas completados)
 
 ---
 
@@ -41,23 +41,24 @@ Al completar este módulo serás capaz de:
 - ✅ Crear modelos incrementales eficientes
 
 ### Analytics y BI (Tema 3)
-- ⏳ Diseñar dashboards efectivos
-- ⏳ Definir y calcular KPIs de negocio
-- ⏳ Crear visualizaciones con herramientas BI
-- ⏳ Implementar drill-down y slicing
-- ⏳ Configurar alertas y monitoring
+- ✅ Diseñar dashboards efectivos para diferentes audiencias
+- ✅ Definir y calcular KPIs de negocio (AOV, CAC, LTV, NRR)
+- ✅ Realizar análisis de cohortes (retención, LTV por cohorte)
+- ✅ Detectar anomalías en métricas con métodos estadísticos
+- ✅ Exportar métricas para herramientas de BI (JSON, CSV)
+- ✅ Implementar data storytelling efectivo
 
 ---
 
 ## 📊 Estadísticas Generales
 
 ```
-Temas completados:    2/3  (67%)
-Tests totales:        198
-Tests pasando:        198  (100%)
-Cobertura promedio:   91%  (tema 1)
+Temas completados:    3/3  (100%)
+Tests totales:        280
+Tests pasando:        280  (100%)
+Cobertura promedio:   91%
 Tiempo estimado:      60-75 horas
-Proyectos prácticos:  2/3
+Proyectos prácticos:  3/3
 ```
 
 ---
@@ -181,15 +182,61 @@ dbt snapshot      # Crear snapshots
 
 **Directorio**: `tema-3-analytics-bi/`
 
-⏳ **En desarrollo**
+### Contenido
 
-### Contenido Planificado
+- **01-TEORIA.md** (~4,000 palabras): Fundamentos de Analytics y BI
+  - Business Intelligence: qué es y qué no es
+  - Métricas vs KPIs vs Dimensiones
+  - Pirámide de métricas (operativas, tácticas, estratégicas)
+  - Principios de diseño de dashboards
+  - Antipatrones en dashboards
+  - Data storytelling
+  - Herramientas de BI modernas
 
-- Diseño de dashboards efectivos
-- KPIs y métricas de negocio
-- Herramientas de visualización
-- Drill-down y slicing
-- Alertas y monitoring
+- **02-EJEMPLOS.md** (~6,000 palabras): 4 ejemplos progresivos
+  - Definir KPIs para e-commerce
+  - Diseñar dashboard ejecutivo
+  - Métricas de producto SaaS
+  - Sistema completo de OKRs
+
+- **03-EJERCICIOS.md** (~8,000 palabras): 15 ejercicios con soluciones
+  - Básicos (1-5): Identificación de KPIs, cálculos básicos
+  - Intermedios (6-11): Diseño de dashboards, cohortes, funnels
+  - Avanzados (12-15): Alertas ML, OKRs cascading, arquitectura
+
+### Proyecto Práctico
+
+**Sistema de Métricas Analíticas**
+
+**Arquitectura**:
+```
+src/
+├── kpis.py               # Cálculo de KPIs (AOV, CAC, LTV, NRR, etc.)
+├── cohorts.py            # Análisis de cohortes y retención
+├── anomaly_detection.py  # Detección de anomalías con MAD
+└── exporters.py          # Exportación a JSON/CSV para BI
+```
+
+**Características**:
+- 9 funciones de cálculo de KPIs
+- Análisis de cohortes con retención D7/D14/D30
+- Detección de anomalías con MAD (robusto a outliers)
+- Exportadores para herramientas de BI
+- 82 tests unitarios, 92% cobertura
+
+**Tecnologías**: Python, pytest, TDD
+
+**Ejecutar**:
+```bash
+cd tema-3-analytics-bi/04-proyecto-practico
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+.\venv\Scripts\Activate.ps1  # Windows
+pip install -r requirements.txt
+pytest -v --cov=src --cov-report=term-missing
+```
+
+**Detalles**: Ver [README del proyecto](tema-3-analytics-bi/04-proyecto-practico/README.md)
 
 ---
 
@@ -224,7 +271,10 @@ dbt snapshot      # Crear snapshots
    - Implementar pipeline dbt completo (8-10 horas)
 
 3. **Semana 5-6**: Tema 3 - Analytics y BI
-   - TBD
+   - Estudiar teoría de KPIs y dashboards (4-5 horas)
+   - Trabajar ejemplos prácticos (3-4 horas)
+   - Resolver ejercicios (5-6 horas)
+   - Implementar proyecto de métricas (6-8 horas)
 
 ### Instalación
 
@@ -283,9 +333,9 @@ dbt seed && dbt run && dbt test
 
 Para considerar el módulo completo:
 
-- [ ] Tema 1: 154 tests pasando, cobertura ≥80%
+- [x] ✅ Tema 1: 154 tests pasando, 91% cobertura
 - [x] ✅ Tema 2: Pipeline dbt ejecutable con ~44 tests
-- [ ] Tema 3: TBD
+- [x] ✅ Tema 3: 82 tests pasando, 92% cobertura
 - [ ] Proyecto integrador final (TBD)
 - [ ] Revisión de pares
 
@@ -302,21 +352,27 @@ Para considerar el módulo completo:
 
 ## 📝 Notas de Versión
 
-**Versión**: 1.0.0
-**Última Actualización**: 2025-11-13
+**Versión**: 1.1.0
+**Última Actualización**: 2024-11-29
 **Mantenedor**: [Tu Nombre]
 
 ### Changelog
 
-- **v1.0.0** (2025-11-13):
+- **v1.1.0** (2024-11-29):
+  - ✅ Tema 3 completado (82 tests, 92% cov)
+  - Sistema de métricas analíticas
+  - Análisis de cohortes
+  - Detección de anomalías
+  - Módulo 8 completo al 100%
+
+- **v1.0.0** (2024-11-13):
   - ✅ Tema 1 completado (154 tests, 91% cov)
   - ✅ Tema 2 completado (pipeline dbt completo)
-  - ⏳ Tema 3 en desarrollo
 
-- **v0.2.0** (2025-11-12):
+- **v0.2.0** (2024-11-12):
   - ✅ Tema 1 completado
 
-- **v0.1.0** (2025-11-09):
+- **v0.1.0** (2024-11-09):
   - 🚀 Inicio del módulo
 
 ---

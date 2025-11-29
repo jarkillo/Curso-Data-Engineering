@@ -1,0 +1,32 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Coverage reports
+.coverage
+htmlcov/
+.pytest_cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Database files
+*.db
+*.duckdb
+
+# Output
+output/
+*.csv
+*.json
+
+# OS
+.DS_Store
+Thumbs.db
