@@ -206,6 +206,85 @@ class TestCalculateCohortLTV:
         assert result["2024-01"]["avg_ltv"] == 100.0
         assert result["2024-02"]["avg_ltv"] == 200.0
 
+    def test_cohort_ltv_with_refunds(self) -> None:
+        """Should correctly handle refunds (negative revenue)."""
+        events = [
+            # User 1: signup, purchase $100, then refund -$100
+            UserEvent(
+                user_id=1,
+                event_date=date(2024, 1, 1),
+                event_type="signup",
+                revenue=0,
+            ),
+            UserEvent(
+                user_id=1,
+                event_date=date(2024, 1, 15),
+                event_type="purchase",
+                revenue=100.0,
+            ),
+            UserEvent(
+                user_id=1,
+                event_date=date(2024, 1, 20),
+                event_type="refund",
+                revenue=-100.0,
+            ),
+            # User 2: signup, purchase $200, partial refund -$50
+            UserEvent(
+                user_id=2,
+                event_date=date(2024, 1, 5),
+                event_type="signup",
+                revenue=0,
+            ),
+            UserEvent(
+                user_id=2,
+                event_date=date(2024, 1, 18),
+                event_type="purchase",
+                revenue=200.0,
+            ),
+            UserEvent(
+                user_id=2,
+                event_date=date(2024, 1, 25),
+                event_type="refund",
+                revenue=-50.0,
+            ),
+        ]
+
+        result = calculate_cohort_ltv(events)
+
+        # User 1: 100 - 100 = 0, User 2: 200 - 50 = 150
+        # Total: 150, Avg: 75
+        assert result["2024-01"]["total_revenue"] == 150.0
+        assert result["2024-01"]["avg_ltv"] == 75.0
+
+    def test_cohort_ltv_negative_total(self) -> None:
+        """Should handle case where refunds exceed purchases (negative LTV)."""
+        events = [
+            UserEvent(
+                user_id=1,
+                event_date=date(2024, 1, 1),
+                event_type="signup",
+                revenue=0,
+            ),
+            UserEvent(
+                user_id=1,
+                event_date=date(2024, 1, 10),
+                event_type="purchase",
+                revenue=50.0,
+            ),
+            UserEvent(
+                user_id=1,
+                event_date=date(2024, 1, 15),
+                event_type="chargeback",
+                revenue=-100.0,  # Chargeback exceeds original purchase
+            ),
+        ]
+
+        result = calculate_cohort_ltv(events)
+
+        # 50 - 100 = -50
+        assert result["2024-01"]["total_revenue"] == -50.0
+        assert result["2024-01"]["avg_ltv"] == -50.0
+
 
 class TestCohortAnalysis:
     """Tests para la clase CohortAnalysis."""

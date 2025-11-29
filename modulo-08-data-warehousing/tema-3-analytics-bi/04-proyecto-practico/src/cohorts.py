@@ -241,11 +241,11 @@ def calculate_cohort_ltv(
             user_cohorts[event.user_id] = cohort_key
             cohort_users[cohort_key].add(event.user_id)
 
-    # Calculate revenue per user
+    # Calculate revenue per user (includes negative revenue for refunds/chargebacks)
     user_revenue: dict[int, float] = defaultdict(float)
 
     for event in events:
-        if event.revenue > 0 and event.user_id in user_cohorts:
+        if event.user_id in user_cohorts:
             user_revenue[event.user_id] += event.revenue
 
     # Aggregate by cohort
