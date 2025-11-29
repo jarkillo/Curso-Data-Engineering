@@ -32,9 +32,9 @@ class TestTerraformValidate:
             ["terraform", "validate"], cwd=env_path, capture_output=True, text=True
         )
 
-        assert (
-            result_validate.returncode == 0
-        ), f"Error en validate: {result_validate.stderr}"
+        assert result_validate.returncode == 0, (
+            f"Error en validate: {result_validate.stderr}"
+        )
         assert "Success!" in result_validate.stdout
 
     def test_validate_staging_environment(self):
@@ -58,9 +58,9 @@ class TestTerraformValidate:
             ["terraform", "validate"], cwd=env_path, capture_output=True, text=True
         )
 
-        assert (
-            result_validate.returncode == 0
-        ), f"Error en validate: {result_validate.stderr}"
+        assert result_validate.returncode == 0, (
+            f"Error en validate: {result_validate.stderr}"
+        )
         assert "Success!" in result_validate.stdout
 
     def test_validate_prod_environment(self):
@@ -82,9 +82,9 @@ class TestTerraformValidate:
             ["terraform", "validate"], cwd=env_path, capture_output=True, text=True
         )
 
-        assert (
-            result_validate.returncode == 0
-        ), f"Error en validate: {result_validate.stderr}"
+        assert result_validate.returncode == 0, (
+            f"Error en validate: {result_validate.stderr}"
+        )
         assert "Success!" in result_validate.stdout
 
     def test_validate_data_lake_module(self):
@@ -111,9 +111,9 @@ class TestTerraformValidate:
             ["terraform", "validate"], cwd=module_path, capture_output=True, text=True
         )
 
-        assert (
-            result_validate.returncode == 0
-        ), f"Error en validate: {result_validate.stderr}"
+        assert result_validate.returncode == 0, (
+            f"Error en validate: {result_validate.stderr}"
+        )
         assert "Success!" in result_validate.stdout
 
     def test_validate_lambda_etl_module(self):
@@ -140,9 +140,9 @@ class TestTerraformValidate:
             ["terraform", "validate"], cwd=module_path, capture_output=True, text=True
         )
 
-        assert (
-            result_validate.returncode == 0
-        ), f"Error en validate: {result_validate.stderr}"
+        assert result_validate.returncode == 0, (
+            f"Error en validate: {result_validate.stderr}"
+        )
         assert "Success!" in result_validate.stdout
 
 

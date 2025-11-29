@@ -58,6 +58,6 @@ def test_dag_tiene_estructura_correcta():
     assert any("exportar" in tid or "fin" in tid for tid in task_ids)
 
     # Verificar que el DAG tiene al menos 10 tasks (número mínimo esperado)
-    assert (
-        len(dag.tasks) >= 10
-    ), f"El DAG tiene {len(dag.tasks)} tasks, se esperaban al menos 10"
+    assert len(dag.tasks) >= 10, (
+        f"El DAG tiene {len(dag.tasks)} tasks, se esperaban al menos 10"
+    )

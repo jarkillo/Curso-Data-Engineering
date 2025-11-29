@@ -50,6 +50,11 @@ extend-exclude = '''
   | \.cursor
   | \.claude
   | airflow/logs
+  # Web app and modules (handled by ruff-format to avoid conflicts)
+  | backend/.*
+  | frontend/.*
+  | modulo-06-airflow/.*
+  | modulo-07-cloud/.*
   # Archivos del curso (material educativo, no código de producción)
   | modulo-01-fundamentos/.*
   | documentacion/juego/.*
@@ -345,7 +350,10 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]  # unused imports
+"backend/app/api/*.py" = ["B008"]  # FastAPI Depends() in defaults is valid pattern
+"backend/app/api/routes/*.py" = ["B008"]  # FastAPI Depends() in defaults is valid pattern
 "tests/*" = ["S101", "S105", "S106"]  # asserts, hardcoded passwords en tests
+"**/dags/*.py" = ["I001"]  # Airflow DAGs have special import order requirements
 
 [tool.ruff.lint.isort]
 known-first-party = ["src"]

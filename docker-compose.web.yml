@@ -1,0 +1,75 @@
+version: '3.8'
+
+# ===============================================
+# Docker Compose - Web Application
+# Master en Ingeniería de Datos
+# ===============================================
+# Para iniciar: docker-compose -f docker-compose.web.yml up
+# Para detener: docker-compose -f docker-compose.web.yml down
+# ===============================================
+
+services:
+  # =============================================
+  # Backend - FastAPI
+  # =============================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: dataeng-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./modulo-01-fundamentos:/modulo-01-fundamentos:ro
+      - ./modulo-02-sql:/modulo-02-sql:ro
+      - ./modulo-03-ingenieria-datos:/modulo-03-ingenieria-datos:ro
+      - ./modulo-04-apis-scraping:/modulo-04-apis-scraping:ro
+      - ./modulo-05-bases-datos-avanzadas:/modulo-05-bases-datos-avanzadas:ro
+      - ./modulo-06-airflow:/modulo-06-airflow:ro
+      - ./modulo-07-cloud:/modulo-07-cloud:ro
+      - ./modulo-08-data-warehousing:/modulo-08-data-warehousing:ro
+      - ./modulo-09-ml-pipelines:/modulo-09-ml-pipelines:ro
+      - ./modulo-10-proyecto-final:/modulo-10-proyecto-final:ro
+      - backend_db:/app/db
+    environment:
+      - DATABASE_URL=sqlite:///./db/data_engineering.db
+      - CONTENT_BASE_PATH=/
+    restart: unless-stopped
+    networks:
+      - dataeng-network
+
+  # =============================================
+  # Frontend - React + Vite
+  # =============================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: dataeng-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:8000/api/v1
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - dataeng-network
+
+# ===============================================
+# Volúmenes
+# ===============================================
+volumes:
+  backend_db:
+    driver: local
+
+# ===============================================
+# Red
+# ===============================================
+networks:
+  dataeng-network:
+    driver: bridge
