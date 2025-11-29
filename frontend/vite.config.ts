@@ -16,7 +16,7 @@ export default defineConfig({
     allowedHosts: ['curso-data.sintetikamusic.com', 'localhost'],
     proxy: {
       '/api': {
-        target: 'http://backend:8000',
+        target: 'http://publico-web_curso-data_backend:8000',
         changeOrigin: true,
       },
     },
