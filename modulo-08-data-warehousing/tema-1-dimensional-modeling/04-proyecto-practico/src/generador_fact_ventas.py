@@ -26,7 +26,8 @@ def generar_fact_ventas(
     Args:
         num_ventas: Número de transacciones de ventas a generar (debe ser > 0)
         dim_fecha: DataFrame con dimensión de fechas (debe tener 'fecha_id')
-        dim_producto: DataFrame con dimensión de productos (debe tener 'producto_id', 'precio_catalogo')
+        dim_producto: DataFrame con dimensión de productos
+            (debe tener 'producto_id', 'precio_catalogo')
         dim_cliente: DataFrame con dimensión de clientes (debe tener 'cliente_id')
         dim_vendedor: DataFrame con dimensión de vendedores (debe tener 'vendedor_id')
 

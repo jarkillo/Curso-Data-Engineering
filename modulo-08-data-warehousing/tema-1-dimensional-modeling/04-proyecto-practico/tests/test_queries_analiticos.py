@@ -160,13 +160,17 @@ def db_con_datos():
         """
         INSERT INTO DimCliente
         (cliente_id, nombre, email, telefono, direccion, ciudad, estado,
-         codigo_postal, fecha_registro, segmento, fecha_inicio, fecha_fin, version, es_actual)
+         codigo_postal, fecha_registro, segmento,
+         fecha_inicio, fecha_fin, version, es_actual)
         VALUES
-        (1, 'Cliente A', 'clienteA@test.com', '555-2001', 'Calle 1', 'CDMX', 'CDMX', '01000',
+        (1, 'Cliente A', 'clienteA@test.com', '555-2001',
+         'Calle 1', 'CDMX', 'CDMX', '01000',
          '2024-01-01', 'Premium', '2024-01-01', NULL, 1, 1),
-        (2, 'Cliente B', 'clienteB@test.com', '555-2002', 'Calle 2', 'Guadalajara', 'Jalisco', '44100',
+        (2, 'Cliente B', 'clienteB@test.com', '555-2002',
+         'Calle 2', 'Guadalajara', 'Jalisco', '44100',
          '2024-01-01', 'Regular', '2024-01-01', NULL, 1, 1),
-        (3, 'Cliente C', 'clienteC@test.com', '555-2003', 'Calle 3', 'Monterrey', 'Nuevo León', '64000',
+        (3, 'Cliente C', 'clienteC@test.com', '555-2003',
+         'Calle 3', 'Monterrey', 'Nuevo León', '64000',
          '2024-01-01', 'Regular', '2024-01-01', NULL, 1, 1)
     """
     )
