@@ -1,0 +1,20 @@
+# Analytics Dashboard Project - Requirements
+# Python 3.11+
+
+# Testing
+pytest>=8.0.0
+pytest-cov>=4.1.0
+
+# Data processing
+pandas>=2.0.0
+
+# Database
+duckdb>=0.9.0
+
+# Date handling
+python-dateutil>=2.8.2
+
+# Development
+black>=24.0.0
+flake8>=7.0.0
+mypy>=1.8.0
