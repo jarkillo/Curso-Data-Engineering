@@ -351,6 +351,7 @@ ignore = [
 "backend/app/api/*.py" = ["B008"]  # FastAPI Depends() in defaults is valid pattern
 "backend/app/api/routes/*.py" = ["B008"]  # FastAPI Depends() in defaults is valid pattern
 "tests/*" = ["S101", "S105", "S106"]  # asserts, hardcoded passwords en tests
+"**/dags/*.py" = ["I001"]  # Airflow DAGs have special import order requirements
 
 [tool.ruff.lint.isort]
 known-first-party = ["src"]
