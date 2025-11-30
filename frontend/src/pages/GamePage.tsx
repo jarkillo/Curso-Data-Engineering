@@ -5,19 +5,22 @@ import { Trophy, Star, Zap, Code2, CheckCircle2, Lock } from 'lucide-react'
 export default function GamePage() {
   const queryClient = useQueryClient()
 
-  const { data: gameState } = useQuery({
+  const { data: gameState, isLoading, isError } = useQuery({
     queryKey: ['gameState'],
     queryFn: gameApi.getGameState,
+    retry: 1,
   })
 
   const { data: missions } = useQuery({
     queryKey: ['missions'],
     queryFn: gameApi.getMissions,
+    retry: 1,
   })
 
   const { data: achievements } = useQuery({
     queryKey: ['achievements'],
     queryFn: gameApi.getAchievements,
+    retry: 1,
   })
 
   const completeMissionMutation = useMutation({
@@ -29,10 +32,30 @@ export default function GamePage() {
     },
   })
 
-  if (!gameState) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    )
+  }
+
+  if (isError || !gameState) {
+    return (
+      <div className="max-w-2xl mx-auto text-center py-16">
+        <div className="text-6xl mb-4">🎮</div>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+          El juego no está disponible
+        </h1>
+        <p className="text-gray-600 dark:text-gray-400 mb-6">
+          No se pudo cargar el estado del juego. Esto puede deberse a un error del servidor.
+        </p>
+        <button
+          onClick={() => window.location.reload()}
+          className="btn btn-primary"
+        >
+          Reintentar
+        </button>
       </div>
     )
   }
