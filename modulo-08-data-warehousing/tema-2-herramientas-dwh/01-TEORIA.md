@@ -880,6 +880,106 @@ WHERE rn = 1
 
 ---
 
+## Cloud Data Warehouses: Snowflake vs Redshift vs BigQuery
+
+### ¿Por qué elegir un Cloud DWH?
+
+dbt funciona con cualquier Data Warehouse que soporte SQL. Sin embargo, los tres grandes dominan el mercado empresarial:
+
+**Analogía**: Piensa en los cloud DWH como diferentes marcas de coches deportivos:
+- **Snowflake** = Tesla → Innovador, moderno, separación de cómputo y almacenamiento
+- **Redshift** = BMW → Integrado con ecosistema AWS, sólido y probado
+- **BigQuery** = Mercedes → Serverless total, escalabilidad automática, integrado con Google
+
+### Comparativa Técnica
+
+| Característica | Snowflake | Redshift | BigQuery |
+|---|---|---|---|
+| **Modelo de precio** | Por segundos de uso | Por hora de cluster | Por TB procesado |
+| **Escalado** | Automático (compute separado) | Manual (resize cluster) | Automático (serverless) |
+| **Almacenamiento** | Separado de cómputo | Junto con cómputo | Separado (serverless) |
+| **Multi-cloud** | ✅ AWS, Azure, GCP | ❌ Solo AWS | ❌ Solo GCP |
+| **Data Sharing** | ✅ Nativo (Zero Copy) | ❌ Requiere ETL | ⚠️ Analytics Hub |
+| **Formato nativo** | Propio (columnar) | Columnar (Redshift) | Columnar (Capacitor) |
+| **dbt Support** | ✅ Excelente | ✅ Excelente | ✅ Excelente |
+
+### ¿Cuándo usar cada uno?
+
+**Snowflake - Ideal para:**
+- Empresas multi-cloud o que quieren evitar vendor lock-in
+- Cargas de trabajo variables (picos de demanda)
+- Data sharing entre organizaciones
+- Equipos que necesitan cómputo separado del storage
+
+```sql
+-- En dbt, conectarse a Snowflake
+-- profiles.yml
+snowflake:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: xy12345.us-east-1
+      user: dbt_user
+      warehouse: TRANSFORM_WH
+      database: ANALYTICS
+      schema: dbt_dev
+```
+
+**Redshift - Ideal para:**
+- Empresas 100% en AWS
+- Cargas de trabajo predecibles (precio fijo)
+- Integración con otros servicios AWS (S3, Glue, SageMaker)
+- Equipos que ya conocen PostgreSQL (sintaxis similar)
+
+```sql
+-- En dbt, conectarse a Redshift
+-- profiles.yml
+redshift:
+  target: dev
+  outputs:
+    dev:
+      type: redshift
+      host: my-cluster.abc123.us-east-1.redshift.amazonaws.com
+      user: dbt_user
+      port: 5439
+      dbname: analytics
+      schema: dbt_dev
+```
+
+**BigQuery - Ideal para:**
+- Empresas en GCP o con muchos datos de Google (Analytics, Ads)
+- Cargas de trabajo impredecibles (paga por query)
+- Equipos pequeños sin tiempo para gestionar infraestructura
+- Análisis de datos semi-estructurados (JSON, arrays)
+
+```sql
+-- En dbt, conectarse a BigQuery
+-- profiles.yml
+bigquery:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: my-gcp-project
+      dataset: dbt_dev
+      location: US
+```
+
+### Consideraciones de Costo
+
+| Escenario | Snowflake | Redshift | BigQuery |
+|---|---|---|---|
+| Pocos queries, mucho storage | 💰 Económico | 💸 Caro (cluster fijo) | 💰 Económico |
+| Muchos queries pequeños | ⚠️ Depende | 💰 Económico (cluster fijo) | 💸 Puede ser caro |
+| Queries esporádicos grandes | 💰 Económico (escala bajo demanda) | 💸 Cluster subutilizado | 💰 Económico (serverless) |
+| 24/7 producción constante | ⚠️ Depende del warehouse size | 💰 Reserved instances | ⚠️ Depende del volumen |
+
+**Consejo práctico**: Comienza con el DWH de tu proveedor cloud principal. Si estás en AWS, prueba Redshift. Si estás en GCP, BigQuery. Si necesitas flexibilidad o multi-cloud, Snowflake.
+
+---
+
 ## Errores Comunes
 
 ### Error 1: Referencias Circulares
