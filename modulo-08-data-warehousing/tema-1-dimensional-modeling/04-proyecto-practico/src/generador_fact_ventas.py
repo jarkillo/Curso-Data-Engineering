@@ -40,6 +40,7 @@ def generar_fact_ventas(
         - vendedor_id (int): FK a DimVendedor
         - cantidad (int): Unidades vendidas (1-10)
         - precio_unitario (float): Precio por unidad (con variación ±20% sobre catálogo)
+        - monto_bruto (float): Subtotal antes de descuentos (cantidad * precio_unitario)
         - descuento (float): Monto de descuento aplicado (0-40% del subtotal)
         - impuesto (float): Impuesto aplicado (16% del subtotal después de descuento)
         - monto_neto (float): Monto final (subtotal - descuento + impuesto)
@@ -56,7 +57,7 @@ def generar_fact_ventas(
         ...     1000, dim_fecha, dim_producto, dim_cliente, dim_vendedor
         ... )
         >>> fact_ventas.shape
-        (1000, 10)
+        (1000, 11)
         >>> fact_ventas['venta_id'].is_unique
         True
     """
@@ -122,6 +123,9 @@ def generar_fact_ventas(
         # Monto neto final
         monto_neto = round(subtotal - descuento + impuesto, 2)
 
+        # Monto bruto (subtotal antes de descuentos)
+        monto_bruto = round(subtotal, 2)
+
         venta = {
             "venta_id": i,
             "fecha_id": fecha_id,
@@ -130,6 +134,7 @@ def generar_fact_ventas(
             "vendedor_id": vendedor_id,
             "cantidad": cantidad,
             "precio_unitario": precio_unitario,
+            "monto_bruto": monto_bruto,
             "descuento": descuento,
             "impuesto": impuesto,
             "monto_neto": monto_neto,
@@ -150,6 +155,7 @@ def generar_fact_ventas(
     df["precio_unitario"] = df["precio_unitario"].astype(float)
     df["descuento"] = df["descuento"].astype(float)
     df["impuesto"] = df["impuesto"].astype(float)
+    df["monto_bruto"] = df["monto_bruto"].astype(float)
     df["monto_neto"] = df["monto_neto"].astype(float)
 
     return df
