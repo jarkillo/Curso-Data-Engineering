@@ -117,7 +117,7 @@ def generar_dim_vendedor(num_vendedores: int) -> pd.DataFrame:
             "email": generar_email_corporativo(nombre, region),
             "telefono": fake.phone_number(),
             "region": region,
-            "comision_porcentaje": round(random.uniform(2.0, 15.0), 2),
+            "comision_porcentaje": round(random.uniform(5.0, 15.0), 2),
             "supervisor_id": supervisor_id,
             "gerente_regional": gerente_regional,
         }
