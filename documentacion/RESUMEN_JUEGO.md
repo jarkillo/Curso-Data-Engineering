@@ -220,7 +220,7 @@ Módulo 1/
    ↓
    Aprendes: ¿Qué es la media? ¿Y la mediana? ¿Por qué son importantes?
    Duración: 30-45 min
-   
+
 2. EJEMPLOS (02-EJEMPLOS.md)
    ↓
    Ves: 4 ejemplos resueltos paso a paso
@@ -243,8 +243,8 @@ Módulo 1/
 ## 🏢 Empresas Ficticias
 
 ### ❌ NO USAR
-- Yurest (nombre comercial real del trabajo)
-- Agora (nombre comercial real del trabajo)
+- DataBite (nombre comercial real del trabajo)
+- CloudMetrics (nombre comercial real del trabajo)
 
 ### ✅ USAR
 - **DataFlow Industries**: Tu empleador (consultora)
@@ -375,4 +375,3 @@ D) 🎨 **Personalizar**: Cambiar algo específico del juego o estructura
 ```bash
 python data_engineer_game.py
 ```
-

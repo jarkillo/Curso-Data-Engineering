@@ -1,6 +1,6 @@
 import axios from 'axios'
 import type { Module, ModuleSummary, ContentResponse } from '../types/content'
-import type { GameState, Mission, Achievement } from '../types/game'
+import type { GameState, Mission, Achievement, MissionResult } from '../types/game'
 import type { LoginRequest, RegisterRequest, TokenResponse, User } from '../types/auth'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api/v1'
@@ -73,8 +73,8 @@ export const gameApi = {
     return data
   },
 
-  completeMission: async (missionId: string): Promise<GameState> => {
-    const { data } = await api.post(`/game/mission/${missionId}/complete`)
+  completeMission: async (missionId: string, answers: number[]): Promise<MissionResult> => {
+    const { data } = await api.post(`/game/mission/${missionId}/complete`, { answers })
     return data
   },
 

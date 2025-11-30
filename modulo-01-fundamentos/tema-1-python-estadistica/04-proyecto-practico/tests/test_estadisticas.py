@@ -84,7 +84,7 @@ class TestCalcularMedia:
 
     def test_media_ejemplo_real_ventas(self):
         """
-        Test con ejemplo real: ventas diarias de un restaurante (Yurest).
+        Test con ejemplo real: ventas diarias de un restaurante (DataBite).
 
         Caso de uso: Calcular la venta promedio de una semana.
         """
@@ -190,7 +190,7 @@ class TestCalcularMediana:
         """
         Test con ejemplo real: tiempos de respuesta de API (en ms).
 
-        Caso de uso: En Agora/Yurest, la mediana es mejor que la media
+        Caso de uso: En CloudMetrics/DataBite, la mediana es mejor que la media
         para medir tiempos de respuesta porque no se ve afectada por
         outliers (peticiones muy lentas ocasionales).
         """
@@ -256,7 +256,7 @@ class TestCalcularModa:
         """
         Test con ejemplo real: productos más vendidos.
 
-        Caso de uso: En Yurest, identificar el producto más pedido.
+        Caso de uso: En DataBite, identificar el producto más pedido.
         """
         # IDs de productos vendidos en un día
         productos = [101, 102, 101, 103, 101, 102, 104]
@@ -389,7 +389,7 @@ class TestCalcularPercentiles:
         """
         Test con ejemplo real: SLA de tiempos de respuesta.
 
-        Caso de uso: En Agora/Yurest, medir que el 95% de las peticiones
+        Caso de uso: En CloudMetrics/DataBite, medir que el 95% de las peticiones
         respondan en menos de X ms (percentil 95).
         """
         tiempos_ms = [10, 12, 15, 18, 20, 22, 25, 30, 35, 200]

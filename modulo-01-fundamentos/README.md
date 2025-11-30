@@ -44,8 +44,8 @@ Al completar este módulo, serás capaz de:
   - Interpretación de resultados
 
 - **[02-EJEMPLOS.md](./tema-1-python-estadistica/02-EJEMPLOS.md)**: 5 ejemplos trabajados paso a paso
-  - Análisis de ventas (Yurest)
-  - Tiempos de respuesta de APIs (Agora)
+  - Análisis de ventas (DataBite)
+  - Tiempos de respuesta de APIs (CloudMetrics)
   - Control de calidad
   - Análisis de salarios
   - Performance de servidores
@@ -358,8 +358,8 @@ Este módulo siguió estrictamente:
 ### Ejemplos Basados en Casos Reales
 
 Los proyectos incluyen ejemplos de:
-- **Yurest**: Sistema de ventas de restaurantes
-- **Agora**: Sistema de gestión empresarial
+- **DataBite**: Sistema de ventas de restaurantes
+- **CloudMetrics**: Sistema de gestión empresarial
 - **APIs**: Análisis de tiempos de respuesta
 - **Logs**: Sistemas de producción
 - **CSV**: Datos de ventas y clientes

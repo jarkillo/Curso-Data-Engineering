@@ -18,7 +18,7 @@ Esta sección contiene **ejemplos resueltos completamente** para que veas cómo 
 
 ### Contexto
 
-Trabajas en **Yurest** y te piden analizar las ventas de la última semana para determinar si el restaurante está cumpliendo sus objetivos.
+Trabajas en **DataBite** y te piden analizar las ventas de la última semana para determinar si el restaurante está cumpliendo sus objetivos.
 
 **Datos:**
 ```
@@ -182,7 +182,7 @@ Dom: 175.40€ ✓ Normal
 
 ### Contexto
 
-Trabajas en **Agora** (sistema de gestión de pedidos). Tu equipo tiene un **SLA** (Service Level Agreement) que dice:
+Trabajas en **CloudMetrics** (sistema de gestión de pedidos). Tu equipo tiene un **SLA** (Service Level Agreement) que dice:
 
 > "El 95% de las peticiones a la API deben responder en menos de 100ms"
 
@@ -190,7 +190,7 @@ Tienes los tiempos de respuesta de las últimas 20 peticiones.
 
 **Datos (en milisegundos):**
 ```
-[12, 15, 18, 14, 16, 22, 19, 17, 21, 23, 
+[12, 15, 18, 14, 16, 22, 19, 17, 21, 23,
  25, 18, 20, 16, 19, 24, 28, 31, 150, 18]
 ```
 
@@ -325,7 +325,7 @@ Recomendación:
 
 ### Contexto
 
-Eres analista de datos en **Yurest** y te piden identificar qué productos se venden más para optimizar el inventario.
+Eres analista de datos en **DataBite** y te piden identificar qué productos se venden más para optimizar el inventario.
 
 **Datos: IDs de productos vendidos hoy**
 ```
@@ -446,15 +446,15 @@ for i, (id_producto, cantidad) in enumerate(ranking, 1):
     nombre, precio = catalogo[id_producto]
     porcentaje = (cantidad / total_productos) * 100
     ingresos = cantidad * precio
-    
+
     # Barra visual
     barra = "█" * int(cantidad / 2)
-    
+
     print(f"{i:<4} {nombre:<22} {cantidad:<8} {porcentaje:5.1f}%  {ingresos:6.2f}€")
     print(f"     {barra}")
 
 # Total de ingresos
-total_ingresos = sum(contador[id_prod] * catalogo[id_prod][1] 
+total_ingresos = sum(contador[id_prod] * catalogo[id_prod][1]
                      for id_prod in contador)
 print("=" * 60)
 print(f"{'TOTAL':<26} {total_productos:<8}        {total_ingresos:6.2f}€")
@@ -473,11 +473,11 @@ Pos  Producto               Ventas   %       Ingresos
 3    Ensalada César         3        15.0%   22.50€
      █
 4    Pasta Carbonara        1         5.0%    9.00€
-     
+
 5    Sushi Roll             1         5.0%   12.00€
-     
+
 6    Tacos                  1         5.0%    8.00€
-     
+
 ============================================================
 TOTAL                      20               186.50€
 ```
@@ -499,7 +499,7 @@ TOTAL                      20               186.50€
 
 ### Contexto
 
-Tienes dos sucursales de Yurest y quieres saber cuál es más estable en sus ventas.
+Tienes dos sucursales de DataBite y quieres saber cuál es más estable en sus ventas.
 
 **Datos: Ventas de los últimos 10 días**
 
@@ -522,14 +522,14 @@ import math
 
 def calcular_estadisticas(datos, nombre):
     media = sum(datos) / len(datos)
-    
+
     # Varianza
     diferencias = [(x - media) ** 2 for x in datos]
     varianza = sum(diferencias) / len(datos)
-    
+
     # Desviación estándar
     desviacion = math.sqrt(varianza)
-    
+
     # Mediana
     ordenados = sorted(datos)
     n = len(ordenados)
@@ -537,14 +537,14 @@ def calcular_estadisticas(datos, nombre):
         mediana = (ordenados[n//2 - 1] + ordenados[n//2]) / 2
     else:
         mediana = ordenados[n//2]
-    
+
     print(f"\n📊 {nombre}")
     print(f"  Ventas: {datos}")
     print(f"  Media:              {media:.2f}€")
     print(f"  Mediana:            {mediana:.2f}€")
     print(f"  Desviación Estándar: {desviacion:.2f}€")
     print(f"  Coef. Variación:    {(desviacion/media)*100:.1f}%")
-    
+
     return media, desviacion
 
 # Analizar ambas sucursales
@@ -628,4 +628,3 @@ Allí encontrarás problemas similares para resolver por tu cuenta, con solucion
 
 **Última actualización:** 2025-10-18  
 **Duración de lectura:** 45-60 minutos
-

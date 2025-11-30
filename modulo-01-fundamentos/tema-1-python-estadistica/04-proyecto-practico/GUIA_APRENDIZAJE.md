@@ -17,9 +17,9 @@ Como Data Engineer, tu trabajo principal es **mover, transformar y garantizar la
 3. **Métricas de Negocio**: Calcular KPIs, promedios, tendencias
 4. **Detección de Anomalías**: Identificar problemas en los datos
 
-### Ejemplo Real: Yurest (Sistema de Ventas)
+### Ejemplo Real: DataBite (Sistema de Ventas)
 
-Imagina que trabajas con Yurest, un sistema de ventas de restaurantes. Cada día necesitas:
+Imagina que trabajas con DataBite, un sistema de ventas de restaurantes. Cada día necesitas:
 
 ```python
 # Datos reales del día
@@ -88,7 +88,7 @@ Ventas ordenadas: 100€, 105€, 110€, 115€, 1000€
 - Salarios (pocos CEOs con salarios altísimos no deben afectar el "salario típico")
 - Datos con outliers
 
-**Ejemplo real Agora:**
+**Ejemplo real CloudMetrics:**
 ```python
 # Tiempos de respuesta de API en milisegundos
 tiempos = [10, 12, 15, 18, 20, 25, 500]  # 500ms es un outlier
@@ -107,7 +107,7 @@ El valor que más se repite.
 **¿Para qué sirve?**  
 Identificar qué es lo más común o frecuente.
 
-**Ejemplo Yurest:**
+**Ejemplo DataBite:**
 ```python
 # IDs de productos vendidos hoy
 productos_vendidos = [
@@ -170,7 +170,7 @@ Dividen tus datos ordenados en 100 partes iguales.
 - **Percentil 75 (Q3)**: 75% de los datos están por debajo
 - **Percentil 95**: 95% de los datos están por debajo (muy usado en SLAs)
 
-**Ejemplo SLA de Agora:**
+**Ejemplo SLA de CloudMetrics:**
 ```python
 # Queremos que el 95% de las peticiones respondan en < 100ms
 
@@ -586,7 +586,7 @@ Marca lo que has aprendido:
 
 ### Data Engineering
 - [ ] Veo la conexión entre estadísticas y datos
-- [ ] Entiendo casos de uso reales (Yurest, Agora)
+- [ ] Entiendo casos de uso reales (DataBite, CloudMetrics)
 - [ ] Puedo explicar por qué esto es relevante para mi carrera
 
 ---
@@ -609,4 +609,3 @@ Donde aprenderás:
 **¿Tienes dudas?** Revisa la documentación, ejecuta los ejemplos, experimenta con el código. La mejor forma de aprender es **haciendo**.
 
 **¡Buen viaje en tu camino a Data Engineer! 🚀**
-

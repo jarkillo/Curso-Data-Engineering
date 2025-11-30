@@ -32,6 +32,13 @@ export interface GameState {
   xp_for_next_level?: number
 }
 
+export interface QuizQuestion {
+  id: string
+  question: string
+  options: string[]
+  correct_index: number
+}
+
 export interface Mission {
   id: string
   title: string
@@ -42,6 +49,16 @@ export interface Mission {
   requirements: string[]
   is_completed: boolean
   is_available: boolean
+  questions: QuizQuestion[]
+}
+
+export interface MissionResult {
+  success: boolean
+  correct_answers: number
+  total_questions: number
+  xp_earned: number
+  message: string
+  is_retry: boolean
 }
 
 export interface Achievement {
