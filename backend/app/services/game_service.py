@@ -2,6 +2,8 @@
 Service for game logic.
 """
 
+import json
+
 from sqlalchemy.orm import Session
 
 from app.models.game import GameState
@@ -120,21 +122,34 @@ class GameService:
             game_state = GameState(
                 user_id=user_id,
                 player_name="Player",
-                unlocked_technologies=["Python", "Git"],
-                stats={
-                    "lines_of_code": 0,
-                    "tests_passed": 0,
-                    "bugs_fixed": 0,
-                    "projects_completed": 0,
-                    "study_hours": 0,
-                    "exercises_solved": 0,
-                },
+                completed_missions=json.dumps([]),
+                unlocked_achievements=json.dumps([]),
+                unlocked_technologies=json.dumps(["Python", "Git"]),
+                stats=json.dumps(
+                    {
+                        "lines_of_code": 0,
+                        "tests_passed": 0,
+                        "bugs_fixed": 0,
+                        "projects_completed": 0,
+                        "study_hours": 0,
+                        "exercises_solved": 0,
+                    }
+                ),
             )
             db.add(game_state)
             db.commit()
             db.refresh(game_state)
 
         return game_state
+
+    def _parse_json_field(self, value: str | None, default: list | dict) -> list | dict:
+        """Parse JSON field from database."""
+        if not value:
+            return default
+        try:
+            return json.loads(value)
+        except (json.JSONDecodeError, TypeError):
+            return default
 
     def get_game_state_response(self, game_state: GameState) -> GameStateResponse:
         """
@@ -150,6 +165,16 @@ class GameService:
         next_rank = self._get_next_rank(game_state.level)
         xp_for_next = self._calculate_xp_for_next_level(game_state.level)
 
+        # Parse JSON fields
+        completed_missions = self._parse_json_field(game_state.completed_missions, [])
+        unlocked_achievements = self._parse_json_field(
+            game_state.unlocked_achievements, []
+        )
+        unlocked_technologies = self._parse_json_field(
+            game_state.unlocked_technologies, []
+        )
+        stats_dict = self._parse_json_field(game_state.stats, {})
+
         return GameStateResponse(
             player_name=game_state.player_name,
             level=game_state.level,
@@ -157,10 +182,10 @@ class GameService:
             total_xp_earned=game_state.total_xp_earned,
             current_module=game_state.current_module,
             current_tema=game_state.current_tema,
-            completed_missions=game_state.completed_missions or [],
-            unlocked_achievements=game_state.unlocked_achievements or [],
-            unlocked_technologies=game_state.unlocked_technologies or [],
-            stats=GameStats(**game_state.stats) if game_state.stats else GameStats(),
+            completed_missions=completed_missions,
+            unlocked_achievements=unlocked_achievements,
+            unlocked_technologies=unlocked_technologies,
+            stats=GameStats(**stats_dict) if stats_dict else GameStats(),
             created_at=game_state.created_at,
             last_played=game_state.last_played,
             play_time_minutes=game_state.play_time_minutes,
