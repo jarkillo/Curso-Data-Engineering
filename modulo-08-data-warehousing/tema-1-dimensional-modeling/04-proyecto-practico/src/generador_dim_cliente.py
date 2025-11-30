@@ -169,7 +169,9 @@ def generar_dim_cliente_con_historial(
         ValueError: Si porcentaje_con_historial no esta entre 0 y 100
 
     Examples:
-        >>> clientes = generar_dim_cliente_con_historial(100, porcentaje_con_historial=30)
+        >>> clientes = generar_dim_cliente_con_historial(
+        ...     100, porcentaje_con_historial=30
+        ... )
         >>> print(clientes["cliente_id"].nunique())
         100
 
