@@ -36,13 +36,13 @@ export default function TopicPage() {
       </Link>
 
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 capitalize">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white capitalize">
           {topicId?.replace(/-/g, ' ')}
         </h1>
       </div>
 
       {/* Section Tabs */}
-      <div className="flex space-x-2 mb-6 border-b">
+      <div className="flex space-x-2 mb-6 border-b border-gray-200 dark:border-gray-700">
         {sections.map((s) => (
           <button
             key={s.id}
@@ -50,7 +50,7 @@ export default function TopicPage() {
             className={`px-4 py-2 font-medium transition-colors border-b-2 ${
               section === s.id
                 ? 'text-primary border-primary'
-                : 'text-gray-600 border-transparent hover:text-gray-900'
+                : 'text-gray-600 dark:text-gray-400 border-transparent hover:text-gray-900 dark:hover:text-white'
             }`}
           >
             {s.label}
@@ -91,7 +91,7 @@ export default function TopicPage() {
           </ReactMarkdown>
         ) : (
           <div className="text-center py-12">
-            <p className="text-gray-600">Contenido no disponible</p>
+            <p className="text-gray-600 dark:text-gray-400">Contenido no disponible</p>
           </div>
         )}
       </div>
