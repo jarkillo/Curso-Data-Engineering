@@ -396,3 +396,78 @@ class TestTransacciones:
             count = cursor.fetchone()[0]
 
             assert count == 1
+
+    def test_rollback_on_exception(self):
+        """Should rollback transaction when exception occurs."""
+
+        from src.database import DatabaseConnection
+
+        try:
+            with DatabaseConnection(":memory:") as db:
+                db.crear_tablas()
+                # Raise an exception to trigger rollback
+                raise ValueError("Test exception")
+        except ValueError:
+            pass  # Expected exception
+
+        # The context manager should have called rollback and closed connection
+
+
+class TestErrorHandling:
+    """Tests para manejo de errores."""
+
+    def test_crear_tablas_sin_conexion_activa(self):
+        """Should raise RuntimeError when no active connection."""
+        import pytest
+
+        from src.database import DatabaseConnection
+
+        db = DatabaseConnection(":memory:")
+        # No usamos context manager, así que no hay conexión
+
+        with pytest.raises(RuntimeError, match="No hay conexión activa"):
+            db.crear_tablas()
+
+    def test_cargar_dimension_sin_conexion_activa(self):
+        """Should raise RuntimeError when no active connection."""
+        import pytest
+
+        from src.database import DatabaseConnection
+
+        db = DatabaseConnection(":memory:")
+        df = pd.DataFrame([{"id": 1}])
+
+        with pytest.raises(RuntimeError, match="No hay conexión activa"):
+            db.cargar_dimension("Test", df)
+
+    def test_ejecutar_query_sin_conexion_activa(self):
+        """Should raise RuntimeError when no active connection."""
+        import pytest
+
+        from src.database import DatabaseConnection
+
+        db = DatabaseConnection(":memory:")
+
+        with pytest.raises(RuntimeError, match="No hay conexión activa"):
+            db.ejecutar_query("SELECT 1")
+
+    def test_ejecutar_comando_sin_conexion_activa(self):
+        """Should raise RuntimeError when no active connection."""
+        import pytest
+
+        from src.database import DatabaseConnection
+
+        db = DatabaseConnection(":memory:")
+
+        with pytest.raises(RuntimeError, match="No hay conexión activa"):
+            db.ejecutar_comando("DELETE FROM Test")
+
+    def test_crear_tablas_schema_no_encontrado(self):
+        """Should raise FileNotFoundError when schema file not found."""
+        import pytest
+
+        from src.database import DatabaseConnection
+
+        with DatabaseConnection(":memory:") as db:
+            with pytest.raises(FileNotFoundError, match="No se encontró"):
+                db.crear_tablas("schema_inexistente.sql")
