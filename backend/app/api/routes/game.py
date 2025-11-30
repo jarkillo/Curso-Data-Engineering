@@ -2,6 +2,8 @@
 API routes for game system.
 """
 
+import json
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
@@ -13,6 +15,16 @@ from app.services.game_service import GameService
 
 router = APIRouter()
 game_service = GameService()
+
+
+def parse_json_list(value: str | None) -> list:
+    """Parse JSON string to list."""
+    if not value:
+        return []
+    try:
+        return json.loads(value)
+    except (json.JSONDecodeError, TypeError):
+        return []
 
 
 @router.get("/state", response_model=GameStateResponse)
@@ -40,7 +52,8 @@ async def get_missions(
         List of missions with completion status
     """
     game_state = game_service.get_or_create_game_state(db, current_user.id)
-    return game_service.get_available_missions(game_state.completed_missions or [])
+    completed = parse_json_list(game_state.completed_missions)
+    return game_service.get_available_missions(completed)
 
 
 @router.get("/achievements", response_model=list[Achievement])
@@ -54,7 +67,8 @@ async def get_achievements(
         List of achievements with unlock status
     """
     game_state = game_service.get_or_create_game_state(db, current_user.id)
-    return game_service.get_achievements(game_state.unlocked_achievements or [])
+    unlocked = parse_json_list(game_state.unlocked_achievements)
+    return game_service.get_achievements(unlocked)
 
 
 @router.post("/mission/{mission_id}/complete", response_model=GameStateResponse)
@@ -82,14 +96,16 @@ async def complete_mission(
     if not mission:
         raise HTTPException(status_code=404, detail="Mission not found")
 
+    # Parse current completed missions
+    completed_missions = parse_json_list(game_state.completed_missions)
+
     # Check if already completed
-    if mission_id in (game_state.completed_missions or []):
+    if mission_id in completed_missions:
         raise HTTPException(status_code=400, detail="Mission already completed")
 
     # Add to completed missions
-    if game_state.completed_missions is None:
-        game_state.completed_missions = []
-    game_state.completed_missions.append(mission_id)
+    completed_missions.append(mission_id)
+    game_state.completed_missions = json.dumps(completed_missions)
 
     # Add XP
     game_state.xp += mission["xp_reward"]
@@ -101,20 +117,19 @@ async def complete_mission(
         game_state.xp -= xp_needed
         game_state.level += 1
 
-    # Check achievements
-    if game_state.unlocked_achievements is None:
-        game_state.unlocked_achievements = []
+    # Parse current achievements
+    unlocked_achievements = parse_json_list(game_state.unlocked_achievements)
 
     # First mission achievement
-    if (
-        len(game_state.completed_missions) == 1
-        and "first_mission" not in game_state.unlocked_achievements
-    ):
-        game_state.unlocked_achievements.append("first_mission")
+    if len(completed_missions) == 1 and "first_mission" not in unlocked_achievements:
+        unlocked_achievements.append("first_mission")
 
     # Level 5 achievement
-    if game_state.level >= 5 and "level_5" not in game_state.unlocked_achievements:
-        game_state.unlocked_achievements.append("level_5")
+    if game_state.level >= 5 and "level_5" not in unlocked_achievements:
+        unlocked_achievements.append("level_5")
+
+    # Save achievements back as JSON
+    game_state.unlocked_achievements = json.dumps(unlocked_achievements)
 
     db.commit()
     db.refresh(game_state)
