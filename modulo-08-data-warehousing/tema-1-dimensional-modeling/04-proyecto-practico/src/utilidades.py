@@ -15,14 +15,20 @@ from pathlib import Path
 
 
 def configurar_logging(
-    nivel: str = "INFO", formato: str | None = None
+    nivel: str = "INFO",
+    formato: str | None = None,
+    archivo: str | None = None,
 ) -> logging.Logger:
     """
     Configura el sistema de logging para la aplicación.
 
+    Configura logging para consola y opcionalmente a archivo.
+
     Args:
         nivel: Nivel de logging (DEBUG, INFO, WARNING, ERROR, CRITICAL)
         formato: Formato personalizado para los mensajes (opcional)
+        archivo: Ruta del archivo de log (opcional). Si se proporciona,
+                 los logs se escriben tanto a consola como a archivo.
 
     Returns:
         Logger configurado
@@ -30,8 +36,8 @@ def configurar_logging(
     Examples:
         >>> logger = configurar_logging(nivel="INFO")
         >>> logger.info("Iniciando proceso")
-        >>> logger = configurar_logging(nivel="DEBUG")
-        >>> logger.debug("Mensaje de debug")
+        >>> logger = configurar_logging(nivel="DEBUG", archivo="logs/dwh.log")
+        >>> logger.debug("Mensaje de debug guardado en archivo")
     """
     # Configurar formato por defecto si no se especifica
     if formato is None:
@@ -47,16 +53,25 @@ def configurar_logging(
     # Limpiar handlers existentes para evitar duplicados
     logger.handlers.clear()
 
+    # Crear formatter
+    formatter = logging.Formatter(formato)
+
     # Crear y configurar handler para consola
     console_handler = logging.StreamHandler()
     console_handler.setLevel(nivel_logging)
-
-    # Crear formatter y añadirlo al handler
-    formatter = logging.Formatter(formato)
     console_handler.setFormatter(formatter)
-
-    # Añadir handler al logger
     logger.addHandler(console_handler)
+
+    # Crear handler para archivo si se especifica
+    if archivo:
+        # Crear directorio si no existe
+        archivo_path = Path(archivo)
+        archivo_path.parent.mkdir(parents=True, exist_ok=True)
+
+        file_handler = logging.FileHandler(archivo, encoding="utf-8")
+        file_handler.setLevel(nivel_logging)
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
 
     return logger
 
@@ -249,3 +264,98 @@ def medir_tiempo(descripcion: str):
             print(f"{descripcion}: Completado en {duracion * 1000:.2f} ms")
         else:
             print(f"{descripcion}: Completado en {duracion:.2f} segundos")
+
+
+def generar_reporte_resumen(estadisticas: dict) -> str:
+    """
+    Genera un reporte de resumen del Data Warehouse en formato texto.
+
+    Crea un resumen formateado con estadísticas de carga del DWH,
+    incluyendo conteos de registros, tiempos de ejecución y estado.
+
+    Args:
+        estadisticas: Diccionario con estadísticas del DWH.
+            Claves esperadas:
+            - dimensiones: dict con nombre -> num_registros
+            - fact_tables: dict con nombre -> num_registros
+            - tiempo_total: float (segundos)
+            - errores: list[str] (opcional)
+
+    Returns:
+        String con el reporte formateado
+
+    Raises:
+        ValueError: Si estadisticas está vacío o no contiene claves requeridas
+
+    Examples:
+        >>> stats = {
+        ...     "dimensiones": {"DimFecha": 365, "DimProducto": 100},
+        ...     "fact_tables": {"FactVentas": 10000},
+        ...     "tiempo_total": 5.23,
+        ...     "errores": []
+        ... }
+        >>> reporte = generar_reporte_resumen(stats)
+        >>> "DimFecha" in reporte
+        True
+    """
+    if not estadisticas:
+        raise ValueError("estadisticas no puede estar vacío")
+
+    required_keys = ["dimensiones", "fact_tables", "tiempo_total"]
+    for key in required_keys:
+        if key not in estadisticas:
+            raise ValueError(f"Falta clave requerida: {key}")
+
+    lineas = []
+    lineas.append("=" * 60)
+    lineas.append("REPORTE DE CARGA - DATA WAREHOUSE")
+    lineas.append("=" * 60)
+    lineas.append("")
+
+    # Sección de dimensiones
+    lineas.append("DIMENSIONES:")
+    lineas.append("-" * 40)
+    total_dim = 0
+    for nombre, registros in estadisticas["dimensiones"].items():
+        lineas.append(f"  {nombre}: {formatear_numero(registros)} registros")
+        total_dim += registros
+    lineas.append(f"  TOTAL: {formatear_numero(total_dim)} registros")
+    lineas.append("")
+
+    # Sección de fact tables
+    lineas.append("TABLAS DE HECHOS:")
+    lineas.append("-" * 40)
+    total_fact = 0
+    for nombre, registros in estadisticas["fact_tables"].items():
+        lineas.append(f"  {nombre}: {formatear_numero(registros)} registros")
+        total_fact += registros
+    lineas.append(f"  TOTAL: {formatear_numero(total_fact)} registros")
+    lineas.append("")
+
+    # Tiempo total
+    tiempo = estadisticas["tiempo_total"]
+    if tiempo < 1:
+        tiempo_str = f"{tiempo * 1000:.2f} ms"
+    else:
+        tiempo_str = f"{tiempo:.2f} segundos"
+    lineas.append(f"TIEMPO TOTAL: {tiempo_str}")
+    lineas.append("")
+
+    # Errores si existen
+    errores = estadisticas.get("errores", [])
+    if errores:
+        lineas.append("ERRORES:")
+        lineas.append("-" * 40)
+        for error in errores:
+            lineas.append(f"  ✗ {error}")
+        lineas.append("")
+
+    # Estado final
+    if errores:
+        lineas.append("ESTADO: ⚠️  COMPLETADO CON ERRORES")
+    else:
+        lineas.append("ESTADO: ✓ COMPLETADO EXITOSAMENTE")
+
+    lineas.append("=" * 60)
+
+    return "\n".join(lineas)
