@@ -2,7 +2,7 @@
 # NOTA: Este archivo debe estar en ~/.dbt/ en tu sistema (no en el proyecto)
 # Este archivo es un EJEMPLO de configuración
 
-techmart_analytics:
+fintech_analytics:
   target: dev
   outputs:
     dev:
@@ -11,7 +11,7 @@ techmart_analytics:
       port: 5432
       user: dataeng_user
       password: "{{ env_var('DBT_PASSWORD') }}"
-      dbname: techmart_dw
+      dbname: fintech_dw
       schema: dbt_dev
       threads: 4
       keepalives_idle: 0
@@ -22,7 +22,7 @@ techmart_analytics:
       port: 5432
       user: dataeng_user
       password: "{{ env_var('DBT_PASSWORD') }}"
-      dbname: techmart_dw
+      dbname: fintech_dw
       schema: dbt_prod
       threads: 8
       keepalives_idle: 0
@@ -37,10 +37,10 @@ techmart_analytics:
 #
 # Para este proyecto de práctica, puedes usar DuckDB (más simple):
 #
-# techmart_analytics:
+# fintech_analytics:
 #   target: dev
 #   outputs:
 #     dev:
 #       type: duckdb
-#       path: techmart.duckdb
+#       path: fintech.duckdb
 #       threads: 4

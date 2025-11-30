@@ -1,6 +1,6 @@
-# Proyecto Práctico: Pipeline dbt Completo - TechMart Analytics
+# Proyecto Práctico: Pipeline dbt Completo - FinTech Analytics
 
-Pipeline de transformación ELT completo usando **dbt (data build tool)** para el e-commerce ficticio TechMart. Este proyecto demuestra todas las capacidades de dbt: staging, dimensiones, hechos, tests, macros, snapshots y documentación.
+Pipeline de transformación ELT completo usando **dbt (data build tool)** para **FinTech Analytics**, empresa ficticia del sector fintech. Como Data Engineer en **DataFlow Industries**, implementarás este Data Warehouse para tu cliente. Este proyecto demuestra todas las capacidades de dbt: staging, dimensiones, hechos, tests, macros, snapshots y documentación.
 
 ## 🎯 Objetivos de Aprendizaje
 
@@ -63,7 +63,11 @@ Al completar este proyecto, aprenderás a:
 │   │   ├── stg_orders.sql
 │   │   └── schema.yml        # Tests y docs de staging
 │   │
-│   └── marts/                # Capa 2: Modelos analíticos
+│   ├── intermediate/         # Capa 2: Transformaciones intermedias
+│   │   ├── int_orders_enriched.sql
+│   │   └── schema.yml        # Tests y docs de intermediate
+│   │
+│   └── marts/                # Capa 3: Modelos analíticos
 │       ├── dimensions/       # Tablas dimensionales
 │       │   ├── dim_customers.sql
 │       │   └── dim_products.sql
@@ -83,7 +87,8 @@ Al completar este proyecto, aprenderás a:
 │   └── raw_orders.csv
 │
 ├── snapshots/                # SCD Type 2
-│   └── products_snapshot.sql
+│   ├── products_snapshot.sql
+│   └── customers_snapshot.sql
 │
 ├── tests/                    # Tests personalizados
 │   ├── assert_positive_order_amounts.sql
@@ -134,19 +139,19 @@ pip install -r requirements.txt
 Crear archivo `~/.dbt/profiles.yml`:
 
 ```yaml
-techmart_analytics:
+fintech_analytics:
   target: dev
   outputs:
     dev:
       type: duckdb
-      path: techmart.duckdb
+      path: fintech.duckdb
       threads: 4
 ```
 
 **Opción B: PostgreSQL**
 
 ```yaml
-techmart_analytics:
+fintech_analytics:
   target: dev
   outputs:
     dev:
@@ -155,7 +160,7 @@ techmart_analytics:
       port: 5432
       user: dataeng_user
       password: "{{ env_var('DBT_PASSWORD') }}"
-      dbname: techmart_dw
+      dbname: fintech_dw
       schema: dbt_dev
       threads: 4
 ```
@@ -612,7 +617,7 @@ ORDER BY 1;
 # Compilar sin ejecutar para ver el SQL generado
 dbt compile --select nombre_modelo
 
-# Revisar archivo compilado en target/compiled/techmart_analytics/models/...
+# Revisar archivo compilado en target/compiled/fintech_analytics/models/...
 ```
 
 ### Error: "Database Error in model X"
@@ -756,14 +761,16 @@ Después de completar este proyecto, puedes:
 - [x] Configuración de proyecto (dbt_project.yml, profiles.yml)
 - [x] Seeds con datos realistas (customers, products, orders)
 - [x] Modelos de staging con limpieza (3 modelos)
+- [x] Modelos intermediate para transformaciones (1 modelo)
 - [x] Dimensiones con métricas agregadas (2 dimensiones)
 - [x] Hechos con análisis (2 hechos)
-- [x] Tests genéricos en schema.yml (~40 tests)
+- [x] Tests genéricos en schema.yml (~45 tests)
 - [x] Tests personalizados (4 tests custom)
 - [x] Macros reutilizables (10 macros)
-- [x] Snapshots para SCD Type 2 (1 snapshot)
+- [x] Snapshots para SCD Type 2 (2 snapshots)
 - [x] Documentación completa (schema.yml + README)
 - [x] Ejemplo de uso (example_usage.py)
+- [x] 3 capas de transformación: staging → intermediate → marts
 
 ---
 

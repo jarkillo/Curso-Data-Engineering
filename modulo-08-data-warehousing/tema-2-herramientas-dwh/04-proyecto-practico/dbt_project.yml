@@ -1,7 +1,7 @@
-# Configuración del proyecto dbt para TechMart Analytics
+# Configuración del proyecto dbt para FinTech Analytics
 # Este proyecto demuestra un pipeline completo de transformación ELT
 
-name: 'techmart_analytics'
+name: 'fintech_analytics'
 version: '1.0.0'
 config-version: 2
 
@@ -18,11 +18,16 @@ snapshot-paths: ["snapshots"]
 
 # Configuración de materialización por defecto
 models:
-  techmart_analytics:
+  fintech_analytics:
     # Staging: vistas para transformaciones iniciales
     staging:
       +materialized: view
       +tags: ['staging']
+
+    # Intermediate: modelos de transformacion intermedia
+    intermediate:
+      +materialized: view
+      +tags: ['intermediate']
 
     # Marts: tablas físicas para análisis final
     marts:
@@ -39,13 +44,13 @@ models:
 
 # Configuración de seeds
 seeds:
-  techmart_analytics:
+  fintech_analytics:
     +schema: raw
     +quote_columns: false
 
 # Configuración de snapshots
 snapshots:
-  techmart_analytics:
+  fintech_analytics:
     +target_schema: snapshots
     +strategy: timestamp
     +unique_key: id
