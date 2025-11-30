@@ -10,6 +10,56 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 ## [Unreleased]
 
 ### Completed
+- **JAR-328: Módulo 8 - Data Warehousing ✅ FINALIZADO Y DOCUMENTADO** (2025-11-30):
+  - ✅ **README principal del módulo 8**: Completo (~400 líneas)
+    * Descripción general con objetivos de aprendizaje
+    * Estado de los 3 temas con métricas
+    * Instrucciones de instalación y ejecución
+    * Recursos adicionales y documentación
+  - ✅ **Verificación de calidad completa**:
+    * Tema 1: 156 tests pasando, 93% cobertura
+    * Tema 2: ~44 tests dbt (genéricos + personalizados)
+    * Tema 3: 84 tests pasando, 92% cobertura
+    * Sin errores de linting (flake8)
+    * Encoding UTF-8 en todos los archivos
+    * Paths multiplataforma con pathlib
+  - ✅ **Progreso Módulo 8**: 100% (3/3 temas completados)
+  - ✅ **Total tests del módulo**: 280+ tests
+  - ✅ **Cobertura promedio**: 91%
+
+- **Módulo 8 Tema 3 - Analytics y BI ✅ COMPLETADO** (2025-11-29):
+  - ✅ **Contenido educativo completo**:
+    * `01-TEORIA.md`: ~4,000 palabras sobre Analytics y BI
+      - Business Intelligence: qué es y qué no es
+      - Métricas vs KPIs vs Dimensiones
+      - Pirámide de métricas (operativas, tácticas, estratégicas)
+      - Principios de diseño de dashboards
+      - Antipatrones en dashboards
+      - Data storytelling
+      - Herramientas de BI modernas
+    * `02-EJEMPLOS.md`: 4 ejemplos progresivos
+      - Definir KPIs para e-commerce
+      - Diseñar dashboard ejecutivo
+      - Métricas de producto SaaS
+      - Sistema completo de OKRs
+    * `03-EJERCICIOS.md`: 15 ejercicios con soluciones
+      - Básicos (1-5): Identificación de KPIs, cálculos básicos
+      - Intermedios (6-11): Diseño de dashboards, cohortes, funnels
+      - Avanzados (12-15): Alertas ML, OKRs cascading, arquitectura
+  - ✅ **Proyecto práctico** - Sistema de Métricas Analíticas:
+    * **Arquitectura modular**:
+      - `kpis.py`: 9 funciones de cálculo de KPIs (AOV, CAC, LTV, NRR, etc.)
+      - `cohorts.py`: Análisis de cohortes con retención D7/D14/D30
+      - `anomaly_detection.py`: Detección de anomalías con MAD
+      - `exporters.py`: Exportación a JSON/CSV para BI
+    * **Características técnicas**:
+      - 84 tests unitarios, 92% cobertura
+      - Análisis de cohortes con métricas de retención
+      - Detección de anomalías robusto a outliers
+      - Exportadores compatibles con herramientas BI
+    * **Tecnologías**: Python, pytest, TDD
+  - ✅ **Progreso Módulo 8**: 67% → 100% (3/3 temas completados)
+
 - **Módulo 8 Tema 2 - Herramientas DWH (dbt) ✅ COMPLETADO** (2025-11-13):
   - ✅ **Contenido educativo completo**:
     * `01-TEORIA.md`: ~7,500 palabras sobre dbt (data build tool) ✨ **NUEVO**:
