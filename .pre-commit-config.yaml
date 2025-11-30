@@ -77,19 +77,8 @@ repos:
         name: 📋 Validar TOML
 
   # ===============================================
-  # BLACK - FORMATEO DE CÓDIGO
-  # ===============================================
-  - repo: https://github.com/psf/black
-    rev: 25.1.0
-    hooks:
-      - id: black
-        name: ⚫ Black - Formatear código
-        language_version: python3.13
-        args: ['--line-length=88', '--target-version=py313']
-        exclude: '^(backend/|frontend/|modulo-06-airflow/|modulo-07-cloud/|modulo-01-fundamentos/|documentacion/juego/|data_engineer_game\.py|game\.html|game_save\.json)'
-
-  # ===============================================
   # RUFF - LINTING Y FORMATEO MODERNO
+  # (Reemplaza Black - Ruff-format es más rápido y compatible)
   # ===============================================
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.14.7

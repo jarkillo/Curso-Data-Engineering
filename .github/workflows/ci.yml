@@ -46,13 +46,10 @@ jobs:
       - name: 📦 Instalar dependencias
         run: |
           python -m pip install --upgrade pip
-          pip install black ruff
+          pip install ruff
           pip install -r requirements.txt
 
-      - name: ⚫ Black - Verificar formato
-        run: black --check --diff .
-
-      - name: 🔍 Ruff - Linting y import sorting
+      - name: 🔍 Ruff - Linting y formateo
         run: |
           ruff check .
           ruff format --check .
