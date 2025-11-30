@@ -29,7 +29,7 @@ def imprimir_separador(titulo):
 
 def ejemplo_1_ventas_restaurante():
     """
-    EJEMPLO 1: Análisis de Ventas de un Restaurante (Yurest)
+    EJEMPLO 1: Análisis de Ventas de un Restaurante (DataBite)
 
     Contexto: Tienes las ventas de una semana y necesitas entender
     cómo está yendo el negocio.
@@ -73,7 +73,7 @@ def ejemplo_1_ventas_restaurante():
 
 def ejemplo_2_tiempos_api():
     """
-    EJEMPLO 2: Análisis de Tiempos de Respuesta de API (Agora)
+    EJEMPLO 2: Análisis de Tiempos de Respuesta de API (CloudMetrics)
 
     Contexto: Monitoreas una API y necesitas saber si cumple el SLA
     (Service Level Agreement) de que el 95% de peticiones respondan
@@ -126,7 +126,7 @@ def ejemplo_2_tiempos_api():
 
 def ejemplo_3_productos_mas_vendidos():
     """
-    EJEMPLO 3: Identificar Productos Más Vendidos (Yurest)
+    EJEMPLO 3: Identificar Productos Más Vendidos (DataBite)
 
     Contexto: Tienes los IDs de productos vendidos en un día y
     necesitas saber cuál es el más popular.

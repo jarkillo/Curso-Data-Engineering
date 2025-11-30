@@ -7,7 +7,13 @@ import json
 from sqlalchemy.orm import Session
 
 from app.models.game import GameState
-from app.schemas.game import Achievement, GameStateResponse, GameStats, Mission
+from app.schemas.game import (
+    Achievement,
+    GameStateResponse,
+    GameStats,
+    Mission,
+    QuizQuestion,
+)
 
 
 class GameService:
@@ -47,39 +53,139 @@ class GameService:
         {"level": 20, "name": "Data Architect", "emoji": "🏆"},
     ]
 
-    # Predefined missions
+    # Predefined missions with quiz questions
     MISSIONS = [
         {
             "id": "mission-1-python-stats",
             "title": "Tu Primera Función Estadística",
-            "description": "Implementa funciones de estadística descriptiva en Python",
+            "description": "Demuestra tu conocimiento sobre estadística descriptiva en Python",
             "module": 1,
             "tema": 1,
             "xp_reward": 100,
+            "questions": [
+                {
+                    "id": "q1",
+                    "question": "¿Qué función de Python calcula la media aritmética?",
+                    "options": [
+                        "sum(lista) / len(lista)",
+                        "max(lista) - min(lista)",
+                        "sorted(lista)[len(lista)//2]",
+                        "lista.count()",
+                    ],
+                    "correct_index": 0,
+                },
+                {
+                    "id": "q2",
+                    "question": "¿Qué medida es más robusta ante valores atípicos (outliers)?",
+                    "options": ["La media", "La mediana", "La suma", "El máximo"],
+                    "correct_index": 1,
+                },
+                {
+                    "id": "q3",
+                    "question": "¿Qué mide la desviación estándar?",
+                    "options": [
+                        "El valor central de los datos",
+                        "La dispersión de los datos respecto a la media",
+                        "El valor más frecuente",
+                        "La diferencia entre máximo y mínimo",
+                    ],
+                    "correct_index": 1,
+                },
+            ],
         },
         {
             "id": "mission-2-csv-processor",
             "title": "Procesador de CSV Profesional",
-            "description": "Crea un sistema robusto de procesamiento de archivos CSV",
+            "description": "Demuestra tu conocimiento sobre procesamiento de archivos CSV",
             "module": 1,
             "tema": 2,
             "xp_reward": 150,
+            "questions": [
+                {
+                    "id": "q1",
+                    "question": "¿Qué módulo de Python se usa para leer archivos CSV?",
+                    "options": ["json", "csv", "xml", "yaml"],
+                    "correct_index": 1,
+                },
+                {
+                    "id": "q2",
+                    "question": "¿Qué función de pandas lee un archivo CSV?",
+                    "options": [
+                        "pd.load_csv()",
+                        "pd.open_csv()",
+                        "pd.read_csv()",
+                        "pd.import_csv()",
+                    ],
+                    "correct_index": 2,
+                },
+                {
+                    "id": "q3",
+                    "question": "¿Qué parámetro especifica el delimitador en un CSV?",
+                    "options": ["split", "separator", "delimiter", "divider"],
+                    "correct_index": 2,
+                },
+            ],
         },
         {
             "id": "mission-3-logging-system",
             "title": "Sistema de Logging Avanzado",
-            "description": "Implementa un sistema de logging configurable para pipelines",
+            "description": "Demuestra tu conocimiento sobre logging en Python",
             "module": 1,
             "tema": 3,
             "xp_reward": 120,
+            "questions": [
+                {
+                    "id": "q1",
+                    "question": "¿Cuál es el nivel de logging más bajo (menos severo)?",
+                    "options": ["ERROR", "WARNING", "INFO", "DEBUG"],
+                    "correct_index": 3,
+                },
+                {
+                    "id": "q2",
+                    "question": "¿Qué módulo de Python proporciona logging?",
+                    "options": ["log", "logging", "logger", "logs"],
+                    "correct_index": 1,
+                },
+                {
+                    "id": "q3",
+                    "question": "¿Qué handler envía logs a un archivo?",
+                    "options": [
+                        "StreamHandler",
+                        "FileHandler",
+                        "ConsoleHandler",
+                        "OutputHandler",
+                    ],
+                    "correct_index": 1,
+                },
+            ],
         },
         {
             "id": "mission-4-sql-basics",
             "title": "Domina SQL Básico",
-            "description": "Crea queries SQL para consultar bases de datos",
+            "description": "Demuestra tu conocimiento sobre consultas SQL básicas",
             "module": 2,
             "tema": 1,
             "xp_reward": 150,
+            "questions": [
+                {
+                    "id": "q1",
+                    "question": "¿Qué cláusula SQL selecciona columnas específicas?",
+                    "options": ["FROM", "WHERE", "SELECT", "ORDER BY"],
+                    "correct_index": 2,
+                },
+                {
+                    "id": "q2",
+                    "question": "¿Qué cláusula filtra filas en SQL?",
+                    "options": ["SELECT", "FROM", "WHERE", "GROUP BY"],
+                    "correct_index": 2,
+                },
+                {
+                    "id": "q3",
+                    "question": "¿Qué función SQL cuenta el número de filas?",
+                    "options": ["SUM()", "COUNT()", "TOTAL()", "NUM()"],
+                    "correct_index": 1,
+                },
+            ],
         },
     ]
 
@@ -90,6 +196,12 @@ class GameService:
             "name": "Primera Misión",
             "description": "Completa tu primera misión",
             "emoji": "🎯",
+        },
+        {
+            "key": "perfect_score",
+            "name": "Perfeccionista",
+            "description": "Obtén puntuación perfecta en una misión",
+            "emoji": "💯",
         },
         {
             "key": "level_5",
@@ -106,16 +218,7 @@ class GameService:
     ]
 
     def get_or_create_game_state(self, db: Session, user_id: int = 1) -> GameState:
-        """
-        Get or create game state for a user.
-
-        Args:
-            db: Database session
-            user_id: User ID (default 1 for MVP)
-
-        Returns:
-            Game state
-        """
+        """Get or create game state for a user."""
         game_state = db.query(GameState).filter(GameState.user_id == user_id).first()
 
         if not game_state:
@@ -152,15 +255,7 @@ class GameService:
             return default
 
     def get_game_state_response(self, game_state: GameState) -> GameStateResponse:
-        """
-        Convert GameState model to response schema.
-
-        Args:
-            game_state: Database game state
-
-        Returns:
-            Game state response
-        """
+        """Convert GameState model to response schema."""
         current_rank = self._get_rank_at_level(game_state.level)
         next_rank = self._get_next_rank(game_state.level)
         xp_for_next = self._calculate_xp_for_next_level(game_state.level)
@@ -194,11 +289,16 @@ class GameService:
             xp_for_next_level=xp_for_next,
         )
 
+    def get_mission_by_id(self, mission_id: str) -> dict | None:
+        """Get a mission by its ID."""
+        return next((m for m in self.MISSIONS if m["id"] == mission_id), None)
+
     def get_available_missions(self, completed_missions: list[str]) -> list[Mission]:
-        """Get all available missions."""
+        """Get all available missions with their questions."""
         missions = []
         for mission_data in self.MISSIONS:
             is_completed = mission_data["id"] in completed_missions
+            questions = [QuizQuestion(**q) for q in mission_data.get("questions", [])]
             missions.append(
                 Mission(
                     id=mission_data["id"],
@@ -209,9 +309,31 @@ class GameService:
                     xp_reward=mission_data["xp_reward"],
                     is_completed=is_completed,
                     is_available=True,
+                    questions=questions,
                 )
             )
         return missions
+
+    def evaluate_mission_answers(
+        self, mission_id: str, answers: list[int]
+    ) -> tuple[int, int]:
+        """
+        Evaluate mission answers and return (correct_count, total_count).
+        """
+        mission = self.get_mission_by_id(mission_id)
+        if not mission:
+            return 0, 0
+
+        questions = mission.get("questions", [])
+        if len(answers) != len(questions):
+            return 0, len(questions)
+
+        correct = sum(
+            1
+            for i, q in enumerate(questions)
+            if i < len(answers) and answers[i] == q["correct_index"]
+        )
+        return correct, len(questions)
 
     def get_achievements(self, unlocked_achievements: list[str]) -> list[Achievement]:
         """Get all achievements."""

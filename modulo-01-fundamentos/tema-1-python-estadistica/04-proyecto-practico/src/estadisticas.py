@@ -252,7 +252,7 @@ def calcular_moda(datos: List[Union[int, float]]) -> List[Union[int, float]]:
     >>> calcular_moda([1, 2, 3, 4])  # Todos únicos
     [1, 2, 3, 4]
 
-    Ejemplo real - Productos más vendidos en Yurest:
+    Ejemplo real - Productos más vendidos en DataBite:
     >>> ids_productos = [101, 102, 101, 103, 101, 102, 104]
     >>> calcular_moda(ids_productos)
     [101]
@@ -478,7 +478,7 @@ def calcular_percentiles(
     {25: 3.25, 50: 5.5, 75: 7.75}
 
     Ejemplo real - SLA de tiempos de respuesta:
-    En Agora/Yurest, queremos que el 95% de las peticiones respondan
+    En CloudMetrics/DataBite, queremos que el 95% de las peticiones respondan
     en menos de 100ms.
 
     >>> tiempos_ms = [10, 12, 15, 18, 20, 22, 25, 30, 35, 200]

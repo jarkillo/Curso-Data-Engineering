@@ -10,7 +10,14 @@ from sqlalchemy.orm import Session
 from app.api.dependencies import get_current_user
 from app.database import get_db
 from app.models.user import User
-from app.schemas.game import Achievement, AddXPRequest, GameStateResponse, Mission
+from app.schemas.game import (
+    Achievement,
+    AddXPRequest,
+    GameStateResponse,
+    Mission,
+    MissionAttempt,
+    MissionResult,
+)
 from app.services.game_service import GameService
 
 router = APIRouter()
@@ -31,12 +38,7 @@ def parse_json_list(value: str | None) -> list:
 async def get_game_state(
     current_user: User = Depends(get_current_user), db: Session = Depends(get_db)
 ):
-    """
-    Get current game state.
-
-    Returns:
-        Game state with all player information
-    """
+    """Get current game state."""
     game_state = game_service.get_or_create_game_state(db, current_user.id)
     return game_service.get_game_state_response(game_state)
 
@@ -45,12 +47,7 @@ async def get_game_state(
 async def get_missions(
     current_user: User = Depends(get_current_user), db: Session = Depends(get_db)
 ):
-    """
-    Get all available missions.
-
-    Returns:
-        List of missions with completion status
-    """
+    """Get all available missions with their quiz questions."""
     game_state = game_service.get_or_create_game_state(db, current_user.id)
     completed = parse_json_list(game_state.completed_missions)
     return game_service.get_available_missions(completed)
@@ -60,81 +57,111 @@ async def get_missions(
 async def get_achievements(
     current_user: User = Depends(get_current_user), db: Session = Depends(get_db)
 ):
-    """
-    Get all achievements.
-
-    Returns:
-        List of achievements with unlock status
-    """
+    """Get all achievements."""
     game_state = game_service.get_or_create_game_state(db, current_user.id)
     unlocked = parse_json_list(game_state.unlocked_achievements)
     return game_service.get_achievements(unlocked)
 
 
-@router.post("/mission/{mission_id}/complete", response_model=GameStateResponse)
+@router.post("/mission/{mission_id}/complete", response_model=MissionResult)
 async def complete_mission(
     mission_id: str,
+    attempt: MissionAttempt,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
-    Complete a mission and award XP.
+    Complete a mission by answering quiz questions.
 
-    Args:
-        mission_id: Mission identifier
-
-    Returns:
-        Updated game state
-
-    Raises:
-        HTTPException: If mission not found or already completed
+    - Must answer all questions correctly to pass
+    - Can retry missions but won't earn XP again
     """
     game_state = game_service.get_or_create_game_state(db, current_user.id)
 
     # Find mission
-    mission = next((m for m in game_service.MISSIONS if m["id"] == mission_id), None)
+    mission = game_service.get_mission_by_id(mission_id)
     if not mission:
         raise HTTPException(status_code=404, detail="Mission not found")
 
     # Parse current completed missions
     completed_missions = parse_json_list(game_state.completed_missions)
+    is_retry = mission_id in completed_missions
 
-    # Check if already completed
-    if mission_id in completed_missions:
-        raise HTTPException(status_code=400, detail="Mission already completed")
+    # Evaluate answers
+    correct, total = game_service.evaluate_mission_answers(mission_id, attempt.answers)
 
-    # Add to completed missions
-    completed_missions.append(mission_id)
-    game_state.completed_missions = json.dumps(completed_missions)
+    # Need all correct to pass
+    if correct < total:
+        return MissionResult(
+            success=False,
+            correct_answers=correct,
+            total_questions=total,
+            xp_earned=0,
+            message=f"Respuestas correctas: {correct}/{total}. ¡Inténtalo de nuevo!",
+            is_retry=is_retry,
+        )
 
-    # Add XP
-    game_state.xp += mission["xp_reward"]
-    game_state.total_xp_earned += mission["xp_reward"]
+    # Mission passed!
+    xp_earned = 0
 
-    # Check level up
-    while game_state.xp >= game_service._calculate_xp_for_next_level(game_state.level):
-        xp_needed = game_service._calculate_xp_for_next_level(game_state.level)
-        game_state.xp -= xp_needed
-        game_state.level += 1
+    # Only award XP on first completion
+    if not is_retry:
+        xp_earned = mission["xp_reward"]
 
-    # Parse current achievements
-    unlocked_achievements = parse_json_list(game_state.unlocked_achievements)
+        # Add to completed missions
+        completed_missions.append(mission_id)
+        game_state.completed_missions = json.dumps(completed_missions)
 
-    # First mission achievement
-    if len(completed_missions) == 1 and "first_mission" not in unlocked_achievements:
-        unlocked_achievements.append("first_mission")
+        # Add XP
+        game_state.xp += xp_earned
+        game_state.total_xp_earned += xp_earned
 
-    # Level 5 achievement
-    if game_state.level >= 5 and "level_5" not in unlocked_achievements:
-        unlocked_achievements.append("level_5")
+        # Check level up
+        while game_state.xp >= game_service._calculate_xp_for_next_level(
+            game_state.level
+        ):
+            xp_needed = game_service._calculate_xp_for_next_level(game_state.level)
+            game_state.xp -= xp_needed
+            game_state.level += 1
 
-    # Save achievements back as JSON
-    game_state.unlocked_achievements = json.dumps(unlocked_achievements)
+        # Parse current achievements
+        unlocked_achievements = parse_json_list(game_state.unlocked_achievements)
 
-    db.commit()
-    db.refresh(game_state)
+        # First mission achievement
+        if (
+            len(completed_missions) == 1
+            and "first_mission" not in unlocked_achievements
+        ):
+            unlocked_achievements.append("first_mission")
 
-    return game_service.get_game_state_response(game_state)
+        # Perfect score achievement (always check on perfect)
+        if correct == total and "perfect_score" not in unlocked_achievements:
+            unlocked_achievements.append("perfect_score")
+
+        # Level 5 achievement
+        if game_state.level >= 5 and "level_5" not in unlocked_achievements:
+            unlocked_achievements.append("level_5")
+
+        # Save achievements back as JSON
+        game_state.unlocked_achievements = json.dumps(unlocked_achievements)
+
+        db.commit()
+        db.refresh(game_state)
+
+    message = "¡Misión completada!"
+    if is_retry:
+        message = "¡Bien hecho! Ya habías completado esta misión, así que no ganas XP adicional."
+    elif xp_earned > 0:
+        message = f"¡Misión completada! +{xp_earned} XP"
+
+    return MissionResult(
+        success=True,
+        correct_answers=correct,
+        total_questions=total,
+        xp_earned=xp_earned,
+        message=message,
+        is_retry=is_retry,
+    )
 
 
 @router.post("/xp", response_model=GameStateResponse)
@@ -143,15 +170,7 @@ async def add_xp(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    """
-    Add XP to player.
-
-    Args:
-        request: XP amount and reason
-
-    Returns:
-        Updated game state
-    """
+    """Add XP to player."""
     game_state = game_service.get_or_create_game_state(db, current_user.id)
 
     # Add XP

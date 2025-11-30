@@ -19,7 +19,7 @@ Aprender a:
 ### Media (Promedio)
 La **media aritmética** es la suma de todos los valores dividida por la cantidad de valores. Es útil para conocer el valor "central" de un conjunto de datos.
 
-**Ejemplo**: Las ventas de Yurest en 5 días fueron [100, 150, 200, 120, 180]. La media es 150 euros/día.
+**Ejemplo**: Las ventas de DataBite en 5 días fueron [100, 150, 200, 120, 180]. La media es 150 euros/día.
 
 ### Mediana
 La **mediana** es el valor que está en el centro cuando ordenamos los datos. Es más robusta que la media ante valores extremos.
@@ -166,4 +166,3 @@ Este proyecto implementa:
 ## Licencia
 
 Este proyecto es parte del Master en Ingeniería de Datos con IA - Material educativo.
-

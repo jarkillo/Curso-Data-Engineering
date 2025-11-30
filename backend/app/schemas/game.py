@@ -41,6 +41,15 @@ class GameStateResponse(BaseModel):
     xp_for_next_level: int | None = None
 
 
+class QuizQuestion(BaseModel):
+    """A quiz question for a mission."""
+
+    id: str
+    question: str
+    options: list[str]
+    correct_index: int
+
+
 class Mission(BaseModel):
     """A game mission."""
 
@@ -53,6 +62,24 @@ class Mission(BaseModel):
     requirements: list[str] = []
     is_completed: bool = False
     is_available: bool = True
+    questions: list[QuizQuestion] = []
+
+
+class MissionAttempt(BaseModel):
+    """Request to complete a mission with answers."""
+
+    answers: list[int]  # Index of selected answer for each question
+
+
+class MissionResult(BaseModel):
+    """Result of a mission attempt."""
+
+    success: bool
+    correct_answers: int
+    total_questions: int
+    xp_earned: int
+    message: str
+    is_retry: bool = False
 
 
 class Achievement(BaseModel):

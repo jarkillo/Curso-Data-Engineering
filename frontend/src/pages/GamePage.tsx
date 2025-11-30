@@ -1,9 +1,13 @@
+import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { gameApi } from '@/services/api'
-import { Trophy, Star, Zap, Code2, CheckCircle2, Lock } from 'lucide-react'
+import { Trophy, Star, Zap, Code2, CheckCircle2, Lock, Play, RefreshCw } from 'lucide-react'
+import QuizModal from '@/components/game/QuizModal'
+import type { Mission } from '@/types/game'
 
 export default function GamePage() {
   const queryClient = useQueryClient()
+  const [selectedMission, setSelectedMission] = useState<Mission | null>(null)
 
   const { data: gameState, isLoading, isError } = useQuery({
     queryKey: ['gameState'],
@@ -24,11 +28,14 @@ export default function GamePage() {
   })
 
   const completeMissionMutation = useMutation({
-    mutationFn: (missionId: string) => gameApi.completeMission(missionId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['gameState'] })
-      queryClient.invalidateQueries({ queryKey: ['missions'] })
-      queryClient.invalidateQueries({ queryKey: ['achievements'] })
+    mutationFn: ({ missionId, answers }: { missionId: string; answers: number[] }) =>
+      gameApi.completeMission(missionId, answers),
+    onSuccess: (result) => {
+      if (result.success) {
+        queryClient.invalidateQueries({ queryKey: ['gameState'] })
+        queryClient.invalidateQueries({ queryKey: ['missions'] })
+        queryClient.invalidateQueries({ queryKey: ['achievements'] })
+      }
     },
   })
 
@@ -186,15 +193,31 @@ export default function GamePage() {
                       <Zap className="w-4 h-4 mr-1" />
                       +{mission.xp_reward} XP
                     </span>
+                    <span className="text-gray-500 dark:text-gray-500">
+                      {mission.questions.length} preguntas
+                    </span>
                   </div>
                 </div>
-                {!mission.is_completed && mission.is_available && (
+                {mission.is_available && (
                   <button
-                    onClick={() => completeMissionMutation.mutate(mission.id)}
-                    disabled={completeMissionMutation.isPending}
-                    className="btn btn-primary"
+                    onClick={() => setSelectedMission(mission)}
+                    className={`btn ${
+                      mission.is_completed
+                        ? 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                        : 'btn-primary'
+                    } flex items-center gap-2`}
                   >
-                    {completeMissionMutation.isPending ? 'Completando...' : 'Completar'}
+                    {mission.is_completed ? (
+                      <>
+                        <RefreshCw className="w-4 h-4" />
+                        Repetir
+                      </>
+                    ) : (
+                      <>
+                        <Play className="w-4 h-4" />
+                        Iniciar
+                      </>
+                    )}
                   </button>
                 )}
               </div>
@@ -242,6 +265,21 @@ export default function GamePage() {
           </div>
         </div>
       </div>
+
+      {/* Quiz Modal */}
+      {selectedMission && (
+        <QuizModal
+          mission={selectedMission}
+          onClose={() => setSelectedMission(null)}
+          onSubmit={async (answers) => {
+            const result = await completeMissionMutation.mutateAsync({
+              missionId: selectedMission.id,
+              answers,
+            })
+            return result
+          }}
+        />
+      )}
     </div>
   )
 }
