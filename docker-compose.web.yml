@@ -58,10 +58,3 @@ volumes:
     driver: local
   frontend_node_modules:
     driver: local
-
-# ===============================================
-# Red
-# ===============================================
-networks:
-  dataeng-network:
-    driver: bridge
