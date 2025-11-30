@@ -2,7 +2,7 @@
 
 ## Introducción
 
-Estos ejercicios te permitirán practicar dbt con **TechMart**, la empresa de e-commerce del Tema 2. Cada ejercicio tiene:
+Estos ejercicios te permitirán practicar dbt con **FinTech Analytics**, la empresa fintech del Tema 2. Como Data Engineer en **DataFlow Industries**, ayudarás a este cliente con su Data Warehouse. Cada ejercicio tiene:
 - 🎯 **Contexto**: Problema de negocio real
 - 📊 **Datos**: Tablas de entrada
 - ❓ **Pregunta**: Qué debes construir
@@ -21,7 +21,7 @@ Estos ejercicios te permitirán practicar dbt con **TechMart**, la empresa de e-
 
 **Contexto**:
 
-TechMart tiene una tabla `raw.products` con datos de productos importados de su sistema ERP. Los datos tienen problemas:
+FinTech Analytics tiene una tabla `raw.products` con datos de productos importados de su sistema ERP. Los datos tienen problemas:
 - SKUs en mayúsculas inconsistentes
 - Descripciones con espacios extra
 - Precios negativos (errores de carga)
@@ -140,7 +140,7 @@ sources:
 
 **Contexto**:
 
-TechMart tiene varias tablas con nombres de personas (customers, employees, vendors) y quieres una función reutilizable para formatearlos consistentemente.
+FinTech Analytics tiene varias tablas con nombres de personas (customers, employees, vendors) y quieres una función reutilizable para formatearlos consistentemente.
 
 **Pregunta**:
 
@@ -200,7 +200,7 @@ SELECT ... FROM cte2
 
 **Contexto**:
 
-TechMart tiene una regla: Todas las órdenes deben tener al menos 1 item. Quieres un test que valide esto.
+FinTech Analytics tiene una regla: Todas las órdenes deben tener al menos 1 item. Quieres un test que valide esto.
 
 **Pregunta**:
 
@@ -316,7 +316,7 @@ models:
 
 **Contexto**:
 
-TechMart tiene una tabla `raw.customer_sessions` que crece diariamente con millones de filas. Necesitas un modelo incremental que:
+FinTech Analytics tiene una tabla `raw.customer_sessions` que crece diariamente con millones de filas. Necesitas un modelo incremental que:
 - Inserte sesiones nuevas
 - Actualice sesiones existentes si cambian (ej: duración actualizada)
 
@@ -505,7 +505,7 @@ El problema está en el SELECT final. ¿De dónde viene `total_revenue`?
 
 **Contexto**:
 
-Diseña un pipeline completo de dbt para TechMart que transforme datos crudos en tablas analíticas.
+Diseña un pipeline completo de dbt para FinTech Analytics que transforme datos crudos en tablas analíticas.
 
 **Pregunta**:
 
