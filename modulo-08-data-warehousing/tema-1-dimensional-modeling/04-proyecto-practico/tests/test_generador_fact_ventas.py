@@ -74,6 +74,7 @@ class TestGenerarFactVentas:
             "vendedor_id",
             "cantidad",
             "precio_unitario",
+            "monto_bruto",
             "descuento",
             "impuesto",
             "monto_neto",
@@ -313,6 +314,21 @@ class TestGenerarFactVentas:
 
         with pytest.raises(ValueError, match="debe ser positivo"):
             generar_fact_ventas(-10, dim_fecha, dim_producto, dim_cliente, dim_vendedor)
+
+    def test_monto_bruto_coherente(self):
+        """Should have monto_bruto = cantidad * precio_unitario."""
+        from src.generador_fact_ventas import generar_fact_ventas
+
+        dim_fecha = pd.DataFrame({"fecha_id": [20240101]})
+        dim_producto = pd.DataFrame({"producto_id": [1], "precio_catalogo": [100.0]})
+        dim_cliente = pd.DataFrame({"cliente_id": [1]})
+        dim_vendedor = pd.DataFrame({"vendedor_id": [1]})
+
+        df = generar_fact_ventas(20, dim_fecha, dim_producto, dim_cliente, dim_vendedor)
+
+        # monto_bruto debe ser cantidad * precio_unitario
+        monto_calculado = df["cantidad"] * df["precio_unitario"]
+        assert ((df["monto_bruto"] - monto_calculado).abs() < 0.01).all()
 
     def test_precio_unitario_cerca_de_precio_catalogo(self):
         """Should have unit price close to catalog price (with variations)."""
