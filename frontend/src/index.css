@@ -161,7 +161,19 @@
   @apply rounded-lg shadow-md my-6;
 }
 
-/* Checkbox styling in markdown */
+/* Task list styling in markdown */
 .markdown-content input[type="checkbox"] {
-  @apply w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-primary focus:ring-primary mr-2;
+  @apply w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-primary focus:ring-primary mr-2 cursor-pointer;
+}
+
+.markdown-content ul:has(input[type="checkbox"]) {
+  @apply list-none pl-0;
+}
+
+.markdown-content li:has(> input[type="checkbox"]) {
+  @apply flex items-start gap-2 py-1;
+}
+
+.markdown-content li:has(> input[type="checkbox"]:checked) {
+  @apply text-gray-400 dark:text-gray-500;
 }
