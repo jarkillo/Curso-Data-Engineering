@@ -57,6 +57,18 @@ class TestValidarNoNulos:
         assert resultado["is_valid"]
         assert len(resultado["errors"]) == 0
 
+    def test_campo_no_existe_en_dataframe(self):
+        """Should report error when required field doesn't exist."""
+        from src.validaciones import validar_no_nulos
+
+        df = pd.DataFrame([{"id": 1, "nombre": "Juan"}])
+
+        resultado = validar_no_nulos(df, ["id", "campo_inexistente"])
+
+        assert not resultado["is_valid"]
+        assert "campo_inexistente" in resultado["errors"][0]
+        assert "no existe" in resultado["errors"][0]
+
 
 class TestValidarRangos:
     """Tests para la función validar_rangos."""
@@ -113,6 +125,29 @@ class TestValidarRangos:
 
         assert resultado["is_valid"]
 
+    def test_dataframe_vacio_es_valido(self):
+        """Should return valid for empty DataFrame."""
+        from src.validaciones import validar_rangos
+
+        df = pd.DataFrame()
+
+        resultado = validar_rangos(df, {"edad": (0, 100)})
+
+        assert resultado["is_valid"]
+        assert len(resultado["errors"]) == 0
+
+    def test_campo_no_existe_en_dataframe(self):
+        """Should report error when field doesn't exist."""
+        from src.validaciones import validar_rangos
+
+        df = pd.DataFrame([{"edad": 25}])
+
+        resultado = validar_rangos(df, {"campo_inexistente": (0, 100)})
+
+        assert not resultado["is_valid"]
+        assert "campo_inexistente" in resultado["errors"][0]
+        assert "no existe" in resultado["errors"][0]
+
 
 class TestValidarTipos:
     """Tests para la función validar_tipos."""
@@ -156,6 +191,29 @@ class TestValidarTipos:
 
         assert not resultado["is_valid"]
         assert len(resultado["errors"]) > 0
+
+    def test_dataframe_vacio_es_valido(self):
+        """Should return valid for empty DataFrame."""
+        from src.validaciones import validar_tipos
+
+        df = pd.DataFrame()
+
+        resultado = validar_tipos(df, {"id": int})
+
+        assert resultado["is_valid"]
+        assert len(resultado["errors"]) == 0
+
+    def test_campo_no_existe_en_dataframe(self):
+        """Should report error when field doesn't exist."""
+        from src.validaciones import validar_tipos
+
+        df = pd.DataFrame([{"id": 1}])
+
+        resultado = validar_tipos(df, {"campo_inexistente": int})
+
+        assert not resultado["is_valid"]
+        assert "campo_inexistente" in resultado["errors"][0]
+        assert "no existe" in resultado["errors"][0]
 
 
 class TestValidarIntegridadReferencial:
@@ -222,6 +280,44 @@ class TestValidarIntegridadReferencial:
         assert "producto_id" in resultado["errors"][0]
         assert "cliente_id" in resultado["errors"][1]
 
+    def test_dataframe_vacio_es_valido(self):
+        """Should return valid for empty DataFrame."""
+        from src.validaciones import validar_integridad_referencial
+
+        df = pd.DataFrame()
+        df_ref = pd.DataFrame([{"producto_id": 1}])
+
+        resultado = validar_integridad_referencial(df, {"producto_id": df_ref})
+
+        assert resultado["is_valid"]
+        assert len(resultado["errors"]) == 0
+
+    def test_campo_fk_no_existe_en_dataframe(self):
+        """Should report error when FK field doesn't exist in main DataFrame."""
+        from src.validaciones import validar_integridad_referencial
+
+        df = pd.DataFrame([{"id": 1}])
+        df_ref = pd.DataFrame([{"producto_id": 1}])
+
+        resultado = validar_integridad_referencial(df, {"producto_id": df_ref})
+
+        assert not resultado["is_valid"]
+        assert "producto_id" in resultado["errors"][0]
+        assert "no existe en DataFrame" in resultado["errors"][0]
+
+    def test_campo_fk_no_existe_en_tabla_referencia(self):
+        """Should report error when FK field doesn't exist in reference table."""
+        from src.validaciones import validar_integridad_referencial
+
+        df = pd.DataFrame([{"producto_id": 1}])
+        df_ref = pd.DataFrame([{"id": 1}])  # No tiene producto_id
+
+        resultado = validar_integridad_referencial(df, {"producto_id": df_ref})
+
+        assert not resultado["is_valid"]
+        assert "producto_id" in resultado["errors"][0]
+        assert "tabla de referencia" in resultado["errors"][0]
+
 
 class TestValidarUnicidad:
     """Tests para la función validar_unicidad."""
@@ -280,3 +376,37 @@ class TestValidarUnicidad:
 
         assert not resultado["is_valid"]
         assert len(resultado["errors"]) == 1
+
+    def test_dataframe_vacio_es_valido(self):
+        """Should return valid for empty DataFrame."""
+        from src.validaciones import validar_unicidad
+
+        df = pd.DataFrame()
+
+        resultado = validar_unicidad(df, ["id"])
+
+        assert resultado["is_valid"]
+        assert len(resultado["errors"]) == 0
+
+    def test_campo_simple_no_existe(self):
+        """Should report error when simple field doesn't exist."""
+        from src.validaciones import validar_unicidad
+
+        df = pd.DataFrame([{"id": 1}])
+
+        resultado = validar_unicidad(df, ["campo_inexistente"])
+
+        assert not resultado["is_valid"]
+        assert "campo_inexistente" in resultado["errors"][0]
+        assert "no existe" in resultado["errors"][0]
+
+    def test_campos_combinacion_no_existen(self):
+        """Should report error when combination fields don't exist."""
+        from src.validaciones import validar_unicidad
+
+        df = pd.DataFrame([{"id": 1}])
+
+        resultado = validar_unicidad(df, [["campo1", "campo2"]])
+
+        assert not resultado["is_valid"]
+        assert "campo1" in resultado["errors"][0] or "campo2" in resultado["errors"][0]
