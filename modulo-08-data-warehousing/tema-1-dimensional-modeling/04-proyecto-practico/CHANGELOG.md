@@ -6,6 +6,26 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.
 
 ---
 
+## [1.1.0] - 2025-11-30
+
+### Added
+- **JAR-336**: Script CLI `cargar_datawarehouse.py` con argparse para ETL configurable
+- **JAR-336**: Soporte de logging a archivo en `configurar_logging()`
+- **JAR-336**: Función `generar_reporte_resumen()` para estadísticas de carga
+
+### Changed
+- **JAR-337**: README.md actualizado con estadísticas correctas (197 tests, 98% coverage)
+- **JAR-337**: CHANGELOG.md actualizado con formato estándar
+
+### Quality Metrics
+- **197 tests passing** (100% success rate)
+- **98% code coverage** (exceeds 80% requirement)
+- **0 flake8 errors**
+- **0 mypy errors**
+- **100% black formatting** compliance
+
+---
+
 ## [1.0.0] - 2025-11-29
 
 ### Added
@@ -59,6 +79,6 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.
 
 ---
 
-**Última actualización:** 2025-11-29
-**Issue:** JAR-325
+**Última actualización:** 2025-11-30
+**Issue:** JAR-337
 **Estado:** COMPLETADO

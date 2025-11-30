@@ -94,20 +94,21 @@ DimCliente -- FactVentas -- DimProducto
 │   ├── queries_analiticos.py         # ✅ 6 queries OLAP
 │   └── utilidades.py                 # ✅ Logging, formateo, helpers
 │
-├── tests/                            # Tests unitarios (TDD) - 154 tests
+├── tests/                            # Tests unitarios (TDD) - 197 tests
 │   ├── __init__.py
 │   ├── test_generador_dim_fecha.py   # ✅ 12 tests (100% passing, 95% cov)
-│   ├── test_generador_dim_producto.py # ✅ 14 tests (100% passing, 93% cov)
-│   ├── test_generador_dim_cliente.py # ✅ 14 tests (100% passing, 94% cov)
+│   ├── test_generador_dim_producto.py # ✅ 14 tests (100% passing, 97% cov)
+│   ├── test_generador_dim_cliente.py # ✅ 22 tests (100% passing, 98% cov)
 │   ├── test_generador_dim_vendedor.py # ✅ 17 tests (100% passing, 93% cov)
-│   ├── test_generador_fact_ventas.py # ✅ 19 tests (100% passing, 91% cov)
-│   ├── test_scd_tipo2.py             # ✅ 12 tests (100% passing, 95% cov)
-│   ├── test_validaciones.py          # ✅ 13 tests (100% passing, 95% cov)
-│   ├── test_database.py              # ✅ 11 tests (100% passing, 94% cov)
-│   ├── test_queries_analiticos.py    # ✅ 26 tests (100% passing, 90% cov)
-│   └── test_utilidades.py            # ✅ 16 tests (100% passing, 91% cov)
+│   ├── test_generador_fact_ventas.py # ✅ 19 tests (100% passing, 92% cov)
+│   ├── test_scd_tipo2.py             # ✅ 12 tests (100% passing, 100% cov)
+│   ├── test_validaciones.py          # ✅ 26 tests (100% passing, 100% cov)
+│   ├── test_database.py              # ✅ 17 tests (100% passing, 100% cov)
+│   ├── test_queries_analiticos.py    # ✅ 26 tests (100% passing, 100% cov)
+│   └── test_utilidades.py            # ✅ 32 tests (100% passing, 99% cov)
 │
-├── main.py                           # Pipeline completo end-to-end
+├── main.py                           # Pipeline demo (uso básico)
+├── cargar_datawarehouse.py           # CLI ETL completo con argparse
 ├── schema.sql                        # DDL del Star Schema (5 tablas)
 ├── requirements.txt                  # Dependencias Python
 ├── .gitignore                        # Archivos ignorados por git
@@ -116,12 +117,13 @@ DimCliente -- FactVentas -- DimProducto
 ```
 
 **Estadísticas del Proyecto:**
-- **Líneas de código**: ~3,500 (src + tests)
-- **Tests**: ✅ **154 tests** (100% passing - 0 fallos)
-- **Cobertura promedio**: ✅ **92.8%** (supera objetivo ≥80%)
-- **Módulos**: 10 módulos (100% completitud)
-- **Funciones**: 55+ funciones con type hints y docstrings completas
+- **Líneas de código**: ~4,000 (src + tests)
+- **Tests**: ✅ **197 tests** (100% passing - 0 fallos)
+- **Cobertura promedio**: ✅ **98%** (supera objetivo ≥80%)
+- **Módulos**: 11 módulos (100% completitud)
+- **Funciones**: 60+ funciones con type hints y docstrings completas
 - **Star Schema**: Completamente funcional con integridad referencial validada
+- **CLI**: Script `cargar_datawarehouse.py` con argparse para ejecución flexible
 
 ---
 
@@ -812,7 +814,26 @@ git config core.autocrlf true
 
 ### Opciones de Extensión (Opcional)
 
-1. **Ejecutar pipeline completo**:
+1. **Ejecutar pipeline con CLI**:
+   ```bash
+   # Uso básico
+   python cargar_datawarehouse.py --db output/dwh.db --ventas 1000
+
+   # Con más opciones
+   python cargar_datawarehouse.py \
+       --db output/dwh.db \
+       --ventas 5000 \
+       --productos 200 \
+       --clientes 500 \
+       --vendedores 50 \
+       --log-file logs/etl.log \
+       --log-level DEBUG
+
+   # Ver todas las opciones
+   python cargar_datawarehouse.py --help
+   ```
+
+   O usar el script demo simple:
    ```bash
    python main.py
    ```
@@ -876,19 +897,20 @@ Proyecto educativo del **Master en Ingeniería de Datos con IA**.
 
 ---
 
-**Última actualización:** 2025-11-11
-**Versión del proyecto:** 1.0 ✅ **100% COMPLETADO**
+**Última actualización:** 2025-11-30
+**Versión del proyecto:** 1.1 ✅ **100% COMPLETADO**
 **Autor:** Claude Code (Anthropic) + Master Data Engineering
 
 **Estado del Star Schema:**
 - ✅ DimFecha (366 registros, calendario completo 2024)
 - ✅ DimProducto (con Faker, categorización automática)
 - ✅ DimCliente (con Faker, SCD Type 2)
-- ✅ DimVendedor (con Faker, estructura jerárquica) - **COMPLETADO 2025-11-10**
-- ✅ FactVentas (tabla de hechos completa) - **COMPLETADO 2025-11-10**
+- ✅ DimVendedor (con Faker, estructura jerárquica)
+- ✅ FactVentas (tabla de hechos completa)
 
 **Métricas finales:**
-- **10/10 módulos implementados** (100%)
-- **154 tests pasando** (100% éxito)
-- **Cobertura promedio: 92.8%** (supera objetivo ≥80%)
+- **11 módulos implementados** (100%)
+- **197 tests pasando** (100% éxito)
+- **Cobertura: 98%** (supera objetivo ≥80%)
+- **CLI completo** con argparse para ejecución flexible
 - **Star Schema completamente funcional** con integridad referencial validada
