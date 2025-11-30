@@ -2,10 +2,11 @@
 
 ## Introducción a los Ejemplos
 
-En esta sección trabajaremos con **TechMart**, una empresa ficticia de e-commerce de electrónica. TechMart tiene:
-- Sistema transaccional en PostgreSQL con ventas en tiempo real
+En esta sección trabajaremos con **FinTech Analytics**, una empresa ficticia del sector fintech y análisis financiero. Como Data Engineer en **DataFlow Industries**, te han asignado a este cliente que tiene:
+
+- Sistema transaccional en PostgreSQL con transacciones en tiempo real
 - Necesidad de reportes analíticos para el equipo de negocio
-- Múltiples fuentes de datos que necesitan consolidarse
+- Múltiples fuentes de datos que necesitan consolidarse (clientes, órdenes, pagos)
 
 Vamos a construir un Data Warehouse usando dbt, progresando desde transformaciones básicas hasta pipelines complejos.
 
@@ -15,7 +16,7 @@ Vamos a construir un Data Warehouse usando dbt, progresando desde transformacion
 
 ### Contexto
 
-TechMart tiene una tabla `raw.customers` con datos de clientes que vienen directamente de su aplicación web. Los datos tienen problemas de calidad:
+FinTech Analytics tiene una tabla `raw.customers` con datos de clientes que vienen directamente de su aplicación web. Los datos tienen problemas de calidad:
 - Emails en mayúsculas/minúsculas inconsistentes
 - Nombres con espacios extra
 - Registros con email NULL
@@ -38,7 +39,7 @@ Necesitamos crear una tabla limpia `staging.stg_customers` que los analistas pue
 
 ```bash
 # Estructura inicial
-techmart_dbt/
+fintech_dbt/
 ├── dbt_project.yml
 ├── models/
 │   └── staging/
@@ -50,11 +51,11 @@ techmart_dbt/
 **Archivo: `dbt_project.yml`**
 
 ```yaml
-name: 'techmart_analytics'
+name: 'fintech_analytics'
 version: '1.0.0'
 config-version: 2
 
-profile: 'techmart'
+profile: 'fintech'
 
 model-paths: ["models"]
 test-paths: ["tests"]
@@ -62,7 +63,7 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 
 models:
-  techmart_analytics:
+  fintech_analytics:
     staging:
       +materialized: view
       +schema: staging
@@ -177,7 +178,7 @@ dbt run --select stg_customers
 
 ### Contexto
 
-Ahora TechMart necesita una tabla dimensional de clientes (`dim_customers`) que:
+Ahora FinTech Analytics necesita una tabla dimensional de clientes (`dim_customers`) que:
 - Use los datos limpios de `stg_customers`
 - Agregue segmentación por valor de lifetime
 - Incluya tests automáticos de calidad
@@ -378,7 +379,7 @@ dbt test --select dim_customers
 
 ### Contexto
 
-TechMart tiene múltiples columnas de dinero almacenadas en centavos (para evitar problemas de decimales). Queremos una función reutilizable para convertir centavos a dólares.
+FinTech Analytics tiene múltiples columnas de dinero almacenadas en centavos (para evitar problemas de decimales). Queremos una función reutilizable para convertir centavos a dólares.
 
 Además, tienen varios reportes que necesitan pivotar métodos de pago.
 
@@ -518,7 +519,7 @@ FROM payments
 
 ### Contexto
 
-TechMart tiene una tabla `raw.page_views` que recibe millones de eventos diarios. Reconstruir toda la tabla cada día es imposible (tardaría horas). Necesitamos un modelo incremental que solo procese eventos nuevos.
+FinTech Analytics tiene una tabla `raw.page_views` que recibe millones de eventos diarios. Reconstruir toda la tabla cada día es imposible (tardaría horas). Necesitamos un modelo incremental que solo procese eventos nuevos.
 
 ### Datos de Entrada
 
@@ -652,7 +653,7 @@ models:
 
 ### Contexto
 
-TechMart quiere analizar cómo cambian los precios de productos a lo largo del tiempo. Si un producto cuesta $100 hoy y mañana sube a $120, queremos guardar ambos registros históricos.
+FinTech Analytics quiere analizar cómo cambian los precios de productos a lo largo del tiempo. Si un producto cuesta $100 hoy y mañana sube a $120, queremos guardar ambos registros históricos.
 
 Esto es **Slowly Changing Dimension Type 2**, que dbt puede hacer automáticamente con snapshots.
 
