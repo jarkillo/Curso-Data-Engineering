@@ -25,7 +25,7 @@ export default function ModulesPage() {
         </Link>
 
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
             Módulo {selectedModule.number}: {selectedModule.title}
           </h1>
           <div className="flex items-center space-x-4 mt-4">
@@ -38,7 +38,7 @@ export default function ModulesPage() {
               {selectedModule.status === 'in_progress' && '▶️ En progreso'}
               {selectedModule.status === 'locked' && '🔒 Bloqueado'}
             </span>
-            <span className="text-gray-600">
+            <span className="text-gray-600 dark:text-gray-400">
               {selectedModule.progress_percentage}% completado
             </span>
           </div>
@@ -55,12 +55,12 @@ export default function ModulesPage() {
                     ) : (
                       <PlayCircle className="w-6 h-6 text-primary" />
                     )}
-                    <h3 className="text-xl font-semibold text-gray-900">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                       Tema {topic.number}: {topic.title}
                     </h3>
                   </div>
                   {topic.coverage && (
-                    <p className="text-sm text-gray-600 ml-9">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 ml-9">
                       Cobertura de tests: {topic.coverage}%
                     </p>
                   )}
@@ -69,7 +69,7 @@ export default function ModulesPage() {
                       <Link
                         key={section}
                         to={`/modules/${moduleId}/${topic.id}?section=${section}`}
-                        className="px-3 py-1 bg-primary-50 text-primary rounded-lg text-sm hover:bg-primary-100 transition-colors"
+                        className="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary dark:text-primary-300 rounded-lg text-sm hover:bg-primary-100 dark:hover:bg-primary-800/40 transition-colors"
                       >
                         {section === 'teoria' && '📖 Teoría'}
                         {section === 'ejemplos' && '💡 Ejemplos'}
@@ -91,8 +91,8 @@ export default function ModulesPage() {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">📚 Módulos del Curso</h1>
-        <p className="text-lg text-gray-600">
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">📚 Módulos del Curso</h1>
+        <p className="text-lg text-gray-600 dark:text-gray-400">
           10 módulos completos para convertirte en Data Engineer profesional
         </p>
       </div>
@@ -106,10 +106,10 @@ export default function ModulesPage() {
           >
             <div className="flex items-start justify-between mb-4">
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 group-hover:text-primary transition-colors">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">
                   Módulo {module.number}
                 </h3>
-                <p className="text-lg text-gray-700 mt-1">{module.title}</p>
+                <p className="text-lg text-gray-700 dark:text-gray-300 mt-1">{module.title}</p>
               </div>
               {module.status === 'completed' && <CheckCircle className="w-8 h-8 text-green-500" />}
               {module.status === 'in_progress' && <PlayCircle className="w-8 h-8 text-primary" />}
@@ -117,7 +117,7 @@ export default function ModulesPage() {
             </div>
 
             <div className="space-y-2">
-              <div className="flex justify-between text-sm text-gray-600">
+              <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 <span>{module.topic_count} temas</span>
                 <span>{module.progress_percentage}% completado</span>
               </div>
