@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: int_orders_enriched
+    description: |
+      Modelo intermedio que combina ordenes con datos de clientes y productos.
+      Este modelo representa la capa INTERMEDIATE del pipeline dbt:
+        staging -> INTERMEDIATE -> marts
+
+      Proposito:
+      - Unificar datos de multiples fuentes staging
+      - Calcular campos derivados comunes
+      - Facilitar la creacion de dimensiones y hechos
+
+    columns:
+      - name: order_id
+        description: "Primary key del pedido"
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        description: "Foreign key al cliente"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+
+      - name: product_id
+        description: "Foreign key al producto"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+
+      - name: total_amount
+        description: "Monto total del pedido"
+        tests:
+          - not_null
+
+      - name: order_value_tier
+        description: "Clasificacion del valor del pedido"
+        tests:
+          - accepted_values:
+              values: ['High Value', 'Medium Value', 'Low Value']

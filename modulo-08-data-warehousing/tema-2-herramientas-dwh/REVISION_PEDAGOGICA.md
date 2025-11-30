@@ -4,7 +4,7 @@
 
 - **Módulo**: 8 - Data Warehousing y Analytics
 - **Tema**: 2 - Herramientas DWH (dbt, Snowflake/Redshift)
-- **Fecha de revisión**: 2025-11-29
+- **Fecha de revisión**: 2025-12-01
 - **Revisor**: Claude Code (Psicólogo Educativo)
 
 ---
@@ -24,7 +24,7 @@ La progresión es clara y lógica:
 
 **Fortalezas**:
 - Analogías efectivas (IDE vs archivos .txt sueltos)
-- Contexto real desde el inicio (DataMart Inc., TechMart)
+- Contexto real desde el inicio (DataMart Inc., FinTech Analytics)
 - No asume conocimiento previo de dbt
 
 ### 2. Claridad Conceptual (9/10)
@@ -51,7 +51,7 @@ Analogías efectivas usadas:
 
 Empresas ficticias usadas consistentemente:
 - DataMart Inc. (teoría)
-- TechMart (proyecto práctico)
+- FinTech Analytics (proyecto práctico)
 
 ### 4. Ejercicios Graduados (10/10)
 
@@ -75,11 +75,12 @@ Cada ejercicio tiene:
 El proyecto práctico es completo y realista:
 - Estructura de proyecto dbt real
 - Seeds con datos realistas
-- 3 modelos staging + 2 dimensiones + 2 hechos
-- 4 tests personalizados + tests genéricos
+- 3 modelos staging + 1 intermediate + 2 dimensiones + 2 hechos
+- 4 tests personalizados + ~45 tests genéricos
 - Macros reutilizables
-- Snapshot SCD Type 2
+- 2 Snapshots SCD Type 2 (products, customers)
 - Documentación completa
+- 3 capas de transformación: staging → intermediate → marts
 
 ### 6. Motivación Intrínseca (9/10)
 
@@ -147,11 +148,12 @@ El proyecto práctico es completo y realista:
 ### Proyecto Práctico
 - [x] Estructura de proyecto dbt completa
 - [x] Seeds con datos realistas
-- [x] Modelos staging, dimensiones, hechos
-- [x] Tests genéricos y personalizados
+- [x] Modelos staging, intermediate, dimensiones, hechos
+- [x] Tests genéricos (~45) y personalizados (4)
 - [x] Macros reutilizables
-- [x] Snapshot SCD Type 2
+- [x] 2 Snapshots SCD Type 2 (products, customers)
 - [x] README completo
+- [x] 3 capas: staging → intermediate → marts
 
 ---
 
@@ -175,4 +177,5 @@ El tema está listo para ser utilizado por estudiantes.
 ---
 
 **Firma del Revisor**: Claude Code (Psicólogo Educativo)
-**Fecha**: 2025-11-29
+**Fecha**: 2025-12-01
+**Issue**: JAR-342
