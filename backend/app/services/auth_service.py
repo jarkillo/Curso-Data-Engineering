@@ -81,7 +81,7 @@ class AuthService:
         if not user:
             return None
 
-        if not verify_password(login_data.password, user.password_hash):
+        if not verify_password(login_data.password, user.hashed_password):
             return None
 
         # Update last login
