@@ -1147,7 +1147,65 @@ Se recomienda unirse a:
 
 ---
 
+## Estado de Implementación
+
+### Módulos Completados
+
+| Módulo | Nombre | Estado | Tests | Cobertura |
+|--------|--------|--------|-------|-----------|
+| 1 | Fundamentos de Programación | ✅ 100% | 50+ | >80% |
+| 2 | Bases de Datos y SQL | ✅ 100% | 40+ | >80% |
+| 3 | Ingeniería de Datos Core | ✅ 100% | 60+ | >80% |
+| 4 | APIs y Web Scraping | ✅ 100% | 45+ | >80% |
+| 5 | Bases de Datos Avanzadas | ✅ 100% | 25+ | >80% |
+| 6 | Orquestación (Airflow) | 🚧 En desarrollo | - | - |
+| 7 | Cloud Data Engineering | 🚧 En desarrollo | - | - |
+| **8** | **Data Warehousing y Analytics** | **✅ 100%** | **280+** | **91%** |
+| 9 | DataOps y Gobernanza | 📋 Planificado | - | - |
+| 10 | Proyecto Final | 📋 Planificado | - | - |
+
+### MÓDULO 8: Data Warehousing y Analytics ✅ COMPLETADO
+
+**Duración:** 4-6 semanas
+**Nivel:** Avanzado
+
+**Estado:** ✅ COMPLETADO (2025-11-30)
+
+#### Temas Implementados
+
+1. ✅ **Dimensional Modeling** (Tema 1)
+   - Teoría: Star Schema, Snowflake, SCD Types
+   - Ejemplos y Ejercicios completos
+   - Proyecto práctico: 156 tests, 93% cobertura
+
+2. ✅ **Herramientas DWH - dbt** (Tema 2)
+   - Teoría: ELT, Materializaciones, Testing
+   - Pipeline dbt completo con TechMart Analytics
+   - ~44 tests (genéricos + personalizados)
+
+3. ✅ **Analytics y BI** (Tema 3)
+   - Teoría: KPIs, Dashboards, Data Storytelling
+   - Proyecto práctico: Sistema de Métricas
+   - 84 tests, 92% cobertura
+
+#### Métricas del Módulo
+
+- **Total de tests**: 280+
+- **Cobertura promedio**: 91%
+- **Tiempo de estudio estimado**: 60-75 horas
+- **Proyectos prácticos**: 3/3 completos
+
+---
+
 ## Changelog del Programa
+
+### Versión 1.1.0 (Noviembre 2025)
+- **JAR-328**: Módulo 8 (Data Warehousing) completado y documentado
+  - Tema 1: Dimensional Modeling con proyecto práctico
+  - Tema 2: Herramientas DWH con pipeline dbt
+  - Tema 3: Analytics y BI con sistema de métricas
+- 280+ tests con 91% de cobertura promedio
+- README del módulo completo y documentado
 
 ### Versión 1.0 (Octubre 2024)
 - Creación inicial del programa
@@ -1163,4 +1221,3 @@ Se recomienda unirse a:
 Este es un viaje desafiante pero extremadamente gratificante. Recuerda: la constancia es más importante que la perfección. Avanza a tu ritmo, construye proyectos reales y disfruta el proceso de convertirte en un Data Engineer experto.
 
 **¡Éxito en tu aprendizaje! 🚀**
-
