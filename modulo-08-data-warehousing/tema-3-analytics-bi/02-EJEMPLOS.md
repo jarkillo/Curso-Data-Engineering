@@ -158,600 +158,1144 @@ Con estos KPIs definidos, RestaurantData Co. puede:
 
 ---
 
-## Ejemplo 2: Diseñar Dashboard Ejecutivo - Nivel: Intermedio
+## Ejemplo 2: Dashboard de Ventas con Python/Plotly - Nivel: Intermedio
 
 ### Contexto
 
-El CFO de **FinTech Analytics** necesita un dashboard ejecutivo para la reunión semanal del board. Quiere ver el estado general del negocio en una sola pantalla.
+**FinTech Analytics** necesita un dashboard visual para analizar sus ventas de servicios financieros. Como Data Engineer, debes crear visualizaciones interactivas usando Python y Plotly que se puedan integrar fácilmente en cualquier herramienta de BI o página web.
 
-### Paso 1: Entender la Audiencia
+### Paso 1: Preparar los Datos
 
-| Aspecto | Detalle |
-|---------|---------|
-| Usuario | CFO y board de directores |
-| Frecuencia de uso | Semanal (reunión de lunes) |
-| Tiempo disponible | 10 minutos máximo |
-| Nivel técnico | Bajo - necesitan claridad |
-| Decisiones que toman | Estratégicas: inversión, hiring, prioridades |
+Primero, creamos datos de ejemplo que simulan las ventas de FinTech Analytics:
 
-### Paso 2: Seleccionar KPIs (Regla del 5)
+```python
+import pandas as pd
+import numpy as np
+from datetime import datetime, timedelta
 
-Solo 5 KPIs máximo para nivel ejecutivo:
+# Generar datos de ventas para FinTech Analytics
+np.random.seed(42)
 
-1. **MRR (Monthly Recurring Revenue)**: Salud financiera
-2. **Net Revenue Retention (NRR)**: Crecimiento de clientes existentes
-3. **CAC Payback Period**: Eficiencia de adquisición
-4. **Gross Margin**: Rentabilidad operativa
-5. **Runway**: Meses de operación restantes
+# Crear 12 meses de datos
+dates = pd.date_range(start='2024-01-01', end='2024-12-31', freq='D')
 
-### Paso 3: Diseñar el Layout
+# Productos financieros de FinTech Analytics
+products = ['Préstamos Personales', 'Inversiones', 'Seguros', 'Tarjetas', 'Cuentas Premium']
+channels = ['Web', 'App Móvil', 'Sucursal', 'Teléfono']
+regions = ['Norte', 'Sur', 'Centro', 'Este', 'Oeste']
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│  FINTECH ANALYTICS - EXECUTIVE DASHBOARD           Semana del 11 Mar   │
-│  Última actualización: Hoy 09:00 AM                                     │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐        │
-│  │ 💰 MRR      │ │ 📈 NRR      │ │ ⏱️ CAC      │ │ 📊 Margen   │        │
-│  │             │ │             │ │ Payback     │ │ Bruto       │        │
-│  │  $2.4M      │ │   112%      │ │  8 meses    │ │   72%       │        │
-│  │  ↑ 8% MoM   │ │   ↑ 3pp     │ │   ↓ 2 meses │ │   → 0pp     │        │
-│  │  🟢 On Track│ │  🟢 Strong  │ │  🟡 Atención│ │  🟢 Healthy │        │
-│  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘        │
-│                                                                          │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   MRR TREND - ÚLTIMOS 12 MESES                    RUNWAY: 18 meses     │
-│   $3M ┤                                   ╭──     ████████████████████░░│
-│       │                              ╭────╯                              │
-│   $2M ┤                    ╭─────────╯                                   │
-│       │         ╭──────────╯                    Cash: $8.2M             │
-│   $1M ┤  ╭──────╯                               Burn: $456K/mes         │
-│       │──╯                                                               │
-│    $0 ┼──────────────────────────────────                               │
-│        Mar  May  Jul  Sep  Nov  Jan  Mar                                │
-│                                                                          │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   ⚠️ ALERTAS ACTIVAS                          📋 NOTAS DE LA SEMANA     │
-│   ─────────────────                          ────────────────────        │
-│   🟡 CAC subió 15% por campaña Q1           • Cerramos deal Enterprise  │
-│   🟢 NRR récord histórico                    • Churn bajo control        │
-│   🟢 Pipeline Q2 +40% vs Q1                  • Hiring: 3 engineers       │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
+# Generar transacciones
+n_transactions = 5000
+data = {
+    'date': np.random.choice(dates, n_transactions),
+    'product': np.random.choice(products, n_transactions, p=[0.3, 0.25, 0.2, 0.15, 0.1]),
+    'channel': np.random.choice(channels, n_transactions, p=[0.4, 0.35, 0.15, 0.1]),
+    'region': np.random.choice(regions, n_transactions),
+    'revenue': np.random.exponential(500, n_transactions) + 100,
+    'customers': np.random.randint(1, 5, n_transactions)
+}
+
+df = pd.DataFrame(data)
+df['date'] = pd.to_datetime(df['date'])
+df['month'] = df['date'].dt.to_period('M')
+df['revenue'] = df['revenue'].round(2)
+
+print(df.head(10))
+print(f"\nTotal registros: {len(df)}")
+print(f"Revenue total: ${df['revenue'].sum():,.2f}")
 ```
 
-### Paso 4: Implementar Queries
+### Paso 2: Crear Visualización de KPIs con Indicadores
 
-```sql
--- MRR (Monthly Recurring Revenue)
-WITH mrr_by_month AS (
-    SELECT
-        DATE_TRUNC('month', subscription_date) AS month,
-        SUM(monthly_amount) AS mrr
-    FROM subscriptions
-    WHERE status = 'active'
-    GROUP BY 1
+```python
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+# Calcular KPIs
+total_revenue = df['revenue'].sum()
+total_customers = df['customers'].sum()
+avg_ticket = total_revenue / len(df)
+monthly_growth = 8.5  # Simulado
+
+# Crear figura con indicadores (gauge charts)
+fig = make_subplots(
+    rows=1, cols=4,
+    specs=[[{"type": "indicator"}, {"type": "indicator"},
+            {"type": "indicator"}, {"type": "indicator"}]],
+    subplot_titles=("Revenue Total", "Clientes", "Ticket Promedio", "Crecimiento MoM")
 )
-SELECT
-    month,
-    mrr,
-    LAG(mrr) OVER (ORDER BY month) AS prev_mrr,
-    (mrr - LAG(mrr) OVER (ORDER BY month)) /
-        NULLIF(LAG(mrr) OVER (ORDER BY month), 0) * 100 AS growth_pct
-FROM mrr_by_month
-ORDER BY month DESC
-LIMIT 12;
 
--- Net Revenue Retention (NRR)
--- NRR = (MRR inicio - Churn - Contraction + Expansion) / MRR inicio * 100
-WITH cohort_mrr AS (
-    SELECT
-        customer_id,
-        DATE_TRUNC('month', first_subscription_date) AS cohort_month,
-        SUM(CASE WHEN month = cohort_month THEN monthly_amount ELSE 0 END) AS starting_mrr,
-        SUM(CASE WHEN month = cohort_month + INTERVAL '12 months'
-                 THEN monthly_amount ELSE 0 END) AS ending_mrr
-    FROM subscription_history
-    GROUP BY 1, 2
+# KPI 1: Revenue Total
+fig.add_trace(go.Indicator(
+    mode="number+delta",
+    value=total_revenue,
+    number={"prefix": "$", "valueformat": ",.0f"},
+    delta={"reference": total_revenue * 0.92, "valueformat": ".1%"},
+    title={"text": "Revenue Total"},
+    domain={'row': 0, 'column': 0}
+), row=1, col=1)
+
+# KPI 2: Total Clientes
+fig.add_trace(go.Indicator(
+    mode="number+delta",
+    value=total_customers,
+    number={"valueformat": ","},
+    delta={"reference": total_customers * 0.95},
+    title={"text": "Clientes Totales"},
+), row=1, col=2)
+
+# KPI 3: Ticket Promedio
+fig.add_trace(go.Indicator(
+    mode="number+delta",
+    value=avg_ticket,
+    number={"prefix": "$", "valueformat": ".2f"},
+    delta={"reference": avg_ticket * 0.98, "valueformat": ".1%"},
+    title={"text": "Ticket Promedio"},
+), row=1, col=3)
+
+# KPI 4: Crecimiento (Gauge)
+fig.add_trace(go.Indicator(
+    mode="gauge+number",
+    value=monthly_growth,
+    number={"suffix": "%"},
+    title={"text": "Crecimiento MoM"},
+    gauge={
+        'axis': {'range': [0, 20]},
+        'bar': {'color': "darkblue"},
+        'steps': [
+            {'range': [0, 5], 'color': "lightcoral"},
+            {'range': [5, 10], 'color': "lightyellow"},
+            {'range': [10, 20], 'color': "lightgreen"}
+        ],
+        'threshold': {
+            'line': {'color': "red", 'width': 4},
+            'thickness': 0.75,
+            'value': 15  # Objetivo
+        }
+    }
+), row=1, col=4)
+
+fig.update_layout(
+    title="FinTech Analytics - Dashboard de KPIs",
+    height=300
 )
-SELECT
-    cohort_month,
-    SUM(ending_mrr) / NULLIF(SUM(starting_mrr), 0) * 100 AS nrr_12_month
-FROM cohort_mrr
-GROUP BY cohort_month
-ORDER BY cohort_month DESC;
-
--- CAC Payback Period (en meses)
--- Payback = CAC / (ARPU * Gross Margin)
-SELECT
-    DATE_TRUNC('month', acquisition_date) AS month,
-    AVG(acquisition_cost) AS avg_cac,
-    AVG(monthly_revenue) AS avg_arpu,
-    0.72 AS gross_margin,  -- 72% margen
-    AVG(acquisition_cost) / NULLIF(AVG(monthly_revenue) * 0.72, 0) AS payback_months
-FROM customers c
-JOIN customer_revenue cr ON c.customer_id = cr.customer_id
-GROUP BY 1
-ORDER BY 1 DESC;
+fig.show()
 ```
 
-### Paso 5: Documentar el Dashboard
+### Paso 3: Gráfico de Tendencia de Revenue
 
-```yaml
-# dashboard_spec.yaml
-name: "Executive Dashboard"
-owner: "Data Team"
-refresh_frequency: "Daily 6 AM UTC"
-audience: "C-Level, Board"
+```python
+import plotly.express as px
 
-kpis:
-  - name: "MRR"
-    definition: "Sum of monthly recurring revenue from active subscriptions"
-    source_table: "analytics.mrr_daily"
-    thresholds:
-      green: "MoM growth >= 5%"
-      yellow: "MoM growth between 0% and 5%"
-      red: "MoM growth < 0%"
+# Agrupar por mes
+monthly_revenue = df.groupby('month').agg({
+    'revenue': 'sum',
+    'customers': 'sum'
+}).reset_index()
+monthly_revenue['month'] = monthly_revenue['month'].astype(str)
 
-  - name: "NRR"
-    definition: "Revenue from existing customers after 12 months / Starting revenue"
-    source_table: "analytics.cohort_retention"
-    thresholds:
-      green: ">= 100%"
-      yellow: "90% - 100%"
-      red: "< 90%"
+# Crear gráfico de línea con área
+fig = go.Figure()
 
-  - name: "CAC Payback"
-    definition: "Months to recover customer acquisition cost"
-    source_table: "analytics.unit_economics"
-    thresholds:
-      green: "<= 12 months"
-      yellow: "12 - 18 months"
-      red: "> 18 months"
+# Línea principal de revenue
+fig.add_trace(go.Scatter(
+    x=monthly_revenue['month'],
+    y=monthly_revenue['revenue'],
+    mode='lines+markers',
+    name='Revenue',
+    line=dict(color='#2E86AB', width=3),
+    marker=dict(size=10),
+    fill='tozeroy',
+    fillcolor='rgba(46, 134, 171, 0.2)'
+))
 
-alerts:
-  - condition: "mrr_growth < 0"
-    severity: "critical"
-    notify: ["cfo@company.com", "ceo@company.com"]
+# Línea de tendencia (promedio móvil)
+monthly_revenue['trend'] = monthly_revenue['revenue'].rolling(window=3, min_periods=1).mean()
+fig.add_trace(go.Scatter(
+    x=monthly_revenue['month'],
+    y=monthly_revenue['trend'],
+    mode='lines',
+    name='Tendencia (3 meses)',
+    line=dict(color='#E94F37', width=2, dash='dash')
+))
 
-  - condition: "nrr < 90"
-    severity: "warning"
-    notify: ["cfo@company.com"]
+fig.update_layout(
+    title="Tendencia de Revenue Mensual - FinTech Analytics",
+    xaxis_title="Mes",
+    yaxis_title="Revenue ($)",
+    yaxis_tickformat="$,.0f",
+    hovermode='x unified',
+    template='plotly_white'
+)
+fig.show()
+```
+
+### Paso 4: Gráfico de Barras por Producto y Canal
+
+```python
+# Revenue por producto
+product_revenue = df.groupby('product')['revenue'].sum().sort_values(ascending=True)
+
+fig = go.Figure()
+
+fig.add_trace(go.Bar(
+    x=product_revenue.values,
+    y=product_revenue.index,
+    orientation='h',
+    marker_color=['#A4243B', '#D8C99B', '#D8973C', '#BD632F', '#2E86AB'],
+    text=[f"${x:,.0f}" for x in product_revenue.values],
+    textposition='outside'
+))
+
+fig.update_layout(
+    title="Revenue por Producto - FinTech Analytics",
+    xaxis_title="Revenue ($)",
+    yaxis_title="Producto",
+    xaxis_tickformat="$,.0f",
+    template='plotly_white',
+    height=400
+)
+fig.show()
+
+# Revenue por canal (pie chart)
+channel_revenue = df.groupby('channel')['revenue'].sum()
+
+fig = go.Figure(data=[go.Pie(
+    labels=channel_revenue.index,
+    values=channel_revenue.values,
+    hole=0.4,
+    marker_colors=['#2E86AB', '#A23B72', '#F18F01', '#C73E1D'],
+    textinfo='label+percent',
+    textposition='outside'
+)])
+
+fig.update_layout(
+    title="Distribución de Revenue por Canal",
+    annotations=[dict(text='Por Canal', x=0.5, y=0.5, font_size=16, showarrow=False)]
+)
+fig.show()
+```
+
+### Paso 5: Dashboard Completo Combinado
+
+```python
+from plotly.subplots import make_subplots
+
+# Preparar datos
+monthly_data = df.groupby('month')['revenue'].sum().reset_index()
+monthly_data['month'] = monthly_data['month'].astype(str)
+product_data = df.groupby('product')['revenue'].sum().sort_values(ascending=False)
+channel_data = df.groupby('channel')['revenue'].sum()
+region_data = df.groupby('region')['revenue'].sum()
+
+# Crear dashboard con subplots
+fig = make_subplots(
+    rows=2, cols=2,
+    subplot_titles=(
+        "Tendencia de Revenue Mensual",
+        "Revenue por Producto",
+        "Distribución por Canal",
+        "Revenue por Región"
+    ),
+    specs=[
+        [{"type": "scatter"}, {"type": "bar"}],
+        [{"type": "pie"}, {"type": "bar"}]
+    ]
+)
+
+# 1. Tendencia mensual (línea)
+fig.add_trace(go.Scatter(
+    x=monthly_data['month'],
+    y=monthly_data['revenue'],
+    mode='lines+markers',
+    name='Revenue Mensual',
+    line=dict(color='#2E86AB', width=2),
+    fill='tozeroy'
+), row=1, col=1)
+
+# 2. Por producto (barras horizontales)
+fig.add_trace(go.Bar(
+    x=product_data.values,
+    y=product_data.index,
+    orientation='h',
+    name='Por Producto',
+    marker_color='#A23B72'
+), row=1, col=2)
+
+# 3. Por canal (pie)
+fig.add_trace(go.Pie(
+    labels=channel_data.index,
+    values=channel_data.values,
+    name='Por Canal',
+    hole=0.3
+), row=2, col=1)
+
+# 4. Por región (barras)
+fig.add_trace(go.Bar(
+    x=region_data.index,
+    y=region_data.values,
+    name='Por Región',
+    marker_color='#F18F01'
+), row=2, col=2)
+
+fig.update_layout(
+    title_text="FinTech Analytics - Dashboard de Ventas Completo",
+    height=700,
+    showlegend=False,
+    template='plotly_white'
+)
+
+# Formatear ejes
+fig.update_yaxes(tickformat="$,.0f", row=1, col=1)
+fig.update_xaxes(tickformat="$,.0f", row=1, col=2)
+fig.update_yaxes(tickformat="$,.0f", row=2, col=2)
+
+fig.show()
+
+# Guardar como HTML interactivo
+fig.write_html("fintech_dashboard.html")
+print("Dashboard guardado como 'fintech_dashboard.html'")
 ```
 
 ### Interpretación
 
-Este dashboard permite al CFO:
-- **Ver la salud del negocio en 30 segundos** (KPIs arriba)
-- **Entender tendencias** (gráfico de MRR)
-- **Actuar sobre problemas** (alertas con contexto)
-- **Preparar discusión** (notas de la semana)
+Este dashboard con Plotly permite:
+- **Visualizar KPIs en tiempo real** con indicadores interactivos
+- **Analizar tendencias** con gráficos de línea y promedios móviles
+- **Comparar productos/canales** con gráficos de barras y pie
+- **Exportar como HTML** para compartir con stakeholders
+- **Interactuar** con hover, zoom y filtros nativos de Plotly
 
 ---
 
-## Ejemplo 3: Métricas de Producto (Engagement, Retention) - Nivel: Intermedio
+## Ejemplo 3: Operaciones OLAP con Python - Nivel: Intermedio
 
 ### Contexto
 
-**CloudAPI Systems** quiere entender mejor cómo los usuarios interactúan con su plataforma SaaS. El Head of Product necesita métricas de engagement y retention.
+**RestaurantData Co.** tiene un Data Warehouse con ventas de su red de restaurantes. El equipo de análisis necesita explorar los datos usando operaciones OLAP (drill-down, roll-up, slice, dice, pivot) para responder preguntas de negocio dinámicamente.
 
-### Paso 1: Definir el Framework de Métricas de Producto
+### Paso 1: Crear el Cubo de Datos
 
-Usaremos el framework **HEART** de Google:
+```python
+import pandas as pd
+import numpy as np
 
-| Dimensión | Pregunta | Métrica |
-|-----------|----------|---------|
-| **H**appiness | ¿Están satisfechos? | NPS, CSAT |
-| **E**ngagement | ¿Lo usan activamente? | DAU/MAU, Session Duration |
-| **A**doption | ¿Adoptan nuevas features? | Feature Adoption Rate |
-| **R**etention | ¿Vuelven? | D1, D7, D30 Retention |
-| **T**ask Success | ¿Completan tareas? | Task Completion Rate |
+# Crear datos de ventas para RestaurantData Co.
+np.random.seed(42)
 
-### Paso 2: Calcular Ratio DAU/MAU (Stickiness)
+# Dimensiones
+years = [2023, 2024]
+quarters = ['Q1', 'Q2', 'Q3', 'Q4']
+months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+categories = ['Entrantes', 'Platos Principales', 'Postres', 'Bebidas']
+regions = ['Norte', 'Sur', 'Centro', 'Este']
+restaurants = {
+    'Norte': ['Rest-N1', 'Rest-N2', 'Rest-N3'],
+    'Sur': ['Rest-S1', 'Rest-S2'],
+    'Centro': ['Rest-C1', 'Rest-C2', 'Rest-C3', 'Rest-C4'],
+    'Este': ['Rest-E1', 'Rest-E2']
+}
 
-```sql
--- DAU/MAU Ratio (Stickiness)
--- Indica qué porcentaje de usuarios mensuales usa el producto diariamente
--- Benchmark SaaS: 10-20% es bueno, >25% es excelente
+# Generar datos
+data = []
+for year in years:
+    for q_idx, quarter in enumerate(quarters):
+        for m_idx in range(3):  # 3 meses por trimestre
+            month = months[q_idx * 3 + m_idx]
+            for region in regions:
+                for restaurant in restaurants[region]:
+                    for category in categories:
+                        # Ventas base con variación
+                        base_sales = np.random.randint(5000, 20000)
+                        # Más ventas en Q4 (temporada alta)
+                        if quarter == 'Q4':
+                            base_sales *= 1.3
+                        # Centro tiene más ventas
+                        if region == 'Centro':
+                            base_sales *= 1.2
 
-WITH daily_users AS (
-    SELECT
-        event_date,
-        COUNT(DISTINCT user_id) AS dau
-    FROM user_events
-    WHERE event_date >= CURRENT_DATE - INTERVAL '30 days'
-    GROUP BY event_date
-),
-monthly_users AS (
-    SELECT
-        COUNT(DISTINCT user_id) AS mau
-    FROM user_events
-    WHERE event_date >= CURRENT_DATE - INTERVAL '30 days'
-)
-SELECT
-    d.event_date,
-    d.dau,
-    m.mau,
-    ROUND(d.dau * 100.0 / NULLIF(m.mau, 0), 1) AS stickiness_pct
-FROM daily_users d
-CROSS JOIN monthly_users m
-ORDER BY d.event_date;
+                        data.append({
+                            'year': year,
+                            'quarter': quarter,
+                            'month': month,
+                            'region': region,
+                            'restaurant': restaurant,
+                            'category': category,
+                            'sales': round(base_sales),
+                            'orders': np.random.randint(100, 500),
+                            'customers': np.random.randint(80, 400)
+                        })
 
--- Resultado esperado:
--- event_date  | dau    | mau     | stickiness_pct
--- 2024-03-01  | 8,500  | 45,000  | 18.9%
--- 2024-03-02  | 7,200  | 45,000  | 16.0%
--- 2024-03-03  | 3,100  | 45,000  | 6.9%   <- Fin de semana
+df = pd.DataFrame(data)
+print("Cubo de datos creado:")
+print(f"Dimensiones: {df.shape}")
+print(f"\nEjemplo de registros:")
+print(df.head(10))
 ```
 
-### Paso 3: Análisis de Cohortes de Retención
+### Paso 2: DRILL-DOWN (De lo general a lo específico)
 
-```sql
--- Retention por Cohorte (D1, D7, D30)
-WITH user_cohorts AS (
-    SELECT
-        user_id,
-        DATE_TRUNC('week', MIN(event_date)) AS cohort_week,
-        MIN(event_date) AS first_activity_date
-    FROM user_events
-    GROUP BY user_id
-),
-user_activities AS (
-    SELECT
-        uc.user_id,
-        uc.cohort_week,
-        uc.first_activity_date,
-        ue.event_date,
-        ue.event_date - uc.first_activity_date AS days_since_first
-    FROM user_cohorts uc
-    JOIN user_events ue ON uc.user_id = ue.user_id
-)
-SELECT
-    cohort_week,
-    COUNT(DISTINCT user_id) AS cohort_size,
-    COUNT(DISTINCT CASE WHEN days_since_first = 1 THEN user_id END) * 100.0 /
-        COUNT(DISTINCT user_id) AS d1_retention,
-    COUNT(DISTINCT CASE WHEN days_since_first = 7 THEN user_id END) * 100.0 /
-        COUNT(DISTINCT user_id) AS d7_retention,
-    COUNT(DISTINCT CASE WHEN days_since_first = 30 THEN user_id END) * 100.0 /
-        COUNT(DISTINCT user_id) AS d30_retention
-FROM user_activities
-GROUP BY cohort_week
-ORDER BY cohort_week DESC
-LIMIT 8;
+```python
+def drill_down(df: pd.DataFrame, levels: list, metric: str = 'sales') -> pd.DataFrame:
+    """
+    Drill-down: Navegar de lo general a lo específico.
 
--- Resultado esperado:
--- cohort_week | cohort_size | d1_retention | d7_retention | d30_retention
--- 2024-W10    | 1,250       | 45.2%        | 28.4%        | NULL
--- 2024-W09    | 1,180       | 48.1%        | 30.2%        | 18.5%
--- 2024-W08    | 1,320       | 42.8%        | 26.1%        | 15.2%
+    Ejemplo: Total → Por Región → Por Restaurante → Por Categoría
+    """
+    results = []
+
+    for i in range(len(levels) + 1):
+        if i == 0:
+            # Nivel más alto: Total
+            total = df[metric].sum()
+            results.append({
+                'level': 'TOTAL',
+                'detail': 'Todas las ventas',
+                metric: total
+            })
+        else:
+            # Drill-down por cada nivel
+            current_levels = levels[:i]
+            grouped = df.groupby(current_levels)[metric].sum().reset_index()
+            for _, row in grouped.iterrows():
+                detail = ' > '.join([str(row[l]) for l in current_levels])
+                results.append({
+                    'level': f'Nivel {i}: {current_levels[-1]}',
+                    'detail': detail,
+                    metric: row[metric]
+                })
+
+    return pd.DataFrame(results)
+
+# Ejemplo: Drill-down de Total → Región → Restaurante
+print("=" * 60)
+print("DRILL-DOWN: Total → Región → Restaurante")
+print("=" * 60)
+
+# Nivel 0: Total
+print(f"\n🔹 NIVEL 0 - TOTAL")
+print(f"   Ventas totales: ${df['sales'].sum():,}")
+
+# Nivel 1: Por Región
+print(f"\n🔹 NIVEL 1 - POR REGIÓN")
+by_region = df.groupby('region')['sales'].sum().sort_values(ascending=False)
+for region, sales in by_region.items():
+    print(f"   {region}: ${sales:,}")
+
+# Nivel 2: Por Restaurante (drill-down en región 'Centro')
+print(f"\n🔹 NIVEL 2 - DRILL-DOWN EN 'CENTRO'")
+centro_df = df[df['region'] == 'Centro']
+by_restaurant = centro_df.groupby('restaurant')['sales'].sum().sort_values(ascending=False)
+for rest, sales in by_restaurant.items():
+    print(f"   {rest}: ${sales:,}")
+
+# Nivel 3: Por Categoría (drill-down en restaurante 'Rest-C1')
+print(f"\n🔹 NIVEL 3 - DRILL-DOWN EN 'REST-C1'")
+rest_c1 = df[df['restaurant'] == 'Rest-C1']
+by_category = rest_c1.groupby('category')['sales'].sum().sort_values(ascending=False)
+for cat, sales in by_category.items():
+    print(f"   {cat}: ${sales:,}")
 ```
 
-### Paso 4: Feature Adoption Funnel
+### Paso 3: ROLL-UP (De lo específico a lo general)
 
-```sql
--- Feature Adoption: API Integration
--- Paso 1: Visit docs → Paso 2: Create API key → Paso 3: First API call → Paso 4: 10+ calls
+```python
+def roll_up(df: pd.DataFrame, from_level: str, to_level: str, metric: str = 'sales') -> pd.DataFrame:
+    """
+    Roll-up: Agregar datos a un nivel superior.
 
-WITH feature_funnel AS (
-    SELECT
-        user_id,
-        MAX(CASE WHEN event_name = 'docs_visited' THEN 1 ELSE 0 END) AS step1_docs,
-        MAX(CASE WHEN event_name = 'api_key_created' THEN 1 ELSE 0 END) AS step2_key,
-        MAX(CASE WHEN event_name = 'first_api_call' THEN 1 ELSE 0 END) AS step3_first_call,
-        MAX(CASE WHEN event_name = 'api_power_user' THEN 1 ELSE 0 END) AS step4_power_user
-    FROM user_events
-    WHERE event_date >= CURRENT_DATE - INTERVAL '30 days'
-    GROUP BY user_id
-)
-SELECT
-    COUNT(*) AS total_users,
-    SUM(step1_docs) AS visited_docs,
-    SUM(step2_key) AS created_key,
-    SUM(step3_first_call) AS made_first_call,
-    SUM(step4_power_user) AS power_users,
-    -- Conversion rates
-    ROUND(SUM(step1_docs) * 100.0 / COUNT(*), 1) AS pct_docs,
-    ROUND(SUM(step2_key) * 100.0 / NULLIF(SUM(step1_docs), 0), 1) AS docs_to_key,
-    ROUND(SUM(step3_first_call) * 100.0 / NULLIF(SUM(step2_key), 0), 1) AS key_to_call,
-    ROUND(SUM(step4_power_user) * 100.0 / NULLIF(SUM(step3_first_call), 0), 1) AS call_to_power
-FROM feature_funnel;
+    Ejemplo: Restaurante → Región → Total
+    """
+    print(f"\n{'=' * 60}")
+    print(f"ROLL-UP: {from_level} → {to_level}")
+    print(f"{'=' * 60}")
 
--- Resultado esperado:
--- total_users | visited_docs | created_key | made_first_call | power_users
--- 5,000       | 2,500        | 1,200       | 800             | 320
---
--- pct_docs | docs_to_key | key_to_call | call_to_power
--- 50.0%    | 48.0%       | 66.7%       | 40.0%
+    if from_level == 'restaurant' and to_level == 'region':
+        # Mostrar detalle por restaurante
+        print(f"\n📊 Detalle por Restaurante (nivel inferior):")
+        by_rest = df.groupby(['region', 'restaurant'])[metric].sum()
+        for (region, rest), sales in by_rest.items():
+            print(f"   {region} > {rest}: ${sales:,}")
+
+        # Roll-up a región
+        print(f"\n📊 Roll-up a Región:")
+        by_region = df.groupby('region')[metric].sum().sort_values(ascending=False)
+        for region, sales in by_region.items():
+            print(f"   {region}: ${sales:,}")
+
+        return by_region.reset_index()
+
+    elif to_level == 'total':
+        print(f"\n📊 Roll-up a TOTAL:")
+        total = df[metric].sum()
+        print(f"   TOTAL: ${total:,}")
+        return pd.DataFrame({'total': [total]})
+
+# Ejemplo: Roll-up de restaurante a región
+roll_up(df, 'restaurant', 'region')
+
+# Roll-up de región a total
+roll_up(df, 'region', 'total')
 ```
 
-### Paso 5: Dashboard de Producto
+### Paso 4: SLICE (Filtrar por una dimensión)
 
+```python
+def slice_cube(df: pd.DataFrame, dimension: str, value: str) -> pd.DataFrame:
+    """
+    Slice: Filtrar el cubo por UN valor de UNA dimensión.
+
+    Ejemplo: Obtener solo datos del año 2024
+    """
+    sliced = df[df[dimension] == value].copy()
+
+    print(f"\n{'=' * 60}")
+    print(f"SLICE: {dimension} = '{value}'")
+    print(f"{'=' * 60}")
+    print(f"\n📊 Registros antes del slice: {len(df):,}")
+    print(f"📊 Registros después del slice: {len(sliced):,}")
+    print(f"📊 Ventas en el slice: ${sliced['sales'].sum():,}")
+
+    return sliced
+
+# Ejemplo 1: Slice por año
+slice_2024 = slice_cube(df, 'year', 2024)
+
+# Ejemplo 2: Slice por región
+slice_centro = slice_cube(df, 'region', 'Centro')
+
+# Ejemplo 3: Slice por categoría
+slice_postres = slice_cube(df, 'category', 'Postres')
+
+# Analizar el slice de postres por región
+print("\n📊 Ventas de Postres por Región:")
+postres_by_region = slice_postres.groupby('region')['sales'].sum().sort_values(ascending=False)
+for region, sales in postres_by_region.items():
+    print(f"   {region}: ${sales:,}")
 ```
-┌──────────────────────────────────────────────────────────────────────┐
-│  CLOUDAPI SYSTEMS - PRODUCT METRICS                     Marzo 2024  │
-├──────────────────────────────────────────────────────────────────────┤
-│                                                                       │
-│  ENGAGEMENT                                     RETENTION             │
-│  ───────────                                    ─────────             │
-│  DAU: 8,500                                     D1: 45% ████████░░   │
-│  MAU: 45,000                                    D7: 28% █████░░░░░   │
-│  Stickiness: 18.9% ████████░░                   D30: 18% ███░░░░░░░  │
-│                                                                       │
-│  Avg Session: 12.4 min                          Benchmark D7: 25%    │
-│  Sessions/User: 3.2/week                        Status: 🟢 Above     │
-│                                                                       │
-├──────────────────────────────────────────────────────────────────────┤
-│                                                                       │
-│  FEATURE ADOPTION: API INTEGRATION                                   │
-│                                                                       │
-│  Visit Docs ──────► Create Key ──────► First Call ──────► Power User │
-│    2,500              1,200               800               320       │
-│    (50%)             (48%)               (67%)             (40%)     │
-│                                                                       │
-│  ⚠️ Mayor drop-off: Docs → Key (52% abandono)                        │
-│  💡 Acción: Simplificar proceso de creación de API key               │
-│                                                                       │
-├──────────────────────────────────────────────────────────────────────┤
-│  COHORT RETENTION - ÚLTIMAS 8 SEMANAS                                │
-│                                                                       │
-│  W10 ████████░░░░░░░░░░░░  45% D1                                    │
-│  W09 █████████░░░░░░░░░░░  48% D1  →  ███░░░░░░  18% D30            │
-│  W08 ███████░░░░░░░░░░░░░  43% D1  →  ███░░░░░░  15% D30            │
-│  W07 ████████░░░░░░░░░░░░  46% D1  →  ████░░░░░  20% D30            │
-│                                                                       │
-│  📈 Tendencia: D1 mejorando +5pp desde W08                           │
-│                                                                       │
-└──────────────────────────────────────────────────────────────────────┘
+
+### Paso 5: DICE (Filtrar por múltiples dimensiones)
+
+```python
+def dice_cube(df: pd.DataFrame, filters: dict) -> pd.DataFrame:
+    """
+    Dice: Filtrar por MÚLTIPLES valores de MÚLTIPLES dimensiones.
+
+    Ejemplo: Q3 y Q4 de 2024, solo regiones Norte y Centro
+    """
+    diced = df.copy()
+
+    print(f"\n{'=' * 60}")
+    print(f"DICE: Múltiples filtros")
+    print(f"{'=' * 60}")
+
+    for dimension, values in filters.items():
+        if isinstance(values, list):
+            diced = diced[diced[dimension].isin(values)]
+        else:
+            diced = diced[diced[dimension] == values]
+        print(f"   ✓ {dimension} IN {values}")
+
+    print(f"\n📊 Registros originales: {len(df):,}")
+    print(f"📊 Registros después del dice: {len(diced):,}")
+    print(f"📊 Ventas en el subcubo: ${diced['sales'].sum():,}")
+
+    return diced
+
+# Ejemplo: Subcubo con Q3 y Q4 de 2024, regiones Norte y Centro
+filters = {
+    'year': 2024,
+    'quarter': ['Q3', 'Q4'],
+    'region': ['Norte', 'Centro']
+}
+
+subcubo = dice_cube(df, filters)
+
+# Analizar el subcubo
+print("\n📊 Análisis del subcubo:")
+print("\nPor Trimestre:")
+print(subcubo.groupby('quarter')['sales'].sum())
+print("\nPor Región:")
+print(subcubo.groupby('region')['sales'].sum())
+print("\nPor Categoría:")
+print(subcubo.groupby('category')['sales'].sum())
+```
+
+### Paso 6: PIVOT (Rotar el cubo)
+
+```python
+def pivot_cube(df: pd.DataFrame, index: str, columns: str, values: str = 'sales',
+               aggfunc: str = 'sum') -> pd.DataFrame:
+    """
+    Pivot: Cambiar la orientación del análisis.
+
+    Ejemplo: Regiones en filas, Categorías en columnas
+    """
+    print(f"\n{'=' * 60}")
+    print(f"PIVOT: {index} (filas) x {columns} (columnas)")
+    print(f"{'=' * 60}")
+
+    pivoted = pd.pivot_table(
+        df,
+        values=values,
+        index=index,
+        columns=columns,
+        aggfunc=aggfunc,
+        fill_value=0
+    )
+
+    # Agregar totales
+    pivoted['TOTAL'] = pivoted.sum(axis=1)
+    pivoted.loc['TOTAL'] = pivoted.sum()
+
+    return pivoted
+
+# Pivot 1: Regiones x Categorías
+print("\n📊 Pivot: Regiones x Categorías")
+pivot1 = pivot_cube(df, 'region', 'category')
+print(pivot1.to_string())
+
+# Pivot 2: Trimestres x Regiones
+print("\n📊 Pivot: Trimestres x Regiones")
+pivot2 = pivot_cube(df, 'quarter', 'region')
+print(pivot2.to_string())
+
+# Pivot 3: Años x Trimestres (para comparar YoY)
+print("\n📊 Pivot: Años x Trimestres (comparación interanual)")
+pivot3 = pivot_cube(df, 'year', 'quarter')
+print(pivot3.to_string())
+
+# Calcular crecimiento YoY
+if 2023 in df['year'].values and 2024 in df['year'].values:
+    print("\n📊 Crecimiento Year-over-Year:")
+    for q in quarters:
+        sales_2023 = df[(df['year'] == 2023) & (df['quarter'] == q)]['sales'].sum()
+        sales_2024 = df[(df['year'] == 2024) & (df['quarter'] == q)]['sales'].sum()
+        growth = ((sales_2024 - sales_2023) / sales_2023) * 100
+        print(f"   {q}: {growth:+.1f}%")
 ```
 
 ### Interpretación
 
-Este análisis permite al equipo de producto:
-- **Identificar cuellos de botella** en la adopción (Docs → Key)
-- **Medir impacto de cambios** comparando cohortes
-- **Priorizar mejoras** basándose en datos de engagement
-- **Alertar sobre problemas** de retención temprano
+Este ejemplo demuestra las 5 operaciones OLAP fundamentales:
+
+| Operación | Uso | Ejemplo de Negocio |
+|-----------|-----|-------------------|
+| **Drill-down** | De general a específico | "¿Qué restaurante en Centro vende más postres?" |
+| **Roll-up** | Agregar a nivel superior | "¿Cuál es el total por región?" |
+| **Slice** | Filtrar por una dimensión | "Muéstrame solo datos de 2024" |
+| **Dice** | Filtrar por múltiples dimensiones | "Q3-Q4 de Norte y Centro" |
+| **Pivot** | Cambiar perspectiva | "Quiero categorías en columnas" |
+
+Estas operaciones permiten a los analistas explorar datos de forma interactiva sin necesidad de escribir queries complejos cada vez.
 
 ---
 
-## Ejemplo 4: Sistema Completo de Métricas (OKRs) - Nivel: Avanzado
+## Ejemplo 4: Dashboard Interactivo con Streamlit - Nivel: Avanzado
 
 ### Contexto
 
-**DataFlow Industries** está implementando OKRs (Objectives and Key Results) para Q2. El CEO quiere un dashboard que conecte OKRs de empresa → equipo → individuo.
+**CloudAPI Systems** necesita un dashboard interactivo para que el equipo de producto analice el uso de su API en tiempo real. Como Data Engineer, debes crear una aplicación Streamlit completa con filtros, gráficos y métricas actualizables.
 
-### Paso 1: Definir Estructura de OKRs
+### Paso 1: Estructura del Proyecto
 
 ```
-EMPRESA: DataFlow Industries - Q2 2024
-
-OBJETIVO 1: Acelerar crecimiento de revenue
-├── KR1.1: Aumentar MRR de $2M a $2.8M (+40%)
-├── KR1.2: Cerrar 5 deals Enterprise (>$50K ARR)
-└── KR1.3: Reducir churn de 4% a 2%
-
-OBJETIVO 2: Mejorar eficiencia operativa
-├── KR2.1: Reducir CAC de $100 a $75 (-25%)
-├── KR2.2: Aumentar NPS de 42 a 55 (+13 puntos)
-└── KR2.3: Reducir tiempo de onboarding de 14 a 7 días
-
-OBJETIVO 3: Escalar el equipo de datos
-├── KR3.1: Contratar 3 Data Engineers
-├── KR3.2: Implementar Data Catalog con 100% de tablas documentadas
-└── KR3.3: Reducir tiempo de creación de dashboards de 5 a 2 días
+cloudapi_dashboard/
+├── app.py              # Aplicación principal Streamlit
+├── data_generator.py   # Generador de datos de ejemplo
+├── requirements.txt    # Dependencias
+└── README.md           # Documentación
 ```
 
-### Paso 2: Mapear KRs a Métricas Técnicas
+### Paso 2: Generador de Datos (data_generator.py)
 
-```sql
--- Tabla de definición de OKRs
-CREATE TABLE okr_definitions (
-    okr_id VARCHAR(10) PRIMARY KEY,
-    objective_id INT,
-    objective_name VARCHAR(200),
-    key_result_name VARCHAR(200),
-    metric_name VARCHAR(100),
-    baseline_value DECIMAL(10,2),
-    target_value DECIMAL(10,2),
-    unit VARCHAR(20),
-    owner_team VARCHAR(50),
-    source_query TEXT
-);
+```python
+# data_generator.py
+"""
+Generador de datos de uso de API para CloudAPI Systems.
+"""
+import pandas as pd
+import numpy as np
+from datetime import datetime, timedelta
 
--- Insertar definiciones
-INSERT INTO okr_definitions VALUES
-('KR1.1', 1, 'Acelerar crecimiento de revenue',
- 'Aumentar MRR de $2M a $2.8M', 'mrr', 2000000, 2800000, 'USD', 'Sales',
- 'SELECT SUM(monthly_amount) FROM subscriptions WHERE status = ''active'''),
+def generate_api_usage_data(days: int = 90) -> pd.DataFrame:
+    """
+    Genera datos simulados de uso de API.
 
-('KR1.2', 1, 'Acelerar crecimiento de revenue',
- 'Cerrar 5 deals Enterprise', 'enterprise_deals', 0, 5, 'count', 'Sales',
- 'SELECT COUNT(*) FROM deals WHERE arr >= 50000 AND closed_date >= ''2024-04-01'''),
+    Args:
+        days: Número de días de datos a generar
 
-('KR1.3', 1, 'Acelerar crecimiento de revenue',
- 'Reducir churn de 4% a 2%', 'churn_rate', 4.0, 2.0, 'percent', 'Success',
- 'SELECT churned_mrr / starting_mrr * 100 FROM mrr_movements WHERE month = current_month');
+    Returns:
+        DataFrame con datos de uso de API
+    """
+    np.random.seed(42)
+
+    # Generar fechas
+    end_date = datetime.now()
+    start_date = end_date - timedelta(days=days)
+    dates = pd.date_range(start=start_date, end=end_date, freq='H')
+
+    # Endpoints de la API
+    endpoints = [
+        '/api/v1/users',
+        '/api/v1/transactions',
+        '/api/v1/reports',
+        '/api/v1/analytics',
+        '/api/v1/webhooks'
+    ]
+
+    # Planes de clientes
+    plans = ['Free', 'Starter', 'Professional', 'Enterprise']
+
+    # Regiones
+    regions = ['US-East', 'US-West', 'EU-West', 'APAC']
+
+    # Generar datos
+    n_records = len(dates) * 10  # 10 registros por hora aprox
+
+    data = {
+        'timestamp': np.random.choice(dates, n_records),
+        'endpoint': np.random.choice(endpoints, n_records, p=[0.35, 0.30, 0.15, 0.12, 0.08]),
+        'plan': np.random.choice(plans, n_records, p=[0.40, 0.30, 0.20, 0.10]),
+        'region': np.random.choice(regions, n_records, p=[0.35, 0.25, 0.25, 0.15]),
+        'response_time_ms': np.random.exponential(100, n_records) + 20,
+        'status_code': np.random.choice([200, 201, 400, 401, 404, 500], n_records,
+                                        p=[0.85, 0.05, 0.04, 0.03, 0.02, 0.01]),
+        'request_size_kb': np.random.exponential(5, n_records) + 1,
+        'response_size_kb': np.random.exponential(10, n_records) + 2
+    }
+
+    df = pd.DataFrame(data)
+    df['timestamp'] = pd.to_datetime(df['timestamp'])
+    df['date'] = df['timestamp'].dt.date
+    df['hour'] = df['timestamp'].dt.hour
+    df['day_of_week'] = df['timestamp'].dt.day_name()
+    df['is_error'] = df['status_code'] >= 400
+    df['response_time_ms'] = df['response_time_ms'].round(2)
+
+    return df.sort_values('timestamp').reset_index(drop=True)
+
+
+def generate_customer_data(n_customers: int = 500) -> pd.DataFrame:
+    """
+    Genera datos de clientes para CloudAPI Systems.
+    """
+    np.random.seed(42)
+
+    plans = ['Free', 'Starter', 'Professional', 'Enterprise']
+    regions = ['US-East', 'US-West', 'EU-West', 'APAC']
+
+    data = {
+        'customer_id': [f'CUST-{i:04d}' for i in range(1, n_customers + 1)],
+        'plan': np.random.choice(plans, n_customers, p=[0.40, 0.30, 0.20, 0.10]),
+        'region': np.random.choice(regions, n_customers, p=[0.35, 0.25, 0.25, 0.15]),
+        'monthly_api_calls': np.random.exponential(10000, n_customers).astype(int),
+        'mrr': np.random.choice([0, 29, 99, 499], n_customers, p=[0.40, 0.30, 0.20, 0.10]),
+        'signup_date': pd.date_range(end=datetime.now(), periods=n_customers, freq='D'),
+        'churn_risk': np.random.uniform(0, 1, n_customers).round(2)
+    }
+
+    return pd.DataFrame(data)
+
+
+if __name__ == "__main__":
+    # Generar y guardar datos
+    api_data = generate_api_usage_data()
+    customer_data = generate_customer_data()
+
+    print(f"API Usage: {len(api_data)} registros")
+    print(f"Customers: {len(customer_data)} registros")
+
+    api_data.to_csv('api_usage.csv', index=False)
+    customer_data.to_csv('customers.csv', index=False)
 ```
 
-### Paso 3: Crear Tabla de Progreso de OKRs
+### Paso 3: Aplicación Streamlit Completa (app.py)
 
-```sql
--- Tracking diario de OKRs
-CREATE TABLE okr_progress (
-    date DATE,
-    okr_id VARCHAR(10),
-    current_value DECIMAL(10,2),
-    progress_pct DECIMAL(5,2),  -- 0-100, puede superar 100
-    on_track BOOLEAN,  -- ¿Vamos bien según proyección lineal?
-    PRIMARY KEY (date, okr_id)
-);
+```python
+# app.py
+"""
+Dashboard interactivo de CloudAPI Systems con Streamlit.
 
--- Query para calcular progreso
-WITH okr_current AS (
-    SELECT
-        CURRENT_DATE AS date,
-        'KR1.1' AS okr_id,
-        (SELECT SUM(monthly_amount) FROM subscriptions WHERE status = 'active') AS current_value
-    UNION ALL
-    SELECT
-        CURRENT_DATE,
-        'KR1.2',
-        (SELECT COUNT(*) FROM deals WHERE arr >= 50000 AND closed_date >= '2024-04-01')
-    UNION ALL
-    SELECT
-        CURRENT_DATE,
-        'KR1.3',
-        (SELECT churned_mrr / NULLIF(starting_mrr, 0) * 100
-         FROM mrr_movements WHERE month = DATE_TRUNC('month', CURRENT_DATE))
+Ejecutar con: streamlit run app.py
+"""
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+from datetime import datetime, timedelta
+import numpy as np
+
+# Importar generador de datos
+from data_generator import generate_api_usage_data, generate_customer_data
+
+# ============================================================
+# CONFIGURACIÓN DE LA PÁGINA
+# ============================================================
+st.set_page_config(
+    page_title="CloudAPI Systems - Dashboard",
+    page_icon="🚀",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
-SELECT
-    oc.date,
-    oc.okr_id,
-    od.key_result_name,
-    od.baseline_value,
-    oc.current_value,
-    od.target_value,
-    -- Calcular progreso (manejar caso donde menor es mejor, ej: churn)
-    CASE
-        WHEN od.target_value > od.baseline_value THEN
-            (oc.current_value - od.baseline_value) /
-            NULLIF(od.target_value - od.baseline_value, 0) * 100
-        ELSE
-            (od.baseline_value - oc.current_value) /
-            NULLIF(od.baseline_value - od.target_value, 0) * 100
-    END AS progress_pct,
-    -- ¿Estamos on track? (proyección lineal basada en días transcurridos del Q)
-    CASE
-        WHEN (CURRENT_DATE - '2024-04-01'::date) / 91.0 * 100 <=
-             CASE
-                 WHEN od.target_value > od.baseline_value THEN
-                     (oc.current_value - od.baseline_value) /
-                     NULLIF(od.target_value - od.baseline_value, 0) * 100
-                 ELSE
-                     (od.baseline_value - oc.current_value) /
-                     NULLIF(od.baseline_value - od.target_value, 0) * 100
-             END
-        THEN TRUE
-        ELSE FALSE
-    END AS on_track
-FROM okr_current oc
-JOIN okr_definitions od ON oc.okr_id = od.okr_id;
-```
 
-### Paso 4: Dashboard de OKRs
+# ============================================================
+# CARGA DE DATOS (con cache para performance)
+# ============================================================
+@st.cache_data(ttl=3600)  # Cache por 1 hora
+def load_data():
+    """Carga y cachea los datos."""
+    api_data = generate_api_usage_data(days=90)
+    customer_data = generate_customer_data(n_customers=500)
+    return api_data, customer_data
 
-```
-┌──────────────────────────────────────────────────────────────────────────┐
-│  DATAFLOW INDUSTRIES - OKR DASHBOARD Q2 2024                             │
-│  Semana 6 de 13 (46% del trimestre)                   Actualizado: Hoy   │
-├──────────────────────────────────────────────────────────────────────────┤
-│                                                                           │
-│  RESUMEN EJECUTIVO                                                       │
-│  ─────────────────                                                       │
-│  Objetivos: 3    Key Results: 9    On Track: 6/9 (67%)                  │
-│                                                                           │
-│  [██████████████████░░░░░░░░░░░░] 67% objetivos en verde                │
-│                                                                           │
-├──────────────────────────────────────────────────────────────────────────┤
-│                                                                           │
-│  OBJETIVO 1: Acelerar crecimiento de revenue                             │
-│  Owner: VP Sales | Status: 🟡 At Risk                                    │
-│  ──────────────────────────────────────────────────────────────────────  │
-│                                                                           │
-│  KR1.1: MRR $2M → $2.8M                                                  │
-│  Current: $2.32M | Progress: 40% | Expected: 46%                         │
-│  [████████████████░░░░░░░░░░░░░░░░░░░░] 🟡 Slightly Behind              │
-│                                                                           │
-│  KR1.2: 5 Enterprise Deals                                               │
-│  Current: 3 | Progress: 60% | Expected: 46%                              │
-│  [████████████████████████░░░░░░░░░░░░] 🟢 Ahead                         │
-│                                                                           │
-│  KR1.3: Churn 4% → 2%                                                    │
-│  Current: 3.8% | Progress: 10% | Expected: 46%                           │
-│  [████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 🔴 At Risk                       │
-│                                                                           │
-├──────────────────────────────────────────────────────────────────────────┤
-│                                                                           │
-│  OBJETIVO 2: Mejorar eficiencia operativa                                │
-│  Owner: VP Ops | Status: 🟢 On Track                                     │
-│  ──────────────────────────────────────────────────────────────────────  │
-│                                                                           │
-│  KR2.1: CAC $100 → $75                                                   │
-│  [████████████████████░░░░░░░░░░░░░░░░] 50% 🟢                           │
-│                                                                           │
-│  KR2.2: NPS 42 → 55                                                      │
-│  [████████████████████████░░░░░░░░░░░░] 62% 🟢                           │
-│                                                                           │
-│  KR2.3: Onboarding 14 → 7 días                                           │
-│  [██████████████░░░░░░░░░░░░░░░░░░░░░░] 35% 🟡                           │
-│                                                                           │
-├──────────────────────────────────────────────────────────────────────────┤
-│                                                                           │
-│  ⚠️ ITEMS QUE REQUIEREN ATENCIÓN                                         │
-│  ──────────────────────────────────                                      │
-│  🔴 KR1.3 (Churn): -36pp vs. esperado. Acción: Reunión con Success      │
-│  🟡 KR1.1 (MRR): -6pp vs. esperado. Pipeline Q2 fuerte, monitorear      │
-│  🟡 KR2.3 (Onboarding): Iniciativa de automatización en progreso        │
-│                                                                           │
-└──────────────────────────────────────────────────────────────────────────┘
-```
+api_df, customer_df = load_data()
 
-### Paso 5: Drill-Down por Equipo
+# ============================================================
+# SIDEBAR - FILTROS
+# ============================================================
+st.sidebar.title("🎛️ Filtros")
 
-```sql
--- Desglose de KR por contribución de equipo
-WITH team_contributions AS (
-    SELECT
-        'KR1.1' AS okr_id,
-        sales_rep_team AS team,
-        SUM(monthly_amount) AS contributed_mrr
-    FROM subscriptions s
-    JOIN sales_reps sr ON s.sales_rep_id = sr.id
-    WHERE s.created_date >= '2024-04-01'
-      AND s.status = 'active'
-    GROUP BY sales_rep_team
+# Filtro de fechas
+st.sidebar.subheader("📅 Rango de Fechas")
+min_date = api_df['timestamp'].min().date()
+max_date = api_df['timestamp'].max().date()
+
+date_range = st.sidebar.date_input(
+    "Seleccionar rango",
+    value=(max_date - timedelta(days=30), max_date),
+    min_value=min_date,
+    max_value=max_date
 )
-SELECT
-    team,
-    contributed_mrr,
-    contributed_mrr / 800000.0 * 100 AS pct_of_target,  -- Target = $800K new MRR
-    RANK() OVER (ORDER BY contributed_mrr DESC) AS rank
-FROM team_contributions
-ORDER BY contributed_mrr DESC;
 
--- Resultado:
--- team       | contributed_mrr | pct_of_target | rank
--- Enterprise | $180,000        | 22.5%         | 1
--- Mid-Market | $95,000         | 11.9%         | 2
--- SMB        | $45,000         | 5.6%          | 3
+# Filtro de endpoints
+st.sidebar.subheader("🔗 Endpoints")
+all_endpoints = api_df['endpoint'].unique().tolist()
+selected_endpoints = st.sidebar.multiselect(
+    "Seleccionar endpoints",
+    options=all_endpoints,
+    default=all_endpoints
+)
+
+# Filtro de planes
+st.sidebar.subheader("💳 Planes")
+all_plans = api_df['plan'].unique().tolist()
+selected_plans = st.sidebar.multiselect(
+    "Seleccionar planes",
+    options=all_plans,
+    default=all_plans
+)
+
+# Filtro de regiones
+st.sidebar.subheader("🌍 Regiones")
+all_regions = api_df['region'].unique().tolist()
+selected_regions = st.sidebar.multiselect(
+    "Seleccionar regiones",
+    options=all_regions,
+    default=all_regions
+)
+
+# ============================================================
+# APLICAR FILTROS
+# ============================================================
+filtered_df = api_df[
+    (api_df['timestamp'].dt.date >= date_range[0]) &
+    (api_df['timestamp'].dt.date <= date_range[1]) &
+    (api_df['endpoint'].isin(selected_endpoints)) &
+    (api_df['plan'].isin(selected_plans)) &
+    (api_df['region'].isin(selected_regions))
+]
+
+# ============================================================
+# HEADER
+# ============================================================
+st.title("🚀 CloudAPI Systems - API Analytics Dashboard")
+st.markdown(f"**Período:** {date_range[0]} a {date_range[1]} | "
+            f"**Registros:** {len(filtered_df):,}")
+
+# ============================================================
+# KPIs PRINCIPALES
+# ============================================================
+st.header("📊 Métricas Clave")
+
+col1, col2, col3, col4, col5 = st.columns(5)
+
+with col1:
+    total_requests = len(filtered_df)
+    st.metric(
+        label="Total Requests",
+        value=f"{total_requests:,}",
+        delta=f"+{np.random.randint(5, 15)}% vs período anterior"
+    )
+
+with col2:
+    avg_response = filtered_df['response_time_ms'].mean()
+    st.metric(
+        label="Avg Response Time",
+        value=f"{avg_response:.1f} ms",
+        delta=f"-{np.random.randint(2, 8)}ms"
+    )
+
+with col3:
+    error_rate = (filtered_df['is_error'].sum() / len(filtered_df)) * 100
+    st.metric(
+        label="Error Rate",
+        value=f"{error_rate:.2f}%",
+        delta=f"-{np.random.uniform(0.1, 0.5):.2f}%"
+    )
+
+with col4:
+    p99_latency = filtered_df['response_time_ms'].quantile(0.99)
+    st.metric(
+        label="P99 Latency",
+        value=f"{p99_latency:.0f} ms",
+        delta=f"-{np.random.randint(5, 15)}ms"
+    )
+
+with col5:
+    uptime = 100 - error_rate
+    st.metric(
+        label="Uptime",
+        value=f"{uptime:.2f}%",
+        delta="↑ 0.1%"
+    )
+
+# ============================================================
+# GRÁFICOS PRINCIPALES
+# ============================================================
+st.header("📈 Análisis de Tráfico")
+
+# Fila 1: Requests por hora y distribución por endpoint
+col1, col2 = st.columns(2)
+
+with col1:
+    # Requests por hora
+    hourly_requests = filtered_df.groupby(
+        filtered_df['timestamp'].dt.floor('H')
+    ).size().reset_index(name='requests')
+
+    fig = px.line(
+        hourly_requests,
+        x='timestamp',
+        y='requests',
+        title='Requests por Hora',
+        labels={'timestamp': 'Fecha/Hora', 'requests': 'Número de Requests'}
+    )
+    fig.update_traces(fill='tozeroy', line_color='#2E86AB')
+    fig.update_layout(height=350)
+    st.plotly_chart(fig, use_container_width=True)
+
+with col2:
+    # Distribución por endpoint
+    endpoint_dist = filtered_df.groupby('endpoint').size().reset_index(name='count')
+
+    fig = px.pie(
+        endpoint_dist,
+        values='count',
+        names='endpoint',
+        title='Distribución por Endpoint',
+        hole=0.4
+    )
+    fig.update_layout(height=350)
+    st.plotly_chart(fig, use_container_width=True)
+
+# Fila 2: Response time por endpoint y errores por hora
+col1, col2 = st.columns(2)
+
+with col1:
+    # Response time por endpoint (box plot)
+    fig = px.box(
+        filtered_df,
+        x='endpoint',
+        y='response_time_ms',
+        title='Response Time por Endpoint',
+        labels={'endpoint': 'Endpoint', 'response_time_ms': 'Response Time (ms)'}
+    )
+    fig.update_layout(height=350)
+    st.plotly_chart(fig, use_container_width=True)
+
+with col2:
+    # Errores por hora
+    error_df = filtered_df[filtered_df['is_error']]
+    hourly_errors = error_df.groupby(
+        error_df['timestamp'].dt.floor('H')
+    ).size().reset_index(name='errors')
+
+    fig = px.bar(
+        hourly_errors,
+        x='timestamp',
+        y='errors',
+        title='Errores por Hora',
+        labels={'timestamp': 'Fecha/Hora', 'errors': 'Número de Errores'},
+        color_discrete_sequence=['#E94F37']
+    )
+    fig.update_layout(height=350)
+    st.plotly_chart(fig, use_container_width=True)
+
+# ============================================================
+# ANÁLISIS POR SEGMENTO
+# ============================================================
+st.header("🔍 Análisis por Segmento")
+
+tab1, tab2, tab3 = st.tabs(["Por Plan", "Por Región", "Por Status Code"])
+
+with tab1:
+    col1, col2 = st.columns(2)
+
+    with col1:
+        plan_usage = filtered_df.groupby('plan').agg({
+            'timestamp': 'count',
+            'response_time_ms': 'mean'
+        }).reset_index()
+        plan_usage.columns = ['Plan', 'Requests', 'Avg Response Time']
+
+        fig = px.bar(
+            plan_usage,
+            x='Plan',
+            y='Requests',
+            title='Requests por Plan',
+            color='Plan',
+            text='Requests'
+        )
+        fig.update_traces(textposition='outside')
+        st.plotly_chart(fig, use_container_width=True)
+
+    with col2:
+        fig = px.bar(
+            plan_usage,
+            x='Plan',
+            y='Avg Response Time',
+            title='Response Time Promedio por Plan',
+            color='Plan',
+            text=plan_usage['Avg Response Time'].round(1)
+        )
+        fig.update_traces(textposition='outside')
+        st.plotly_chart(fig, use_container_width=True)
+
+with tab2:
+    col1, col2 = st.columns(2)
+
+    with col1:
+        region_usage = filtered_df.groupby('region').size().reset_index(name='Requests')
+
+        fig = px.bar(
+            region_usage,
+            x='region',
+            y='Requests',
+            title='Requests por Región',
+            color='region'
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+    with col2:
+        # Heatmap: Hora del día x Región
+        heatmap_data = filtered_df.groupby(['hour', 'region']).size().unstack(fill_value=0)
+
+        fig = px.imshow(
+            heatmap_data.T,
+            title='Heatmap: Hora del Día x Región',
+            labels=dict(x="Hora", y="Región", color="Requests"),
+            aspect="auto"
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+with tab3:
+    status_dist = filtered_df.groupby('status_code').size().reset_index(name='count')
+    status_dist['status_code'] = status_dist['status_code'].astype(str)
+
+    fig = px.bar(
+        status_dist,
+        x='status_code',
+        y='count',
+        title='Distribución de Status Codes',
+        color='status_code',
+        text='count'
+    )
+    fig.update_traces(textposition='outside')
+    st.plotly_chart(fig, use_container_width=True)
+
+# ============================================================
+# TABLA DE DATOS
+# ============================================================
+st.header("📋 Datos Detallados")
+
+with st.expander("Ver datos filtrados"):
+    st.dataframe(
+        filtered_df[['timestamp', 'endpoint', 'plan', 'region',
+                     'status_code', 'response_time_ms']].head(1000),
+        use_container_width=True
+    )
+
+# ============================================================
+# FOOTER
+# ============================================================
+st.divider()
+st.markdown("""
+**CloudAPI Systems Dashboard** | Creado con Streamlit y Plotly
+- 📊 Dashboard actualizado cada hora
+- 🔗 Datos simulados para demostración
+- 📚 Parte del curso de Data Engineering
+""")
 ```
+
+### Paso 4: Requirements (requirements.txt)
+
+```
+streamlit>=1.28.0
+pandas>=2.0.0
+numpy>=1.24.0
+plotly>=5.18.0
+```
+
+### Paso 5: Ejecutar la Aplicación
+
+```bash
+# Instalar dependencias
+pip install -r requirements.txt
+
+# Ejecutar el dashboard
+streamlit run app.py
+
+# El dashboard se abrirá en http://localhost:8501
+```
+
+### Características del Dashboard
+
+1. **Filtros Interactivos**: Sidebar con filtros de fecha, endpoint, plan y región
+2. **KPIs en Tiempo Real**: Métricas clave con deltas vs período anterior
+3. **Gráficos Dinámicos**: Se actualizan automáticamente al cambiar filtros
+4. **Múltiples Visualizaciones**: Líneas, barras, pie, box plots, heatmaps
+5. **Tabs para Segmentos**: Análisis por plan, región y status code
+6. **Tabla de Datos**: Acceso a los datos filtrados
 
 ### Interpretación
 
-Este sistema de OKRs permite:
-
-1. **Alineación vertical**: De empresa → equipo → individuo
-2. **Transparencia**: Todos ven el progreso en tiempo real
-3. **Acción temprana**: Alertas cuando algo está off-track
-4. **Accountability**: Cada KR tiene un owner claro
-5. **Aprendizaje**: Histórico para mejorar estimaciones futuras
+Este dashboard con Streamlit permite:
+- **Explorar datos interactivamente** con filtros en tiempo real
+- **Identificar patrones** de uso por hora, región y plan
+- **Detectar anomalías** en errores y latencia
+- **Compartir análisis** como aplicación web accesible
+- **Extender fácilmente** con nuevas métricas y visualizaciones
 
 ---
 
 ## Resumen de Ejemplos
 
-| Ejemplo | Nivel | Concepto Principal | Aplicación |
-|---------|-------|-------------------|------------|
-| 1 | Básico | Definición de KPIs | E-commerce delivery |
-| 2 | Intermedio | Dashboard ejecutivo | Board meeting |
-| 3 | Intermedio | Métricas de producto | SaaS engagement |
-| 4 | Avanzado | Sistema OKRs | Tracking organizacional |
+| Ejemplo | Nivel | Concepto Principal | Tecnología | Empresa Ficticia |
+|---------|-------|-------------------|------------|------------------|
+| 1 | Básico | Definición de KPIs | SQL + Python | RestaurantData Co. |
+| 2 | Intermedio | Dashboard de ventas | Python + Plotly | FinTech Analytics |
+| 3 | Intermedio | Operaciones OLAP | Python + Pandas | RestaurantData Co. |
+| 4 | Avanzado | Dashboard interactivo | Streamlit + Plotly | CloudAPI Systems |
 
-Estos ejemplos muestran la progresión desde KPIs simples hasta sistemas completos de métricas que alinean toda la organización.
+Estos ejemplos muestran la progresión desde KPIs básicos en SQL hasta aplicaciones web interactivas completas con Streamlit.
+
+**Habilidades desarrolladas:**
+- Definir y calcular KPIs relevantes para el negocio
+- Crear visualizaciones interactivas con Plotly
+- Aplicar operaciones OLAP para explorar datos multidimensionales
+- Construir dashboards web completos con Streamlit
 
 ---
 
