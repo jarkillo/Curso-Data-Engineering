@@ -349,6 +349,205 @@ Tu rol no es dominar estas herramientas a nivel experto, sino:
 
 ---
 
+### Concepto 8: Operaciones OLAP
+
+OLAP (Online Analytical Processing) es el conjunto de operaciones que permiten a los usuarios explorar datos multidimensionales de forma interactiva. Piensa en tu Data Warehouse como un cubo de Rubik de datos: OLAP te permite girarlo, cortarlo y verlo desde diferentes ángulos.
+
+**Analogía del Mundo Real - Google Maps**:
+
+Las operaciones OLAP son como navegar en Google Maps:
+- **Zoom out** (Roll-up): Ver el país completo
+- **Zoom in** (Drill-down): Ver una calle específica
+- **Filtrar** (Slice): Mostrar solo restaurantes
+- **Múltiples filtros** (Dice): Restaurantes italianos abiertos ahora
+- **Rotar vista** (Pivot): Cambiar de mapa a vista satélite
+
+**Las 5 Operaciones OLAP Fundamentales**:
+
+**1. Drill-Down (Desglosar)**
+
+Navegar de lo general a lo específico, añadiendo niveles de detalle.
+
+```
+Ventas Anuales: $10M
+    ↓ drill-down por trimestre
+Q1: $2.2M | Q2: $2.5M | Q3: $2.8M | Q4: $2.5M
+    ↓ drill-down por mes (Q3)
+Jul: $0.9M | Ago: $1.0M | Sep: $0.9M
+    ↓ drill-down por día
+Sep 15: $32K | Sep 16: $28K | ...
+```
+
+**Uso típico**: "Las ventas de Q3 fueron altas, ¿qué mes contribuyó más?"
+
+**2. Roll-Up (Agregar)**
+
+Lo opuesto a drill-down: agregar datos a un nivel superior.
+
+```
+Ventas por tienda: Tienda A: $500K, Tienda B: $300K, Tienda C: $200K
+    ↑ roll-up por región
+Región Norte: $1M (Tiendas A+B+C)
+    ↑ roll-up por país
+España: $5M (todas las regiones)
+```
+
+**Uso típico**: "Quiero ver el total nacional, no el detalle por tienda"
+
+**3. Slice (Cortar)**
+
+Filtrar el cubo por UN valor de UNA dimensión, obteniendo una "rebanada".
+
+```
+Cubo de Ventas: [Tiempo] x [Producto] x [Región]
+    ↓ slice: Tiempo = "2024"
+Resultado: Todas las ventas de 2024, por producto y región
+```
+
+**Uso típico**: "Muéstrame solo los datos del año actual"
+
+**4. Dice (Subcubo)**
+
+Filtrar por MÚLTIPLES valores de MÚLTIPLES dimensiones, obteniendo un subcubo.
+
+```
+Cubo de Ventas: [Tiempo] x [Producto] x [Región]
+    ↓ dice: Tiempo IN (Q1, Q2) AND Producto = "Electrónica" AND Región IN ("Norte", "Sur")
+Resultado: Subcubo con solo esas combinaciones
+```
+
+**Uso típico**: "Quiero comparar electrónica en norte y sur durante el primer semestre"
+
+**5. Pivot (Rotar)**
+
+Cambiar la orientación del análisis, intercambiando filas por columnas.
+
+```
+ANTES (Pivot original):
+         | Ene  | Feb  | Mar
+Producto A| 100 | 120 | 110
+Producto B| 80  | 90  | 85
+
+DESPUÉS (Pivot rotado):
+         | Producto A | Producto B
+Ene      | 100        | 80
+Feb      | 120        | 90
+Mar      | 110        | 85
+```
+
+**Uso típico**: "Quiero ver los productos en columnas y el tiempo en filas"
+
+**Por qué importa para Data Engineers**:
+
+1. **Diseño de índices**: Debes optimizar para las operaciones OLAP más frecuentes
+2. **Pre-agregaciones**: Calcular roll-ups comunes para mejor performance
+3. **Modelado dimensional**: Las jerarquías de dimensiones habilitan drill-down/roll-up
+4. **Cubos OLAP**: Algunas herramientas (SSAS, Kylin) requieren definir cubos explícitos
+
+---
+
+### Concepto 9: Gobernanza de Métricas
+
+A medida que una organización crece, las métricas se multiplican y fragmentan. Marketing tiene su definición de "usuario activo", Producto tiene otra, y Finanzas una tercera. Este caos se llama **"métrica sprawl"** y es uno de los problemas más comunes en Analytics.
+
+**Analogía del Mundo Real - El Diccionario de la RAE**:
+
+Imagina si cada persona definiera las palabras como quisiera. "Mesa" podría significar una cosa para ti y otra para mí. La comunicación sería imposible.
+
+La RAE existe para dar definiciones oficiales y evitar el caos. **La gobernanza de métricas es la "RAE" de tus datos**: define oficialmente qué significa cada métrica para toda la organización.
+
+**Los 4 Pilares de la Gobernanza de Métricas**:
+
+**1. Diccionario de Métricas Centralizado**
+
+Un repositorio único donde se documentan todas las métricas:
+
+```yaml
+# Ejemplo de entrada en diccionario de métricas
+metric:
+  name: "Monthly Active Users (MAU)"
+  definition: "Usuarios únicos que realizaron al menos 1 acción en los últimos 30 días"
+  formula: "COUNT(DISTINCT user_id) WHERE last_action_date >= CURRENT_DATE - 30"
+  source_table: "analytics.fact_user_actions"
+  owner: "Equipo de Producto"
+  refresh_frequency: "Diario"
+  valid_from: "2024-01-01"
+  related_metrics: ["DAU", "WAU", "Retention Rate"]
+  caveats: "Excluye usuarios de prueba y bots conocidos"
+```
+
+**2. Ownership Claro**
+
+Cada métrica tiene un "dueño" responsable de:
+- Mantener la definición actualizada
+- Responder preguntas sobre la métrica
+- Aprobar cambios en la fórmula
+- Comunicar cambios a stakeholders
+
+| Métrica | Owner | Equipo |
+|---------|-------|--------|
+| Revenue | CFO | Finanzas |
+| MAU | VP Producto | Producto |
+| CAC | CMO | Marketing |
+| NPS | VP Customer Success | CX |
+
+**3. Versionado y Changelog**
+
+Las métricas evolucionan. Documentar cambios es crítico:
+
+```markdown
+## Changelog: Monthly Active Users (MAU)
+
+### v2.0 (2024-06-01)
+- CAMBIO: Excluir usuarios con menos de 2 acciones (antes: 1)
+- RAZÓN: Reducir ruido de bots no detectados
+- IMPACTO: MAU bajó ~5% vs definición anterior
+
+### v1.0 (2024-01-01)
+- Definición inicial
+```
+
+**4. Auditoría y Linaje**
+
+Saber de dónde vienen los datos y cómo se transforman:
+
+```
+Fuente: raw.user_events
+    ↓
+Staging: staging.stg_user_actions (limpieza)
+    ↓
+Intermediate: analytics.int_user_activity (agregación)
+    ↓
+Mart: analytics.dim_users + analytics.fact_user_actions
+    ↓
+Métrica: MAU (calculada en BI tool)
+```
+
+**Herramientas para Gobernanza de Métricas**:
+
+| Herramienta | Tipo | Uso |
+|-------------|------|-----|
+| dbt (metrics layer) | Open source | Definir métricas en código |
+| Atlan | Catálogo | Documentación y linaje |
+| Monte Carlo | Observabilidad | Alertas de anomalías |
+| Looker LookML | Capa semántica | Definiciones centralizadas |
+
+**Errores Comunes en Gobernanza**:
+
+1. **No tener diccionario**: Cada equipo inventa sus métricas
+2. **Diccionario desactualizado**: Existe pero nadie lo mantiene
+3. **Sin ownership**: Métricas huérfanas que nadie entiende
+4. **Sin comunicación**: Cambios que rompen dashboards sin aviso
+
+**Por qué importa para Data Engineers**:
+
+1. **Implementas las fórmulas**: Tú escribes el SQL que calcula las métricas
+2. **Mantienes el linaje**: Documenta de dónde vienen los datos
+3. **Alertas de calidad**: Detecta cuando una métrica se comporta raro
+4. **Single source of truth**: Tu DWH debe ser la fuente oficial
+
+---
+
 ## Aplicaciones Prácticas
 
 ### Caso de Uso 1: E-commerce - Dashboard de Ventas
@@ -490,6 +689,7 @@ OBJETIVO: Aumentar rentabilidad 20%
 - [ ] Entiendo la diferencia entre métrica, KPI y dimensión
 - [ ] Conozco la pirámide de métricas (operativas, tácticas, estratégicas)
 - [ ] Sé identificar antipatrones en dashboards
+- [ ] Entiendo las 5 operaciones OLAP (drill-down, roll-up, slice, dice, pivot)
 
 ### Diseño de Dashboards
 - [ ] Puedo diseñar un dashboard para una audiencia específica
@@ -502,6 +702,11 @@ OBJETIVO: Aumentar rentabilidad 20%
 - [ ] Sé elegir las métricas correctas para cada nivel organizacional
 - [ ] Entiendo cómo las herramientas de BI se conectan con el Data Warehouse
 - [ ] Puedo documentar definiciones de métricas de forma clara
+
+### Gobernanza y Operaciones
+- [ ] Sé qué es un diccionario de métricas y por qué es importante
+- [ ] Entiendo los 4 pilares de gobernanza (diccionario, ownership, versionado, linaje)
+- [ ] Puedo aplicar operaciones OLAP para explorar datos
 
 ### Conexión con Data Engineering
 - [ ] Entiendo cómo mi diseño de DWH impacta la creación de dashboards
