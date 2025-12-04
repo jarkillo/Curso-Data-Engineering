@@ -10,6 +10,26 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 ## [Unreleased]
 
 ### Completed
+
+- **JAR-348: Módulo 8 - CIERRE FINAL ✅** (2025-12-04):
+  - ✅ CHANGELOG.md consolidado del módulo creado
+  - ✅ Todos los temas verificados y completos
+  - ✅ Revisiones pedagógicas aprobadas (9.4/10)
+  - ✅ Dashboard Streamlit funcional
+  - ✅ JAR-194 cerrado como Done
+
+- **JAR-347: Revisión Pedagógica Tema 3 ✅** (2025-12-04):
+  - ✅ REVISION_PEDAGOGICA.md creado
+  - ✅ Score: 9.4/10 - APROBADO
+  - ✅ Validación de teoría, ejemplos, ejercicios y dashboard
+
+- **JAR-346: Dashboard Streamlit Completo ✅** (2025-12-04):
+  - ✅ Aplicación Streamlit con 4 páginas
+  - ✅ 22+ visualizaciones interactivas con Plotly
+  - ✅ Conexión al Data Warehouse del Tema 1
+  - ✅ Filtros por año, mes, categoría y región
+  - ✅ README y CHANGELOG actualizados
+
 - **JAR-328: Módulo 8 - Data Warehousing ✅ FINALIZADO Y DOCUMENTADO** (2025-11-30):
   - ✅ **README principal del módulo 8**: Completo (~400 líneas)
     * Descripción general con objetivos de aprendizaje
