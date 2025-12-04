@@ -11,6 +11,47 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 
 ---
 
+## [2.0.0] - 2024-12-04
+
+### Added
+
+#### Dashboard Streamlit (`dashboard/`)
+- `app.py` - Aplicación principal multipágina con 4 secciones
+- `database.py` - Conexión al Data Warehouse del Tema 1
+- `queries.py` - 20+ consultas analíticas optimizadas
+
+#### Páginas del Dashboard
+- **Overview**: KPIs ejecutivos, tendencias, distribución por categoría y región
+- **Análisis de Ventas**: Series temporales, top productos, treemap, heatmap
+- **Análisis de Clientes**: Segmentación, RFM, top clientes
+- **Performance Vendedores**: Rankings, evolución, comisiones
+
+#### Visualizaciones (22+ interactivas)
+- Indicadores KPI con métricas
+- Gráficos de línea con área (tendencias)
+- Gráficos de pie/donut (distribución)
+- Gráficos de barras horizontales y verticales
+- Treemap para jerarquías
+- Heatmap para patrones temporales
+- Scatter plots para RFM
+- Histogramas para distribuciones
+- Tablas interactivas con formato
+
+#### Filtros Interactivos
+- Filtro por año
+- Filtro por mes
+- Filtro por categoría de producto
+- Filtro por región
+
+### Changed
+- `requirements.txt` actualizado con Streamlit 1.28+ y Plotly 5.18+
+- `README.md` reescrito con instrucciones completas del dashboard
+
+### Issue Reference
+- **JAR-346**: Tema 3 - Proyecto práctico: Dashboard Analytics completo
+
+---
+
 ## [1.0.0] - 2024-11-29
 
 ### Added
