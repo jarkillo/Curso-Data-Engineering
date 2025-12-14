@@ -134,6 +134,7 @@ def transform_data_task(**context):
 
     from src.transformers.cleaning import clean_customers, clean_orders, clean_products
     from src.transformers.enrichment import (
+        add_date_id,
         calculate_order_metrics,
         enrich_orders_with_customers,
         enrich_orders_with_products,
@@ -159,6 +160,9 @@ def transform_data_task(**context):
         # Enriquecer pedidos
         enriched_df = enrich_orders_with_products(clean_orders_df, clean_products_df)
         enriched_df = enrich_orders_with_customers(enriched_df, clean_customers_df)
+        enriched_df = add_date_id(
+            enriched_df
+        )  # Añade date_id para enlazar con dim_date
         enriched_df = calculate_order_metrics(enriched_df)
 
         # Guardar datos transformados
@@ -244,7 +248,7 @@ def load_warehouse_task(**context):
         result = load_fact_table(
             fact_sales,
             output_path=str(warehouse_path / "fact_sales.parquet"),
-            foreign_keys=["product_id", "customer_id"],
+            foreign_keys=["product_id", "customer_id", "date_id"],
             measures=["quantity", "order_total"],
             fact_name="fact_sales",
         )

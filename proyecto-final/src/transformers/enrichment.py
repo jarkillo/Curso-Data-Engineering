@@ -65,6 +65,44 @@ def enrich_orders_with_customers(
     return enriched
 
 
+def add_date_id(
+    orders_df: pd.DataFrame,
+    date_column: str = "order_date",
+) -> pd.DataFrame:
+    """
+    Añade columna date_id para enlazar con dim_date.
+
+    El date_id se genera en formato YYYYMMDD como entero,
+    coincidiendo con el formato usado en dim_date.
+
+    Args:
+        orders_df: DataFrame de pedidos con columna de fecha.
+        date_column: Nombre de la columna de fecha.
+
+    Returns:
+        DataFrame con columna date_id añadida.
+
+    Examples:
+        >>> orders = pd.DataFrame({
+        ...     "order_id": ["1"],
+        ...     "order_date": pd.to_datetime(["2024-01-15"])
+        ... })
+        >>> add_date_id(orders)
+          order_id order_date  date_id
+        0        1 2024-01-15 20240115
+    """
+    df = orders_df.copy()
+
+    # Asegurar que la columna es datetime
+    if not pd.api.types.is_datetime64_any_dtype(df[date_column]):
+        df[date_column] = pd.to_datetime(df[date_column])
+
+    # Generar date_id en formato YYYYMMDD
+    df["date_id"] = df[date_column].dt.strftime("%Y%m%d").astype(int)
+
+    return df
+
+
 def calculate_order_metrics(
     orders_df: pd.DataFrame,
     discount_threshold: float = 0.0,
