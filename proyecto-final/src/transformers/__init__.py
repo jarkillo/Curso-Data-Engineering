@@ -13,6 +13,7 @@ from src.transformers.cleaning import (
     remove_duplicates,
 )
 from src.transformers.enrichment import (
+    add_date_id,
     calculate_order_metrics,
     enrich_orders_with_customers,
     enrich_orders_with_products,
@@ -26,6 +27,7 @@ __all__ = [
     "handle_missing_values",
     "enrich_orders_with_products",
     "enrich_orders_with_customers",
+    "add_date_id",
     "calculate_order_metrics",
     "aggregate_sales_by_product",
     "aggregate_sales_by_customer",
