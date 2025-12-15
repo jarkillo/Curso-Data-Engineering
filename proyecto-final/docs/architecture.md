@@ -62,6 +62,7 @@ Este documento describe la arquitectura del pipeline ETL de TechMart Analytics, 
 │  │                        ENRICHMENT                                   │   │
 │  │  • Join pedidos + productos                                         │   │
 │  │  • Join pedidos + clientes                                          │   │
+│  │  • Generación de date_id (YYYYMMDD) para enlace con dim_date        │   │
 │  │  • Cálculo de métricas (totales, descuentos)                        │   │
 │  └─────────────────────────────────────────────────────────────────────┘   │
 │                                     │                                       │
@@ -137,12 +138,18 @@ Este documento describe la arquitectura del pipeline ETL de TechMart Analytics, 
 | Componente | Responsabilidad |
 |------------|-----------------|
 | `cleaning` | Limpieza y normalización de datos |
-| `enrichment` | Joins y cálculo de métricas |
+| `enrichment` | Joins, generación de date_id y cálculo de métricas |
 | `aggregations` | Agregaciones y KPIs |
+
+**Funciones de enrichment:**
+- `enrich_orders_with_products()` - Join con catálogo
+- `enrich_orders_with_customers()` - Join con clientes
+- `add_date_id()` - Genera `date_id` (formato YYYYMMDD) para enlace con `dim_date`
+- `calculate_order_metrics()` - Calcula totales y descuentos
 
 **Pipeline de transformación:**
 ```
-Raw Data → Clean → Enrich → Aggregate → Ready for Load
+Raw Data → Clean → Enrich (joins + date_id) → Metrics → Aggregate → Ready for Load
 ```
 
 ### 3. Cargadores (`src/loaders/`)
@@ -288,6 +295,7 @@ end
 2. **Enriquecimiento**:
    - Join pedidos + productos (por product_id)
    - Join pedidos + clientes (por customer_id)
+   - Generar `date_id` (YYYYMMDD) a partir de `order_date` para enlace con `dim_date`
    - Calcular order_total = quantity × unit_price
    - Calcular descuentos según reglas de negocio
 
@@ -307,7 +315,7 @@ end
    - Generación de dim_date para rango de fechas
 
 3. **Carga de hechos**:
-   - Validación de foreign keys
+   - Validación de foreign keys (`product_id`, `customer_id`, `date_id`)
    - Cálculo de métricas agregadas
 
 ### Validación Post-Carga
