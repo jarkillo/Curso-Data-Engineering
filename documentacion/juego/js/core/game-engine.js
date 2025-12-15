@@ -189,8 +189,8 @@ const GameEngine = (function() {
             UIManager.showScreen(UIManager.SCREENS.STORY);
             UIManager.showScene(1);
         } else {
-            // Returning player, go to game/module select
-            startMission();
+            // Returning player, go to module selection
+            showModuleSelect();
         }
     }
 
@@ -930,6 +930,191 @@ const GameEngine = (function() {
     }
 
     // ==========================================
+    // MODULE SELECTION FUNCTIONS
+    // ==========================================
+
+    /**
+     * Show module selection screen
+     */
+    function showModuleSelect() {
+        currentGameState = GAME_STATES.MODULE_SELECT;
+        UIManager.showScreen('moduleSelectScreen');
+        renderModuleGrid();
+        SoundManager.play('transition');
+    }
+
+    /**
+     * Render the module selection grid
+     */
+    function renderModuleGrid() {
+        const grid = document.getElementById('modulesGrid');
+        if (!grid) return;
+
+        const allModuleIds = ModuleRegistry.getAllModuleIds();
+
+        grid.innerHTML = allModuleIds.map(moduleId => {
+            const info = ModuleRegistry.getModuleInfo(moduleId);
+            const isUnlocked = ModuleRegistry.isModuleUnlocked(moduleId, state);
+            const progress = ModuleRegistry.getModuleProgress(moduleId, state);
+            const progressPercent = Math.round(progress * 100);
+            const isLoaded = ModuleRegistry.isModuleLoaded(moduleId);
+
+            return `
+                <div class="module-card ${isUnlocked ? 'unlocked' : 'locked'} ${progressPercent === 100 ? 'completed' : ''}"
+                     data-module="${moduleId}"
+                     onclick="${isUnlocked ? `GameEngine.selectModule(${moduleId})` : ''}">
+                    <div class="module-icon" style="background: ${info.color}20; border-color: ${info.color};">
+                        ${info.icon}
+                    </div>
+                    <div class="module-info">
+                        <h3 class="module-name">${info.displayName}</h3>
+                        <p class="module-description">${info.description}</p>
+                        <div class="module-meta">
+                            <span class="module-company">${info.company}</span>
+                            <span class="module-missions">${info.totalMissions} misiones</span>
+                        </div>
+                    </div>
+                    <div class="module-progress-bar">
+                        <div class="module-progress-fill" style="width: ${progressPercent}%; background: ${info.color};"></div>
+                    </div>
+                    <div class="module-progress-text">${progressPercent}% completado</div>
+                    ${!isUnlocked ? `
+                        <div class="module-lock-overlay">
+                            <span class="lock-icon">🔒</span>
+                            <span class="lock-text">Nivel ${info.requiredLevel} requerido</span>
+                        </div>
+                    ` : ''}
+                    ${!isLoaded && isUnlocked ? `
+                        <div class="module-status">📥 Próximamente</div>
+                    ` : ''}
+                </div>
+            `;
+        }).join('');
+    }
+
+    /**
+     * Select a module to play
+     * @param {number} moduleId
+     */
+    async function selectModule(moduleId) {
+        SoundManager.play('click');
+
+        const info = ModuleRegistry.getModuleInfo(moduleId);
+
+        // Check if module is unlocked
+        if (!ModuleRegistry.isModuleUnlocked(moduleId, state)) {
+            UIManager.showFeedback(`
+                🔒 <strong>Módulo bloqueado</strong><br><br>
+                Necesitas nivel ${info.requiredLevel} para desbloquear este módulo.<br>
+                Tu nivel actual: ${state.level}
+            `, 'error');
+            return;
+        }
+
+        // Load module if not loaded
+        if (!ModuleRegistry.isModuleLoaded(moduleId)) {
+            try {
+                UIManager.showFeedback('📥 Cargando módulo...', 'info');
+                await ModuleRegistry.loadModuleScript(moduleId);
+                UIManager.hideFeedback();
+            } catch (error) {
+                UIManager.showFeedback(`
+                    ❌ <strong>Error al cargar módulo</strong><br><br>
+                    ${error.message}<br>
+                    Este módulo aún no está disponible.
+                `, 'error');
+                return;
+            }
+        }
+
+        // Update current module
+        state.currentModule = moduleId;
+        currentModule = ModuleRegistry.getModule(moduleId);
+
+        // Check if player has seen this module's story
+        const storyKey = `module_${moduleId}_story_seen`;
+        if (!state[storyKey] && currentModule && currentModule.story) {
+            // Show module intro story
+            showModuleStory(moduleId);
+        } else {
+            // Go directly to first uncompleted mission
+            startModuleMission(moduleId);
+        }
+
+        saveGame();
+    }
+
+    /**
+     * Show module introduction story
+     * @param {number} moduleId
+     */
+    function showModuleStory(moduleId) {
+        const module = ModuleRegistry.getModule(moduleId);
+        if (!module || !module.story) {
+            startModuleMission(moduleId);
+            return;
+        }
+
+        // Use StoryManager to show the module story
+        const storyData = {
+            title: module.story.intro?.title || `Módulo ${moduleId}: ${module.displayName}`,
+            scenes: module.story.intro?.scenes || []
+        };
+
+        if (storyData.scenes.length === 0) {
+            // No scenes, go directly to mission
+            state[`module_${moduleId}_story_seen`] = true;
+            startModuleMission(moduleId);
+            return;
+        }
+
+        // Show story with callback to start mission when done
+        StoryManager.showStory(storyData, function() {
+            // Mark story as seen
+            state[`module_${moduleId}_story_seen`] = true;
+            StorageManager.saveGameState(state);
+
+            // Start the first uncompleted mission
+            startModuleMission(moduleId);
+        });
+    }
+
+    /**
+     * Start the first uncompleted mission in a module
+     * @param {number} moduleId
+     */
+    function startModuleMission(moduleId) {
+        const missions = ModuleRegistry.getModuleMissions(moduleId);
+
+        // Find first uncompleted mission
+        let missionToStart = null;
+        for (const mission of missions) {
+            if (!state.missionsCompleted.includes(mission.id)) {
+                missionToStart = mission;
+                break;
+            }
+        }
+
+        // If all completed, start from first mission (replay)
+        if (!missionToStart && missions.length > 0) {
+            missionToStart = missions[0];
+        }
+
+        if (missionToStart) {
+            startMissionById(missionToStart.id);
+        } else {
+            UIManager.showFeedback('⚠️ No hay misiones disponibles en este módulo', 'error');
+        }
+    }
+
+    /**
+     * Go back to module selection from game
+     */
+    function backToModuleSelect() {
+        showModuleSelect();
+    }
+
+    // ==========================================
     // TOOL FUNCTIONS
     // ==========================================
 
@@ -1011,6 +1196,11 @@ const GameEngine = (function() {
         setVolume,
         confirmReset,
         resetProgress,
+
+        // Module selection
+        showModuleSelect,
+        selectModule,
+        backToModuleSelect,
 
         // Tools
         switchTool,

@@ -18,7 +18,8 @@ const UIManager = (function() {
         START: 'startScreen',
         STORY: 'storyScreen',
         GAME: 'gameScreen',
-        MODULE_SELECT: 'moduleSelectScreen'
+        MODULE_SELECT: 'moduleSelectScreen',
+        DYNAMIC_STORY: 'dynamicStoryScreen'
     };
 
     // Current active screen
@@ -29,19 +30,32 @@ const UIManager = (function() {
      * @param {string} screenId - ID of screen to show
      */
     function showScreen(screenId) {
+        // Hide all known screens
         Object.values(SCREENS).forEach(id => {
             const screen = document.getElementById(id);
             if (screen) {
-                screen.style.display = id === screenId ? 'block' : 'none';
+                screen.style.display = 'none';
             }
         });
+
+        // Show the requested screen
+        const targetScreen = document.getElementById(screenId);
+        if (targetScreen) {
+            targetScreen.style.display = 'block';
+        }
 
         currentScreen = screenId;
         console.log('[UIManager] Showing screen:', screenId);
 
         // Special handling for different screens
         if (screenId === SCREENS.START) {
-            document.getElementById(SCREENS.START).style.display = 'flex';
+            const startScreen = document.getElementById(SCREENS.START);
+            if (startScreen) startScreen.style.display = 'flex';
+        }
+
+        if (screenId === SCREENS.DYNAMIC_STORY) {
+            const dynamicStoryScreen = document.getElementById(SCREENS.DYNAMIC_STORY);
+            if (dynamicStoryScreen) dynamicStoryScreen.style.display = 'flex';
         }
     }
 
