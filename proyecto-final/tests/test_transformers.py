@@ -17,6 +17,7 @@ from src.transformers.cleaning import (
     remove_duplicates,
 )
 from src.transformers.enrichment import (
+    add_date_id,
     calculate_order_metrics,
     enrich_orders_with_customers,
     enrich_orders_with_products,
@@ -278,6 +279,39 @@ class TestEnrichOrdersWithCustomers:
         df = enrich_orders_with_customers(clean_orders_df, clean_customers_df)
         assert "customer_name" in df.columns
         assert "region" in df.columns
+
+
+class TestAddDateId:
+    """Tests para add_date_id."""
+
+    def test_adds_date_id_column(self, clean_orders_df):
+        """Debe añadir columna date_id."""
+        df = add_date_id(clean_orders_df)
+        assert "date_id" in df.columns
+
+    def test_date_id_format_yyyymmdd(self, clean_orders_df):
+        """date_id debe ser formato YYYYMMDD como entero."""
+        df = add_date_id(clean_orders_df)
+        # 2024-01-15 -> 20240115
+        first_row = df[df["order_id"] == "ORD-001"].iloc[0]
+        assert first_row["date_id"] == 20240115
+
+    def test_handles_string_dates(self):
+        """Debe manejar fechas como strings."""
+        orders = pd.DataFrame(
+            {
+                "order_id": ["1"],
+                "order_date": ["2024-03-20"],  # String, no datetime
+            }
+        )
+        df = add_date_id(orders)
+        assert df["date_id"].iloc[0] == 20240320
+
+    def test_preserves_original_columns(self, clean_orders_df):
+        """Debe preservar todas las columnas originales."""
+        original_cols = set(clean_orders_df.columns)
+        df = add_date_id(clean_orders_df)
+        assert original_cols.issubset(set(df.columns))
 
 
 class TestCalculateOrderMetrics:
