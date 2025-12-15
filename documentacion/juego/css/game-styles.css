@@ -1838,3 +1838,630 @@ input:focus-visible {
         font-size: 1rem;
     }
 }
+
+/* ===========================================
+   14. TOOL STYLES - SQL EDITOR
+   =========================================== */
+
+.sql-editor-container {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sql-editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sql-editor-title {
+    font-weight: 600;
+    color: #00d2ff;
+}
+
+.sql-editor-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.sql-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.sql-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.sql-btn.small {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+}
+
+.sql-btn.primary {
+    background: linear-gradient(135deg, #00d2ff 0%, #3a47d5 100%);
+}
+
+.sql-btn.primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 210, 255, 0.3);
+}
+
+.sql-editor-wrapper {
+    display: flex;
+    position: relative;
+}
+
+.sql-line-numbers {
+    width: 40px;
+    padding: 15px 10px;
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.4);
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: right;
+    user-select: none;
+    overflow: hidden;
+}
+
+.sql-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 15px;
+    resize: none;
+    outline: none;
+    min-height: 100px;
+}
+
+.sql-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.sql-editor-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sql-status {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.sql-status-success { color: #27ae60; }
+.sql-status-error { color: #e74c3c; }
+.sql-status-warning { color: #f39c12; }
+.sql-status-loading { color: #00d2ff; }
+
+.sql-results-container {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    max-height: 300px;
+    overflow: auto;
+}
+
+.sql-results-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.2);
+    font-size: 0.9rem;
+}
+
+.sql-results-count {
+    opacity: 0.7;
+}
+
+.sql-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.sql-table th,
+.sql-table td {
+    padding: 10px 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sql-table th {
+    background: rgba(0, 210, 255, 0.1);
+    font-weight: 600;
+    color: #00d2ff;
+}
+
+.sql-table tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.sql-null {
+    color: #95a5a6;
+    font-style: italic;
+}
+
+.sql-no-results {
+    padding: 20px;
+    text-align: center;
+    opacity: 0.7;
+}
+
+.sql-error-container {
+    padding: 15px;
+    background: rgba(231, 76, 60, 0.1);
+    border-top: 1px solid rgba(231, 76, 60, 0.3);
+    color: #e74c3c;
+}
+
+.sql-error-icon {
+    margin-right: 8px;
+}
+
+/* ===========================================
+   15. TOOL STYLES - JSON VIEWER
+   =========================================== */
+
+.json-viewer-container {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.json-viewer-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.json-viewer-title {
+    font-weight: 600;
+    color: #f39c12;
+}
+
+.json-viewer-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.json-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+}
+
+.json-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.json-search {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    width: 150px;
+}
+
+.json-search::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.json-viewer-content {
+    padding: 15px;
+    max-height: 400px;
+    overflow: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.json-placeholder {
+    text-align: center;
+    opacity: 0.5;
+    padding: 40px;
+}
+
+.json-line {
+    white-space: nowrap;
+}
+
+.json-children {
+    padding-left: 20px;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    margin-left: 8px;
+}
+
+.json-toggle {
+    cursor: pointer;
+    margin-right: 5px;
+    user-select: none;
+    opacity: 0.7;
+}
+
+.json-toggle:hover {
+    opacity: 1;
+}
+
+.json-key { color: #e06c75; }
+.json-string { color: #98c379; }
+.json-number { color: #d19a66; }
+.json-boolean { color: #56b6c2; }
+.json-null { color: #c678dd; }
+.json-bracket { color: rgba(255, 255, 255, 0.7); }
+.json-colon { color: rgba(255, 255, 255, 0.5); }
+.json-comma { color: rgba(255, 255, 255, 0.5); }
+
+.json-collapsed {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+    margin: 0 5px;
+}
+
+.json-collapsed:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.json-highlight {
+    background: rgba(255, 215, 0, 0.3);
+    padding: 1px 2px;
+    border-radius: 2px;
+}
+
+.json-viewer-footer {
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.json-error {
+    color: #e74c3c;
+    padding: 20px;
+    text-align: center;
+}
+
+.json-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(39, 174, 96, 0.9);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    animation: slideIn 0.3s ease;
+    z-index: 9999;
+}
+
+/* ===========================================
+   16. TOOL STYLES - DAG VISUALIZER
+   =========================================== */
+
+.dag-visualizer-container {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dag-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dag-title {
+    font-weight: 600;
+    color: #4ecdc4;
+}
+
+.dag-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.dag-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+}
+
+.dag-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.dag-canvas-wrapper {
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+#dagCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.dag-legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dag-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+}
+
+.dag-legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+
+.dag-node-info {
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dag-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.dag-info-status {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.dag-status-success { background: rgba(39, 174, 96, 0.2); color: #27ae60; }
+.dag-status-failed { background: rgba(231, 76, 60, 0.2); color: #e74c3c; }
+.dag-status-running { background: rgba(243, 156, 18, 0.2); color: #f39c12; }
+.dag-status-pending { background: rgba(149, 165, 166, 0.2); color: #95a5a6; }
+
+.dag-info-row {
+    display: flex;
+    gap: 10px;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+}
+
+.dag-info-label {
+    color: rgba(255, 255, 255, 0.6);
+    min-width: 100px;
+}
+
+/* ===========================================
+   17. TOOL STYLES - CODE EDITOR
+   =========================================== */
+
+.code-editor-container {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.code-editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.code-editor-title {
+    font-weight: 600;
+    color: #a855f7;
+}
+
+.code-editor-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.code-lang-select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.code-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+}
+
+.code-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.code-editor-wrapper {
+    display: flex;
+    position: relative;
+}
+
+.code-line-numbers {
+    width: 40px;
+    padding: 15px 10px;
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.4);
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: right;
+    user-select: none;
+    overflow: hidden;
+}
+
+.code-editor-scroll {
+    flex: 1;
+    position: relative;
+    overflow: auto;
+}
+
+.code-highlight,
+.code-input {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 15px;
+    margin: 0;
+    border: none;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.code-highlight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    color: transparent;
+    background: transparent;
+}
+
+.code-input {
+    position: relative;
+    width: 100%;
+    min-height: 150px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.9);
+    caret-color: #fff;
+    resize: none;
+    outline: none;
+}
+
+.code-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Syntax highlighting colors */
+.code-keyword { color: #c678dd; }
+.code-string { color: #98c379; }
+.code-number { color: #d19a66; }
+.code-comment { color: #5c6370; font-style: italic; }
+.code-function { color: #61afef; }
+.code-decorator { color: #e5c07b; }
+.code-key { color: #e06c75; }
+.code-boolean { color: #56b6c2; }
+
+.code-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(39, 174, 96, 0.9);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    animation: slideIn 0.3s ease;
+    z-index: 9999;
+}
+
+/* ===========================================
+   18. TOOL PANEL TABS
+   =========================================== */
+
+.tool-tabs {
+    display: flex;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    overflow-x: auto;
+}
+
+.tool-tab {
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+}
+
+.tool-tab:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.tool-tab.active {
+    color: #00d2ff;
+    border-bottom-color: #00d2ff;
+    background: rgba(0, 210, 255, 0.1);
+}
+
+.tool-contents {
+    position: relative;
+}
+
+.tool-content {
+    display: none;
+}
+
+.tool-content.active {
+    display: block;
+}
