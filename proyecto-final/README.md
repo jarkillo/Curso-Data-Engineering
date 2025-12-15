@@ -94,10 +94,10 @@ proyecto-final/
 │   └── test_validators.py
 ├── dags/
 │   └── daily_etl_dag.py      # DAG de Airflow
-├── data/
+├── data/                     # Creado durante setup
 │   ├── raw/                  # Datos crudos
 │   └── processed/            # Datos procesados
-├── docker/
+├── docker/                   # Creado durante despliegue
 │   ├── Dockerfile
 │   └── docker-compose.yml
 ├── docs/
@@ -151,22 +151,45 @@ pytest -m "not integration"
 ### Ejecutar Pipeline Completo
 
 ```python
-from src.extractors import extract_all_sources
-from src.transformers import transform_data
-from src.loaders import load_to_warehouse
+from src.extractors import (
+    extract_orders_from_api,
+    extract_products_from_csv,
+    extract_customers_from_db,
+)
+from src.transformers import (
+    clean_orders, clean_products, clean_customers,
+    enrich_orders_with_products, enrich_orders_with_customers,
+    add_date_id, calculate_order_metrics,
+)
+from src.loaders import load_dimension, load_fact_table, create_dim_date
 
 # 1. Extracción
-raw_data = extract_all_sources(
-    api_url="http://api.techmart.local/orders",
-    csv_path="data/raw/products.csv",
-    db_connection_string="postgresql://..."
-)
+orders_df = extract_orders_from_api("http://api.techmart.local/orders")
+products_df = extract_products_from_csv("data/raw/products.csv")
+customers_df = extract_customers_from_db("postgresql://...")
 
 # 2. Transformación
-transformed_data = transform_data(raw_data)
+clean_orders_df = clean_orders(orders_df)
+clean_products_df = clean_products(products_df)
+clean_customers_df = clean_customers(customers_df)
+
+enriched_df = enrich_orders_with_products(clean_orders_df, clean_products_df)
+enriched_df = enrich_orders_with_customers(enriched_df, clean_customers_df)
+enriched_df = add_date_id(enriched_df)  # Genera date_id para dim_date
+enriched_df = calculate_order_metrics(enriched_df)
 
 # 3. Carga
-load_to_warehouse(transformed_data, target_schema="analytics")
+dim_date = create_dim_date("2024-01-01", "2024-12-31")
+load_dimension(clean_products_df, "warehouse/dim_product.parquet", "product_id", "dim_product")
+load_dimension(clean_customers_df, "warehouse/dim_customer.parquet", "customer_id", "dim_customer")
+load_dimension(dim_date, "warehouse/dim_date.parquet", "date_id", "dim_date")
+load_fact_table(
+    enriched_df,
+    "warehouse/fact_sales.parquet",
+    foreign_keys=["product_id", "customer_id", "date_id"],
+    measures=["quantity", "order_total"],
+    fact_name="fact_sales",
+)
 ```
 
 ### Ejecutar con Airflow
@@ -194,8 +217,14 @@ airflow standalone
 | Módulo | Descripción | Operaciones |
 |--------|-------------|-------------|
 | `cleaning` | Limpieza de datos | Nulls, duplicados, tipos |
-| `enrichment` | Enriquecimiento | Joins, lookups, cálculos |
+| `enrichment` | Enriquecimiento | Joins, date_id, métricas |
 | `aggregations` | Agregaciones | Métricas, KPIs, rollups |
+
+**Funciones principales de enrichment:**
+- `enrich_orders_with_products()` - Join con catálogo de productos
+- `enrich_orders_with_customers()` - Join con datos de clientes
+- `add_date_id()` - Genera `date_id` (YYYYMMDD) para enlace con `dim_date`
+- `calculate_order_metrics()` - Calcula totales y descuentos
 
 ### Cargadores
 
@@ -203,17 +232,30 @@ airflow standalone
 |--------|-------------|---------|
 | `warehouse_loader` | Carga dimensional | Star schema DW |
 
-## Data Warehouse Schema
+## Data Warehouse Schema (Star Schema)
 
 ### Dimensiones
 
-- **dim_product**: Productos con categorías y atributos
-- **dim_customer**: Clientes con segmentación
-- **dim_date**: Calendario con atributos temporales
+- **dim_product**: Productos con categorías y atributos (`product_id` PK)
+- **dim_customer**: Clientes con segmentación (`customer_id` PK)
+- **dim_date**: Calendario con atributos temporales (`date_id` PK, formato YYYYMMDD)
 
-### Hechos
+### Tabla de Hechos
 
-- **fact_sales**: Ventas con métricas (cantidad, revenue, descuentos)
+- **fact_sales**: Ventas con métricas
+  - Foreign Keys: `product_id`, `customer_id`, `date_id`
+  - Measures: `quantity`, `order_total`, `discount_amount`
+
+```
+            dim_product
+                 │
+                 │ product_id
+                 ▼
+dim_date ──── fact_sales ──── dim_customer
+  date_id        │              customer_id
+                 │
+            (measures)
+```
 
 ## Monitoreo
 
