@@ -304,16 +304,28 @@ const JSONViewer = (function() {
             }
         }
 
-        // Remove existing highlights
+        // Remove existing highlights (safe: use textNode instead of outerHTML to prevent XSS)
         content.querySelectorAll('.json-highlight').forEach(el => {
-            el.outerHTML = el.textContent;
+            const textNode = document.createTextNode(el.textContent);
+            el.parentNode.replaceChild(textNode, el);
         });
 
-        // Add new highlights
+        // Add new highlights (escape HTML to prevent XSS)
         matches.forEach(node => {
             const text = node.textContent;
-            const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
-            const newHtml = text.replace(regex, '<span class="json-highlight">$1</span>');
+            // Escape HTML entities before creating highlight spans
+            const escapedText = text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+            const escapedQuery = escapeRegex(query)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+            const regex = new RegExp(`(${escapedQuery})`, 'gi');
+            const newHtml = escapedText.replace(regex, '<span class="json-highlight">$1</span>');
 
             const span = document.createElement('span');
             span.innerHTML = newHtml;
