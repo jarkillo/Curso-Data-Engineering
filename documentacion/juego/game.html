@@ -907,10 +907,27 @@
     <script src="js/core/ui-manager.js"></script>
     <script src="js/core/module-registry.js"></script>
     <script src="js/core/story-manager.js"></script>
+    <script src="js/core/achievements-manager.js"></script>
     <script src="js/core/game-engine.js"></script>
 
-    <!-- Game Modules -->
+    <!-- Tool Modules -->
+    <script src="js/tools/tool-manager.js"></script>
+    <script src="js/tools/sql-editor.js"></script>
+    <script src="js/tools/json-viewer.js"></script>
+    <script src="js/tools/dag-visualizer.js"></script>
+    <script src="js/tools/code-editor.js"></script>
+
+    <!-- Game Modules (All 10) -->
     <script src="js/modules/module-1.js"></script>
+    <script src="js/modules/module-2.js"></script>
+    <script src="js/modules/module-3.js"></script>
+    <script src="js/modules/module-4.js"></script>
+    <script src="js/modules/module-5.js"></script>
+    <script src="js/modules/module-6.js"></script>
+    <script src="js/modules/module-7.js"></script>
+    <script src="js/modules/module-8.js"></script>
+    <script src="js/modules/module-9.js"></script>
+    <script src="js/modules/module-10.js"></script>
 
     <!-- Initialization Script -->
     <script>
@@ -1011,9 +1028,15 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('[Game] Data Engineer: The Game v2.0.0');
             console.log('[Game] Initializing modular architecture...');
+            console.log('[Game] 10 modules, 52 missions, ~13,000 XP total');
 
-            // Initialize game engine
+            // Initialize core systems
             GameEngine.init();
+
+            // Initialize achievements
+            if (typeof AchievementsManager !== 'undefined') {
+                AchievementsManager.init();
+            }
 
             // Check for existing save
             const savedState = StorageManager.loadGameState();
@@ -1021,6 +1044,12 @@
                 document.getElementById('loadBtn').style.display = 'block';
             } else {
                 document.getElementById('loadBtn').style.display = 'none';
+            }
+
+            // Log registered modules
+            if (typeof ModuleRegistry !== 'undefined') {
+                const modules = ModuleRegistry.getAllModules();
+                console.log('[Game] Registered modules:', Object.keys(modules).length);
             }
 
             console.log('[Game] Initialization complete');
