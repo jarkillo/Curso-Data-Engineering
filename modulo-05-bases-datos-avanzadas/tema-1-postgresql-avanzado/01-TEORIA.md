@@ -1078,3 +1078,8 @@ Ahora que entiendes la teoría:
 **Última actualización:** 2025-10-25
 
 ¡Bienvenido al mundo de PostgreSQL Avanzado! 🐘🚀
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Módulo 4: APIs y Web Scraping: Rate Limiting y Caching](../../modulo-04-apis-scraping/tema-3-rate-limiting-caching/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

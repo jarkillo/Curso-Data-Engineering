@@ -368,3 +368,8 @@ Si encuentras errores o tienes dudas:
 ---
 
 **Desarrollado con ❤️ siguiendo TDD y principios de código limpio**
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Web Scraping - 01 Teoria](../../tema-2-web-scraping/01-TEORIA.md)

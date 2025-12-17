@@ -743,3 +743,8 @@ db.usuarios.createIndex({email: 1}, {unique: true});
 **Última actualización:** 2025-10-25
 
 ¡Bienvenido al mundo NoSQL! 🍃
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [PostgreSQL Avanzado - Proyecto Práctico](../tema-1-postgresql-avanzado/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

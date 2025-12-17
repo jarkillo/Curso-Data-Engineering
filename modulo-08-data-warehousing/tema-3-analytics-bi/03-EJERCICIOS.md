@@ -1211,3 +1211,8 @@ CREATE TABLE analytics.metrics.metric_thresholds (
 ---
 
 **Siguiente paso**: [04-proyecto-practico/](04-proyecto-practico/) - Implementa un sistema de métricas completo con TDD
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

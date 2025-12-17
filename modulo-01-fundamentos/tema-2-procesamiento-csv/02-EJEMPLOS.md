@@ -1390,3 +1390,8 @@ Ahora que has visto estos ejemplos trabajados:
 ---
 
 *Última actualización: 2025-10-19*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)

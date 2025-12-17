@@ -782,3 +782,8 @@ Después de completar este proyecto, puedes:
 ---
 
 ¿Dudas? Revisa [01-TEORIA.md](../01-TEORIA.md) o ejecuta `dbt docs serve` para explorar la documentación interactiva.
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Analytics y BI - 01 Teoria](../../tema-3-analytics-bi/01-TEORIA.md)

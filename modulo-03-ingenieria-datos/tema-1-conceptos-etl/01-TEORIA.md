@@ -720,3 +720,8 @@ Ahora que entiendes los conceptos fundamentales, en los siguientes temas aprende
 **¡Felicidades!** Has completado la teoría del Tema 1. Ahora continúa con **02-EJEMPLOS.md** para ver pipelines en acción, y luego practica con **03-EJERCICIOS.md**.
 
 **Última actualización**: 2025-10-23
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Módulo 2: SQL: Optimización SQL](../../modulo-02-sql/tema-3-optimizacion/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

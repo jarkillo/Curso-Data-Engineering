@@ -969,3 +969,8 @@ Ahora que has visto pipelines en acción, es tu turno de practicar:
 **¡Felicidades!** Has completado los ejemplos del Tema 1. Ahora tienes las bases para diseñar pipelines robustos y escalables.
 
 **Última actualización**: 2025-10-23
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)

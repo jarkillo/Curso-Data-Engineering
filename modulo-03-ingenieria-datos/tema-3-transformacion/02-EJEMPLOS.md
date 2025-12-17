@@ -1414,3 +1414,8 @@ Has visto 5 ejemplos progresivos que cubren:
 
 **Tiempo estimado**: 60-90 minutos
 **Última actualización**: 2025-10-30
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)

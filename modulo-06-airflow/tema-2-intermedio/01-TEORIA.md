@@ -1554,3 +1554,8 @@ Antes de continuar al Tema 3, **practica** lo aprendido:
 ---
 
 **🚀 ¡Continúa con el Tema 3: Airflow en Producción!**
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Introducción a Airflow - Proyecto Práctico](../tema-1-introduccion/proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

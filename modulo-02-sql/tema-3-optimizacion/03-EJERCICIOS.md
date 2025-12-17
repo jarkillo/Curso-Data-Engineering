@@ -1069,3 +1069,8 @@ REFRESH MATERIALIZED VIEW dashboard_transportistas;
 ✅ Vistas materializadas y caching
 
 **¡Continúa con el proyecto práctico en `04-proyecto-practico/`!** 🚀
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

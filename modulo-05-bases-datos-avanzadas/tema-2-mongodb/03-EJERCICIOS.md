@@ -1003,3 +1003,8 @@ db.inscripciones.aggregate([
 ✅ Pipeline complejo multi-stage
 
 **¡Continúa con el proyecto práctico en `04-proyecto-practico/`!** 🚀
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

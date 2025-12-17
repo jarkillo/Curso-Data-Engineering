@@ -701,3 +701,8 @@ Has completado los 5 ejemplos prácticos. Ahora:
 **Última actualización:** 2025-10-25
 **Tiempo estimado:** 90-120 minutos (todos los ejemplos)
 **Nivel:** Básico a Avanzado
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)

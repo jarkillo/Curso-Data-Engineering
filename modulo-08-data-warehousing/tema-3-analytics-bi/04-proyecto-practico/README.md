@@ -305,3 +305,8 @@ sqlite3.OperationalError: unable to open database file
 ## Licencia
 
 Material del Master en Ingeniería de Datos con IA.
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md)

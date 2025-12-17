@@ -1346,3 +1346,8 @@ Has completado 12 ejercicios de modelado de datos:
 **Tiempo estimado de resolución**: 3-4 horas
 **Revisado**: 2025-11-12
 **Nivel alcanzado**: Intermedio-Avanzado en Modelado de Datos 🎓
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

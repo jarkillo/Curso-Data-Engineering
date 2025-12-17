@@ -914,3 +914,8 @@ Proyecto educativo del **Master en Ingeniería de Datos con IA**.
 - **Cobertura: 98%** (supera objetivo ≥80%)
 - **CLI completo** con argparse para ejecución flexible
 - **Star Schema completamente funcional** con integridad referencial validada
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Herramientas DWH - 01 Teoria](../../tema-2-herramientas-dwh/01-TEORIA.md)

@@ -1125,3 +1125,8 @@ Diferencia de precio promedio: 9.52%
 ---
 
 **¡Excelente trabajo!** Ya dominas los patrones fundamentales de extracción de datos. Ahora es tu turno de practicar.
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)

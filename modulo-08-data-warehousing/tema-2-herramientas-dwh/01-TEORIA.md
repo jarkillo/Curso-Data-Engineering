@@ -1105,3 +1105,8 @@ Antes de continuar al siguiente tema, asegúrate de que puedes:
 **¡Felicidades!** Ahora entiendes los fundamentos de dbt. En la siguiente sección veremos ejemplos prácticos ejecutables.
 
 **Próximo paso**: [`02-EJEMPLOS.md`](./02-EJEMPLOS.md) - Ejemplos progresivos de dbt desde básico hasta avanzado.
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Modelado Dimensional - Proyecto Práctico](../tema-1-dimensional-modeling/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

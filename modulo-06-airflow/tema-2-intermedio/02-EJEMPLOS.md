@@ -1277,3 +1277,8 @@ Ahora que has visto los ejemplos prácticos, es momento de **practicar por tu cu
 ---
 
 **¡Felicitaciones por completar los ejemplos del Tema 2!** 🎉
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)

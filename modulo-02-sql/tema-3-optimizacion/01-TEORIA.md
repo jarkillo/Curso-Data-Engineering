@@ -786,3 +786,8 @@ Al final de este tema, deberías poder responder SÍ a todas estas preguntas:
 
 **Tiempo estimado de lectura**: 35-40 minutos
 **Palabras**: ~4,200
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [SQL Intermedio - Proyecto Práctico](../tema-2-sql-intermedio/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

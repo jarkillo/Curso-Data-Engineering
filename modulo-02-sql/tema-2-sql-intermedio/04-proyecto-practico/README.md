@@ -256,3 +256,8 @@ Este proyecto es parte del **Master en Ingeniería de Datos** y tiene fines educ
 **Última actualización:** 2025-10-25
 **Versión:** 1.0.0
 **Autor:** Equipo Pedagógico Master Data Engineering
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Optimización SQL - 01 Teoria](../../tema-3-optimizacion/01-TEORIA.md)

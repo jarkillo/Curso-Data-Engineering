@@ -1500,3 +1500,8 @@ except Exception as e:
 **¡Felicidades por completar los ejercicios!** Ahora tienes las habilidades para diseñar pipelines robustos y escalables.
 
 **Última actualización**: 2025-10-23
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

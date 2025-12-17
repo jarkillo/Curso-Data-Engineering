@@ -452,3 +452,8 @@ TOTAL                         94%
 **¡Éxito en tu proyecto!** 🚀
 
 Si tienes dudas, revisa los ejemplos del Tema 1 o consulta la documentación oficial de Airflow.
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Airflow Intermedio - 01 Teoria](../../tema-2-intermedio/01-TEORIA.md)

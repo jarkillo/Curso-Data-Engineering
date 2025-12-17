@@ -508,3 +508,8 @@ Si tienes dudas, consulta los ejemplos y ejercicios del tema. Todo el código qu
 **Proyecto**: Sistema de Extracción Multi-Fuente
 **Versión**: 1.0.0
 **Última actualización**: 2025-10-30
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Transformación - 01 Teoria](../../tema-3-transformacion/01-TEORIA.md)

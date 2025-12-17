@@ -1304,3 +1304,8 @@ Ahora tienes las bases para orquestar workflows de Data Engineering. En los ejem
 **Autor**: @teaching [pedagogo]
 **Módulo**: 6 - Apache Airflow y Orquestación
 **Tema**: 1 - Introducción a Airflow
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Módulo 5: Bases de Datos Avanzadas: Modelado de Datos](../../modulo-05-bases-datos-avanzadas/tema-3-modelado-datos/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

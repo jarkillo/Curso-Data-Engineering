@@ -508,3 +508,8 @@ Después de dominar este proyecto:
 **Autor:** DataHub Inc. - Equipo de Data Engineering
 **Licencia:** MIT
 **Nivel:** Intermedio-Avanzado
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Módulo 5: Bases de Datos Avanzadas: PostgreSQL Avanzado](../../../modulo-05-bases-datos-avanzadas/tema-1-postgresql-avanzado/01-TEORIA.md)

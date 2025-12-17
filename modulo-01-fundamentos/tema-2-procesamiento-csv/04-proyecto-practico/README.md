@@ -603,3 +603,8 @@ Proyecto práctico desarrollado siguiendo metodología TDD y arquitectura funcio
 ---
 
 **Última actualización:** 2025-10-19
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Logs y Debugging - 01 Teoria](../../tema-3-logs-debugging/01-TEORIA.md)

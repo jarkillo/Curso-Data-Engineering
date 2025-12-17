@@ -1531,3 +1531,8 @@ Marca los ejercicios que has completado:
 **Última actualización:** 2025-10-18
 **Tiempo total estimado:** 2-3 horas
 **Autor:** Equipo Pedagógico del Master en Ingeniería de Datos
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

@@ -886,3 +886,8 @@ Y construirás pipelines de nivel profesional que funcionan en producción 24/7.
 En el siguiente documento (`02-EJEMPLOS.md`), veremos estas estrategias en acción con casos reales y código ejecutable.
 
 **¡Éxito en tu aprendizaje!** 🚀
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Formatos Modernos - Proyecto Práctico](../tema-5-formatos-modernos/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

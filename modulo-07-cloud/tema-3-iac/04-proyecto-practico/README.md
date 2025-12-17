@@ -603,3 +603,8 @@ Este proyecto es parte del **Master en Ingeniería de Datos con IA** y está dis
 **¡Felicidades!** Has completado el proyecto de Infrastructure as Code. 🎉
 
 Ahora tienes una infraestructura de Data Lake completa, testeada y lista para producción.
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Módulo 8: Data Warehousing: Modelado Dimensional](../../../modulo-08-data-warehousing/tema-1-dimensional-modeling/01-TEORIA.md)

@@ -1382,3 +1382,8 @@ Has completado 12 ejercicios progresivos sobre formatos de datos modernos:
 ---
 
 *Última actualización: 2025-10-30*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

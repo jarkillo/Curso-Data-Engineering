@@ -1686,3 +1686,8 @@ Una vez completados todos los ejercicios:
 Has dominado los conceptos intermedios de Apache Airflow. Ahora estás listo para construir pipelines complejos y productivos.
 
 **🚀 Continúa con el Proyecto Práctico para aplicar todo lo aprendido.**
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](proyecto-practico/README.md)

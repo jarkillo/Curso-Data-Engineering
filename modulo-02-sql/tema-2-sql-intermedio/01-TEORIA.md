@@ -888,3 +888,8 @@ Completa este checklist para asegurarte de que dominas SQL Intermedio:
 **Última actualización:** 2025-10-25
 **Tiempo estimado de lectura:** 30-45 minutos
 **Nivel:** Intermedio
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [SQL Básico - Proyecto Práctico](../tema-1-sql-basico/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

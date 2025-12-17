@@ -238,3 +238,8 @@ python -m pytest
 
 **Última actualización:** 2025-10-25
 **Versión:** 1.0.0
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [MongoDB - 01 Teoria](../../tema-2-mongodb/01-TEORIA.md)

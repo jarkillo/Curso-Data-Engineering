@@ -694,3 +694,8 @@ pytest -v
 **Calidad**: TDD con funciones puras
 
 **¡Éxito en tu aprendizaje de Modelado de Datos!** 🚀
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Módulo 6: Apache Airflow: Introducción a Airflow](../../../modulo-06-airflow/tema-1-introduccion/01-TEORIA.md)

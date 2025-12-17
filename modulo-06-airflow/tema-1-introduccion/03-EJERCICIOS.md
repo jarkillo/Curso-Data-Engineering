@@ -1768,3 +1768,8 @@ Has consolidado tu aprendizaje de Apache Airflow con práctica real.
 **Autor**: @teaching [profesor]
 **Módulo**: 6 - Apache Airflow y Orquestación
 **Tema**: 1 - Introducción a Airflow
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](proyecto-practico/README.md)

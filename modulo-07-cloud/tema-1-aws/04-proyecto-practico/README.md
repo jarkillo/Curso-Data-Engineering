@@ -526,3 +526,8 @@ MIT License - Proyecto educativo
 
 *Última actualización: 2025-11-09*
 *Módulo 7 - Tema 1: AWS para Data Engineering*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Google Cloud Platform - 01 Teoria](../../tema-2-gcp/01-TEORIA.md)

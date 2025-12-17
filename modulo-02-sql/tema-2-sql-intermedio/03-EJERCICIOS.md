@@ -1199,3 +1199,8 @@ Has completado este tema cuando:
 ---
 
 **¡Felicidades!** 🎉 Has completado los ejercicios de SQL Intermedio. Ahora dominas JOINs, subconsultas y CASE WHEN como un profesional.
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

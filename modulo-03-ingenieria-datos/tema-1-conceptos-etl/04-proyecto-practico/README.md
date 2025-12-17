@@ -899,3 +899,8 @@ Después de completar este proyecto, te recomendamos:
 Has implementado un pipeline ETL robusto, bien testeado y productivo. Este proyecto puede ser parte de tu portafolio profesional.
 
 **Última actualización**: 2025-10-23
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Extracción - 01 Teoria](../../tema-2-extraccion/01-TEORIA.md)

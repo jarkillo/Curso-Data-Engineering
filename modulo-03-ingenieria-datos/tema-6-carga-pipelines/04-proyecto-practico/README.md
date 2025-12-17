@@ -325,3 +325,8 @@ pytest --cov=src --cov-report=html
 ---
 
 **¡Éxito con tu aprendizaje de Data Engineering!** 🚀
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Módulo 4: APIs y Web Scraping: APIs REST](../../../modulo-04-apis-scraping/tema-1-apis-rest/01-TEORIA.md)

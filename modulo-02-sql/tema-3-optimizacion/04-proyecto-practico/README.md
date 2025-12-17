@@ -451,3 +451,8 @@ pytest --cov=src --cov-report=term
 **Calidad**: TDD con funciones puras
 
 **¡Éxito en tu aprendizaje de Optimización SQL!** 🚀
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Módulo 3: Ingeniería de Datos: Conceptos ETL](../../../modulo-03-ingenieria-datos/tema-1-conceptos-etl/01-TEORIA.md)

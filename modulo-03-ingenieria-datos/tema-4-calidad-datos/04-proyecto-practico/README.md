@@ -512,3 +512,8 @@ Para preguntas o problemas:
 ---
 
 *Última actualización: 2025-10-30*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Formatos Modernos - 01 Teoria](../../tema-5-formatos-modernos/01-TEORIA.md)

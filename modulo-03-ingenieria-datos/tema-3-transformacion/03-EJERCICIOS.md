@@ -1537,3 +1537,8 @@ print("✅ Ejercicio 15 correcto")
 
 **Tiempo estimado de práctica**: 4-6 horas
 **Última actualización**: 2025-10-30
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

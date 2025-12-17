@@ -1,0 +1,15 @@
+# Archivos generados
+certificados/*.pdf
+progreso/*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Virtual environments
+venv/
+.venv/
