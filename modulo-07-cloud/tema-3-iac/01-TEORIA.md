@@ -1226,3 +1226,8 @@ Marca lo que ya dominas:
 ---
 
 *Última actualización: 2025-01-15*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Google Cloud Platform - Proyecto Práctico](../tema-2-gcp/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

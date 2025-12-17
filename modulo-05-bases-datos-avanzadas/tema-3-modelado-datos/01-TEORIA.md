@@ -520,3 +520,8 @@ cliente_id | nombre | ciudad_actual | ciudad_anterior
 **Última actualización:** 2025-10-25
 
 ¡Domina el arte del modelado! 📐
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [MongoDB - Proyecto Práctico](../tema-2-mongodb/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

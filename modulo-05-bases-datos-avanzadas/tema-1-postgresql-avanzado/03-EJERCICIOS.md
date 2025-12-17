@@ -2398,3 +2398,8 @@ GROUP BY tipo_tabla, query_tipo;
 **Siguiente:** [Proyecto Práctico →](./04-proyecto-practico/)
 
 **Última actualización:** 2025-10-25
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

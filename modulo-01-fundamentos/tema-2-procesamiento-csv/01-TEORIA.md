@@ -1127,3 +1127,8 @@ Marca cada punto cuando lo hayas entendido:
 ---
 
 *Última actualización: 2025-10-19*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Python y Estadística - Proyecto Práctico](../tema-1-python-estadistica/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

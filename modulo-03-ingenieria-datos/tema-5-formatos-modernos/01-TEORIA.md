@@ -1025,3 +1025,8 @@ pq.write_table(
 ---
 
 *Última actualización: 2025-10-30*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Calidad de Datos - Proyecto Práctico](../tema-4-calidad-datos/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

@@ -506,7 +506,7 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'
 def validar_lista_numeros(datos):
     if not isinstance(datos, list):
         raise TypeError("Los datos deben ser una lista")
-    
+
     for valor in datos:
         if not isinstance(valor, (int, float)):
             raise TypeError(f"Todos los elementos deben ser números, encontrado: {type(valor)}")
@@ -525,10 +525,10 @@ if len(datos) == 0:
 for valor in datos:
     if valor < 0 and solo_positivos:
         raise ValueError(f"Se encontró un valor negativo: {valor}")
-    
+
     if math.isinf(valor):
         raise ValueError(f"Se encontró un valor infinito")
-    
+
     if math.isnan(valor):
         raise ValueError(f"Se encontró un NaN (Not a Number)")
 ```
@@ -585,4 +585,8 @@ Ahora que entiendes la teoría, es momento de:
 
 **Última actualización:** 2025-10-18  
 **Duración de lectura:** 30-45 minutos
+---
 
+## 🧭 Navegación
+
+➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

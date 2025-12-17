@@ -901,3 +901,8 @@ MongoDB permite **pipelines complejos** con múltiples stages (`$group`, `$looku
 | 5 | Pipeline Complejo | ⭐⭐⭐ | Analytics de usuarios (JOIN + agregación) |
 
 **¡Continúa con los ejercicios en `03-EJERCICIOS.md`!** 🚀
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)

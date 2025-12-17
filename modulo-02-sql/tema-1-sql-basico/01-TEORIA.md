@@ -811,3 +811,8 @@ Ahora que entiendes los fundamentos de SQL, es hora de practicar:
 ---
 
 **Última actualización:** 2025-10-23
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Módulo 1: Fundamentos: Logs y Debugging](../../modulo-01-fundamentos/tema-3-logs-debugging/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

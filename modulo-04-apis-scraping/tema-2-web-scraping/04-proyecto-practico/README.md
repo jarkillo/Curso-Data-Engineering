@@ -511,3 +511,8 @@ Este es un proyecto educativo del **Master en Ingeniería de Datos - DataHub Inc
 ---
 
 *"El scraping es como la pesca: necesitas paciencia, la herramienta correcta, y respetar las reglas del lago." 🎣*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Rate Limiting y Caching - 01 Teoria](../../tema-3-rate-limiting-caching/01-TEORIA.md)

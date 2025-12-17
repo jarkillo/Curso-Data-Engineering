@@ -978,3 +978,8 @@ GROUP BY dept.nombre_departamento;
 **Tiempo estimado**: 4-6 horas para completar todos los ejercicios
 **Prerequisitos**: Haber leído 01-TEORIA.md y 02-EJEMPLOS.md
 **Herramientas recomendadas**: Python 3.11+, PostgreSQL o SQLite, pandas
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

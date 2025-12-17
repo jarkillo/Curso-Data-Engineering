@@ -376,3 +376,8 @@ Has visto PostgreSQL avanzado en acción:
 ---
 
 **Última actualización:** 2025-10-25
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)

@@ -598,3 +598,8 @@ Después de completar este proyecto, estás listo para:
 ---
 
 **¡Felicitaciones por completar el Proyecto Práctico de Airflow Intermedio!** 🎉
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Módulo 7: Cloud Computing: AWS](../../../modulo-07-cloud/tema-1-aws/01-TEORIA.md)

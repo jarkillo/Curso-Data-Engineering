@@ -483,3 +483,8 @@ Fecha: 2025-10-30
 ---
 
 **¡Happy coding! 🚀**
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Calidad de Datos - 01 Teoria](../../tema-4-calidad-datos/01-TEORIA.md)

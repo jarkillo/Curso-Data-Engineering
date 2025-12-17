@@ -732,3 +732,8 @@ En los siguientes ejemplos y ejercicios, pondrás estos conceptos en práctica d
 ---
 
 **Siguiente paso**: [02-EJEMPLOS.md](02-EJEMPLOS.md) - Ejemplos prácticos de KPIs y dashboards
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Herramientas DWH - Proyecto Práctico](../tema-2-herramientas-dwh/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

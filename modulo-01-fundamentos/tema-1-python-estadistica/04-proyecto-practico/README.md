@@ -166,3 +166,8 @@ Este proyecto implementa:
 ## Licencia
 
 Este proyecto es parte del Master en Ingeniería de Datos con IA - Material educativo.
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Procesamiento CSV - 01 Teoria](../../tema-2-procesamiento-csv/01-TEORIA.md)

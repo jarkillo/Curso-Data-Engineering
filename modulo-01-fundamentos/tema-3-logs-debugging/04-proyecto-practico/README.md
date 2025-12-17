@@ -458,3 +458,8 @@ Este proyecto es parte del Master en Ingeniería de Datos con IA - Material educ
 ---
 
 *Última actualización: 2025-10-19*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Módulo 2: SQL: SQL Básico](../../../modulo-02-sql/tema-1-sql-basico/01-TEORIA.md)

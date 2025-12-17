@@ -836,3 +836,8 @@ Has completado la teoría de GCP. Ahora:
 
 *Última actualización: 2025-11-09*
 *Módulo 7 - Tema 2: GCP para Data Engineering*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [AWS - Proyecto Práctico](../tema-1-aws/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

@@ -850,3 +850,8 @@ Ahora que comprendes los fundamentos teóricos del modelado dimensional, en los 
 **Tiempo estimado de lectura**: 35-40 minutos
 **Nivel**: Intermedio
 **Prerequisitos**: SQL básico, conceptos de bases de datos relacionales
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Módulo 7: Cloud Computing: Infrastructure as Code](../../modulo-07-cloud/tema-3-iac/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

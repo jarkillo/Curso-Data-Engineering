@@ -590,3 +590,8 @@ Uso educativo exclusivamente.
 ---
 
 *Última actualización: 2025-10-30*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Carga y Pipelines - 01 Teoria](../../tema-6-carga-pipelines/01-TEORIA.md)

@@ -1442,3 +1442,8 @@ Ahora tienes las habilidades fundamentales para analizar datos como un Data Engi
 
 **Última actualización:** 2025-10-19
 **Duración estimada:** 3-4 horas (todos los ejercicios)
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

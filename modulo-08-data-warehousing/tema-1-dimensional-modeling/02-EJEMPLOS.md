@@ -1320,3 +1320,8 @@ LIMIT 20;
 **Tiempo estimado**: 50-60 minutos de lectura y práctica
 **Prerequisitos**: Haber leído 01-TEORIA.md, conocimientos de SQL
 **Herramientas**: Python 3.11+, pandas, SQL (PostgreSQL/MySQL)
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)

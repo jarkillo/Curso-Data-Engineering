@@ -1329,3 +1329,8 @@ Después de completar estos ejercicios:
 
 *Última actualización: 2025-10-23*
 *Tiempo estimado total: 6-10 horas*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

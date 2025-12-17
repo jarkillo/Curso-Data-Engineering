@@ -1038,3 +1038,8 @@ Cuando haces JOIN entre tablas, debes especificar de qué tabla viene cada colum
 **¡Excelente trabajo!** 🎉 Ahora dominas dbt desde básico hasta avanzado.
 
 **Siguiente paso**: [`04-proyecto-practico/`](./04-proyecto-practico/) - Pipeline completo de Data Warehouse con dbt.
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

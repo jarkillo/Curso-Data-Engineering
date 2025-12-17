@@ -2081,3 +2081,8 @@ Ahora que has visto cómo funcionan los servicios en ejemplos reales, es momento
 ---
 
 *Última actualización: 2025-01-15*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)

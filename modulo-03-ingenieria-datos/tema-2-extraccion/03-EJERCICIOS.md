@@ -1218,3 +1218,8 @@ Has completado exitosamente los ejercicios si:
 **¡Felicidades!** Has completado los ejercicios de extracción de datos. Estás listo para el **proyecto práctico TDD** donde construirás un sistema de extracción completo y profesional.
 
 **Próximo paso**: `04-proyecto-practico/` - Sistema de extracción multi-fuente con arquitectura limpia y >85% de cobertura de tests.
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

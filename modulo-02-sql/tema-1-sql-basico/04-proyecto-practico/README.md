@@ -511,3 +511,8 @@ Una vez completado este proyecto:
 ---
 
 **Última actualización:** 2025-10-23
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [SQL Intermedio - 01 Teoria](../../tema-2-sql-intermedio/01-TEORIA.md)

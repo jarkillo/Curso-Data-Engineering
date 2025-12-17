@@ -1188,3 +1188,8 @@ Verifica que puedes hacer lo siguiente:
 
 *Última actualización: 2025-10-23*
 *Tiempo de lectura: 30-45 minutos*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Módulo 3: Ingeniería de Datos: Carga y Pipelines](../../modulo-03-ingenieria-datos/tema-6-carga-pipelines/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

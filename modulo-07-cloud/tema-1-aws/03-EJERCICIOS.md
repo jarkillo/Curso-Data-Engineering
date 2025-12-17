@@ -865,3 +865,8 @@ WHERE año = 2025
 **Siguiente paso:** [04-proyecto-practico](./04-proyecto-practico/) - Proyecto final: Pipeline ETL Serverless
 
 **Última actualización:** 2025-11-09
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

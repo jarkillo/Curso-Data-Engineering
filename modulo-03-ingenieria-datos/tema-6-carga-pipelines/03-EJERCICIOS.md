@@ -1359,3 +1359,8 @@ except Exception as e:
 **Próximo paso**: En el proyecto práctico (`04-proyecto-practico/`), construirás un pipeline ETL completo con TDD, implementando todas estas técnicas en un caso real.
 
 **¡Éxito con los ejercicios!** 🚀
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

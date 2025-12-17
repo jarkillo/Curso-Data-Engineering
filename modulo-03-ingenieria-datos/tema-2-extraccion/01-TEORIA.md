@@ -954,3 +954,8 @@ Al terminar este tema, deberías poder:
 **¡Felicidades!** Has completado la teoría de extracción de datos. Ahora estás listo para ver ejemplos prácticos y hacer ejercicios.
 
 **Próximo paso**: `02-EJEMPLOS.md` donde verás 5 casos reales de extracción de datos.
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Conceptos ETL - Proyecto Práctico](../tema-1-conceptos-etl/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

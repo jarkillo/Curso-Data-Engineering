@@ -1076,3 +1076,8 @@ Marca lo que ya dominas:
 
 *Última actualización: 2025-10-23*
 *Tema 2 - Módulo 4 - Master en Ingeniería de Datos*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [APIs REST - Proyecto Práctico](../tema-1-apis-rest/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

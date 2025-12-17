@@ -579,3 +579,8 @@ log = "2024-11-12 14:30:45 | ERROR | UserService | Connection failed"
 **Calidad**: TDD con funciones puras
 
 **¡Éxito en tu aprendizaje de MongoDB!** 🚀
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Modelado de Datos - 01 Teoria](../../tema-3-modelado-datos/01-TEORIA.md)

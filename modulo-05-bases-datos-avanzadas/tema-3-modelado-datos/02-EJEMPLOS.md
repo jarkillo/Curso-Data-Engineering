@@ -1216,3 +1216,8 @@ Hemos visto:
 **Recursos**: [dbdiagram.io](https://dbdiagram.io/) para crear diagramas ER visuales
 
 ¡Domina el modelado! 📐✨
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)

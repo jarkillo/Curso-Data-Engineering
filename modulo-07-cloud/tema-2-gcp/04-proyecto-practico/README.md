@@ -670,3 +670,8 @@ def test_crear_dataset(mock_client):
 
 *Última actualización: 2025-01-15*
 *Proyecto construido con 💙 siguiendo TDD y mejores prácticas de Data Engineering*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [03 Ejercicios](../03-EJERCICIOS.md) | ➡️ **Siguiente**: [Infrastructure as Code - 01 Teoria](../../tema-3-iac/01-TEORIA.md)

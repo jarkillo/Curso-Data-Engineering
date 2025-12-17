@@ -973,3 +973,8 @@ Ahorro acumulado: $1.00
 **Última actualización:** 2025-10-24
 **Tiempo total:** 45-60 minutos de lectura/práctica
 **Nivel:** Intermedio-Avanzado
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)

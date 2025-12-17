@@ -1300,3 +1300,8 @@ Estos ejemplos muestran la progresión desde KPIs básicos en SQL hasta aplicaci
 ---
 
 **Siguiente paso**: [03-EJERCICIOS.md](03-EJERCICIOS.md) - Practica diseñando tus propios KPIs y dashboards
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)

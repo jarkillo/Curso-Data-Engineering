@@ -1029,3 +1029,8 @@ Ahora que entiendes la teoría, es momento de:
 **Última actualización:** 2025-10-18
 **Duración de lectura:** 35-50 minutos
 **Autor:** Equipo Pedagógico del Master en Ingeniería de Datos
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Procesamiento CSV - Proyecto Práctico](../tema-2-procesamiento-csv/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

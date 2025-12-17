@@ -1085,3 +1085,8 @@ Total mensual: ~$57/mes
 ---
 
 **¡Felicidades!** Has completado los ejemplos de Infrastructure as Code. 🎉
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)

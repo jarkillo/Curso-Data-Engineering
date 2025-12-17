@@ -1017,3 +1017,8 @@ Ahora que has visto ejemplos completos:
 **Última actualización:** 2025-10-18
 **Duración de lectura:** 45-60 minutos
 **Autor:** Equipo Pedagógico del Master en Ingeniería de Datos
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)

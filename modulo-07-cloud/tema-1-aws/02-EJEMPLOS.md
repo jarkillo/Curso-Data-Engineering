@@ -1353,3 +1353,8 @@ LIMIT 10;
 **Siguiente paso:** [03-EJERCICIOS.md](./03-EJERCICIOS.md) - Ejercicios para practicar
 
 **Última actualización:** 2025-11-09
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)

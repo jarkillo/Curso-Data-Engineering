@@ -969,3 +969,8 @@ En este tema has aprendido:
 **Tiempo de lectura estimado**: 45-60 minutos
 **Palabras**: ~4,500
 **Última actualización**: 2025-10-30
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Extracción - Proyecto Práctico](../tema-2-extraccion/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

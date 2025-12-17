@@ -1259,3 +1259,8 @@ La **calidad de datos** es fundamental en Data Engineering:
 **Próximo tema**: Tema 5 - Carga de Datos (Load)
 
 *Última actualización: 2025-10-30*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Transformación - Proyecto Práctico](../tema-3-transformacion/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

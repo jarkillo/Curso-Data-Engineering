@@ -1224,3 +1224,8 @@ Una vez completes todos los ejercicios, estás listo para el **proyecto práctic
 ---
 
 *Última actualización: 2025-01-15*
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [02 Ejemplos](02-EJEMPLOS.md) | ➡️ **Siguiente**: [Proyecto Práctico](04-proyecto-practico/README.md)

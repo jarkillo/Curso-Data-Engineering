@@ -700,3 +700,8 @@ df.to_parquet("ventas.parquet", compression="snappy")
 **Siguiente paso:** [02-EJEMPLOS.md](./02-EJEMPLOS.md) - Ejemplos trabajados de pipelines AWS
 
 **Última actualización:** 2025-11-09
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Módulo 6: Apache Airflow: Airflow Intermedio](../../modulo-06-airflow/tema-2-intermedio/proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

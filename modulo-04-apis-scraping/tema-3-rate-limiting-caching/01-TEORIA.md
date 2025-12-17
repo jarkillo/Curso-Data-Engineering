@@ -1038,3 +1038,8 @@ Pero también:
 **Última actualización:** 2025-10-24
 **Tiempo de lectura:** 25-30 minutos
 **Nivel:** Intermedio-Avanzado
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [Web Scraping - Proyecto Práctico](../tema-2-web-scraping/04-proyecto-practico/README.md) | ➡️ **Siguiente**: [02 Ejemplos](02-EJEMPLOS.md)

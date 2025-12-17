@@ -1015,3 +1015,8 @@ Ahora entiendes cómo crear pipelines reales de Data Engineering con orquestaci�
 **Autor**: @teaching [profesor]
 **Módulo**: 6 - Apache Airflow y Orquestación
 **Tema**: 1 - Introducción a Airflow
+---
+
+## 🧭 Navegación
+
+⬅️ **Anterior**: [01 Teoria](01-TEORIA.md) | ➡️ **Siguiente**: [03 Ejercicios](03-EJERCICIOS.md)
