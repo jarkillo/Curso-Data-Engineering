@@ -1,0 +1,9 @@
+# Dependencias para el Sistema de Evaluación
+# Master en Ingeniería de Datos
+
+# Generación de certificados PDF
+reportlab>=4.0.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
